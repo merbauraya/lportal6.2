@@ -340,7 +340,7 @@ public class EisAdminPortlet extends MVCPortlet {
             
             ConfigLocalServiceUtil.addByStringValue(key, color);
             
-            
+             
             n++;
            
         }
