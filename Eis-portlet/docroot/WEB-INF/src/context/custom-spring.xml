@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+ 
+<beans>
+    <bean id="UserLibraryLocalService" class="com.idetronic.eis.service.impl.UserLibraryLocalServiceImpl" />
+	<bean id="UserLibrary" class="com.idetronic.eis.model.impl.UserLibraryImpl" />
+	<bean id="LibraryLocalService" class="com.idetronic.eis.service.impl.LibraryLocalServiceImpl" />
+	<bean id="Library" class="com.idetronic.eis.model.impl.LibraryImpl"/>
+	
+</beans>

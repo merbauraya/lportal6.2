@@ -1,0 +1,449 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<hint-collection name="CLOB">
+		<hint name="max-length">2000000</hint>
+		<hint name="display-width">500</hint>
+		<hint name="display-height">105</hint>
+	</hint-collection>
+	<model name="com.idetronic.eis.model.Config">
+		<field name="id" type="long" />
+		<field name="key" type="String" />
+		<field name="value" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
+	<model name="com.idetronic.eis.model.FactIrItem">
+		<field name="factIrItemId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="facultyId" type="long" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="itemTypeId" type="long" />
+		<field name="itemMediumId" type="long" />
+		<field name="titleTotal" type="int" />
+		<field name="volumeTotal" type="int" />
+		<field name="createdByUserId" type="long" />
+		<field name="createdByUserName" type="String" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactIrSubmission">
+		<field name="submissionId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="facultyId" type="long" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="itemMediumId" type="long" />
+		<field name="titleTotal" type="int" />
+		<field name="volumeTotal" type="int" />
+		<field name="createdByUserId" type="long" />
+		<field name="createdByUserName" type="String" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactMembership">
+		<field name="factMembershipId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="stateId" type="long" />
+		<field name="libraryTypeId" type="long" />
+		<field name="membershipCategoryId" type="long" />
+		<field name="activeCount" type="int" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactNonPrintedMaterial">
+		<field name="factNonPrintedMaterialId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="libraryCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="stateId" type="long" />
+		<field name="stateCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="libraryTypeId" type="long" />
+		<field name="itemTypeId" type="long" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="monthVal" type="int" />
+		<field name="yearVal" type="int" />
+		<field name="titleTotal" type="int" />
+		<field name="volumeTotal" type="int" />
+		<field name="dateCreated" type="Date" />
+		<field name="createdByUserName" type="String" />
+		<field name="createdByUserId" type="long" />
+	</model>
+	<model name="com.idetronic.eis.model.FactPost">
+		<field name="factPostId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="postGradeId" type="long" />
+		<field name="stateId" type="long" />
+		<field name="value" type="int" />
+		<field name="createdByUserId" type="long" />
+		<field name="createdByUserName" type="String" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactPrintedMaterial">
+		<field name="factPrintedMaterialId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="libraryCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="stateId" type="long" />
+		<field name="stateCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="itemTypeId" type="long" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="libraryTypeId" type="long" />
+		<field name="monthVal" type="int" />
+		<field name="yearVal" type="int" />
+		<field name="titleTotal" type="int" />
+		<field name="volumeTotal" type="int" />
+		<field name="dateCreated" type="Date" />
+		<field name="createdByUserName" type="String" />
+		<field name="createdByUserId" type="long" />
+	</model>
+	<model name="com.idetronic.eis.model.FactSeating">
+		<field name="factSeatingId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="departmentId" type="long" />
+		<field name="seatingCategoryId" type="long" />
+		<field name="stateId" type="long" />
+		<field name="libraryTypeId" type="long" />
+		<field name="period" type="String" />
+		<field name="capacity" type="int" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactVisitor">
+		<field name="factVisitorId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="visitorCategoryId" type="long" />
+		<field name="stateId" type="long" />
+		<field name="libraryTypeId" type="long" />
+		<field name="value" type="int" />
+		<field name="createdByUserId" type="long" />
+		<field name="createdByUserName" type="String" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.Faculty">
+		<field name="facultyId" type="long" />
+		<field name="facultyTypeId" type="long" />
+		<field name="facultyName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.FacultyType">
+		<field name="facultyTypeId" type="long" />
+		<field name="facultyTypeName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.ItemMedium">
+		<field name="itemMediumId" type="long" />
+		<field name="itemMediumName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.ItemType">
+		<field name="itemTypeId" type="long" />
+		<field name="itemTypeName" type="String" />
+		<field name="printedType" type="int" />
+		<field name="IRType" type="boolean" />
+		<field name="active" type="boolean" />
+	</model>
+	<model name="com.idetronic.eis.model.ItemTypeCategory">
+		<field name="itemTypeCategoryId" type="long" />
+		<field name="itemTypeCategoryName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.KpiEntry">
+		<field name="kpiEntryId" type="long" />
+		<field name="kpiTypeId" type="long" />
+		<field name="periodYear" type="String" />
+		<field name="periodType" type="int" />
+		<field name="period" type="String" />
+		<field name="value" type="double" />
+		<field name="actual" type="double" />
+	</model>
+	<model name="com.idetronic.eis.model.KpiType">
+		<field name="kpiTypeId" type="long" />
+		<field name="kpiTypeKey" type="String">
+			<hint name="max-length">30</hint>
+		</field>
+		<field name="kpiName" type="String">
+			<hint name="max-length">250</hint>
+		</field>
+		<field name="periodMonth" type="boolean" />
+		<field name="periodQuarter" type="boolean" />
+		<field name="periodSemiAnnual" type="boolean" />
+		<field name="periodYear" type="boolean" />
+		<field name="isDecimal" type="boolean" />
+		<field name="manualValue" type="boolean" />
+	</model>
+	<model name="com.idetronic.eis.model.Library">
+		<field name="libraryId" type="long" />
+		<field name="libraryCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="stateId" type="long" />
+		<field name="libraryTypeId" type="long" />
+		<field name="stateName" type="String" />
+		<field name="libraryName" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.LibrarySeatingDepartment">
+		<field name="libraryDepartmentId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="departmentId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.LibraryType">
+		<field name="libraryTypeId" type="long" />
+		<field name="libraryTypeCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="libraryTypeName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.Loan">
+		<field name="loanEntryId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="period" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="stateId" type="long" />
+		<field name="libraryTypeId" type="long" />
+		<field name="periodYear" type="int" />
+		<field name="periodMonth" type="int" />
+		<field name="createDate" type="Date" />
+		<field name="memberCategoryId" type="long" />
+		<field name="value" type="int" />
+	</model>
+	<model name="com.idetronic.eis.model.MemberCategory">
+		<field name="memberCategoryId" type="long" />
+		<field name="memberCategoryName" type="String" />
+		<field name="memberCategoryGroupName" type="String" />
+		<field name="active" type="boolean" />
+	</model>
+	<model name="com.idetronic.eis.model.PostCategory">
+		<field name="postCategoryId" type="long" />
+		<field name="postCategoryCode" type="String">
+			<hint name="max-length">15</hint>
+		</field>
+		<field name="postCategoryName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.PostGrade">
+		<field name="postGradeId" type="long" />
+		<field name="postCategoryId" type="long" />
+		<field name="postGradeCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="postGradeScheme" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="postGradeName" type="String" />
+		<field name="postGradeDesc" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.Project">
+		<field name="projectId" type="long" />
+		<field name="projectName" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+		<field name="projectStatus" type="int" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="startMonth" type="int" />
+		<field name="startYear" type="int" />
+		<field name="startMonthName" type="String">
+			<hint name="max-length">20</hint>
+		</field>
+		<field name="endMonth" type="int" />
+		<field name="endYear" type="int" />
+		<field name="progressStatus" type="int" />
+		<field name="endMonthName" type="String">
+			<hint name="max-length">20</hint>
+		</field>
+		<field name="completionDate" type="Date" />
+		<field name="progress" type="int" />
+		<field name="resourceId" type="long" />
+		<field name="resourceTypeId" type="long" />
+		<field name="resourceName" type="String" />
+		<field name="resourceType" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.ProjectActivity">
+		<field name="projectActivityId" type="long" />
+		<field name="strategyId" type="long" />
+		<field name="activityName" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="startMonth" type="int" />
+		<field name="startYear" type="int" />
+		<field name="startMonthName" type="String">
+			<hint name="max-length">20</hint>
+		</field>
+		<field name="endMonth" type="int" />
+		<field name="endYear" type="int" />
+		<field name="endMonthName" type="String">
+			<hint name="max-length">20</hint>
+		</field>
+		<field name="progress" type="int" />
+		<field name="status" type="int" />
+		<field name="progressStatus" type="int" />
+		<field name="completionDate" type="Date" />
+		<field name="resourceName" type="String" />
+		<field name="resourceType" type="String" />
+		<field name="remark" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
+	<model name="com.idetronic.eis.model.ProjectResource">
+		<field name="projectResourceId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="resourceName" type="String" />
+	</model>
+	<model name="com.idetronic.eis.model.ProjectResourceType">
+		<field name="projectResourceTypeId" type="long" />
+		<field name="resourceTypeName" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.ProjectStrategy">
+		<field name="projectStrategyId" type="long" />
+		<field name="strategyName" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+		<field name="projectId" type="long" />
+		<field name="userName" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="startMonth" type="int" />
+		<field name="startYear" type="int" />
+		<field name="startMonthName" type="String">
+			<hint name="max-length">20</hint>
+		</field>
+		<field name="endMonth" type="int" />
+		<field name="endYear" type="int" />
+		<field name="endMonthName" type="String">
+			<hint name="max-length">20</hint>
+		</field>
+		<field name="completionDate" type="Date" />
+		<field name="projectStrategyStatus" type="int" />
+		<field name="userId" type="long" />
+		<field name="progress" type="int" />
+		<field name="status" type="int" />
+		<field name="progressStatus" type="int" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="resourceName" type="String" />
+		<field name="resourceType" type="String" />
+		<field name="remark" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
+	<model name="com.idetronic.eis.model.Report">
+		<field name="reportId" type="long" />
+		<field name="reportKey" type="String" />
+		<field name="reportName" type="String" />
+		<field name="reportTitle" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+	</model>
+	<model name="com.idetronic.eis.model.SeatingCategory">
+		<field name="seatingCategoryId" type="long" />
+		<field name="seatingCategoryName" type="String" />
+		<field name="seatingDepartmentId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.SeatingDepartment">
+		<field name="departmentId" type="long" />
+		<field name="departmentName" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.State">
+		<field name="stateId" type="long" />
+		<field name="stateName" type="String" />
+		<field name="stateCode" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+	</model>
+	<model name="com.idetronic.eis.model.UserLibrary">
+		<field name="userLibraryId" type="long" />
+		<field name="userId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="createdByUserId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.VisitorCategory">
+		<field name="visitorCategoryId" type="long" />
+		<field name="visitorCategoryCode" type="String" />
+		<field name="visitorCategoryName" type="String" />
+	</model>
+</model-hints>

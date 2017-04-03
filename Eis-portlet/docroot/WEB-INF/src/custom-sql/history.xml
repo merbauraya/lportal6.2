@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.idetronic.eis.service.persistence.FactVisitorFinder.getHistoryByL_P">
+		SELECT 
+		    A.*,category.*
+		FROM
+		    eis_FactVisitor A
+		        INNER JOIN
+		    eis_VisitorCategory AS category ON A.visitorCategoryId = category.visitorCategoryId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactSeatingFinder.getHistoryByL_P">
+		SELECT 
+		    A.*, category.*
+		FROM
+		    eis_FactSeating A
+		        INNER JOIN
+		    eis_SeatingCategory AS category ON A.seatingCategoryId = category.seatingCategoryId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+	
+		
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LoanFinder.getHistoryByL_P">
+		SELECT 
+		    A.*, category.*
+		FROM
+		    eis_Loan A
+		        INNER JOIN
+		    eis_MemberCategory AS category ON A.memberCategoryId = category.memberCategoryId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+	
+		ORDER BY createDate ASC
+	
+		
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactMembershipFinder.getHistoryByL_P">
+		SELECT 
+		    A.*, category.*
+		FROM
+		    eis_FactMembership A
+		        INNER JOIN
+		    eis_MemberCategory category ON A.membershipCategoryId = category.memberCategoryId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+		ORDER BY createDate	    
+
+
+	
+		
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactPrintedMaterialFinder.getHistoryByL_P">
+		SELECT 
+		    A.*, itemType.*
+		FROM
+		    eis_FactPrintedMaterial A
+		        INNER JOIN
+		    eis_ItemType itemType ON A.itemTypeId = itemType.itemTypeId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+		ORDER BY dateCreated 
+
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinder.getHistoryByL_P">
+		SELECT 
+		    A.*, itemType.*
+		FROM
+		    eis_FactNonPrintedMaterial A
+		        INNER JOIN
+		    eis_ItemType itemType ON A.itemTypeId = itemType.itemTypeId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+		ORDER BY dateCreated 
+
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactIrItemFinder.getHistoryByL_P">
+		SELECT 
+		    A.*, itemType.*, itemMedium.*
+		FROM
+		    eis_FactIrItem A
+		        INNER JOIN
+		    eis_ItemType itemType ON A.itemTypeId = itemType.itemTypeId
+		        INNER JOIN
+		    eis_ItemMedium itemMedium ON A.itemMediumId = itemMedium.itemMediumId
+		WHERE
+		    A.libraryId = ? AND A.period = ?
+		        AND facultyId = ?
+		ORDER BY createdDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactPostFinder.getHistoryByL_P">
+		SELECT 
+		    *
+		FROM
+		    eis_FactPost A
+		        INNER JOIN
+		    eis_PostGrade grade ON A.postGradeId = grade.postGradeId
+		        INNER JOIN
+		    eis_PostCategory category ON grade.postCategoryId = category.postCategoryId
+		WHERE
+		    libraryId = ? AND period = ?
+		ORDER BY createdDate
+	</sql>
+	
+</custom-sql>

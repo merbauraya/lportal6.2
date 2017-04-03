@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountIrItemByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactIrItem
+		WHERE
+		    libraryId = ? AND period = ?
+	</sql>
+	
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountLibraryMembershipByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactMembership
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountNonPrintedByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactNonPrintedMaterial
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountPrintedByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactPrintedMaterial
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountPositionByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactPost
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountSeatingByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactSeating
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountVisitorByL_P">
+		SELECT 
+		    COUNT(*) AS totalCount
+		FROM
+		    eis_FactVisitor
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountLoanByL_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_Loan
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	
+
+</custom-sql>

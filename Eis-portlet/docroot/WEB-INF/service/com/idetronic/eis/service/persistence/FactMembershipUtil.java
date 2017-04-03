@@ -1,0 +1,627 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.idetronic.eis.service.persistence;
+
+import com.idetronic.eis.model.FactMembership;
+
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+import com.liferay.portal.service.ServiceContext;
+
+import java.util.List;
+
+/**
+ * The persistence utility for the fact membership service. This utility wraps {@link FactMembershipPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Mazlan Mat
+ * @see FactMembershipPersistence
+ * @see FactMembershipPersistenceImpl
+ * @generated
+ */
+public class FactMembershipUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
+	 */
+	public static void clearCache(FactMembership factMembership) {
+		getPersistence().clearCache(factMembership);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
+	 */
+	public static long countWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().countWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<FactMembership> findWithDynamicQuery(
+		DynamicQuery dynamicQuery) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<FactMembership> findWithDynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<FactMembership> findWithDynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel)
+	 */
+	public static FactMembership update(FactMembership factMembership)
+		throws SystemException {
+		return getPersistence().update(factMembership);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, ServiceContext)
+	 */
+	public static FactMembership update(FactMembership factMembership,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(factMembership, serviceContext);
+	}
+
+	/**
+	* Returns all the fact memberships where libraryId = &#63;.
+	*
+	* @param libraryId the library ID
+	* @return the matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findByLibrary(
+		long libraryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLibrary(libraryId);
+	}
+
+	/**
+	* Returns a range of all the fact memberships where libraryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.FactMembershipModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param libraryId the library ID
+	* @param start the lower bound of the range of fact memberships
+	* @param end the upper bound of the range of fact memberships (not inclusive)
+	* @return the range of matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findByLibrary(
+		long libraryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLibrary(libraryId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the fact memberships where libraryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.FactMembershipModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param libraryId the library ID
+	* @param start the lower bound of the range of fact memberships
+	* @param end the upper bound of the range of fact memberships (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findByLibrary(
+		long libraryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibrary(libraryId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first fact membership in the ordered set where libraryId = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership findByLibrary_First(
+		long libraryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLibrary_First(libraryId, orderByComparator);
+	}
+
+	/**
+	* Returns the first fact membership in the ordered set where libraryId = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fact membership, or <code>null</code> if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership fetchByLibrary_First(
+		long libraryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByLibrary_First(libraryId, orderByComparator);
+	}
+
+	/**
+	* Returns the last fact membership in the ordered set where libraryId = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership findByLibrary_Last(
+		long libraryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLibrary_Last(libraryId, orderByComparator);
+	}
+
+	/**
+	* Returns the last fact membership in the ordered set where libraryId = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fact membership, or <code>null</code> if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership fetchByLibrary_Last(
+		long libraryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByLibrary_Last(libraryId, orderByComparator);
+	}
+
+	/**
+	* Returns the fact memberships before and after the current fact membership in the ordered set where libraryId = &#63;.
+	*
+	* @param factMembershipId the primary key of the current fact membership
+	* @param libraryId the library ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a fact membership with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership[] findByLibrary_PrevAndNext(
+		long factMembershipId, long libraryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibrary_PrevAndNext(factMembershipId, libraryId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the fact memberships where libraryId = &#63; from the database.
+	*
+	* @param libraryId the library ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByLibrary(long libraryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByLibrary(libraryId);
+	}
+
+	/**
+	* Returns the number of fact memberships where libraryId = &#63;.
+	*
+	* @param libraryId the library ID
+	* @return the number of matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByLibrary(long libraryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByLibrary(libraryId);
+	}
+
+	/**
+	* Returns all the fact memberships where libraryId = &#63; and period = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @return the matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findByLibraryPeriod(
+		long libraryId, java.lang.String period)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLibraryPeriod(libraryId, period);
+	}
+
+	/**
+	* Returns a range of all the fact memberships where libraryId = &#63; and period = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.FactMembershipModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @param start the lower bound of the range of fact memberships
+	* @param end the upper bound of the range of fact memberships (not inclusive)
+	* @return the range of matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findByLibraryPeriod(
+		long libraryId, java.lang.String period, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibraryPeriod(libraryId, period, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the fact memberships where libraryId = &#63; and period = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.FactMembershipModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @param start the lower bound of the range of fact memberships
+	* @param end the upper bound of the range of fact memberships (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findByLibraryPeriod(
+		long libraryId, java.lang.String period, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibraryPeriod(libraryId, period, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first fact membership in the ordered set where libraryId = &#63; and period = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership findByLibraryPeriod_First(
+		long libraryId, java.lang.String period,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibraryPeriod_First(libraryId, period,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first fact membership in the ordered set where libraryId = &#63; and period = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching fact membership, or <code>null</code> if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership fetchByLibraryPeriod_First(
+		long libraryId, java.lang.String period,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByLibraryPeriod_First(libraryId, period,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last fact membership in the ordered set where libraryId = &#63; and period = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership findByLibraryPeriod_Last(
+		long libraryId, java.lang.String period,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibraryPeriod_Last(libraryId, period,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last fact membership in the ordered set where libraryId = &#63; and period = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching fact membership, or <code>null</code> if a matching fact membership could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership fetchByLibraryPeriod_Last(
+		long libraryId, java.lang.String period,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByLibraryPeriod_Last(libraryId, period,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the fact memberships before and after the current fact membership in the ordered set where libraryId = &#63; and period = &#63;.
+	*
+	* @param factMembershipId the primary key of the current fact membership
+	* @param libraryId the library ID
+	* @param period the period
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a fact membership with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership[] findByLibraryPeriod_PrevAndNext(
+		long factMembershipId, long libraryId, java.lang.String period,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLibraryPeriod_PrevAndNext(factMembershipId,
+			libraryId, period, orderByComparator);
+	}
+
+	/**
+	* Removes all the fact memberships where libraryId = &#63; and period = &#63; from the database.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByLibraryPeriod(long libraryId,
+		java.lang.String period)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByLibraryPeriod(libraryId, period);
+	}
+
+	/**
+	* Returns the number of fact memberships where libraryId = &#63; and period = &#63;.
+	*
+	* @param libraryId the library ID
+	* @param period the period
+	* @return the number of matching fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByLibraryPeriod(long libraryId,
+		java.lang.String period)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByLibraryPeriod(libraryId, period);
+	}
+
+	/**
+	* Caches the fact membership in the entity cache if it is enabled.
+	*
+	* @param factMembership the fact membership
+	*/
+	public static void cacheResult(
+		com.idetronic.eis.model.FactMembership factMembership) {
+		getPersistence().cacheResult(factMembership);
+	}
+
+	/**
+	* Caches the fact memberships in the entity cache if it is enabled.
+	*
+	* @param factMemberships the fact memberships
+	*/
+	public static void cacheResult(
+		java.util.List<com.idetronic.eis.model.FactMembership> factMemberships) {
+		getPersistence().cacheResult(factMemberships);
+	}
+
+	/**
+	* Creates a new fact membership with the primary key. Does not add the fact membership to the database.
+	*
+	* @param factMembershipId the primary key for the new fact membership
+	* @return the new fact membership
+	*/
+	public static com.idetronic.eis.model.FactMembership create(
+		long factMembershipId) {
+		return getPersistence().create(factMembershipId);
+	}
+
+	/**
+	* Removes the fact membership with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param factMembershipId the primary key of the fact membership
+	* @return the fact membership that was removed
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a fact membership with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership remove(
+		long factMembershipId)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().remove(factMembershipId);
+	}
+
+	public static com.idetronic.eis.model.FactMembership updateImpl(
+		com.idetronic.eis.model.FactMembership factMembership)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().updateImpl(factMembership);
+	}
+
+	/**
+	* Returns the fact membership with the primary key or throws a {@link com.idetronic.eis.NoSuchFactMembershipException} if it could not be found.
+	*
+	* @param factMembershipId the primary key of the fact membership
+	* @return the fact membership
+	* @throws com.idetronic.eis.NoSuchFactMembershipException if a fact membership with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership findByPrimaryKey(
+		long factMembershipId)
+		throws com.idetronic.eis.NoSuchFactMembershipException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByPrimaryKey(factMembershipId);
+	}
+
+	/**
+	* Returns the fact membership with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param factMembershipId the primary key of the fact membership
+	* @return the fact membership, or <code>null</code> if a fact membership with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.FactMembership fetchByPrimaryKey(
+		long factMembershipId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByPrimaryKey(factMembershipId);
+	}
+
+	/**
+	* Returns all the fact memberships.
+	*
+	* @return the fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findAll();
+	}
+
+	/**
+	* Returns a range of all the fact memberships.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.FactMembershipModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of fact memberships
+	* @param end the upper bound of the range of fact memberships (not inclusive)
+	* @return the range of fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findAll(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findAll(start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the fact memberships.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.FactMembershipModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of fact memberships
+	* @param end the upper bound of the range of fact memberships (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.FactMembership> findAll(
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findAll(start, end, orderByComparator);
+	}
+
+	/**
+	* Removes all the fact memberships from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeAll();
+	}
+
+	/**
+	* Returns the number of fact memberships.
+	*
+	* @return the number of fact memberships
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countAll();
+	}
+
+	public static FactMembershipPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (FactMembershipPersistence)PortletBeanLocatorUtil.locate(com.idetronic.eis.service.ClpSerializer.getServletContextName(),
+					FactMembershipPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(FactMembershipUtil.class,
+				"_persistence");
+		}
+
+		return _persistence;
+	}
+
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	public void setPersistence(FactMembershipPersistence persistence) {
+	}
+
+	private static FactMembershipPersistence _persistence;
+}

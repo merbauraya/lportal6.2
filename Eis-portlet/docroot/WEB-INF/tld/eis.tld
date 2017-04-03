@@ -1,0 +1,365 @@
+<?xml version="1.0"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.1</jsp-version>
+	<short-name>eis</short-name>
+	<uri>http://idetronic.com.my/tld/eis</uri>
+
+	
+	<tag>
+		<name>period-selector</name>
+		<tag-class>com.idetronic.eis.taglib.PeriodSelectorTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>controlName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>allowPreviousYear</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>useYearRange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>numberPreviousYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+			
+		</attribute>
+		<attribute>
+			<name>numberFutureYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+			
+		</attribute>
+				
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>useMonthName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>startYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>endYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>includeEmptyOption</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>allowFuturePeriod</name>
+			
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>dataCountDay</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+	</tag>
+
+	<tag>
+		<name>month-selector</name>
+		<tag-class>com.idetronic.eis.taglib.MonthSelectorTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>controlName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+	</tag>
+	<tag>
+		<name>library-selector</name>
+		<tag-class>com.idetronic.eis.taglib.LibrarySelectorTag</tag-class> 
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>adminAllowAll</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>addAllOption</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		
+	</tag>
+	
+	<tag>
+		<name>status-selector</name>
+		<tag-class>com.idetronic.eis.taglib.StatusSelectorTag</tag-class> 
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>status</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>controlName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+	</tag>
+	<tag>
+		<name>progress-selector</name>
+		<tag-class>com.idetronic.eis.taglib.ProgressStatusSelectorTag</tag-class>  
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>progressStatus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>controlName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+	</tag>
+	<tag>
+		<name>status-display</name>
+		<tag-class>com.idetronic.eis.taglib.StatusDisplayTag</tag-class> 
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>status</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>progress</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	
+		
+		
+	</tag>
+	<tag>
+		<name>input-date</name>
+		<tag-class>com.idetronic.eis.taglib.InputDateTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Creates a date input field that displays a calendar UI for date selection.</description>
+		
+		
+		
+		<attribute>
+			<name>autoFocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+						<description>Sets whether the date field gets focus by default. The default value is <![CDATA[<code>false</code>]]>.</description>
+			
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		<description>Sets a CSS class for styling the component.</description>
+			
+		</attribute>
+		<attribute>
+			<name>dayParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		<description>Sets a variable name to refer to the day of the component.</description>
+			
+		</attribute>
+		<attribute>
+			<name>dayValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+						<description>Sets the day value displayed in the input field.</description>
+			
+		</attribute>
+		<attribute>
+			<name>disableNamespace</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+						<description>Sets whether to disable the namespace for the component. The default value is <![CDATA[<code>false</code>]]>.</description>
+			
+		</attribute>
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+						<description>Sets whether to disable the input field. The default value is <![CDATA[<code>false</code>]]>.</description>
+			
+		</attribute>
+		<attribute>
+			<name>firstDayOfWeek</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+						<description>Marks the first day of the week. The default value is <![CDATA[<code>Calendar.SUNDAY - 1</code>]]>.</description>
+			
+		</attribute>
+		<attribute>
+			<name>formName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+						<description>Sets the name of the date input's form.</description>
+			
+		</attribute>
+		<attribute>
+			<name>monthAndYearParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+						<description>Sets a variable name to refer to the combined month and year of the component.</description>
+			
+		</attribute>
+		<attribute>
+			<name>monthParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+						<description>Sets a variable name to refer to the month of the component.</description>
+			
+		</attribute>
+		<attribute>
+			<name>monthValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+						<description>Sets the numerical value of the month and displays it in the input field. Integer values for the month start with <![CDATA[<code>0</code>]]>.</description>
+			
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+						<description>Sets the date input's name.</description>
+			
+		</attribute>
+		<attribute>
+			<name>nullable</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+						<description>Sets whether the component's values can be set to null.</description>
+			
+		</attribute>
+		<attribute>
+			<name>yearParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+						<description>Sets a variable name to refer to the year of the component.</description>
+			
+		</attribute>
+		<attribute>
+			<name>yearValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+						<description>Sets the year value displayed in the input field.</description>
+			
+		</attribute>
+	</tag>
+	<tag>
+		<name>year-selector</name>
+		<tag-class>com.idetronic.eis.taglib.YearSelectorTag</tag-class> 
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>controlName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>allowPreviousYear</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>useYearRange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>numberPreviousYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+			
+		</attribute>
+		<attribute>
+			<name>numberFutureYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+			
+		</attribute>
+				
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>startYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>endYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+	</tag>
+	
+	
+	
+	
+</taglib>

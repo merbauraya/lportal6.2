@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.idetronic.eis" auto-namespace-tables="true">
+	<author>Mazlan Mat</author>
+	<namespace>eis</namespace>
+	
+	<entity name="State" local-service="true" remote-service="false">
+		<column name="stateId" type="long" primary="true" />
+		<column name="stateName" type="String"/>
+		<column name="stateCode" type="String" />
+		<finder name="stateCode" return-type="State" unique="true">
+            <finder-column name="stateCode" />
+        </finder>
+		
+	</entity>
+	
+	<entity name="LibraryType" local-service="true" remote-service="false">
+		<column name="libraryTypeId" type="long" primary="true" />
+		<column name="libraryTypeCode" type="String"/>
+		<column name="libraryTypeName" type="String"/>
+		<finder name="Code" return-type="LibraryType" unique="true">
+            <finder-column name="libraryTypeCode" />
+        </finder>
+	</entity>
+	
+	<entity name="Library" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="libraryId" type="long" primary="true"  />
+
+		<!-- Audit fields -->
+		<column name="libraryCode" type="String"/>
+		<column name="stateId" type="long" />
+		<column name="libraryTypeId" type="long" />
+		<column name="stateName" type="String" />
+		<column name="libraryName" type="String" />
+		
+		
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+
+		
+		
+		
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="libraryCode" return-type="Library" unique="true">
+            <finder-column name="libraryCode" />
+        </finder>
+        <finder name="libraryName" return-type="Library" unique="true">
+            <finder-column name="libraryName" />
+        </finder>
+		<finder return-type="Collection" name="State">
+			<finder-column name="stateId"></finder-column>
+		</finder>
+	</entity>
+  	<entity name="FacultyType" local-service="true">
+  		<column name="facultyTypeId" type="long" primary="true"></column>
+  		<column name="facultyTypeName" type="String"></column>
+  	
+  	</entity>
+  	<entity name="Faculty" local-service="true">
+  		<column name="facultyId" type="long" primary="true"></column>
+  		<column name="facultyTypeId" type="long"></column>
+  		<column name="facultyName" type="String"></column>
+  	</entity>
+  	<entity name="ItemType" local-service="true">
+  		<column name="itemTypeId" type="long" primary="true"></column>
+  		<column name="itemTypeName" type="String"></column>
+  		<column name="printedType" type="int"></column>
+  		<column name="IRType" type="boolean"></column>
+  		<column name="active" type="boolean"></column>
+  		<finder return-type="Collection" name="PrintedType">
+  			<finder-column name="printedType"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="IRType">
+  			<finder-column name="IRType"></finder-column>
+  		</finder>
+  	</entity>
+  	<entity name="ItemMedium" local-service="true">
+  		<!-- Soft Copy/Hard Copy -->
+  		<column name="itemMediumId" type="long" primary="true"></column>
+  		<column name="itemMediumName" type="String"></column>
+  	</entity>
+  	
+  	<entity name="ItemTypeCategory" local-service="true">
+  	<!-- 
+  		e.g., Judul or Naskah
+  	 -->
+  		<column name="itemTypeCategoryId" type="long" primary="true"></column>
+  		<column name="itemTypeCategoryName" type="String"></column>
+  	</entity>
+  	
+  	
+  	
+  	
+  	<entity name="PostCategory" local-service="true">
+  		<column name="postCategoryId" type="long" primary="true"></column>
+  		<column name="postCategoryCode" type="String"></column>
+  		<column name="postCategoryName" type="String"></column>
+  		<finder name="PostCategoryCode" return-type="PostCategory" unique="true">
+            <finder-column name="postCategoryCode" />
+            
+        </finder>
+  	</entity>
+  	
+  	<entity name="PostGrade" local-service="true">
+  		<column name="postGradeId" type="long" primary="true"></column>
+  		<column name="postCategoryId" type="long"></column>
+  		<column name="postGradeCode" type="String"></column>
+  		<column name="postGradeScheme" type="String"></column>
+  		<column name="postGradeName" type="String"></column>
+  		<column name="postGradeDesc" type="String"></column>
+  		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		
+  		<finder name="GradeCode" return-type="PostGrade" unique="true">
+            <finder-column name="postGradeCode" />
+            
+        </finder>
+  		
+  	</entity>
+  	<entity name="VisitorCategory" local-service="true">
+  		<column name="visitorCategoryId" type="long" primary="true"></column>
+  		<column name="visitorCategoryCode" type="String"></column>
+  		<column name="visitorCategoryName" type="String"></column>
+  		<finder name="Category" return-type="VisitorCategory" unique="true">
+            <finder-column name="visitorCategoryCode" />
+            
+        </finder>
+  		
+  	</entity>
+ 
+  	
+  	<entity name="UserLibrary" local-service="true">
+  		<column name="userLibraryId" type="long" primary="true"/>
+  		<column name="userId" type="long" />
+  		<column name="libraryId" type="long" />
+  		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="createdByUserId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+  		<finder name="userLibrary" return-type="UserLibrary" unique="true">
+            <finder-column name="userId" />
+            <finder-column name="libraryId" />
+        </finder>
+        <finder name="user" return-type="Collection">
+            <finder-column name="userId" />
+        </finder>
+         <finder name="library" return-type="Collection">
+            <finder-column name="libraryId" />
+        </finder>
+        
+  	</entity>
+  	<entity name="FactPrintedMaterial" local-service="true">
+  		<column name="factPrintedMaterialId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="libraryCode" type="String"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="stateCode" type="String"></column>
+  		<column name="itemTypeId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="libraryTypeId" type="long"></column>
+  		<column name="monthVal" type="int"></column>
+  		<column name="yearVal" type="int"></column>
+  		<column name="titleTotal" type="int"></column>
+  		<column name="volumeTotal" type="int"></column>
+  		<column name="dateCreated" type="Date"></column>
+  		<column name="createdByUserName" type="String"></column>
+  		<column name="createdByUserId" type="long"></column>
+  		
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="LibraryPeriod">
+  			<finder-column name="libraryId"></finder-column>
+  			<finder-column name="period"></finder-column>
+  		</finder>
+  	</entity>
+  	<entity name="FactNonPrintedMaterial" local-service="true">
+  		<column name="factNonPrintedMaterialId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="libraryCode" type="String"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="stateCode" type="String"></column>
+  		<column name="libraryTypeId" type="long"></column>
+  		<column name="itemTypeId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="monthVal" type="int"></column>
+  		<column name="yearVal" type="int"></column>
+  		<column name="titleTotal" type="int"></column>
+  		<column name="volumeTotal" type="int"></column>
+  		<column name="dateCreated" type="Date"></column>
+  		<column name="createdByUserName" type="String"></column>
+  		<column name="createdByUserId" type="long"></column>
+  		
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="LibraryPeriod">
+  			<finder-column name="libraryId"></finder-column>
+  			<finder-column name="period"></finder-column>
+  		</finder>
+  	</entity>
+  	<entity name="Loan" local-service="true">
+  		<column name="loanEntryId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="period" type="String"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="libraryTypeId" type="long"></column>
+  		<column name="periodYear" type="int"></column>
+  		<column name="periodMonth" type="int"></column>
+  		<column name="createDate" type="Date" />
+		<column name="memberCategoryId" type="long"></column>
+		<column name="value" type="int"></column>
+		
+		 <finder name="Library" return-type="Collection">
+            <finder-column name="libraryId" />
+        </finder>
+        <finder return-type="Collection" name="LibraryPeriod">
+        	<finder-column name="libraryId"></finder-column>
+        	<finder-column name="period"></finder-column>
+        </finder>
+  	</entity>
+  	<entity name="FactPost" local-service="true">
+  		<column name="factPostId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="postGradeId" type="long"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="value" type="int"></column>
+  		<column name="createdByUserId" type="long"></column>
+  		<column name="createdByUserName" type="String"></column>
+  		<column name="createdDate" type="Date"></column>
+  		<finder return-type="Collection" name="LibraryPeriod">
+        	<finder-column name="libraryId"></finder-column>
+        	<finder-column name="period"></finder-column>
+        </finder>
+  		<finder return-type="Collection" name="PostGrade">
+  			<finder-column name="postGradeId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+  	</entity>
+  	<entity name="FactVisitor" local-service="true">
+  		<column name="factVisitorId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="visitorCategoryId" type="long"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="libraryTypeId" type="long"></column>
+  		<column name="value" type="int"></column>
+  		<column name="createdByUserId" type="long"></column>
+  		<column name="createdByUserName" type="String"></column>
+  		<column name="createdDate" type="Date"></column>
+  		<finder return-type="Collection" name="LibraryPeriod">
+        	<finder-column name="libraryId"></finder-column>
+        	<finder-column name="period"></finder-column>
+        </finder>
+  		<finder return-type="Collection" name="VisitorCategory">
+  			<finder-column name="visitorCategoryId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+  	</entity> 
+  	<entity name="FactIrSubmission" local-service="true">
+  		<column name="submissionId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"/>
+  		<column name="facultyId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemMediumId" type="long"></column>
+  		<column name="titleTotal" type="int"></column>
+  		<column name="volumeTotal" type="int"></column>
+		<column name="createdByUserId" type="long"></column>
+  		<column name="createdByUserName" type="String"></column>
+  		<column name="createdDate" type="Date"></column>
+  		
+  		<finder return-type="Collection" name="FacultyPeriod">
+  			<finder-column name="facultyId"></finder-column>
+  			<finder-column name="period"></finder-column>
+  		</finder>
+  	</entity>
+  	<entity name="FactIrItem" local-service="true">
+  		<column name="factIrItemId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"/>
+  		<column name="facultyId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemTypeId" type="long"></column>
+  		<column name="itemMediumId" type="long"></column>
+  		<column name="titleTotal" type="int"></column>
+  		<column name="volumeTotal" type="int"></column>
+		<column name="createdByUserId" type="long"></column>
+  		<column name="createdByUserName" type="String"></column>
+  		<column name="createdDate" type="Date"></column>
+  		
+  		<finder return-type="Collection" name="PeriodItemTypeMedium">
+  			<finder-column name="period"></finder-column>
+  			<finder-column name="itemTypeId"></finder-column>
+  			<finder-column name="itemMediumId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="LibraryFacultyPeriod">
+  			<finder-column name="libraryId"></finder-column>
+  			<finder-column name="facultyId"></finder-column>
+  			<finder-column name="period"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="LibraryPeriod">
+        	<finder-column name="libraryId"></finder-column>
+        	<finder-column name="period"></finder-column>
+        </finder>
+  	</entity>
+  	<entity name="Project" local-service="true">
+  		<column name="projectId" type="long" primary="true"></column>
+  		<column name="projectName" type="String"></column>
+  		<column name="projectStatus" type="int"></column>
+  		<column name="startDate" type="Date"></column>
+  		<column name="endDate" type="Date"></column>
+  		<column name="startMonth" type="int"></column>
+  		<column name="startYear" type="int"></column>
+  		<column name="startMonthName" type="String"></column>
+  		<column name="endMonth" type="int"></column>
+  		<column name="endYear" type="int"></column>
+  		<column name="progressStatus" type="int"></column>
+  		<column name="endMonthName" type="String"></column>
+  		<column name="completionDate" type="Date"></column>
+  		<column name="progress" type="int"></column>
+  		
+  		<column name="resourceId" type="long"></column>
+  		<column name="resourceTypeId" type="long"></column>
+  		<column name="resourceName" type="String"></column>
+		<column name="resourceType" type="String"></column>
+
+  		<!-- PK fields -->
+
+  		<!-- Group instance -->
+
+  		<column name="groupId" type="long"></column>
+
+  		<!-- Audit fields -->
+
+  		<column name="companyId" type="long"></column>
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+  	</entity>
+  	<entity name="ProjectStrategy" local-service="true"
+  		remote-service="false">
+
+  		<!-- PK fields -->
+
+  		<column name="projectStrategyId" type="long" primary="true"></column>
+
+  		<!-- Group instance -->
+        <column name="strategyName" type="String"></column>
+        <column name="projectId" type="long" primary="false"></column>
+
+  		<!-- Audit fields -->
+  		<column name="userName" type="String"></column>
+  		<column name="startDate" type="Date"></column>
+  		<column name="endDate" type="Date"></column>
+        <column name="startMonth" type="int"></column>
+        <column name="startYear" type="int"></column>
+        <column name="startMonthName" type="String"></column>
+        <column name="endMonth" type="int"></column>
+        <column name="endYear" type="int"></column>
+        <column name="endMonthName" type="String"></column>
+        <column name="completionDate" type="Date"></column>
+        <column name="projectStrategyStatus" type="int"></column>
+  		<column name="userId" type="long"></column>
+        <column name="progress" type="int"></column>
+		<column name="status" type="int"></column>
+		<column name="progressStatus" type="int"></column>
+  		<column name="groupId" type="long"></column>
+
+  		<column name="companyId" type="long"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+        <column name="resourceName" type="String"></column>
+        <column name="resourceType" type="String"></column>
+        <column name="remark" type="String"></column>
+        
+        <order by="asc">
+        	<order-column name="startDate" />
+         </order>
+        
+        <finder name="Project" return-type="Collection">
+        	<finder-column name="projectId"></finder-column>
+        </finder>
+  	</entity>
+  	<entity name="ProjectActivity" local-service="true"
+  		remote-service="false">
+
+
+  		<!-- PK fields -->
+
+  		<column name="projectActivityId" type="long" primary="true"></column>
+
+  		<!-- Group instance -->
+        <column name="strategyId" type="long"></column>
+        <column name="activityName" type="String"></column>
+
+  		<column name="groupId" type="long"></column>
+
+  		<!-- Audit fields -->
+
+  		<column name="companyId" type="long"></column>
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="startDate" type="Date"></column>
+  		<column name="endDate" type="Date"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+        <column name="startMonth" type="int"></column>
+        <column name="startYear" type="int"></column>
+        <column name="startMonthName" type="String"></column>
+        <column name="endMonth" type="int"></column>
+        <column name="endYear" type="int"></column>
+        <column name="endMonthName" type="String"></column>
+        
+        <column name="progress" type="int"></column>
+        <column name="status" type="int"></column>
+        <column name="progressStatus" type="int"></column>
+        <column name="completionDate" type="Date"></column>
+        <column name="resourceName" type="String"></column>
+        <column name="resourceType" type="String"></column>
+        <column name="remark" type="String"></column>
+        <order by="asc">
+        	<order-column name="startDate" />
+         </order>
+        
+        <finder return-type="Collection" name="Strategy">
+        	<finder-column name="strategyId"></finder-column>
+        	
+        </finder>
+  	</entity>
+  	<entity name="ProjectResource">
+
+  		<!-- PK fields -->
+
+  		<column name="projectResourceId" type="long" primary="true"></column>
+
+  		<!-- Group instance -->
+
+  		<column name="groupId" type="long"></column>
+
+  		<!-- Audit fields -->
+
+  		<column name="companyId" type="long"></column>
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+        <column name="resourceName" type="String"></column>
+  	</entity>
+  	<entity name="ProjectResourceType">
+
+  		<!-- PK fields -->
+
+  		<column name="projectResourceTypeId" type="long"
+  			primary="true">
+  		</column>
+
+  		<!-- Group instance -->
+        <column name="resourceTypeName" type="String"></column>
+
+  		<column name="groupId" type="long"></column>
+
+  		<!-- Audit fields -->
+
+  		<column name="companyId" type="long"></column>
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+  	</entity>
+  	<entity name="SeatingDepartment" local-service="true">
+  		<column name="departmentId" type="long" primary="true"></column>
+  		<column name="departmentName" type="String"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+  	</entity>
+  	<entity name="SeatingCategory" local-service="true">
+  		<column name="seatingCategoryId" type="long" primary="true"></column>
+  		<column name="seatingCategoryName" type="String"></column>
+  		<column name="seatingDepartmentId" type="long"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+  		<finder return-type="Collection" name="Department">
+  			<finder-column name="seatingDepartmentId"></finder-column>
+  		</finder>
+  	
+  	</entity>
+  	<entity name="LibrarySeatingDepartment" local-service="true">
+  		<column name="libraryDepartmentId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="departmentId" type="long"></column>
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<column name="modifiedDate" type="Date"></column>
+		<finder return-type="LibrarySeatingDepartment" name="LibraryDepartment" unique="true">
+			<finder-column name="libraryId"></finder-column>
+			<finder-column name="departmentId"></finder-column>
+		</finder>
+  	</entity>
+  	<entity name="FactSeating" local-service="true">
+  		<column name="factSeatingId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="departmentId" type="long"></column>
+  		<column name="seatingCategoryId" type="long"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="libraryTypeId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="capacity" type="int"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<finder return-type="Collection" name="LibraryDepartment">
+  			<finder-column name="libraryId"></finder-column>
+  			<finder-column name="departmentId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="LibDeptCatPeriod">
+  			<finder-column name="libraryId"></finder-column>
+  			<finder-column name="departmentId"></finder-column>
+  			<finder-column name="seatingCategoryId"></finder-column>
+  			<finder-column name="period"></finder-column>
+  		</finder>
+  		
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+  	</entity>
+  	<entity name="MemberCategory" local-service="true">
+  		<column name="memberCategoryId" type="long" primary="true"></column>
+  		<column name="memberCategoryName" type="String"></column>
+  		<column name="memberCategoryGroupName" type="String"></column>
+  		<column name="active" type="boolean"></column>
+  		
+  	</entity>
+  	
+  	<entity name="FactMembership" local-service="true">
+  		<column name="factMembershipId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="stateId" type="long"></column>
+  		<column name="libraryTypeId" type="long"></column>
+  		<column name="membershipCategoryId" type="long"></column>
+  		<column name="activeCount" type="int"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="LibraryPeriod">
+  			<finder-column name="libraryId"></finder-column>
+  			<finder-column name="period"></finder-column>
+  		</finder>
+  	</entity>
+	<entity name="Config" local-service="true">
+		<column name="id" type="long" primary="true"></column>
+		<column name="key" type="String"></column>
+		<column name="value" type="String"></column>
+		
+		<finder return-type="Config" name="Key" unique="true">
+			<finder-column name="key"></finder-column>
+		</finder>
+	</entity>
+	
+	<entity name="KpiType" local-service="true">
+		<column name="kpiTypeId" type="long" primary="true"></column>
+		<column name="kpiTypeKey" type="String"></column>
+		<column name="kpiName" type="String"></column>
+		<column name="periodMonth" type="boolean"></column>
+		<column name="periodQuarter" type="boolean"></column>
+		<column name="periodSemiAnnual" type="boolean"></column>
+		<column name="periodYear" type="boolean"></column>
+		<column name="isDecimal" type="boolean"></column>
+		<column name="manualValue" type="boolean"></column>
+		
+		<finder return-type="KpiType" name="Key" unique="true">
+			<finder-column name="kpiTypeKey"></finder-column>
+		</finder>
+	</entity>
+	<entity name="KpiEntry" local-service="true">
+		<column name="kpiEntryId" type="long" primary="true"></column>
+		<column name="kpiTypeId" type="long"></column>
+		<column name="periodYear" type="String"></column>
+		<column name="periodType" type="int"></column>
+		<column name="period" type="String"></column>
+		<column name="value" type="double"></column>
+		<column name="actual" type="double"></column>
+		
+			<order by="asc">
+            	<order-column name="period" />
+            </order>
+		
+		<finder return-type="KpiEntry" name="TypePeriod" unique="true">
+			<finder-column name="kpiTypeId"/>
+			<finder-column name="periodType" />
+			<finder-column name="period"/>
+			
+		</finder>
+		<finder return-type="Collection" name="YearType">
+			<finder-column name="kpiTypeId"/>
+			<finder-column name="periodYear"/>
+			<finder-column name="periodType" />
+			
+			
+		</finder>
+		
+		
+	</entity>
+	<entity name="Report" local-service="true">
+		<column name="reportId" type="long" primary="true"></column>
+		<column name="reportKey" type="String"></column>
+		<column name="reportName" type="String"></column>
+		<column name="reportTitle" type="String"></column>
+		
+		<finder return-type="Report" name="Key" unique="true">
+			<finder-column name="reportKey"></finder-column>
+		</finder>
+	</entity>
+	
+	
+	
+</service-builder>

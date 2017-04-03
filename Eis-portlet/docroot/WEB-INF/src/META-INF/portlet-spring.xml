@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.eis.service.ConfigLocalService" class="com.idetronic.eis.service.impl.ConfigLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.ConfigService" class="com.idetronic.eis.service.impl.ConfigServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ConfigPersistence" class="com.idetronic.eis.service.persistence.ConfigPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactIrItemLocalService" class="com.idetronic.eis.service.impl.FactIrItemLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactIrItemService" class="com.idetronic.eis.service.impl.FactIrItemServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactIrItemPersistence" class="com.idetronic.eis.service.persistence.FactIrItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactIrItemFinder" class="com.idetronic.eis.service.persistence.FactIrItemFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactIrSubmissionLocalService" class="com.idetronic.eis.service.impl.FactIrSubmissionLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactIrSubmissionService" class="com.idetronic.eis.service.impl.FactIrSubmissionServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactIrSubmissionPersistence" class="com.idetronic.eis.service.persistence.FactIrSubmissionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactIrSubmissionFinder" class="com.idetronic.eis.service.persistence.FactIrSubmissionFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactMembershipLocalService" class="com.idetronic.eis.service.impl.FactMembershipLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactMembershipService" class="com.idetronic.eis.service.impl.FactMembershipServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactMembershipPersistence" class="com.idetronic.eis.service.persistence.FactMembershipPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactMembershipFinder" class="com.idetronic.eis.service.persistence.FactMembershipFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactNonPrintedMaterialLocalService" class="com.idetronic.eis.service.impl.FactNonPrintedMaterialLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactNonPrintedMaterialService" class="com.idetronic.eis.service.impl.FactNonPrintedMaterialServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactNonPrintedMaterialPersistence" class="com.idetronic.eis.service.persistence.FactNonPrintedMaterialPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinder" class="com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactPostLocalService" class="com.idetronic.eis.service.impl.FactPostLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactPostService" class="com.idetronic.eis.service.impl.FactPostServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactPostPersistence" class="com.idetronic.eis.service.persistence.FactPostPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactPostFinder" class="com.idetronic.eis.service.persistence.FactPostFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactPrintedMaterialLocalService" class="com.idetronic.eis.service.impl.FactPrintedMaterialLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactPrintedMaterialService" class="com.idetronic.eis.service.impl.FactPrintedMaterialServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactPrintedMaterialPersistence" class="com.idetronic.eis.service.persistence.FactPrintedMaterialPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactPrintedMaterialFinder" class="com.idetronic.eis.service.persistence.FactPrintedMaterialFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactSeatingLocalService" class="com.idetronic.eis.service.impl.FactSeatingLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactSeatingService" class="com.idetronic.eis.service.impl.FactSeatingServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactSeatingPersistence" class="com.idetronic.eis.service.persistence.FactSeatingPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactSeatingFinder" class="com.idetronic.eis.service.persistence.FactSeatingFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactVisitorLocalService" class="com.idetronic.eis.service.impl.FactVisitorLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactVisitorService" class="com.idetronic.eis.service.impl.FactVisitorServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactVisitorPersistence" class="com.idetronic.eis.service.persistence.FactVisitorPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactVisitorFinder" class="com.idetronic.eis.service.persistence.FactVisitorFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FacultyLocalService" class="com.idetronic.eis.service.impl.FacultyLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FacultyService" class="com.idetronic.eis.service.impl.FacultyServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FacultyPersistence" class="com.idetronic.eis.service.persistence.FacultyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FacultyTypeLocalService" class="com.idetronic.eis.service.impl.FacultyTypeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FacultyTypeService" class="com.idetronic.eis.service.impl.FacultyTypeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FacultyTypePersistence" class="com.idetronic.eis.service.persistence.FacultyTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ItemMediumLocalService" class="com.idetronic.eis.service.impl.ItemMediumLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.ItemMediumService" class="com.idetronic.eis.service.impl.ItemMediumServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ItemMediumPersistence" class="com.idetronic.eis.service.persistence.ItemMediumPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ItemTypeLocalService" class="com.idetronic.eis.service.impl.ItemTypeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.ItemTypeService" class="com.idetronic.eis.service.impl.ItemTypeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ItemTypePersistence" class="com.idetronic.eis.service.persistence.ItemTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ItemTypeCategoryLocalService" class="com.idetronic.eis.service.impl.ItemTypeCategoryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.ItemTypeCategoryService" class="com.idetronic.eis.service.impl.ItemTypeCategoryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ItemTypeCategoryPersistence" class="com.idetronic.eis.service.persistence.ItemTypeCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.KpiEntryLocalService" class="com.idetronic.eis.service.impl.KpiEntryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.KpiEntryService" class="com.idetronic.eis.service.impl.KpiEntryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.KpiEntryPersistence" class="com.idetronic.eis.service.persistence.KpiEntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.KpiTypeLocalService" class="com.idetronic.eis.service.impl.KpiTypeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.KpiTypeService" class="com.idetronic.eis.service.impl.KpiTypeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.KpiTypePersistence" class="com.idetronic.eis.service.persistence.KpiTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.LibraryLocalService" class="com.idetronic.eis.service.impl.LibraryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.LibraryPersistence" class="com.idetronic.eis.service.persistence.LibraryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.LibraryFinder" class="com.idetronic.eis.service.persistence.LibraryFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.LibrarySeatingDepartmentLocalService" class="com.idetronic.eis.service.impl.LibrarySeatingDepartmentLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.LibrarySeatingDepartmentService" class="com.idetronic.eis.service.impl.LibrarySeatingDepartmentServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.LibrarySeatingDepartmentPersistence" class="com.idetronic.eis.service.persistence.LibrarySeatingDepartmentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.LibraryTypeLocalService" class="com.idetronic.eis.service.impl.LibraryTypeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.LibraryTypePersistence" class="com.idetronic.eis.service.persistence.LibraryTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.LoanLocalService" class="com.idetronic.eis.service.impl.LoanLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.LoanService" class="com.idetronic.eis.service.impl.LoanServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.LoanPersistence" class="com.idetronic.eis.service.persistence.LoanPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.LoanFinder" class="com.idetronic.eis.service.persistence.LoanFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.MemberCategoryLocalService" class="com.idetronic.eis.service.impl.MemberCategoryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.MemberCategoryService" class="com.idetronic.eis.service.impl.MemberCategoryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.MemberCategoryPersistence" class="com.idetronic.eis.service.persistence.MemberCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.PostCategoryLocalService" class="com.idetronic.eis.service.impl.PostCategoryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.PostCategoryService" class="com.idetronic.eis.service.impl.PostCategoryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.PostCategoryPersistence" class="com.idetronic.eis.service.persistence.PostCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.PostGradeLocalService" class="com.idetronic.eis.service.impl.PostGradeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.PostGradeService" class="com.idetronic.eis.service.impl.PostGradeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.PostGradePersistence" class="com.idetronic.eis.service.persistence.PostGradePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ProjectLocalService" class="com.idetronic.eis.service.impl.ProjectLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.ProjectService" class="com.idetronic.eis.service.impl.ProjectServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ProjectPersistence" class="com.idetronic.eis.service.persistence.ProjectPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ProjectActivityLocalService" class="com.idetronic.eis.service.impl.ProjectActivityLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ProjectActivityPersistence" class="com.idetronic.eis.service.persistence.ProjectActivityPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ProjectResourceService" class="com.idetronic.eis.service.impl.ProjectResourceServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ProjectResourcePersistence" class="com.idetronic.eis.service.persistence.ProjectResourcePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ProjectResourceTypeService" class="com.idetronic.eis.service.impl.ProjectResourceTypeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ProjectResourceTypePersistence" class="com.idetronic.eis.service.persistence.ProjectResourceTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ProjectStrategyLocalService" class="com.idetronic.eis.service.impl.ProjectStrategyLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ProjectStrategyPersistence" class="com.idetronic.eis.service.persistence.ProjectStrategyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.ReportLocalService" class="com.idetronic.eis.service.impl.ReportLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.ReportService" class="com.idetronic.eis.service.impl.ReportServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.ReportPersistence" class="com.idetronic.eis.service.persistence.ReportPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.SeatingCategoryLocalService" class="com.idetronic.eis.service.impl.SeatingCategoryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.SeatingCategoryService" class="com.idetronic.eis.service.impl.SeatingCategoryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.SeatingCategoryPersistence" class="com.idetronic.eis.service.persistence.SeatingCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.SeatingDepartmentLocalService" class="com.idetronic.eis.service.impl.SeatingDepartmentLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.SeatingDepartmentService" class="com.idetronic.eis.service.impl.SeatingDepartmentServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.SeatingDepartmentPersistence" class="com.idetronic.eis.service.persistence.SeatingDepartmentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.StateLocalService" class="com.idetronic.eis.service.impl.StateLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.StatePersistence" class="com.idetronic.eis.service.persistence.StatePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.UserLibraryLocalService" class="com.idetronic.eis.service.impl.UserLibraryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.UserLibraryService" class="com.idetronic.eis.service.impl.UserLibraryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.UserLibraryPersistence" class="com.idetronic.eis.service.persistence.UserLibraryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.VisitorCategoryLocalService" class="com.idetronic.eis.service.impl.VisitorCategoryLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.VisitorCategoryService" class="com.idetronic.eis.service.impl.VisitorCategoryServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.VisitorCategoryPersistence" class="com.idetronic.eis.service.persistence.VisitorCategoryPersistenceImpl" parent="basePersistence" />
+</beans>

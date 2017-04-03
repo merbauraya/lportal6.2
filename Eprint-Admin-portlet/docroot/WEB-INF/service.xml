@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.idetronic.eprint">
+	<author>Mazlan Mat</author>
+	<namespace>Eprints</namespace>
+	<entity name="Eprint" local-service="true" remote-service="false">
+		<column name="eprintId" type="long" primary="true"></column>
+		<column name="title" type="String"></column>
+		<column name="eprintType" type="String"></column>
+		<column name="eprintStatus" type="String"></column>
+		<column name="metadataVisibility" type="String"></column>
+		<column name="eprintAbstract" type="String"></column>
+		<column name="eprintKeywords" type="String"></column>
+		<column name="isPublished" type="String"></column>
+		<column name="dateYear" type="String"></column>
+		<column name="fullTextStatus" type="String"></column>
+		<column name="companyId" type="long"></column>
+		<column name="modifiedDate" type="Date"></column>
+		<column name="createdDate" type="Date"></column>
+		<column name="groupId" type="long"></column>
+		<finder return-type="Collection" name="eprintType">
+			<finder-column name="eprintType"></finder-column>
+		</finder>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry"></reference>
+	</entity>
+	<entity name="EprintSubject" local-service="true" remote-service="false">
+		<column name="eprintId" type="long" primary="true"></column>
+		<column name="subjectId" type="String" primary="true"></column>
+		<column name="subjectName" type="String"></column>
+	</entity>
+	<entity name="EprintStaticContent" local-service="true" remote-service="false">
+		<column name="contentId" type="long" primary="true"></column>
+		<column name="content" type="String"></column>
+	</entity>
+</service-builder>

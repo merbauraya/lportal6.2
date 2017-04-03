@@ -1,0 +1,801 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ConfigModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactIrItemModelImpl">
+		<attributes>
+			<id name="factIrItemId" />
+			<basic name="libraryId" />
+			<basic name="facultyId" />
+			<basic name="period" />
+			<basic name="itemTypeId" />
+			<basic name="itemMediumId" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="createdByUserId" />
+			<basic name="createdByUserName" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactIrSubmissionModelImpl">
+		<attributes>
+			<id name="submissionId" />
+			<basic name="libraryId" />
+			<basic name="facultyId" />
+			<basic name="period" />
+			<basic name="itemMediumId" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="createdByUserId" />
+			<basic name="createdByUserName" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactMembershipModelImpl">
+		<attributes>
+			<id name="factMembershipId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="stateId" />
+			<basic name="libraryTypeId" />
+			<basic name="membershipCategoryId" />
+			<basic name="activeCount" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactNonPrintedMaterialModelImpl">
+		<attributes>
+			<id name="factNonPrintedMaterialId" />
+			<basic name="libraryId" />
+			<basic name="libraryCode" />
+			<basic name="stateId" />
+			<basic name="stateCode" />
+			<basic name="libraryTypeId" />
+			<basic name="itemTypeId" />
+			<basic name="period" />
+			<basic name="monthVal" />
+			<basic name="yearVal" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="dateCreated">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="createdByUserName" />
+			<basic name="createdByUserId" />
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactPostModelImpl">
+		<attributes>
+			<id name="factPostId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="postGradeId" />
+			<basic name="stateId" />
+			<basic name="value" />
+			<basic name="createdByUserId" />
+			<basic name="createdByUserName" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactPrintedMaterialModelImpl">
+		<attributes>
+			<id name="factPrintedMaterialId" />
+			<basic name="libraryId" />
+			<basic name="libraryCode" />
+			<basic name="stateId" />
+			<basic name="stateCode" />
+			<basic name="itemTypeId" />
+			<basic name="period" />
+			<basic name="libraryTypeId" />
+			<basic name="monthVal" />
+			<basic name="yearVal" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="dateCreated">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="createdByUserName" />
+			<basic name="createdByUserId" />
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactSeatingModelImpl">
+		<attributes>
+			<id name="factSeatingId" />
+			<basic name="libraryId" />
+			<basic name="departmentId" />
+			<basic name="seatingCategoryId" />
+			<basic name="stateId" />
+			<basic name="libraryTypeId" />
+			<basic name="period" />
+			<basic name="capacity" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactVisitorModelImpl">
+		<attributes>
+			<id name="factVisitorId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="visitorCategoryId" />
+			<basic name="stateId" />
+			<basic name="libraryTypeId" />
+			<basic name="value" />
+			<basic name="createdByUserId" />
+			<basic name="createdByUserName" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FacultyModelImpl">
+		<attributes>
+			<id name="facultyId" />
+			<basic name="facultyTypeId" />
+			<basic name="facultyName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FacultyTypeModelImpl">
+		<attributes>
+			<id name="facultyTypeId" />
+			<basic name="facultyTypeName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ItemMediumModelImpl">
+		<attributes>
+			<id name="itemMediumId" />
+			<basic name="itemMediumName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ItemTypeModelImpl">
+		<attributes>
+			<id name="itemTypeId" />
+			<basic name="itemTypeName" />
+			<basic name="printedType" />
+			<basic name="IRType" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ItemTypeCategoryModelImpl">
+		<attributes>
+			<id name="itemTypeCategoryId" />
+			<basic name="itemTypeCategoryName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.KpiEntryModelImpl">
+		<attributes>
+			<id name="kpiEntryId" />
+			<basic name="kpiTypeId" />
+			<basic name="periodYear" />
+			<basic name="periodType" />
+			<basic name="period" />
+			<basic name="value" />
+			<basic name="actual" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.KpiTypeModelImpl">
+		<attributes>
+			<id name="kpiTypeId" />
+			<basic name="kpiTypeKey" />
+			<basic name="kpiName" />
+			<basic name="periodMonth" />
+			<basic name="periodQuarter" />
+			<basic name="periodSemiAnnual" />
+			<basic name="periodYear" />
+			<basic name="isDecimal" />
+			<basic name="manualValue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.LibraryModelImpl">
+		<attributes>
+			<id name="libraryId" />
+			<basic name="libraryCode" />
+			<basic name="stateId" />
+			<basic name="libraryTypeId" />
+			<basic name="stateName" />
+			<basic name="libraryName" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.LibrarySeatingDepartmentModelImpl">
+		<attributes>
+			<id name="libraryDepartmentId" />
+			<basic name="libraryId" />
+			<basic name="departmentId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.LibraryTypeModelImpl">
+		<attributes>
+			<id name="libraryTypeId" />
+			<basic name="libraryTypeCode" />
+			<basic name="libraryTypeName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.LoanModelImpl">
+		<attributes>
+			<id name="loanEntryId" />
+			<basic name="libraryId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="period" />
+			<basic name="stateId" />
+			<basic name="libraryTypeId" />
+			<basic name="periodYear" />
+			<basic name="periodMonth" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="memberCategoryId" />
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.MemberCategoryModelImpl">
+		<attributes>
+			<id name="memberCategoryId" />
+			<basic name="memberCategoryName" />
+			<basic name="memberCategoryGroupName" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.PostCategoryModelImpl">
+		<attributes>
+			<id name="postCategoryId" />
+			<basic name="postCategoryCode" />
+			<basic name="postCategoryName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.PostGradeModelImpl">
+		<attributes>
+			<id name="postGradeId" />
+			<basic name="postCategoryId" />
+			<basic name="postGradeCode" />
+			<basic name="postGradeScheme" />
+			<basic name="postGradeName" />
+			<basic name="postGradeDesc" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ProjectModelImpl">
+		<attributes>
+			<id name="projectId" />
+			<basic name="projectName" />
+			<basic name="projectStatus" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="startMonth" />
+			<basic name="startYear" />
+			<basic name="startMonthName" />
+			<basic name="endMonth" />
+			<basic name="endYear" />
+			<basic name="progressStatus" />
+			<basic name="endMonthName" />
+			<basic name="completionDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="progress" />
+			<basic name="resourceId" />
+			<basic name="resourceTypeId" />
+			<basic name="resourceName" />
+			<basic name="resourceType" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ProjectActivityModelImpl">
+		<attributes>
+			<id name="projectActivityId" />
+			<basic name="strategyId" />
+			<basic name="activityName" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="startMonth" />
+			<basic name="startYear" />
+			<basic name="startMonthName" />
+			<basic name="endMonth" />
+			<basic name="endYear" />
+			<basic name="endMonthName" />
+			<basic name="progress" />
+			<basic name="status" />
+			<basic name="progressStatus" />
+			<basic name="completionDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="resourceName" />
+			<basic name="resourceType" />
+			<basic name="remark" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ProjectResourceModelImpl">
+		<attributes>
+			<id name="projectResourceId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="resourceName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ProjectResourceTypeModelImpl">
+		<attributes>
+			<id name="projectResourceTypeId" />
+			<basic name="resourceTypeName" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ProjectStrategyModelImpl">
+		<attributes>
+			<id name="projectStrategyId" />
+			<basic name="strategyName" />
+			<basic name="projectId" />
+			<basic name="userName" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="startMonth" />
+			<basic name="startYear" />
+			<basic name="startMonthName" />
+			<basic name="endMonth" />
+			<basic name="endYear" />
+			<basic name="endMonthName" />
+			<basic name="completionDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="projectStrategyStatus" />
+			<basic name="userId" />
+			<basic name="progress" />
+			<basic name="status" />
+			<basic name="progressStatus" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="resourceName" />
+			<basic name="resourceType" />
+			<basic name="remark" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.ReportModelImpl">
+		<attributes>
+			<id name="reportId" />
+			<basic name="reportKey" />
+			<basic name="reportName" />
+			<basic name="reportTitle" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.SeatingCategoryModelImpl">
+		<attributes>
+			<id name="seatingCategoryId" />
+			<basic name="seatingCategoryName" />
+			<basic name="seatingDepartmentId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.SeatingDepartmentModelImpl">
+		<attributes>
+			<id name="departmentId" />
+			<basic name="departmentName" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.StateModelImpl">
+		<attributes>
+			<id name="stateId" />
+			<basic name="stateName" />
+			<basic name="stateCode" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.UserLibraryModelImpl">
+		<attributes>
+			<id name="userLibraryId" />
+			<basic name="userId" />
+			<basic name="libraryId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="createdByUserId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.VisitorCategoryModelImpl">
+		<attributes>
+			<id name="visitorCategoryId" />
+			<basic name="visitorCategoryCode" />
+			<basic name="visitorCategoryName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.idetronic.eis.model.impl.ConfigImpl" name="Config">
+		<table name="eis_Config" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactIrItemImpl" name="FactIrItem">
+		<table name="eis_FactIrItem" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactIrSubmissionImpl" name="FactIrSubmission">
+		<table name="eis_FactIrSubmission" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactMembershipImpl" name="FactMembership">
+		<table name="eis_FactMembership" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactNonPrintedMaterialImpl" name="FactNonPrintedMaterial">
+		<table name="eis_FactNonPrintedMaterial" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactPostImpl" name="FactPost">
+		<table name="eis_FactPost" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactPrintedMaterialImpl" name="FactPrintedMaterial">
+		<table name="eis_FactPrintedMaterial" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactSeatingImpl" name="FactSeating">
+		<table name="eis_FactSeating" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactVisitorImpl" name="FactVisitor">
+		<table name="eis_FactVisitor" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FacultyImpl" name="Faculty">
+		<table name="eis_Faculty" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FacultyTypeImpl" name="FacultyType">
+		<table name="eis_FacultyType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ItemMediumImpl" name="ItemMedium">
+		<table name="eis_ItemMedium" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ItemTypeImpl" name="ItemType">
+		<table name="eis_ItemType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ItemTypeCategoryImpl" name="ItemTypeCategory">
+		<table name="eis_ItemTypeCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.KpiEntryImpl" name="KpiEntry">
+		<table name="eis_KpiEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.KpiTypeImpl" name="KpiType">
+		<table name="eis_KpiType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.LibraryImpl" name="Library">
+		<table name="eis_Library" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.LibrarySeatingDepartmentImpl" name="LibrarySeatingDepartment">
+		<table name="eis_LibrarySeatingDepartment" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.LibraryTypeImpl" name="LibraryType">
+		<table name="eis_LibraryType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.LoanImpl" name="Loan">
+		<table name="eis_Loan" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.MemberCategoryImpl" name="MemberCategory">
+		<table name="eis_MemberCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.PostCategoryImpl" name="PostCategory">
+		<table name="eis_PostCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.PostGradeImpl" name="PostGrade">
+		<table name="eis_PostGrade" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ProjectImpl" name="Project">
+		<table name="eis_Project" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ProjectActivityImpl" name="ProjectActivity">
+		<table name="eis_ProjectActivity" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ProjectResourceImpl" name="ProjectResource">
+		<table name="eis_ProjectResource" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ProjectResourceTypeImpl" name="ProjectResourceType">
+		<table name="eis_ProjectResourceType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ProjectStrategyImpl" name="ProjectStrategy">
+		<table name="eis_ProjectStrategy" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.ReportImpl" name="Report">
+		<table name="eis_Report" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.SeatingCategoryImpl" name="SeatingCategory">
+		<table name="eis_SeatingCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.SeatingDepartmentImpl" name="SeatingDepartment">
+		<table name="eis_SeatingDepartment" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.StateImpl" name="State">
+		<table name="eis_State" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.UserLibraryImpl" name="UserLibrary">
+		<table name="eis_UserLibrary" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.VisitorCategoryImpl" name="VisitorCategory">
+		<table name="eis_VisitorCategory" />
+		<attributes />
+	</entity>
+</entity-mappings>

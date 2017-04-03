@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.idetronic.eis.service.persistence.FactPrintedMaterialFinder.findLatestEntryByL_P">
+	
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactPrintedMaterial A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            itemTypeId,
+		            MAX(factPrintedMaterialId) AS id
+		    FROM
+		        eis_FactPrintedMaterial
+		    WHERE
+		        libraryId = ? AND period = ?
+		          
+		    GROUP BY itemTypeId , libraryId , period) groupedData ON (A.itemTypeId = groupedData.itemTypeId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId)
+		        AND A.factPrintedMaterialId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+	
+	</sql>
+	
+	
+	<sql id="com.idetronic.eis.service.persistence.FactPrintedMaterialFinder.findLatestEntryByL_P_T">
+	
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactPrintedMaterial A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            itemTypeId,
+		            MAX(factPrintedMaterialId) AS id
+		    FROM
+		        eis_FactPrintedMaterial
+		    WHERE
+		        libraryId = ? AND period = ?
+		          AND itemTypeId = ?
+		    GROUP BY itemTypeId , libraryId , period) groupedData ON (A.itemTypeId = groupedData.itemTypeId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId)
+		        AND A.factPrintedMaterialId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinder.findLatestEntryByL_P">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactNonPrintedMaterial A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            itemTypeId,
+		            MAX(factNonPrintedMaterialId) AS id
+		    FROM
+		        eis_FactNonPrintedMaterial
+		    WHERE
+		        libraryId = ? AND period = ?
+		          
+		    GROUP BY itemTypeId , libraryId , period) groupedData ON (A.itemTypeId = groupedData.itemTypeId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId)
+		        AND A.factNonPrintedMaterialId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+                
+                
+
+
+		
+	
+	</sql>
+	
+		<sql id="com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinder.findLatestEntryByL_P_T">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactNonPrintedMaterial A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            itemTypeId,
+		            MAX(factNonPrintedMaterialId) AS id
+		    FROM
+		        eis_FactNonPrintedMaterial
+		    WHERE
+		        libraryId = ? AND period = ?
+		        AND itemTypeId = ?
+		          
+		    GROUP BY itemTypeId , libraryId , period) groupedData ON (A.itemTypeId = groupedData.itemTypeId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId)
+		        AND A.factNonPrintedMaterialId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+                
+                
+
+
+		
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LoanFinder.findLatestEntryByL_P">
+			SELECT 
+		    A.*
+		FROM
+		    eis_Loan A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            memberCategoryId,
+		            MAX(loanEntryId) AS id
+		    FROM
+		        eis_Loan
+		    WHERE
+		        libraryId = ? AND period = ?
+		            
+		    GROUP BY memberCategoryId , libraryId , period) groupedData ON (A.memberCategoryId = groupedData.memberCategoryId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId)
+		        AND A.loanEntryId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+                
+                
+
+
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactPostFinder.findLatestEntryByL_P">
+		SELECT 
+		    A.*
+		FROM
+	    eis_FactPost A
+	        INNER JOIN
+	    (SELECT 
+	        libraryId, period, postGradeId, MAX(factPostId) AS id
+	    FROM
+	        eis_FactPost
+	    WHERE
+	        libraryId = ? AND period = ?
+	    GROUP BY postGradeId , libraryId , period) groupedData ON (A.postGradeId = groupedData.postGradeId
+	        AND A.period = groupedData.period
+	        AND A.libraryId = groupedData.libraryId)
+	        AND A.factPostId = groupedData.id
+	        AND A.period = groupedData.period
+	        AND A.libraryId = groupedData.libraryId
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactVisitorFinder.findLatestEntryByL_P">
+		SELECT 
+		    A.*
+		FROM
+	    eis_FactVisitor A
+	        INNER JOIN
+	    (SELECT 
+	        libraryId, period, visitorCategoryId, MAX(factVisitorId) AS id
+	    FROM
+	        eis_FactVisitor
+	    WHERE
+	        libraryId = ? AND period = ?
+	    GROUP BY visitorCategoryId , libraryId , period) groupedData ON (A.visitorCategoryId = groupedData.visitorCategoryId
+	        AND A.period = groupedData.period
+	        AND A.libraryId = groupedData.libraryId)
+	        AND A.factVisitorId = groupedData.id
+	        AND A.period = groupedData.period
+	        AND A.libraryId = groupedData.libraryId
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactIrSubmissionFinder.findLatestEntryByL_P_F">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactIrSubmission A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            facultyId,
+		            itemMediumId,
+		            MAX(submissionId) AS id
+		    FROM
+		        eis_FactIrSubmission
+		    WHERE
+		        libraryId = ? AND period = ?
+		            AND facultyId = ?
+		    GROUP BY libraryId , period , facultyId , itemMediumId) groupedData ON (A.itemMediumId = groupedData.itemMediumId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.itemMediumId = groupedData.itemMediumId)
+		        AND A.submissionId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+        
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactIrItemFinder.findLatestEntryByP">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactIrItem A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            facultyId,
+		            itemMediumId,
+		            itemTypeId,
+		            MAX(factIrItemId) AS id
+		    FROM
+		        eis_FactIrItem
+		    WHERE
+		        libraryId = ? AND facultyId = ?
+		            AND period = ?
+		    GROUP BY libraryId , period , facultyId , itemMediumId , itemTypeId) groupedData ON (A.itemMediumId = groupedData.itemMediumId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.itemMediumId = groupedData.itemMediumId
+		        AND A.itemTypeId = groupedData.itemTypeId)
+		        AND A.factIrItemId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.findMissingPrintedMaterialDataBy_P">
+		SELECT 
+	    A.*
+		FROM
+		    eis_Library A
+		WHERE
+		    NOT EXISTS( SELECT 
+		            1
+		        FROM
+		            eis_FactPrintedMaterial B
+		        WHERE
+		            A.libraryId = B.libraryId
+		                AND B.period = ?)
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactSeatingFinder.findLatestEntryByP_L">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactSeating A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            departmentId,
+		            seatingCategoryId,
+		            MAX(factSeatingId) AS id
+		    FROM
+		        eis_FactSeating
+		    WHERE
+		        libraryId = ? AND period = ?
+		    GROUP BY departmentId , seatingCategoryId , libraryId , period) groupedData ON (A.departmentId = groupedData.departmentId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.seatingCategoryId = groupedData.seatingCategoryId)
+		        AND A.factSeatingId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+	
+	</sql>
+	
+	<sql id="com.idetronic.eis.service.persistence.FactMembershipFinder.findLatestEntryByL_P">
+		SELECT 
+	    	A.*
+		FROM
+		    eis_FactMembership A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            membershipCategoryId,
+		            MAX(factMembershipId) AS id
+		    FROM
+		        eis_FactMembership
+		    WHERE
+		        libraryId = ? AND period = ?
+		    GROUP BY membershipCategoryId , libraryId , period) groupedData ON (A.membershipCategoryId = groupedData.membershipCategoryId
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId)
+		        AND A.factMembershipId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+	
+	</sql>
+	<sql file="custom-sql/missing_data.xml"/>
+	<sql file="custom-sql/history.xml"/>
+</custom-sql>
