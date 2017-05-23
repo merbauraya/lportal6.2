@@ -91,10 +91,9 @@ public class LibraryModelImpl extends BaseModelImpl<Library>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.idetronic.eis.model.Library"),
 			true);
-	public static long LIBRARYCODE_COLUMN_BITMASK = 1L;
-	public static long LIBRARYNAME_COLUMN_BITMASK = 2L;
-	public static long STATEID_COLUMN_BITMASK = 4L;
-	public static long CREATEDATE_COLUMN_BITMASK = 8L;
+	public static long LIBRARYNAME_COLUMN_BITMASK = 1L;
+	public static long STATEID_COLUMN_BITMASK = 2L;
+	public static long CREATEDATE_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.idetronic.eis.model.Library"));
 
@@ -248,17 +247,7 @@ public class LibraryModelImpl extends BaseModelImpl<Library>
 
 	@Override
 	public void setLibraryCode(String libraryCode) {
-		_columnBitmask |= LIBRARYCODE_COLUMN_BITMASK;
-
-		if (_originalLibraryCode == null) {
-			_originalLibraryCode = _libraryCode;
-		}
-
 		_libraryCode = libraryCode;
-	}
-
-	public String getOriginalLibraryCode() {
-		return GetterUtil.getString(_originalLibraryCode);
 	}
 
 	@Override
@@ -503,8 +492,6 @@ public class LibraryModelImpl extends BaseModelImpl<Library>
 	public void resetOriginalValues() {
 		LibraryModelImpl libraryModelImpl = this;
 
-		libraryModelImpl._originalLibraryCode = libraryModelImpl._libraryCode;
-
 		libraryModelImpl._originalStateId = libraryModelImpl._stateId;
 
 		libraryModelImpl._setOriginalStateId = false;
@@ -684,7 +671,6 @@ public class LibraryModelImpl extends BaseModelImpl<Library>
 		};
 	private long _libraryId;
 	private String _libraryCode;
-	private String _originalLibraryCode;
 	private long _stateId;
 	private long _originalStateId;
 	private boolean _setOriginalStateId;

@@ -33,6 +33,7 @@ public class ConfigSoap implements Serializable {
 		soapModel.setId(model.getId());
 		soapModel.setKey(model.getKey());
 		soapModel.setValue(model.getValue());
+		soapModel.setTitle(model.getTitle());
 
 		return soapModel;
 	}
@@ -109,7 +110,16 @@ public class ConfigSoap implements Serializable {
 		_value = value;
 	}
 
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	private long _id;
 	private String _key;
 	private String _value;
+	private String _title;
 }

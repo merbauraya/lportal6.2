@@ -1,8 +1,8 @@
 <%
 
-	for (SeatingDepartment department : departments)
+	for (MasterFile department : departments)
 	{
-		String title =  department.getDepartmentName() ;//itemType.getItemTypeName() + " / " + medium.getItemMediumName();
+		String title =  department.getMasterFileName() ;//itemType.getItemTypeName() + " / " + medium.getItemMediumName();
 
 %>
 			<aui:row>
@@ -16,9 +16,9 @@
 		<%		
 				for (cur = 0; cur < rowSize + extra; cur++)
 				{
-					SeatingCategory category = categories.get(cur);
-					String inputName = department.getDepartmentId() +"-"+ category.getSeatingCategoryId();
-					String label = category.getSeatingCategoryName();
+					MasterFile category = categories.get(cur);
+					String inputName = department.getMasterFileId() +"-"+ category.getMasterFileId();
+					String label = category.getMasterFileName();
 		%>
 			
 			<aui:row>
@@ -44,9 +44,9 @@
 					for (int i = 0; i < rowSize; cur++)
 					{
 						i++; 
-						SeatingCategory category = categories.get(cur);
-						String inputName = department.getDepartmentId() +"-"+ category.getSeatingCategoryId();
-						String label = category.getSeatingCategoryName();
+						MasterFile category = categories.get(cur);
+						String inputName = department.getMasterFileId() +"-"+ category.getMasterFileId();
+						String label = category.getMasterFileName();
 				%>
 					<aui:row>
 							<aui:col>
@@ -69,9 +69,9 @@
 					for (int i = 0; i < rowSize; cur++)
 					{
 						i++; 
-						SeatingCategory category = categories.get(cur);
-						String inputName = department.getDepartmentId() +"-"+ category.getSeatingCategoryId();
-						String label = category.getSeatingCategoryName();
+						MasterFile category = categories.get(cur);
+						String inputName = department.getMasterFileId() +"-"+ category.getMasterFileId();
+						String label = category.getMasterFileName();
 				%>
 					<aui:row>
 							<aui:col>

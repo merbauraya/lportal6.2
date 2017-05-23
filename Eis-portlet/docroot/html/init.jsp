@@ -22,13 +22,18 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.Collections" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 <%@ page import="javax.portlet.WindowState" %>
 <%@ page import="javax.portlet.ActionRequest"%>
 <%@ page import="javax.portlet.PortletRequest"%>
 
-<%@ page import="com.liferay.portal.model.User " %>
+<%@ page import="com.liferay.portal.model.User" %>
+<%@ page import="com.liferay.portal.model.Group" %>
+<%@ page import="com.liferay.portal.model.UserGroupRole" %>
+<%@ page import="com.liferay.portal.model.Role" %>
+<%@ page import="com.liferay.portal.model.Team" %>
 
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
@@ -59,7 +64,14 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.util.OrderByComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.OrderByComparatorFactory" %>
-
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portlet.sites.util.SitesUtil" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.RoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.TeamLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
+<%@ page import="com.liferay.util.portlet.PortletProps" %>
 
 <%@ page import="com.idetronic.eis.model.State" %>
 <%@ page import="com.idetronic.eis.model.LibraryType" %>
@@ -90,6 +102,9 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.idetronic.eis.model.KpiType" %>
 <%@ page import="com.idetronic.eis.model.KpiEntry" %>
 <%@ page import="com.idetronic.eis.model.Report" %>
+<%@ page import="com.idetronic.eis.model.MasterType" %>
+<%@ page import="com.idetronic.eis.model.MasterFile" %>
+<%@ page import="com.idetronic.eis.model.impl.ConfigImpl" %>
 
 <%@ page import="com.idetronic.eis.service.ProjectLocalServiceUtil" %>
 <%@ page import="com.idetronic.eis.service.ProjectStrategyLocalServiceUtil" %>
@@ -120,14 +135,17 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.idetronic.eis.service.KpiTypeLocalServiceUtil" %>
 <%@ page import="com.idetronic.eis.service.KpiEntryLocalServiceUtil" %>
 <%@ page import="com.idetronic.eis.service.ReportLocalServiceUtil" %>
+<%@ page import="com.idetronic.eis.service.MasterTypeLocalServiceUtil" %>
+<%@ page import="com.idetronic.eis.service.MasterFileLocalServiceUtil" %>
 
 <%@ page import="com.idetronic.eis.search.UserLibraryChecker" %>
+<%@ page import="com.idetronic.eis.search.UserDataChecker" %>
 <%@ page import="com.idetronic.eis.search.UserSearch" %>
 <%@ page import="com.idetronic.eis.search.UserSearchTerms" %>
 <%@ page import="com.idetronic.eis.search.UserDisplayTerms" %>
 
 <%@ page import="com.idetronic.eis.util.EisUtil" %>
-
+<%@ page import="com.idetronic.eis.util.MissingDataUtil" %>
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
@@ -149,7 +167,8 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 	int mPeriodNumYearForward = GetterUtil.getInteger(props.get(EisUtil.CONFIG_PERIOD_NUM_YEAR_FWD));
 	
 	boolean isAdmin  = permissionChecker.isOmniadmin() || permissionChecker.isGroupAdmin(themeDisplay.getScopeGroupId());
-
+	
+	boolean devMode = GetterUtil.getBoolean(PortletProps.get("DEV_MODE"));
 
 
 

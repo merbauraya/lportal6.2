@@ -76,6 +76,8 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 		attributes.put("reportKey", getReportKey());
 		attributes.put("reportName", getReportName());
 		attributes.put("reportTitle", getReportTitle());
+		attributes.put("dataEntry", getDataEntry());
+		attributes.put("dataName", getDataName());
 
 		return attributes;
 	}
@@ -104,6 +106,18 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 
 		if (reportTitle != null) {
 			setReportTitle(reportTitle);
+		}
+
+		Boolean dataEntry = (Boolean)attributes.get("dataEntry");
+
+		if (dataEntry != null) {
+			setDataEntry(dataEntry);
+		}
+
+		String dataName = (String)attributes.get("dataName");
+
+		if (dataName != null) {
+			setDataName(dataName);
 		}
 	}
 
@@ -199,6 +213,57 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 		}
 	}
 
+	@Override
+	public boolean getDataEntry() {
+		return _dataEntry;
+	}
+
+	@Override
+	public boolean isDataEntry() {
+		return _dataEntry;
+	}
+
+	@Override
+	public void setDataEntry(boolean dataEntry) {
+		_dataEntry = dataEntry;
+
+		if (_reportRemoteModel != null) {
+			try {
+				Class<?> clazz = _reportRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDataEntry", boolean.class);
+
+				method.invoke(_reportRemoteModel, dataEntry);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getDataName() {
+		return _dataName;
+	}
+
+	@Override
+	public void setDataName(String dataName) {
+		_dataName = dataName;
+
+		if (_reportRemoteModel != null) {
+			try {
+				Class<?> clazz = _reportRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDataName", String.class);
+
+				method.invoke(_reportRemoteModel, dataName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getReportRemoteModel() {
 		return _reportRemoteModel;
 	}
@@ -272,6 +337,8 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 		clone.setReportKey(getReportKey());
 		clone.setReportName(getReportName());
 		clone.setReportTitle(getReportTitle());
+		clone.setDataEntry(getDataEntry());
+		clone.setDataName(getDataName());
 
 		return clone;
 	}
@@ -324,7 +391,7 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{reportId=");
 		sb.append(getReportId());
@@ -334,6 +401,10 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 		sb.append(getReportName());
 		sb.append(", reportTitle=");
 		sb.append(getReportTitle());
+		sb.append(", dataEntry=");
+		sb.append(getDataEntry());
+		sb.append(", dataName=");
+		sb.append(getDataName());
 		sb.append("}");
 
 		return sb.toString();
@@ -341,7 +412,7 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.Report");
@@ -363,6 +434,14 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 			"<column><column-name>reportTitle</column-name><column-value><![CDATA[");
 		sb.append(getReportTitle());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dataEntry</column-name><column-value><![CDATA[");
+		sb.append(getDataEntry());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dataName</column-name><column-value><![CDATA[");
+		sb.append(getDataName());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -373,6 +452,8 @@ public class ReportClp extends BaseModelImpl<Report> implements Report {
 	private String _reportKey;
 	private String _reportName;
 	private String _reportTitle;
+	private boolean _dataEntry;
+	private String _dataName;
 	private BaseModel<?> _reportRemoteModel;
 	private Class<?> _clpSerializerClass = com.idetronic.eis.service.ClpSerializer.class;
 }

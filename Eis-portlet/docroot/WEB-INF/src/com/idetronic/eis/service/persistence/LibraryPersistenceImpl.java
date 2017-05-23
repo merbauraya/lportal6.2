@@ -83,248 +83,6 @@ public class LibraryPersistenceImpl extends BasePersistenceImpl<Library>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(LibraryModelImpl.ENTITY_CACHE_ENABLED,
 			LibraryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_LIBRARYCODE = new FinderPath(LibraryModelImpl.ENTITY_CACHE_ENABLED,
-			LibraryModelImpl.FINDER_CACHE_ENABLED, LibraryImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchBylibraryCode",
-			new String[] { String.class.getName() },
-			LibraryModelImpl.LIBRARYCODE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_LIBRARYCODE = new FinderPath(LibraryModelImpl.ENTITY_CACHE_ENABLED,
-			LibraryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBylibraryCode",
-			new String[] { String.class.getName() });
-
-	/**
-	 * Returns the library where libraryCode = &#63; or throws a {@link com.idetronic.eis.NoSuchLibraryException} if it could not be found.
-	 *
-	 * @param libraryCode the library code
-	 * @return the matching library
-	 * @throws com.idetronic.eis.NoSuchLibraryException if a matching library could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Library findBylibraryCode(String libraryCode)
-		throws NoSuchLibraryException, SystemException {
-		Library library = fetchBylibraryCode(libraryCode);
-
-		if (library == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("libraryCode=");
-			msg.append(libraryCode);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchLibraryException(msg.toString());
-		}
-
-		return library;
-	}
-
-	/**
-	 * Returns the library where libraryCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param libraryCode the library code
-	 * @return the matching library, or <code>null</code> if a matching library could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Library fetchBylibraryCode(String libraryCode)
-		throws SystemException {
-		return fetchBylibraryCode(libraryCode, true);
-	}
-
-	/**
-	 * Returns the library where libraryCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param libraryCode the library code
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching library, or <code>null</code> if a matching library could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Library fetchBylibraryCode(String libraryCode,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { libraryCode };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LIBRARYCODE,
-					finderArgs, this);
-		}
-
-		if (result instanceof Library) {
-			Library library = (Library)result;
-
-			if (!Validator.equals(libraryCode, library.getLibraryCode())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_LIBRARY_WHERE);
-
-			boolean bindLibraryCode = false;
-
-			if (libraryCode == null) {
-				query.append(_FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_1);
-			}
-			else if (libraryCode.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_3);
-			}
-			else {
-				bindLibraryCode = true;
-
-				query.append(_FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindLibraryCode) {
-					qPos.add(libraryCode);
-				}
-
-				List<Library> list = q.list();
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIBRARYCODE,
-						finderArgs, list);
-				}
-				else {
-					Library library = list.get(0);
-
-					result = library;
-
-					cacheResult(library);
-
-					if ((library.getLibraryCode() == null) ||
-							!library.getLibraryCode().equals(libraryCode)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIBRARYCODE,
-							finderArgs, library);
-					}
-				}
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIBRARYCODE,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (Library)result;
-		}
-	}
-
-	/**
-	 * Removes the library where libraryCode = &#63; from the database.
-	 *
-	 * @param libraryCode the library code
-	 * @return the library that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Library removeBylibraryCode(String libraryCode)
-		throws NoSuchLibraryException, SystemException {
-		Library library = findBylibraryCode(libraryCode);
-
-		return remove(library);
-	}
-
-	/**
-	 * Returns the number of libraries where libraryCode = &#63;.
-	 *
-	 * @param libraryCode the library code
-	 * @return the number of matching libraries
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public int countBylibraryCode(String libraryCode) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_LIBRARYCODE;
-
-		Object[] finderArgs = new Object[] { libraryCode };
-
-		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
-				this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_LIBRARY_WHERE);
-
-			boolean bindLibraryCode = false;
-
-			if (libraryCode == null) {
-				query.append(_FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_1);
-			}
-			else if (libraryCode.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_3);
-			}
-			else {
-				bindLibraryCode = true;
-
-				query.append(_FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindLibraryCode) {
-					qPos.add(libraryCode);
-				}
-
-				count = (Long)q.uniqueResult();
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_1 = "library.libraryCode IS NULL";
-	private static final String _FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_2 = "library.libraryCode = ?";
-	private static final String _FINDER_COLUMN_LIBRARYCODE_LIBRARYCODE_3 = "(library.libraryCode IS NULL OR library.libraryCode = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_LIBRARYNAME = new FinderPath(LibraryModelImpl.ENTITY_CACHE_ENABLED,
 			LibraryModelImpl.FINDER_CACHE_ENABLED, LibraryImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchBylibraryName",
@@ -1067,9 +825,6 @@ public class LibraryPersistenceImpl extends BasePersistenceImpl<Library>
 		EntityCacheUtil.putResult(LibraryModelImpl.ENTITY_CACHE_ENABLED,
 			LibraryImpl.class, library.getPrimaryKey(), library);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIBRARYCODE,
-			new Object[] { library.getLibraryCode() }, library);
-
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIBRARYNAME,
 			new Object[] { library.getLibraryName() }, library);
 
@@ -1148,14 +903,7 @@ public class LibraryPersistenceImpl extends BasePersistenceImpl<Library>
 
 	protected void cacheUniqueFindersCache(Library library) {
 		if (library.isNew()) {
-			Object[] args = new Object[] { library.getLibraryCode() };
-
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LIBRARYCODE, args,
-				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIBRARYCODE, args,
-				library);
-
-			args = new Object[] { library.getLibraryName() };
+			Object[] args = new Object[] { library.getLibraryName() };
 
 			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LIBRARYNAME, args,
 				Long.valueOf(1));
@@ -1164,16 +912,6 @@ public class LibraryPersistenceImpl extends BasePersistenceImpl<Library>
 		}
 		else {
 			LibraryModelImpl libraryModelImpl = (LibraryModelImpl)library;
-
-			if ((libraryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_LIBRARYCODE.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { library.getLibraryCode() };
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LIBRARYCODE,
-					args, Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIBRARYCODE,
-					args, library);
-			}
 
 			if ((libraryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_LIBRARYNAME.getColumnBitmask()) != 0) {
@@ -1190,20 +928,7 @@ public class LibraryPersistenceImpl extends BasePersistenceImpl<Library>
 	protected void clearUniqueFindersCache(Library library) {
 		LibraryModelImpl libraryModelImpl = (LibraryModelImpl)library;
 
-		Object[] args = new Object[] { library.getLibraryCode() };
-
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_LIBRARYCODE, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIBRARYCODE, args);
-
-		if ((libraryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_LIBRARYCODE.getColumnBitmask()) != 0) {
-			args = new Object[] { libraryModelImpl.getOriginalLibraryCode() };
-
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_LIBRARYCODE, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIBRARYCODE, args);
-		}
-
-		args = new Object[] { library.getLibraryName() };
+		Object[] args = new Object[] { library.getLibraryName() };
 
 		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_LIBRARYNAME, args);
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIBRARYNAME, args);

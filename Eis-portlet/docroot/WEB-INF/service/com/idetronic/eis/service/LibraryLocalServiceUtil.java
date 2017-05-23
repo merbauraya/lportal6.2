@@ -333,6 +333,16 @@ public class LibraryLocalServiceUtil {
 		return getService().isMissingLoanData(libraryId, period);
 	}
 
+	public static boolean isMissingExpenseData(long libraryId,
+		java.lang.String period) {
+		return getService().isMissingExpenseData(libraryId, period);
+	}
+
+	public static boolean isMissingConsultationData(long libraryId,
+		java.lang.String period) {
+		return getService().isMissingConsultationData(libraryId, period);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

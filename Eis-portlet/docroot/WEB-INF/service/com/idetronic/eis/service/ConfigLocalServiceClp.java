@@ -120,21 +120,29 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName21 = "getByKeyAsString";
+		_methodName21 = "getKeyAsLong";
 
 		_methodParameterTypes21 = new String[] { "java.lang.String" };
 
-		_methodName22 = "getByKey";
+		_methodName22 = "getByKeyAsString";
 
 		_methodParameterTypes22 = new String[] { "java.lang.String" };
 
-		_methodName23 = "deleteByKeyWildcard";
+		_methodName23 = "getByKey";
 
 		_methodParameterTypes23 = new String[] { "java.lang.String" };
 
-		_methodName24 = "findWithKeyWildcard";
+		_methodName24 = "deleteByKeyWildcard";
 
 		_methodParameterTypes24 = new String[] { "java.lang.String" };
+
+		_methodName25 = "findWithKeyWildcard";
+
+		_methodParameterTypes25 = new String[] { "java.lang.String", "int", "int" };
+
+		_methodName26 = "countByKeyWildCard";
+
+		_methodParameterTypes26 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -752,13 +760,42 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 	}
 
 	@Override
-	public java.lang.String getByKeyAsString(java.lang.String key)
+	public long getKeyAsLong(java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName21,
 					_methodParameterTypes21,
+					new Object[] { ClpSerializer.translateInput(key) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Long)returnObj).longValue();
+	}
+
+	@Override
+	public java.lang.String getByKeyAsString(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] { ClpSerializer.translateInput(key) });
 		}
 		catch (Throwable t) {
@@ -787,8 +824,8 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22,
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] { ClpSerializer.translateInput(key) });
 		}
 		catch (Throwable t) {
@@ -818,8 +855,8 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 	public void deleteByKeyWildcard(java.lang.String keyWildCard)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableLocalService.invokeMethod(_methodName23,
-				_methodParameterTypes23,
+			_invokableLocalService.invokeMethod(_methodName24,
+				_methodParameterTypes24,
 				new Object[] { ClpSerializer.translateInput(keyWildCard) });
 		}
 		catch (Throwable t) {
@@ -841,14 +878,20 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 
 	@Override
 	public java.util.List<com.idetronic.eis.model.Config> findWithKeyWildcard(
-		java.lang.String keyWildCard)
+		java.lang.String keyWildCard, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName24,
-					_methodParameterTypes24,
-					new Object[] { ClpSerializer.translateInput(keyWildCard) });
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						ClpSerializer.translateInput(keyWildCard),
+						
+					start,
+						
+					end
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -867,6 +910,35 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 		}
 
 		return (java.util.List<com.idetronic.eis.model.Config>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int countByKeyWildCard(java.lang.String keyWildCard)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
+					new Object[] { ClpSerializer.translateInput(keyWildCard) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -918,4 +990,8 @@ public class ConfigLocalServiceClp implements ConfigLocalService {
 	private String[] _methodParameterTypes23;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

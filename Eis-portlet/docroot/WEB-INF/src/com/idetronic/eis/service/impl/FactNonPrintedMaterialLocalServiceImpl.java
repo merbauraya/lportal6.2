@@ -22,6 +22,7 @@ import com.idetronic.eis.model.FactNonPrintedMaterial;
 import com.idetronic.eis.model.FactPrintedMaterial;
 import com.idetronic.eis.model.ItemType;
 import com.idetronic.eis.model.Library;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.State;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
 import com.idetronic.eis.service.StateLocalServiceUtil;
@@ -97,19 +98,19 @@ public class FactNonPrintedMaterialLocalServiceImpl
 	{
 		long id = CounterLocalServiceUtil.increment(FactNonPrintedMaterial.class.getName());
 		
-		Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
-		State state = StateLocalServiceUtil.fetchState(library.getStateId());
+		//Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
+		//State state = StateLocalServiceUtil.fetchState(library.getStateId());
 		FactNonPrintedMaterial fact = factNonPrintedMaterialPersistence.create(id);
 		
 		fact.setLibraryId(libraryId);
 		fact.setItemTypeId(itemTypeId);
-		fact.setLibraryCode(library.getLibraryCode());
-		fact.setStateId(library.getStateId());
-		fact.setStateCode(state.getStateCode());
+		//fact.setLibraryCode(library.getLibraryCode());
+		//fact.setStateId(library.getStateId());
+		//fact.setStateCode(state.getStateCode());
 		fact.setPeriod(period);
 		fact.setTitleTotal(titleTotal);
 		fact.setVolumeTotal(volumeTotal);
-		fact.setLibraryTypeId(library.getLibraryTypeId());
+		//fact.setLibraryTypeId(library.getLibraryTypeId());
 		
 		int year = Integer.valueOf(period.substring(0,4));
 		int month = Integer.valueOf(period.substring(4, 6));
@@ -143,7 +144,7 @@ public class FactNonPrintedMaterialLocalServiceImpl
 		List list = FactNonPrintedMaterialFinderUtil.getHistory(libraryId, period);
 		
 		FactNonPrintedMaterial fact = null;
-		ItemType category = null;
+		MasterFile category = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -153,7 +154,7 @@ public class FactNonPrintedMaterialLocalServiceImpl
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(FactNonPrintedMaterial)arrayobject[0];
-			category = (ItemType)arrayobject[1];
+			category = (MasterFile)arrayobject[1];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -164,7 +165,7 @@ public class FactNonPrintedMaterialLocalServiceImpl
 			jsonObject.put("Bil", i);
 			jsonObject.put("Judul", fact.getTitleTotal());
 			jsonObject.put("Naskah", fact.getVolumeTotal());
-			jsonObject.put("Jenis Bahan", category.getItemTypeName());
+			jsonObject.put("Jenis Bahan", category.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getCreatedByUserName());
 			
 			String pattern = "dd/MM/yyyy";

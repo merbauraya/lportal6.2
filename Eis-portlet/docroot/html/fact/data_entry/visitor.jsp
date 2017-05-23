@@ -7,10 +7,10 @@
 		
 		for (cur = 0; cur < rowSize + extra; cur++)
 		{
-			VisitorCategory category = categories.get(cur); 
+			MasterFile category = categories.get(cur); 
 		
-			String valueTitle = category.getVisitorCategoryId() +"-value";
-			String label = category.getVisitorCategoryName();
+			String valueTitle = category.getMasterFileId() +"-value";
+			String label = category.getMasterFileName();
 	 
 	%> 
 		
@@ -40,9 +40,9 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							VisitorCategory category = categories.get(cur);
-							String valueTitle = category.getVisitorCategoryId() +"-value";
-							String label = category.getVisitorCategoryName();
+							MasterFile category = categories.get(cur);
+							String valueTitle = category.getMasterFileId() +"-value";
+							String label = category.getMasterFileName();
 
 							i++;
 					%>
@@ -69,9 +69,9 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							VisitorCategory category = categories.get(cur);
-							String valueTitle = category.getVisitorCategoryId() +"-value";
-							String label = category.getVisitorCategoryName();
+							MasterFile category = categories.get(cur);
+							String valueTitle = category.getMasterFileId() +"-value";
+							String label = category.getMasterFileName();
 
 
 							i++;

@@ -3,6 +3,8 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.eis.model.Config" />
+	<import class="com.idetronic.eis.model.FactConsultation" />
+	<import class="com.idetronic.eis.model.FactExpense" />
 	<import class="com.idetronic.eis.model.FactIrItem" />
 	<import class="com.idetronic.eis.model.FactIrSubmission" />
 	<import class="com.idetronic.eis.model.FactMembership" />
@@ -22,6 +24,8 @@
 	<import class="com.idetronic.eis.model.LibrarySeatingDepartment" />
 	<import class="com.idetronic.eis.model.LibraryType" />
 	<import class="com.idetronic.eis.model.Loan" />
+	<import class="com.idetronic.eis.model.MasterFile" />
+	<import class="com.idetronic.eis.model.MasterType" />
 	<import class="com.idetronic.eis.model.MemberCategory" />
 	<import class="com.idetronic.eis.model.PostCategory" />
 	<import class="com.idetronic.eis.model.PostGrade" />
@@ -35,6 +39,7 @@
 	<import class="com.idetronic.eis.model.SeatingDepartment" />
 	<import class="com.idetronic.eis.model.State" />
 	<import class="com.idetronic.eis.model.UserLibrary" />
+	<import class="com.idetronic.eis.model.UserReport" />
 	<import class="com.idetronic.eis.model.VisitorCategory" />
 	<class name="com.idetronic.eis.model.impl.ConfigImpl" table="eis_Config">
 		<cache usage="read-write" />
@@ -43,6 +48,40 @@
 		</id>
 		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactConsultationImpl" table="eis_FactConsultation">
+		<cache usage="read-write" />
+		<id name="factConsultationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="consultationGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="consultationCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="totalSession" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactExpenseImpl" table="eis_FactExpense">
+		<cache usage="read-write" />
+		<id name="factExpenseId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="entryType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="masterFileId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="amount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.FactIrItemImpl" table="eis_FactIrItem">
 		<cache usage="read-write" />
@@ -300,6 +339,51 @@
 		<property name="memberCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
+	<class name="com.idetronic.eis.model.impl.MasterFileImpl" table="eis_MasterFile">
+		<cache usage="read-write" />
+		<id name="masterFileId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="masterTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="parentId1" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="parentId2" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="masterFileName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status1" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status3" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status4" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="masterCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="oldId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="note" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="inActive" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.MasterTypeImpl" table="eis_MasterType">
+		<cache usage="read-write" />
+		<id name="masterTypeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="masterTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="parentType" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="pageLabel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nameLabel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hasParent1" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="parentId1" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="parentId2" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="hasParent2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="parent1Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="parent2Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hasStatus1" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasStatus2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasStatus3" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasStatus4" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status1Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status2Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status3Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status4Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hasCode" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="codeLabel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="com.idetronic.eis.model.impl.MemberCategoryImpl" table="eis_MemberCategory">
 		<cache usage="read-write" />
 		<id name="memberCategoryId" type="long">
@@ -456,6 +540,8 @@
 		<property name="reportKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="reportName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="reportTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dataEntry" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="dataName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.SeatingCategoryImpl" table="eis_SeatingCategory">
 		<cache usage="read-write" />
@@ -505,6 +591,18 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.UserReportImpl" table="eis_UserReport">
+		<cache usage="read-write" />
+		<id name="userReportId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="reportId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.VisitorCategoryImpl" table="eis_VisitorCategory">
 		<cache usage="read-write" />

@@ -10,6 +10,7 @@ import com.idetronic.eis.model.impl.FactPostImpl;
 import com.idetronic.eis.model.impl.ItemMediumImpl;
 import com.idetronic.eis.model.impl.ItemTypeImpl;
 import com.idetronic.eis.model.impl.LoanImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.idetronic.eis.model.impl.PostCategoryImpl;
 import com.idetronic.eis.model.impl.PostGradeImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
@@ -71,8 +72,8 @@ implements FactPostFinder
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactPost", FactPostImpl.class); 
-	        q.addEntity("PostGrade", PostGradeImpl.class);
-	        q.addEntity("PostCategory", PostCategoryImpl.class);
+	        q.addEntity("PostGrade", MasterFileImpl.class);
+	        q.addEntity("PostCategory", MasterFileImpl.class);
 	        
 	        
 	        QueryPos qPos = QueryPos.getInstance(q);  

@@ -2,8 +2,10 @@
 <%@ include file="/html/toolbar.jsp" %>
 
 <%
-	List<Library> libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
-	List<VisitorCategory> categories = VisitorCategoryLocalServiceUtil.getVisitorCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	//List<Library> libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
+   // List<Library> libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
+    long visitorCategoryTypeId = ConfigLocalServiceUtil.getKeyAsLong("master.visitor.category");
+	List<MasterFile> categories =  MasterFileLocalServiceUtil.findByMasterType(visitorCategoryTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	
 	int rowCount = categories.size();
 	int rowSize = (int)Math.floor(rowCount/3);
@@ -43,10 +45,10 @@
 	<aui:input name="redirect" value="<%= currentURL %>" type="hidden"></aui:input>
 	<aui:row>
 	<aui:col span="6">
-		<eis:library-selector
+		<eis:library-selector2
 					adminAllowAll="<%= mLibraryAdminAllowAll %>"
 				
-				/>
+				/> 
 	</aui:col>
 	
 	<aui:col span="3">

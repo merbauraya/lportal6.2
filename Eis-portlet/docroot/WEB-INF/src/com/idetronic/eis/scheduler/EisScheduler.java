@@ -22,13 +22,22 @@ public class EisScheduler implements MessageListener{
 	@Override
 	public void receive(Message message) throws MessageListenerException {
 	
+		EisUtil.updateDataLatestPeriod();
+		runEmailNotification();
+
+
+		
+	}
+	
+	public void runEmailNotification()
+	{
 		int firstReminderDay;
 		int secondReminderDay;
 		int firstRemindarDayUntil;
 		int secondReminderDayUntil;
 		Calendar cal = Calendar.getInstance();
 		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-		EisUtil.updateDataLatestPeriod();
+		
 		
 		
 
@@ -55,7 +64,7 @@ public class EisScheduler implements MessageListener{
 			
 			
 			
-			if (dayOfMonth >= firstReminderDay  && dayOfMonth <= secondReminderDay)
+			if (dayOfMonth >= firstReminderDay  && dayOfMonth <= firstRemindarDayUntil)
 			{
 				LOGGER.info("EIS 1st Reminder check");
 				ReminderNotification.checkFirstReminder();
@@ -82,10 +91,7 @@ public class EisScheduler implements MessageListener{
 		} catch (PortalException e) {
 			
 			e.printStackTrace();
-		}
-
-
-		
+		}	
 	}
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(EisScheduler.class);

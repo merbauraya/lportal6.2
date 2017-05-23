@@ -18,6 +18,7 @@
 	if (adminAllowAll && isAdmin)
 	{
 		Object libraryService  = (Object)PortletBeanLocatorUtil.locate("Eis-portlet","LibraryLocalService");
+		Object masterFileService = (Object)PortletBeanLocatorUtil.locate("Eis-portlet","MasterFileLocalService");
 		
 		Method methodGetLibrary = libraryService.getClass().getMethod("getLibraries",new Class[]{int.class,int.class});
 

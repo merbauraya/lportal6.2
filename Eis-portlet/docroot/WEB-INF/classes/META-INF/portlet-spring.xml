@@ -4,6 +4,14 @@
 	<bean id="com.idetronic.eis.service.ConfigLocalService" class="com.idetronic.eis.service.impl.ConfigLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.ConfigService" class="com.idetronic.eis.service.impl.ConfigServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.ConfigPersistence" class="com.idetronic.eis.service.persistence.ConfigPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactConsultationLocalService" class="com.idetronic.eis.service.impl.FactConsultationLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactConsultationService" class="com.idetronic.eis.service.impl.FactConsultationServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactConsultationPersistence" class="com.idetronic.eis.service.persistence.FactConsultationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactConsultationFinder" class="com.idetronic.eis.service.persistence.FactConsultationFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactExpenseLocalService" class="com.idetronic.eis.service.impl.FactExpenseLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactExpenseService" class="com.idetronic.eis.service.impl.FactExpenseServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactExpensePersistence" class="com.idetronic.eis.service.persistence.FactExpensePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactExpenseFinder" class="com.idetronic.eis.service.persistence.FactExpenseFinderImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactIrItemLocalService" class="com.idetronic.eis.service.impl.FactIrItemLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactIrItemService" class="com.idetronic.eis.service.impl.FactIrItemServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactIrItemPersistence" class="com.idetronic.eis.service.persistence.FactIrItemPersistenceImpl" parent="basePersistence" />
@@ -69,6 +77,12 @@
 	<bean id="com.idetronic.eis.service.LoanService" class="com.idetronic.eis.service.impl.LoanServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.LoanPersistence" class="com.idetronic.eis.service.persistence.LoanPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.persistence.LoanFinder" class="com.idetronic.eis.service.persistence.LoanFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.MasterFileLocalService" class="com.idetronic.eis.service.impl.MasterFileLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.MasterFileService" class="com.idetronic.eis.service.impl.MasterFileServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.MasterFilePersistence" class="com.idetronic.eis.service.persistence.MasterFilePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.MasterTypeLocalService" class="com.idetronic.eis.service.impl.MasterTypeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.MasterTypeService" class="com.idetronic.eis.service.impl.MasterTypeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.MasterTypePersistence" class="com.idetronic.eis.service.persistence.MasterTypePersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.MemberCategoryLocalService" class="com.idetronic.eis.service.impl.MemberCategoryLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.MemberCategoryService" class="com.idetronic.eis.service.impl.MemberCategoryServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.MemberCategoryPersistence" class="com.idetronic.eis.service.persistence.MemberCategoryPersistenceImpl" parent="basePersistence" />
@@ -103,6 +117,9 @@
 	<bean id="com.idetronic.eis.service.UserLibraryLocalService" class="com.idetronic.eis.service.impl.UserLibraryLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.UserLibraryService" class="com.idetronic.eis.service.impl.UserLibraryServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.UserLibraryPersistence" class="com.idetronic.eis.service.persistence.UserLibraryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.UserReportLocalService" class="com.idetronic.eis.service.impl.UserReportLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.UserReportService" class="com.idetronic.eis.service.impl.UserReportServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.UserReportPersistence" class="com.idetronic.eis.service.persistence.UserReportPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.VisitorCategoryLocalService" class="com.idetronic.eis.service.impl.VisitorCategoryLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.VisitorCategoryService" class="com.idetronic.eis.service.impl.VisitorCategoryServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.VisitorCategoryPersistence" class="com.idetronic.eis.service.persistence.VisitorCategoryPersistenceImpl" parent="basePersistence" />

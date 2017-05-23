@@ -273,9 +273,16 @@ public class ReportLocalServiceUtil {
 
 	public static com.idetronic.eis.model.Report addReport(
 		java.lang.String reportKey, java.lang.String reportName,
-		java.lang.String reportTitle)
+		java.lang.String reportTitle, boolean hasDataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addReport(reportKey, reportName, reportTitle);
+		return getService()
+				   .addReport(reportKey, reportName, reportTitle, hasDataEntry);
+	}
+
+	public static java.util.List<com.idetronic.eis.model.Report> findByDataEntry(
+		boolean dataEntry)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByDataEntry(dataEntry);
 	}
 
 	public static void clearService() {

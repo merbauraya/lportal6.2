@@ -5,18 +5,18 @@
 %>
 <liferay-ui:search-container searchContainer="<%=libraryListSearchContainer %>">
      <liferay-ui:search-container-results />
-           <liferay-ui:search-container-row className="com.idetronic.eis.model.Library" modelVar="library">
-           		<liferay-ui:search-container-column-text name="code" value="<%=library.getLibraryCode() %>"></liferay-ui:search-container-column-text>
-                <liferay-ui:search-container-column-text name="Name" value="<%=library.getLibraryName() %>"></liferay-ui:search-container-column-text>
+           <liferay-ui:search-container-row className="com.idetronic.eis.model.MasterFile" modelVar="library">
+           		
+                <liferay-ui:search-container-column-text name="Name" value="<%=library.getMasterFileName() %>"></liferay-ui:search-container-column-text>
           		 <liferay-ui:search-container-column-text>
           		 <liferay-portlet:renderURL var="editAssociationURL">
-          		 	<portlet:param name="libraryId" value="<%= String.valueOf(library.getLibraryId()) %>"/>
+          		 	<portlet:param name="libraryId" value="<%= String.valueOf(library.getMasterFileId()) %>"/>
           		 	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
           		 	<portlet:param name="navigation" value="editUserLibrary"/>
           		 </liferay-portlet:renderURL>
           		 
           		 
-           		<aui:a cssClass="btn btn-default" href="<%=editAssociationURL  %>" data-primkey="<%=library.getLibraryId() %>"  label="edit-association" />
+           		<aui:a cssClass="btn btn-default" href="<%=editAssociationURL  %>" data-primkey="<%=library.getMasterFileId() %>"  label="edit-association" />
            		
            
            </liferay-ui:search-container-column-text>

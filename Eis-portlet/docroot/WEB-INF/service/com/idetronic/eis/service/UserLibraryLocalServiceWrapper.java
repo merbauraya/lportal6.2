@@ -303,8 +303,7 @@ public class UserLibraryLocalServiceWrapper implements UserLibraryLocalService,
 
 	@Override
 	public void remove(long userId, long libraryId)
-		throws com.idetronic.eis.NoSuchUserLibraryException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_userLibraryLocalService.remove(userId, libraryId);
 	}
 
@@ -329,6 +328,14 @@ public class UserLibraryLocalServiceWrapper implements UserLibraryLocalService,
 	}
 
 	@Override
+	public void updateAssociationByUser(long userId, long[] addLibraryIds,
+		long[] removeLibraryIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_userLibraryLocalService.updateAssociationByUser(userId, addLibraryIds,
+			removeLibraryIds, serviceContext);
+	}
+
+	@Override
 	public void updateAssociation(long libraryId, long[] addUserIds,
 		long[] removeUserId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -343,7 +350,13 @@ public class UserLibraryLocalServiceWrapper implements UserLibraryLocalService,
 	}
 
 	@Override
-	public java.util.List<com.idetronic.eis.model.Library> getLibraryByUser(
+	public java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser2(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _userLibraryLocalService.getLibraryByUser2(userId);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLibraryLocalService.getLibraryByUser(userId);
 	}
@@ -353,6 +366,12 @@ public class UserLibraryLocalServiceWrapper implements UserLibraryLocalService,
 		long libraryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLibraryLocalService.findByLibrary(libraryId);
+	}
+
+	@Override
+	public java.util.List<java.lang.Object> getDistinctUser()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _userLibraryLocalService.getDistinctUser();
 	}
 
 	/**

@@ -1,0 +1,81 @@
+/*
+ * @author vipin.bardia
+ * @email bardia.vipin@gmail.com
+ */
+.img-class{
+	padding:5px;
+	cursor:move;
+}
+.column-class{
+	float: left;
+	height: 100%;
+	font-size: 1.3em;
+	text-align: center;
+	outline: 3px solid #427ead;
+}
+.column-class-copy{
+	float: left;
+	height: 100%;
+	text-align: center;
+}
+.border-class-copy{
+	border-top: 1px solid blue;
+	border-left: 1px solid blue;
+	border-right: 1px solid blue;
+}
+.row-class{
+	width: 100%;
+	display: inline-block;
+}
+.layout-partition{
+	margin-left:20px;
+	width:260px;
+	height:590px;
+	outline: 5px solid #427ead;
+	display: inline;
+	float: left;
+	padding:10px;
+}
+.clear{
+	clear:both;
+}
+.iconImage{
+	width:120px;
+	height:120px;
+	float: left;
+	border: 1px solid blue;
+	border-bottom: 2px solid blue;
+}
+.control-bar{	
+	border-top: 3px solid #427ead;
+}
+.property-container{
+	border-top: 3px solid #427ead;
+	float:left;
+	margin-top:10px;
+	display:inline-block;
+	margin-bottom: 10px;
+}
+.float-left{
+	float:left;
+}
+.float-right{
+	float:right;
+}
+.control-bar div{	
+	margin-right:20px;
+	float:left;
+	clear:both;
+	margin-top:7px;
+}
+.custom-ui-active-class label{
+	font-weight: bolder !important;
+	font-size: 18px !important;
+	color: #eb8f00 !important;
+}
+.custom-ui-row-active-class label{
+	color: #eb8f00 !important;
+}
+.margin-10{
+	margin-top:10px;
+}

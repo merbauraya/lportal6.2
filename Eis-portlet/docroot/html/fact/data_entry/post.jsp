@@ -5,10 +5,10 @@
 		
 		for (cur = 0; cur < rowSize + extra; cur++)
 		{
-			PostGrade postGrade = postGrades.get(cur);
+			MasterFile postGrade = postGrades.get(cur);
 		
-			String valueTitle = postGrade.getPostGradeId() +"-value";
-			String label = postGrade.getPostGradeName() +" ("+ postGrade.getPostGradeCode() + ")";
+			String valueTitle = postGrade.getMasterFileId() +"-value";
+			String label = postGrade.getMasterFileName() +" ("+ postGrade.getMasterCode() + ")";
 			
 	 
 	%> 
@@ -39,9 +39,9 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							PostGrade postGrade = postGrades.get(cur);
-							String valueTitle = postGrade.getPostGradeId() +"-value";
-							String label = postGrade.getPostGradeName() +" ("+ postGrade.getPostGradeCode() + ")";
+							MasterFile postGrade = postGrades.get(cur);
+							String valueTitle = postGrade.getMasterFileId() +"-value";
+							String label = postGrade.getMasterFileName() +"(" + postGrade.getMasterCode() + ")";
 
 							i++;
 					%>
@@ -70,9 +70,9 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							PostGrade postGrade = postGrades.get(cur);
-							String valueTitle = postGrade.getPostGradeId() +"-value";
-							String label = postGrade.getPostGradeName() +" ("+ postGrade.getPostGradeCode() + ")";
+							MasterFile postGrade = postGrades.get(cur);
+							String valueTitle = postGrade.getMasterFileId() +"-value";
+							String label = postGrade.getMasterFileName() +" ("+ postGrade.getMasterCode() + ")";
 
 							i++;
 					%>
@@ -101,9 +101,9 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							PostGrade postGrade = postGrades.get(cur);
-							String valueTitle = postGrade.getPostGradeId() +"-value";
-							String label = postGrade.getPostGradeName() +" ("+ postGrade.getPostGradeCode() + ")";
+							MasterFile postGrade = postGrades.get(cur);
+							String valueTitle = postGrade.getMasterFileId() +"-value";
+							String label = postGrade.getMasterFileName() +" ("+ postGrade.getMasterCode() + ")";
 
 							i++;
 					%>

@@ -51,6 +51,7 @@ public class ConfigWrapper implements Config, ModelWrapper<Config> {
 		attributes.put("id", getId());
 		attributes.put("key", getKey());
 		attributes.put("value", getValue());
+		attributes.put("title", getTitle());
 
 		return attributes;
 	}
@@ -73,6 +74,12 @@ public class ConfigWrapper implements Config, ModelWrapper<Config> {
 
 		if (value != null) {
 			setValue(value);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
 		}
 	}
 
@@ -154,6 +161,26 @@ public class ConfigWrapper implements Config, ModelWrapper<Config> {
 	@Override
 	public void setValue(java.lang.String value) {
 		_config.setValue(value);
+	}
+
+	/**
+	* Returns the title of this config.
+	*
+	* @return the title of this config
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _config.getTitle();
+	}
+
+	/**
+	* Sets the title of this config.
+	*
+	* @param title the title of this config
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_config.setTitle(title);
 	}
 
 	@Override

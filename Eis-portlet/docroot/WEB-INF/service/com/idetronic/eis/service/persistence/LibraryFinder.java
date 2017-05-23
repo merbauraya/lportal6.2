@@ -42,6 +42,12 @@ public interface LibraryFinder {
 	public int getLoanCountByLibraryPeriod(long libraryId,
 		java.lang.String period);
 
+	public int getExpenseCountByLibraryPeriod(long libraryId,
+		java.lang.String period);
+
 	public int getIrItemCountByLibraryPeriod(long libraryId,
+		java.lang.String period);
+
+	public int getConsultationountByLibraryPeriod(long libraryId,
 		java.lang.String period);
 }

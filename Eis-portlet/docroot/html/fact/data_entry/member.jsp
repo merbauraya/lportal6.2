@@ -5,9 +5,9 @@
 		
 		for (cur = 0; cur < rowSize + extra; cur++)
 		{
-			MemberCategory category = categories.get(cur);
+			MasterFile category = categories.get(cur);
 		
-			String valueTitle = category.getMemberCategoryId() +"-value";
+			String valueTitle = category.getMasterFileId() +"-value";
 			
 	 
 	%> 
@@ -19,7 +19,7 @@
 				
 			<aui:col width="50">
 				<div class="data-cont">
-				<aui:input cssClass="dataInput" name="<%= valueTitle %>" label="<%=category.getMemberCategoryName()  %>" >
+				<aui:input cssClass="dataInput" name="<%= valueTitle %>" label="<%=category.getMasterFileName()  %>" >
 					<aui:validator name="digits"></aui:validator>
 				</aui:input>
 				</div>
@@ -39,15 +39,15 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							MemberCategory category = categories.get(cur); 
-							String valueTitle = category.getMemberCategoryId() +"-value";
+							MasterFile category = categories.get(cur); 
+							String valueTitle = category.getMasterFileId() +"-value";
 
 							i++;
 					%>
 						<aui:layout cssClass="item-data-cont ">
 							<aui:col width="50">
 								<div class="data-cont">
-								<aui:input cssClass="dataInput" name="<%= valueTitle %>" label="<%=category.getMemberCategoryName()%>" >
+								<aui:input cssClass="dataInput" name="<%= valueTitle %>" label="<%=category.getMasterFileName()%>" >
 									<aui:validator name="digits"></aui:validator>
 								</aui:input>
 								</div>
@@ -69,15 +69,15 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							MemberCategory category = categories.get(cur);
-							String valueTitle = category.getMemberCategoryId() +"-value";
+							MasterFile category = categories.get(cur);
+							String valueTitle = category.getMasterFileId() +"-value";
 
 							i++;
 					%>
 						<aui:layout cssClass="item-data-cont ">
 							<aui:col width="50">
 								<div class="data-cont">
-								<aui:input cssClass="dataInput" name="<%= valueTitle %>" label="<%=category.getMemberCategoryName() %>" >
+								<aui:input cssClass="dataInput" name="<%= valueTitle %>" label="<%=category.getMasterFileName() %>" >
 									<aui:validator name="digits"></aui:validator>
 								</aui:input>
 								</div>

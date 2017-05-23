@@ -2,24 +2,29 @@
 <%@ include file="/html/toolbar.jsp" %>
 
 <%
-	List<Library> libraries  = null;
-	
+	//List<Library> libraries  = null;
+	List<MasterFile> libraries  = null;
 	//PermissionChecker permissionChecker = PermissionThreadLocal.getPermissionChecker(); 
 	
 	if (permissionChecker.isOmniadmin() || permissionChecker.isCompanyAdmin())
 	{
-		libraries = LibraryLocalServiceUtil.getLibraries(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		//libraries = LibraryLocalServiceUtil.getLibraries(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		libraries = MasterFileLocalServiceUtil.getAllLibraries();
 	}else
 	{
-		libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
+		//libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
+		libraries = UserLibraryLocalServiceUtil.getLibraryByUser2(themeDisplay.getUserId());
 	
 	}
 	
-	List<Faculty> faculties = FacultyLocalServiceUtil.getFaculties(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+	//List<Faculty> faculties = FacultyLocalServiceUtil.getFaculties(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+	List<MasterFile> faculties = MasterFileLocalServiceUtil.getAllFaculties();
 
-
-	List<ItemType> irTypes = ItemTypeLocalServiceUtil.getIRType(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);	
-	List<ItemMedium> mediums = ItemMediumLocalServiceUtil.getItemMediums(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	//List<ItemType> irTypes = ItemTypeLocalServiceUtil.getIRType(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);	
+	List<MasterFile> irTypes = MasterFileLocalServiceUtil.getAllIrItem();
+	//List<ItemMedium> mediums = ItemMediumLocalServiceUtil.getItemMediums(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	List<MasterFile> mediums = MasterFileLocalServiceUtil.getAllItemMediums();
+	
 	
 	int rowCount = irTypes.size();
 	int rowSize = (int)Math.floor(rowCount/3);
@@ -48,7 +53,7 @@
 	<aui:row>
 		<aui:layout>
 			<aui:col span="3">
-				<eis:library-selector
+				<eis:library-selector2
 					adminAllowAll="<%= mLibraryAdminAllowAll %>"
 				
 				/>
@@ -56,10 +61,10 @@
 			<aui:col span="3">
 				<aui:select name="faculty">
 					<%
-						for (Faculty faculty : faculties)
+						for (MasterFile faculty : faculties)
 						{
 					%>
-						<aui:option label="<%= faculty.getFacultyName() %>" value="<%= faculty.getFacultyId() %>" />
+						<aui:option label="<%= faculty.getMasterFileName() %>" value="<%= faculty.getMasterFileId() %>" />
 							
 					<%
 						}

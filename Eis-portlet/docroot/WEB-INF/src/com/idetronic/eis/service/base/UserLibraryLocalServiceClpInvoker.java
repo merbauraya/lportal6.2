@@ -106,60 +106,75 @@ public class UserLibraryLocalServiceClpInvoker {
 				"com.idetronic.eis.model.UserLibrary"
 			};
 
-		_methodName238 = "getBeanIdentifier";
+		_methodName272 = "getBeanIdentifier";
 
-		_methodParameterTypes238 = new String[] {  };
+		_methodParameterTypes272 = new String[] {  };
 
-		_methodName239 = "setBeanIdentifier";
+		_methodName273 = "setBeanIdentifier";
 
-		_methodParameterTypes239 = new String[] { "java.lang.String" };
+		_methodParameterTypes273 = new String[] { "java.lang.String" };
 
-		_methodName244 = "add";
+		_methodName278 = "add";
 
-		_methodParameterTypes244 = new String[] {
+		_methodParameterTypes278 = new String[] {
 				"long", "long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName245 = "add";
+		_methodName279 = "add";
 
-		_methodParameterTypes245 = new String[] {
+		_methodParameterTypes279 = new String[] {
 				"long", "long[][]", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName246 = "remove";
+		_methodName280 = "remove";
 
-		_methodParameterTypes246 = new String[] { "long", "long" };
+		_methodParameterTypes280 = new String[] { "long", "long" };
 
-		_methodName247 = "findByLibrary";
+		_methodName281 = "findByLibrary";
 
-		_methodParameterTypes247 = new String[] { "long", "int", "int" };
+		_methodParameterTypes281 = new String[] { "long", "int", "int" };
 
-		_methodName248 = "findByUser";
+		_methodName282 = "findByUser";
 
-		_methodParameterTypes248 = new String[] { "long", "int", "int" };
+		_methodParameterTypes282 = new String[] { "long", "int", "int" };
 
-		_methodName249 = "hasAssociation";
+		_methodName283 = "hasAssociation";
 
-		_methodParameterTypes249 = new String[] { "long", "long" };
+		_methodParameterTypes283 = new String[] { "long", "long" };
 
-		_methodName250 = "updateAssociation";
+		_methodName284 = "updateAssociationByUser";
 
-		_methodParameterTypes250 = new String[] {
+		_methodParameterTypes284 = new String[] {
 				"long", "long[][]", "long[][]",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName251 = "countByLibrary";
+		_methodName285 = "updateAssociation";
 
-		_methodParameterTypes251 = new String[] { "long" };
+		_methodParameterTypes285 = new String[] {
+				"long", "long[][]", "long[][]",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName252 = "getLibraryByUser";
+		_methodName286 = "countByLibrary";
 
-		_methodParameterTypes252 = new String[] { "long" };
+		_methodParameterTypes286 = new String[] { "long" };
 
-		_methodName253 = "findByLibrary";
+		_methodName287 = "getLibraryByUser2";
 
-		_methodParameterTypes253 = new String[] { "long" };
+		_methodParameterTypes287 = new String[] { "long" };
+
+		_methodName288 = "getLibraryByUser";
+
+		_methodParameterTypes288 = new String[] { "long" };
+
+		_methodName289 = "findByLibrary";
+
+		_methodParameterTypes289 = new String[] { "long" };
+
+		_methodName290 = "getDistinctUser";
+
+		_methodParameterTypes290 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -251,27 +266,27 @@ public class UserLibraryLocalServiceClpInvoker {
 			return UserLibraryLocalServiceUtil.updateUserLibrary((com.idetronic.eis.model.UserLibrary)arguments[0]);
 		}
 
-		if (_methodName238.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes238, parameterTypes)) {
+		if (_methodName272.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName239.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes239, parameterTypes)) {
+		if (_methodName273.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
 			UserLibraryLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName244.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes244, parameterTypes)) {
+		if (_methodName278.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[2]);
 		}
 
-		if (_methodName245.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes245, parameterTypes)) {
+		if (_methodName279.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
 			UserLibraryLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				(long[])arguments[1],
 				(com.liferay.portal.service.ServiceContext)arguments[2]);
@@ -279,36 +294,45 @@ public class UserLibraryLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName246.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes246, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			UserLibraryLocalServiceUtil.remove(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
 			return null;
 		}
 
-		if (_methodName247.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes247, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.findByLibrary(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName248.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes248, parameterTypes)) {
+		if (_methodName282.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes282, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.findByUser(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName249.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes249, parameterTypes)) {
+		if (_methodName283.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes283, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.hasAssociation(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName250.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes250, parameterTypes)) {
+		if (_methodName284.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes284, parameterTypes)) {
+			UserLibraryLocalServiceUtil.updateAssociationByUser(((Long)arguments[0]).longValue(),
+				(long[])arguments[1], (long[])arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+
+			return null;
+		}
+
+		if (_methodName285.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes285, parameterTypes)) {
 			UserLibraryLocalServiceUtil.updateAssociation(((Long)arguments[0]).longValue(),
 				(long[])arguments[1], (long[])arguments[2],
 				(com.liferay.portal.service.ServiceContext)arguments[3]);
@@ -316,19 +340,29 @@ public class UserLibraryLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName251.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes251, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.countByLibrary(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName252.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes252, parameterTypes)) {
+		if (_methodName287.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
+			return UserLibraryLocalServiceUtil.getLibraryByUser2(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName288.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.getLibraryByUser(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName253.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes253, parameterTypes)) {
+		if (_methodName289.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
 			return UserLibraryLocalServiceUtil.findByLibrary(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName290.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
+			return UserLibraryLocalServiceUtil.getDistinctUser();
 		}
 
 		throw new UnsupportedOperationException();
@@ -366,28 +400,34 @@ public class UserLibraryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName238;
-	private String[] _methodParameterTypes238;
-	private String _methodName239;
-	private String[] _methodParameterTypes239;
-	private String _methodName244;
-	private String[] _methodParameterTypes244;
-	private String _methodName245;
-	private String[] _methodParameterTypes245;
-	private String _methodName246;
-	private String[] _methodParameterTypes246;
-	private String _methodName247;
-	private String[] _methodParameterTypes247;
-	private String _methodName248;
-	private String[] _methodParameterTypes248;
-	private String _methodName249;
-	private String[] _methodParameterTypes249;
-	private String _methodName250;
-	private String[] _methodParameterTypes250;
-	private String _methodName251;
-	private String[] _methodParameterTypes251;
-	private String _methodName252;
-	private String[] _methodParameterTypes252;
-	private String _methodName253;
-	private String[] _methodParameterTypes253;
+	private String _methodName272;
+	private String[] _methodParameterTypes272;
+	private String _methodName273;
+	private String[] _methodParameterTypes273;
+	private String _methodName278;
+	private String[] _methodParameterTypes278;
+	private String _methodName279;
+	private String[] _methodParameterTypes279;
+	private String _methodName280;
+	private String[] _methodParameterTypes280;
+	private String _methodName281;
+	private String[] _methodParameterTypes281;
+	private String _methodName282;
+	private String[] _methodParameterTypes282;
+	private String _methodName283;
+	private String[] _methodParameterTypes283;
+	private String _methodName284;
+	private String[] _methodParameterTypes284;
+	private String _methodName285;
+	private String[] _methodParameterTypes285;
+	private String _methodName286;
+	private String[] _methodParameterTypes286;
+	private String _methodName287;
+	private String[] _methodParameterTypes287;
+	private String _methodName288;
+	private String[] _methodParameterTypes288;
+	private String _methodName289;
+	private String[] _methodParameterTypes289;
+	private String _methodName290;
+	private String[] _methodParameterTypes290;
 }

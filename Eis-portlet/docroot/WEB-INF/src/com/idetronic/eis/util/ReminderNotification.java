@@ -47,7 +47,7 @@ public class ReminderNotification {
 		
 		String period = EisUtil.getPreviousPeriod();
 		
-		Map missingDataMap = getUserMissingData(period);
+		Map missingDataMap =  MissingDataUtil.getUserMissingData(period) ;//getUserMissingData(period);
 		
 		
 		
@@ -82,6 +82,7 @@ public class ReminderNotification {
 				mailMessage.setHTMLFormat(true);
 				MailServiceUtil.sendEmail(mailMessage);
 				LOGGER.info("EIS 1st Reminder " + user.getEmailAddress());
+				
 				//UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userId, notificationEvent)
 				
 			} catch (Exception e) {
@@ -127,7 +128,7 @@ public class ReminderNotification {
 		String period = EisUtil.getPreviousPeriod();
 		
 
-		Map missingDataMap = getUserMissingData(period);
+		Map missingDataMap = MissingDataUtil.getUserMissingData(period);
 		
 		Iterator entries = missingDataMap.entrySet().iterator();
 		
@@ -161,7 +162,7 @@ public class ReminderNotification {
 				mailMessage.setBody(body);
 				mailMessage.setHTMLFormat(true);
 				MailServiceUtil.sendEmail(mailMessage);
-				//LOGGER.info("EIS 2nd reminder: " + user.getEmailAddress());
+				LOGGER.info("EIS 2nd reminder: " + user.getEmailAddress());
 				
 			} catch (Exception e) {
 				LOGGER.error("Error sending EIS 2nd reminder");
@@ -182,25 +183,30 @@ public class ReminderNotification {
 		
 		Map userMap = new HashMap();
 		
-		
-		for (UserLibrary userLibrary : userLibraries)
+		List<Object> userIds = UserLibraryLocalServiceUtil.getDistinctUser();
+		for (Object userIdObj : userIds)
 		{
-			User user = UserLocalServiceUtil.getUser(userLibrary.getUserId());
+			long userId = (long)userIdObj;
+			User user = UserLocalServiceUtil.getUser(userId);
 			
-			if (!userMap.containsKey(userLibrary.getUserId()))
+			if (!userMap.containsKey(userId))
 			{
-				ArrayList missingData = EisUtil.getMissingData(user.getUserId(), period, user.getLocale(), false,0,EisUtil.DATA_ALL_DATA);
-				userMap.put(userLibrary.getUserId(), missingData);
 				
+				
+				ArrayList missingData = EisUtil.getMissingUserData(user.getUserId(), period, user.getLocale());
+				if (missingData.size()>0)
+				{
+					userMap.put(userId, missingData);
+				}
 			}
 		}
+		
 		
 		return userMap;
 	}
 	
 	private static String replaceSubjectTemplate(String subject,User user,String period) throws SystemException, PortalException
 	{
-		//Company company = CompanyLocalServiceUtil.getCompanyByVirtualHost("km.ptar.uitm.edu.my");
 		Company company = CompanyLocalServiceUtil.getCompanyByWebId(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
 
 

@@ -102,32 +102,32 @@ public class ItemTypeLocalServiceClpInvoker {
 				"com.idetronic.eis.model.ItemType"
 			};
 
-		_methodName238 = "getBeanIdentifier";
+		_methodName272 = "getBeanIdentifier";
 
-		_methodParameterTypes238 = new String[] {  };
+		_methodParameterTypes272 = new String[] {  };
 
-		_methodName239 = "setBeanIdentifier";
+		_methodName273 = "setBeanIdentifier";
 
-		_methodParameterTypes239 = new String[] { "java.lang.String" };
+		_methodParameterTypes273 = new String[] { "java.lang.String" };
 
-		_methodName244 = "add";
+		_methodName278 = "add";
 
-		_methodParameterTypes244 = new String[] {
+		_methodParameterTypes278 = new String[] {
 				"java.lang.String", "int", "boolean", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName245 = "getPrintedType";
+		_methodName279 = "getPrintedType";
 
-		_methodParameterTypes245 = new String[] { "int", "int" };
+		_methodParameterTypes279 = new String[] { "int", "int" };
 
-		_methodName246 = "getNonPrintedType";
+		_methodName280 = "getNonPrintedType";
 
-		_methodParameterTypes246 = new String[] { "int", "int" };
+		_methodParameterTypes280 = new String[] { "int", "int" };
 
-		_methodName247 = "getIRType";
+		_methodName281 = "getIRType";
 
-		_methodParameterTypes247 = new String[] { "boolean", "int", "int" };
+		_methodParameterTypes281 = new String[] { "boolean", "int", "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -219,20 +219,20 @@ public class ItemTypeLocalServiceClpInvoker {
 			return ItemTypeLocalServiceUtil.updateItemType((com.idetronic.eis.model.ItemType)arguments[0]);
 		}
 
-		if (_methodName238.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes238, parameterTypes)) {
+		if (_methodName272.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName239.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes239, parameterTypes)) {
+		if (_methodName273.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
 			ItemTypeLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName244.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes244, parameterTypes)) {
+		if (_methodName278.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.add((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Boolean)arguments[2]).booleanValue(),
@@ -240,20 +240,20 @@ public class ItemTypeLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[4]);
 		}
 
-		if (_methodName245.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes245, parameterTypes)) {
+		if (_methodName279.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.getPrintedType(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName246.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes246, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.getNonPrintedType(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName247.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes247, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.getIRType(((Boolean)arguments[0]).booleanValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
@@ -294,16 +294,16 @@ public class ItemTypeLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName238;
-	private String[] _methodParameterTypes238;
-	private String _methodName239;
-	private String[] _methodParameterTypes239;
-	private String _methodName244;
-	private String[] _methodParameterTypes244;
-	private String _methodName245;
-	private String[] _methodParameterTypes245;
-	private String _methodName246;
-	private String[] _methodParameterTypes246;
-	private String _methodName247;
-	private String[] _methodParameterTypes247;
+	private String _methodName272;
+	private String[] _methodParameterTypes272;
+	private String _methodName273;
+	private String[] _methodParameterTypes273;
+	private String _methodName278;
+	private String[] _methodParameterTypes278;
+	private String _methodName279;
+	private String[] _methodParameterTypes279;
+	private String _methodName280;
+	private String[] _methodParameterTypes280;
+	private String _methodName281;
+	private String[] _methodParameterTypes281;
 }

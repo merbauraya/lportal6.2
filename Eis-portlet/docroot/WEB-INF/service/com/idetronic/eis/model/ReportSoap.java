@@ -34,6 +34,8 @@ public class ReportSoap implements Serializable {
 		soapModel.setReportKey(model.getReportKey());
 		soapModel.setReportName(model.getReportName());
 		soapModel.setReportTitle(model.getReportTitle());
+		soapModel.setDataEntry(model.getDataEntry());
+		soapModel.setDataName(model.getDataName());
 
 		return soapModel;
 	}
@@ -118,8 +120,30 @@ public class ReportSoap implements Serializable {
 		_reportTitle = reportTitle;
 	}
 
+	public boolean getDataEntry() {
+		return _dataEntry;
+	}
+
+	public boolean isDataEntry() {
+		return _dataEntry;
+	}
+
+	public void setDataEntry(boolean dataEntry) {
+		_dataEntry = dataEntry;
+	}
+
+	public String getDataName() {
+		return _dataName;
+	}
+
+	public void setDataName(String dataName) {
+		_dataName = dataName;
+	}
+
 	private long _reportId;
 	private String _reportKey;
 	private String _reportName;
 	private String _reportTitle;
+	private boolean _dataEntry;
+	private String _dataName;
 }

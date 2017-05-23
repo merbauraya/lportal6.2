@@ -365,6 +365,52 @@ implements LibraryFinder
 
 	    return 0;
 	}
+	
+	public int getExpenseCountByLibraryPeriod(long libraryId,String period)
+	{
+		Session session = null;
+	    try {
+	        session = openSession();
+
+	        String sql = CustomSQLUtil.get(
+	        		COUNT_EXPENSE_BY_LIBRARY_PERIOD);
+
+	        SQLQuery q = session.createSQLQuery(sql);
+	        q.setCacheable(false);
+	        
+	        q.addScalar("totalCount",Type.INTEGER);
+	        
+	        QueryPos qPos = QueryPos.getInstance(q);  
+	        qPos.add(libraryId);
+	        qPos.add(period);
+	        
+	        Iterator itr = q.list().iterator();
+	        
+	        if (itr.hasNext()) {
+	            int count = (int)itr.next();
+	    
+	            return count;
+	          }
+	        
+	        
+
+	       
+	        
+	        return 0;
+	    } catch (Exception e) {
+	        try {
+	            throw new SystemException(e);
+	        } catch (SystemException se) {
+	            se.printStackTrace();
+	        }
+	    } finally {
+	        closeSession(session);
+	    }
+
+	    return 0;
+		
+	}
+	
 	/**
 	 * Return total row for IR item for a specific library and period
 	 * @param libraryId 
@@ -379,6 +425,51 @@ implements LibraryFinder
 
 	        String sql = CustomSQLUtil.get(
 	        		COUNT_IR_ITEM_BY_LIBRARY_PERIOD);
+
+	        SQLQuery q = session.createSQLQuery(sql);
+	        q.setCacheable(false);
+	        
+	        q.addScalar("totalCount",Type.INTEGER);
+	        
+	        QueryPos qPos = QueryPos.getInstance(q);  
+	        qPos.add(libraryId);
+	        qPos.add(period);
+	        
+	        Iterator itr = q.list().iterator();
+	        
+	        if (itr.hasNext()) {
+	            int count = (int)itr.next();
+	    
+	            return count;
+	          }
+	        
+	        
+
+	       
+	        
+	        return 0;
+	    
+	    } catch (Exception e) {
+	        try {
+	            throw new SystemException(e);
+	        } catch (SystemException se) {
+	            se.printStackTrace();
+	        }
+	    } finally {
+	        closeSession(session);
+	    }
+
+	    return 0;
+	}
+	
+	public int getConsultationountByLibraryPeriod(long libraryId,String period)
+	{
+		Session session = null;
+	    try {
+	        session = openSession();
+
+	        String sql = CustomSQLUtil.get(
+	        		COUNT_CONSULTATION_BY_LIBRARY_PERIOD);
 
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
@@ -450,4 +541,12 @@ implements LibraryFinder
 			LibraryFinder.class.getName() +
 		        ".CountLoanByL_P";
 	
+	public static final String COUNT_EXPENSE_BY_LIBRARY_PERIOD =
+			LibraryFinder.class.getName() +
+		        ".CountExpenseByL_P";
+	
+	public static final String COUNT_CONSULTATION_BY_LIBRARY_PERIOD = 
+			LibraryFinder.class.getName() +
+	        ".CountConsultationByL_P";
+
 }

@@ -5,6 +5,7 @@
 	long libraryId = ParamUtil.getLong(request, "library");
 	String periodFilter = ParamUtil.getString(request, "period");
 	long dataId = ParamUtil.getLong(request, "dataType");
+	long userId = themeDisplay.getUserId();
 	if (Validator.isNull(dataId))
 	{
 		dataId = EisUtil.DATA_ALL_DATA;
@@ -23,7 +24,7 @@
 	<aui:form action="<%=viewURL %>">
 		<aui:layout>
 			<aui:col span="3">
-				<eis:library-selector
+				<eis:library-selector2
 					adminAllowAll="<%= mLibraryAdminAllowAll %>"
 					addAllOption = "<%= true %>"
 				
@@ -41,28 +42,14 @@
 					includeEmptyOption="<%= false %>"
 					allowFuturePeriod= "<%= false%>"
 					dataCountDay = "<%= mDataCountDay %>"
+					value="<%=periodFilter%>"
 					
 				/>
 				
 				
 			</aui:col>
 			
-			<aui:col span="3">
-				<aui:select name="dataType">
-					<aui:option value="-1"></aui:option>
-					<aui:option value="<%= EisUtil.DATA_IR %>"><%=LanguageUtil.get(locale, "ir-item") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_LOAN %>"><%=LanguageUtil.get(locale, "loan") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_MEMBERSHIP%>"><%=LanguageUtil.get(locale, "membership") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_NON_PRINTED_MATERIAL %>"><%=LanguageUtil.get(locale, "non-printed-item-type") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_POSITION%>"><%=LanguageUtil.get(locale, "job-post") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_PRINTED_MATERIAL %>"><%=LanguageUtil.get(locale, "printed-item") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_SEATING%>"><%=LanguageUtil.get(locale, "seating") %></aui:option>
-					<aui:option value="<%= EisUtil.DATA_VISITOR%>"><%=LanguageUtil.get(locale, "visitor") %></aui:option>
-					
-				</aui:select>
 			
-			
-			</aui:col>
 			<aui:col span="3">
 				<div class="control-group">
 					<label class="control-label">&nbsp;</label>
@@ -125,10 +112,8 @@
 		String periodString = EisUtil.getPeriodString(period);// monthName + " " + String.valueOf(year);
 
 		//boolean isAdmin = permissionChecker.isOmniadmin();
-		
-		
-		ArrayList missingData = EisUtil.getMissingData(themeDisplay.getUserId(),period,themeDisplay,isAdmin,libraryId,dataId);
-		 
+		ArrayList missingData = MissingDataUtil.getUserMissingData(themeDisplay.getUserId(),period,themeDisplay.getLocale(),libraryId,isAdmin,mLibraryAdminAllowAll);
+		//long userId,String period,Locale locale,long libraryId,boolean isAdmin,boolean adminAllowAllLibrary
 	%>
 	
 	<div>
@@ -149,8 +134,16 @@
 			</div>
 				<c:choose>
 					<c:when test="<%= missingData.size() > 0 %>">
+					<liferay-portlet:renderURL varImpl="iteratorURL">
+						<portlet:param name="library" value="<%= String.valueOf(libraryId) %>"/>
+						<portlet:param name="period" value="<%= period %>"/>
+						<portlet:param name="dataId" value="<%= String.valueOf(dataId) %>"/>
+					</liferay-portlet:renderURL>
 					
-						<liferay-ui:search-container delta="10" emptyResultsMessage="no-data">
+					
+						<liferay-ui:search-container delta="10" emptyResultsMessage="no-data"
+							iteratorURL="<%= iteratorURL %>"
+						>
 						    <liferay-ui:search-container-results
 						        results="<%= ListUtil.subList(missingData,searchContainer.getStart(), searchContainer.getEnd()) %>"
 						        total="<%= missingData.size() %>"
@@ -244,6 +237,9 @@ public PortletURL getEditURL(int dataType,javax.portlet.RenderResponse response)
 	    	
 	    case EisUtil.DATA_VISITOR : page = "/html/fact/visitor.jsp";
 	    	break;
+	    	
+	    case EisUtil.DATA_EXPENSE : page = "/html/fact/expense.jsp";
+    		break;
     
     
     	

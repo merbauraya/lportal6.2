@@ -111,8 +111,13 @@ public class ReportLocalServiceClp implements ReportLocalService {
 		_methodName19 = "addReport";
 
 		_methodParameterTypes19 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"boolean"
 			};
+
+		_methodName20 = "findByDataEntry";
+
+		_methodParameterTypes20 = new String[] { "boolean" };
 	}
 
 	@Override
@@ -664,7 +669,7 @@ public class ReportLocalServiceClp implements ReportLocalService {
 	@Override
 	public com.idetronic.eis.model.Report addReport(
 		java.lang.String reportKey, java.lang.String reportName,
-		java.lang.String reportTitle)
+		java.lang.String reportTitle, boolean hasDataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -676,7 +681,9 @@ public class ReportLocalServiceClp implements ReportLocalService {
 						
 					ClpSerializer.translateInput(reportName),
 						
-					ClpSerializer.translateInput(reportTitle)
+					ClpSerializer.translateInput(reportTitle),
+						
+					hasDataEntry
 					});
 		}
 		catch (Throwable t) {
@@ -696,6 +703,35 @@ public class ReportLocalServiceClp implements ReportLocalService {
 		}
 
 		return (com.idetronic.eis.model.Report)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.eis.model.Report> findByDataEntry(
+		boolean dataEntry)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] { dataEntry });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.idetronic.eis.model.Report>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -737,4 +773,6 @@ public class ReportLocalServiceClp implements ReportLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

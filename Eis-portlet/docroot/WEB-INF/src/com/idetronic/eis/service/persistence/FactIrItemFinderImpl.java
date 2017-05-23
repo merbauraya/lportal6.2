@@ -9,6 +9,7 @@ import com.idetronic.eis.model.impl.FactIrSubmissionImpl;
 import com.idetronic.eis.model.impl.FactNonPrintedMaterialImpl;
 import com.idetronic.eis.model.impl.ItemMediumImpl;
 import com.idetronic.eis.model.impl.ItemTypeImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -71,8 +72,8 @@ implements FactIrItemFinder
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactIrItem", FactIrItemImpl.class); 
-	        q.addEntity("ItemType", ItemTypeImpl.class);
-	        q.addEntity("ItemMedium", ItemMediumImpl.class);
+	        q.addEntity("ItemType", MasterFileImpl.class);
+	        q.addEntity("ItemMedium", MasterFileImpl.class);
 	        
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

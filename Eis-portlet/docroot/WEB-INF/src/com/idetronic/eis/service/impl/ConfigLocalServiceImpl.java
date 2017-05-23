@@ -28,6 +28,8 @@ import com.idetronic.eis.service.base.ConfigLocalServiceBaseImpl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
@@ -109,6 +111,20 @@ public class ConfigLocalServiceImpl extends ConfigLocalServiceBaseImpl {
 		
 		return configPersistence.update(config);
 	}
+	
+	public long getKeyAsLong(String key) throws SystemException
+	{
+		Config config;
+		try {
+			config = configPersistence.findByKey(key);
+			String value = config.getValue();
+			
+			return Long.parseLong(value);
+			
+		} catch (NoSuchConfigException e) {
+			return 0;
+		}
+	}
 	public String getByKeyAsString(String key) throws SystemException
 	{
 		Config config;
@@ -145,7 +161,7 @@ public class ConfigLocalServiceImpl extends ConfigLocalServiceBaseImpl {
 	}
 	public void deleteByKeyWildcard(String keyWildCard) throws SystemException
 	{
-		List<Config> configs = findWithKeyWildcard(keyWildCard);
+		List<Config> configs = findWithKeyWildcard(keyWildCard,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
 		
 		for (Config config :configs)
 		{
@@ -159,12 +175,21 @@ public class ConfigLocalServiceImpl extends ConfigLocalServiceBaseImpl {
 	 * @return list of Config
 	 * @throws SystemException
 	 */
-	public List<Config> findWithKeyWildcard(String keyWildCard) throws SystemException
+	public List<Config> findWithKeyWildcard(String keyWildCard,int start,int end) throws SystemException
 	{
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Config.class, PortletClassLoaderUtil.getClassLoader()); 
 		String wildcard = "%" + keyWildCard + "%";
 		query.add(RestrictionsFactoryUtil.like("key", wildcard));
+		query.addOrder(OrderFactoryUtil.asc("key"));
+		query.setLimit(start, end);
+		
 		
 		return configPersistence.findWithDynamicQuery(query);
 	}
+	
+	public int countByKeyWildCard(String keyWildCard) throws SystemException
+	{
+		return findWithKeyWildcard(keyWildCard,QueryUtil.ALL_POS,QueryUtil.ALL_POS).size();
+	}
+	
 }

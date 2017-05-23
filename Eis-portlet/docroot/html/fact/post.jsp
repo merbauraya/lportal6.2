@@ -2,10 +2,11 @@
 <%@ include file="/html/toolbar.jsp" %>
 
 <%
-	List<Library> libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
+	//List<Library> libraries = UserLibraryLocalServiceUtil.getLibraryByUser(themeDisplay.getUserId());
 	
-	OrderByComparator ord = OrderByComparatorFactoryUtil.create("PostGrade", "postGradeCode", false); 
-	List<PostGrade> postGrades = PostGradeLocalServiceUtil.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,ord);
+	OrderByComparator ord = OrderByComparatorFactoryUtil.create("MasterFile", "masterCode", false); 
+	long postGradeType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_POST_GRADE);
+	List<MasterFile> postGrades = MasterFileLocalServiceUtil.findByMasterFile(postGradeType,QueryUtil.ALL_POS, QueryUtil.ALL_POS,ord);
 	
 	
 	 
@@ -49,7 +50,7 @@
 		<aui:input name="redirect" value="<%= currentURL %>" type="hidden"></aui:input>
 	<aui:row>
 	<aui:col span="6">
-		<eis:library-selector
+		<eis:library-selector2
 					adminAllowAll="<%= mLibraryAdminAllowAll %>"
 				
 				/>

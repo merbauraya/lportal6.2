@@ -74,5 +74,24 @@
 	
 	</sql>
 	
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountExpenseByL_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactExpense
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountConsultationByL_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactConsultation
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	
 
 </custom-sql>

@@ -23,6 +23,7 @@ import com.idetronic.eis.model.FactPost;
 import com.idetronic.eis.model.ItemMedium;
 import com.idetronic.eis.model.ItemType;
 import com.idetronic.eis.model.Library;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.PostCategory;
 import com.idetronic.eis.model.PostGrade;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
@@ -77,8 +78,8 @@ public class FactPostLocalServiceImpl extends FactPostLocalServiceBaseImpl {
 		factPost.setCreatedDate(new Date());
 		
 		
-		Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
-		factPost.setStateId(library.getStateId());
+		//Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
+		//factPost.setStateId(library.getStateId());
 		
 		
 		return factPostPersistence.update(factPost);
@@ -112,8 +113,8 @@ public class FactPostLocalServiceImpl extends FactPostLocalServiceBaseImpl {
 		List list = FactPostFinderUtil.getHistory(libraryId, period);
 		
 		FactPost fact = null;
-		PostGrade grade = null;
-		PostCategory category = null;
+		MasterFile grade = null;
+		MasterFile category = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -123,8 +124,8 @@ public class FactPostLocalServiceImpl extends FactPostLocalServiceBaseImpl {
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(FactPost)arrayobject[0];
-			grade = (PostGrade)arrayobject[1];
-			category = (PostCategory)arrayobject[2];
+			grade = (MasterFile)arrayobject[1];
+			category = (MasterFile)arrayobject[2];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -134,10 +135,10 @@ public class FactPostLocalServiceImpl extends FactPostLocalServiceBaseImpl {
 			
 			jsonObject.put("Bil", i);
 			jsonObject.put("Jumlah", fact.getValue());
-			jsonObject.put("Gred", grade.getPostGradeCode());
-			jsonObject.put("Jawatan", grade.getPostGradeName());
+			jsonObject.put("Gred", grade.getMasterFileName());
+			jsonObject.put("Jawatan", grade.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getCreatedByUserName());
-			jsonObject.put("Kategori", category.getPostCategoryName());
+			jsonObject.put("Kategori", category.getMasterFileName());
 			
 			String pattern = "dd/MM/yyyy";
 		    SimpleDateFormat format = new SimpleDateFormat(pattern);

@@ -12,6 +12,36 @@
 		<field name="value" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="title" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+	</model>
+	<model name="com.idetronic.eis.model.FactConsultation">
+		<field name="factConsultationId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="consultationGroupId" type="long" />
+		<field name="consultationCategoryId" type="long" />
+		<field name="value" type="long" />
+		<field name="totalSession" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactExpense">
+		<field name="factExpenseId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="entryType" type="int" />
+		<field name="masterFileId" type="long" />
+		<field name="amount" type="double" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
 	</model>
 	<model name="com.idetronic.eis.model.FactIrItem">
 		<field name="factIrItemId" type="long" />
@@ -242,6 +272,45 @@
 		<field name="memberCategoryId" type="long" />
 		<field name="value" type="int" />
 	</model>
+	<model name="com.idetronic.eis.model.MasterFile">
+		<field name="masterFileId" type="long" />
+		<field name="masterTypeId" type="long" />
+		<field name="parentId1" type="long" />
+		<field name="parentId2" type="long" />
+		<field name="masterFileName" type="String" />
+		<field name="status1" type="boolean" />
+		<field name="status2" type="boolean" />
+		<field name="status3" type="boolean" />
+		<field name="status4" type="boolean" />
+		<field name="masterCode" type="String" />
+		<field name="oldId" type="long" />
+		<field name="note" type="String" />
+		<field name="inActive" type="boolean" />
+	</model>
+	<model name="com.idetronic.eis.model.MasterType">
+		<field name="masterTypeId" type="long" />
+		<field name="masterTypeName" type="String" />
+		<field name="status" type="int" />
+		<field name="parentType" type="boolean" />
+		<field name="pageLabel" type="String" />
+		<field name="nameLabel" type="String" />
+		<field name="hasParent1" type="boolean" />
+		<field name="parentId1" type="long" />
+		<field name="parentId2" type="long" />
+		<field name="hasParent2" type="boolean" />
+		<field name="parent1Label" type="String" />
+		<field name="parent2Label" type="String" />
+		<field name="hasStatus1" type="boolean" />
+		<field name="hasStatus2" type="boolean" />
+		<field name="hasStatus3" type="boolean" />
+		<field name="hasStatus4" type="boolean" />
+		<field name="status1Label" type="String" />
+		<field name="status2Label" type="String" />
+		<field name="status3Label" type="String" />
+		<field name="status4Label" type="String" />
+		<field name="hasCode" type="boolean" />
+		<field name="codeLabel" type="String" />
+	</model>
 	<model name="com.idetronic.eis.model.MemberCategory">
 		<field name="memberCategoryId" type="long" />
 		<field name="memberCategoryName" type="String" />
@@ -401,6 +470,8 @@
 		<field name="reportTitle" type="String">
 			<hint name="max-length">150</hint>
 		</field>
+		<field name="dataEntry" type="boolean" />
+		<field name="dataName" type="String" />
 	</model>
 	<model name="com.idetronic.eis.model.SeatingCategory">
 		<field name="seatingCategoryId" type="long" />
@@ -440,6 +511,15 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.UserReport">
+		<field name="userReportId" type="long" />
+		<field name="userId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="reportId" type="long" />
+		<field name="createdByUserId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
 	</model>
 	<model name="com.idetronic.eis.model.VisitorCategory">
 		<field name="visitorCategoryId" type="long" />

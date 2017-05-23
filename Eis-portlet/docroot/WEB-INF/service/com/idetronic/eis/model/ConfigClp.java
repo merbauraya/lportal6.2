@@ -75,6 +75,7 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 		attributes.put("id", getId());
 		attributes.put("key", getKey());
 		attributes.put("value", getValue());
+		attributes.put("title", getTitle());
 
 		return attributes;
 	}
@@ -97,6 +98,12 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 
 		if (value != null) {
 			setValue(value);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
 		}
 	}
 
@@ -162,6 +169,29 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 				Method method = clazz.getMethod("setValue", String.class);
 
 				method.invoke(_configRemoteModel, value);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getTitle() {
+		return _title;
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+
+		if (_configRemoteModel != null) {
+			try {
+				Class<?> clazz = _configRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTitle", String.class);
+
+				method.invoke(_configRemoteModel, title);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -241,6 +271,7 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 		clone.setId(getId());
 		clone.setKey(getKey());
 		clone.setValue(getValue());
+		clone.setTitle(getTitle());
 
 		return clone;
 	}
@@ -293,7 +324,7 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{id=");
 		sb.append(getId());
@@ -301,6 +332,8 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 		sb.append(getKey());
 		sb.append(", value=");
 		sb.append(getValue());
+		sb.append(", title=");
+		sb.append(getTitle());
 		sb.append("}");
 
 		return sb.toString();
@@ -308,7 +341,7 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.Config");
@@ -326,6 +359,10 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 			"<column><column-name>value</column-name><column-value><![CDATA[");
 		sb.append(getValue());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -335,6 +372,7 @@ public class ConfigClp extends BaseModelImpl<Config> implements Config {
 	private long _id;
 	private String _key;
 	private String _value;
+	private String _title;
 	private BaseModel<?> _configRemoteModel;
 	private Class<?> _clpSerializerClass = com.idetronic.eis.service.ClpSerializer.class;
 }

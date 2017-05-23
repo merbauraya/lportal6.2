@@ -6,5 +6,7 @@
 	<bean id="UserLibrary" class="com.idetronic.eis.model.impl.UserLibraryImpl" />
 	<bean id="LibraryLocalService" class="com.idetronic.eis.service.impl.LibraryLocalServiceImpl" />
 	<bean id="Library" class="com.idetronic.eis.model.impl.LibraryImpl"/>
+	<bean id="MasterFile" class="com.idetronic.eis.model.impl.MasterFileImpl"/>
+	<bean id="MasterFileLocalService" class="com.idetronic.eis.service.impl.MasterFileLocalServiceImpl" />
 	
 </beans>

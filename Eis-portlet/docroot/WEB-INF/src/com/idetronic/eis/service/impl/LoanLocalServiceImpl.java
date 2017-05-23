@@ -22,9 +22,11 @@ import com.idetronic.eis.model.FactNonPrintedMaterial;
 import com.idetronic.eis.model.FactVisitor;
 import com.idetronic.eis.model.Library;
 import com.idetronic.eis.model.Loan;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.MemberCategory;
 import com.idetronic.eis.model.VisitorCategory;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
 import com.idetronic.eis.service.base.LoanLocalServiceBaseImpl;
 import com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinderUtil;
 import com.idetronic.eis.service.persistence.FactVisitorFinderUtil;
@@ -76,10 +78,10 @@ public class LoanLocalServiceImpl extends LoanLocalServiceBaseImpl {
 		loan.setMemberCategoryId(memberCategoryId);
 		
 		
-		Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
+		//MasterFile library = MasterFileLocalServiceUtil.getMasterFile(libraryId);
 		
-		loan.setStateId(library.getStateId());
-		loan.setLibraryTypeId(library.getLibraryTypeId());
+		//loan.setStateId(library.getParentId1());
+		//loan.setLibraryTypeId(library.getParentId2());
 		
 		return loanPersistence.update(loan);
 		
@@ -123,7 +125,7 @@ public class LoanLocalServiceImpl extends LoanLocalServiceBaseImpl {
 		List list = LoanFinderUtil.getHistory(libraryId, period);
 		
 		Loan fact = null;
-		MemberCategory category = null;
+		MasterFile category = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -133,7 +135,7 @@ public class LoanLocalServiceImpl extends LoanLocalServiceBaseImpl {
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(Loan)arrayobject[0];
-			category = (MemberCategory)arrayobject[1];
+			category = (MasterFile)arrayobject[1];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -143,7 +145,7 @@ public class LoanLocalServiceImpl extends LoanLocalServiceBaseImpl {
 			
 			jsonObject.put("Bil", i);
 			jsonObject.put("Nilai", fact.getValue());
-			jsonObject.put("Kategori", category.getMemberCategoryName());
+			jsonObject.put("Kategori", category.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getUserName());
 			
 			String pattern = "dd/MM/yyyy";

@@ -5,6 +5,7 @@ import java.util.List;
 import com.idetronic.eis.model.Loan;
 import com.idetronic.eis.model.impl.FactVisitorImpl;
 import com.idetronic.eis.model.impl.LoanImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.idetronic.eis.model.impl.MemberCategoryImpl;
 import com.idetronic.eis.model.impl.VisitorCategoryImpl;
 import com.idetronic.eis.portlet.EisPortlet;
@@ -70,7 +71,7 @@ public class LoanFinderImpl extends BasePersistenceImpl<Loan> implements LoanFin
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("Loan", LoanImpl.class); 
-	        q.addEntity("MemberCategory", MemberCategoryImpl.class);
+	        q.addEntity("MemberCategory", MasterFileImpl.class);
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

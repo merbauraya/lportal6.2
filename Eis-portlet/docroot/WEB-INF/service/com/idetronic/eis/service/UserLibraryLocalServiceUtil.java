@@ -288,8 +288,7 @@ public class UserLibraryLocalServiceUtil {
 	}
 
 	public static void remove(long userId, long libraryId)
-		throws com.idetronic.eis.NoSuchUserLibraryException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().remove(userId, libraryId);
 	}
 
@@ -310,6 +309,14 @@ public class UserLibraryLocalServiceUtil {
 		return getService().hasAssociation(libraryId, userId);
 	}
 
+	public static void updateAssociationByUser(long userId,
+		long[] addLibraryIds, long[] removeLibraryIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService()
+			.updateAssociationByUser(userId, addLibraryIds, removeLibraryIds,
+			serviceContext);
+	}
+
 	public static void updateAssociation(long libraryId, long[] addUserIds,
 		long[] removeUserId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -323,7 +330,12 @@ public class UserLibraryLocalServiceUtil {
 		return getService().countByLibrary(libraryId);
 	}
 
-	public static java.util.List<com.idetronic.eis.model.Library> getLibraryByUser(
+	public static java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser2(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLibraryByUser2(userId);
+	}
+
+	public static java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLibraryByUser(userId);
 	}
@@ -332,6 +344,11 @@ public class UserLibraryLocalServiceUtil {
 		long libraryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().findByLibrary(libraryId);
+	}
+
+	public static java.util.List<java.lang.Object> getDistinctUser()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDistinctUser();
 	}
 
 	public static void clearService() {

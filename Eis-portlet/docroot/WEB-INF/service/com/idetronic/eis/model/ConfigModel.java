@@ -101,6 +101,21 @@ public interface ConfigModel extends BaseModel<Config> {
 	 */
 	public void setValue(String value);
 
+	/**
+	 * Returns the title of this config.
+	 *
+	 * @return the title of this config
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this config.
+	 *
+	 * @param title the title of this config
+	 */
+	public void setTitle(String title);
+
 	@Override
 	public boolean isNew();
 

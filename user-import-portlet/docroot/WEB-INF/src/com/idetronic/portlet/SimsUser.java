@@ -385,7 +385,7 @@ public class SimsUser extends MVCPortlet
 				user = UserLocalServiceUtil.getUserByScreenName(
 						companyId, screenName);
 			} catch (PortalException e) {
-				log.error("error validating user:" + e.getMessage());
+				//log.info("No user exists with screename=" +screenName + e.getMessage());
 				//e.printStackTrace();
 			} catch (com.liferay.portal.kernel.exception.SystemException e) {
 				log.error("SystemException:error validating user:" + e.getMessage());
@@ -451,6 +451,10 @@ public class SimsUser extends MVCPortlet
 		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
 		Date bday;
 		
+		
+		
+		
+		
 		try {
 			bday = rs.getDate("bk_tarikh_lahir");
 			if (rs.wasNull())
@@ -485,15 +489,15 @@ public class SimsUser extends MVCPortlet
 				
 			}
 			
-			User existingUser = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+			User existingUser = getExistingUserByEmail(companyId,emailAddress);//  UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
 			if (Validator.isNotNull(existingUser))
 			{
-				log.info("Email already used:" + emailAddress);
+				log.info("Existing user. Email already used:" + emailAddress);
 				return null;
 			}
 			
 			screenName = screenNameValidator(rs.getString("bp_no_pekerja"));//default screen name to no pekerja
-			if (screenName == "")
+			if (Validator.isNull(screenName))
 			{
 				//we cannot use this screen name due to id conflict in group_ table
 				//replace it with no_kp
@@ -526,6 +530,7 @@ public class SimsUser extends MVCPortlet
 				return null;
 			}
 			
+			log.info("importing, screenName="+ screenName +" email=" + emailAddress + " name="+ firstName);
 			
 			user = UserLocalServiceUtil.addUser(creatorUserId, companyId, 
 						autoPassword, password1, password2, 
@@ -552,7 +557,7 @@ public class SimsUser extends MVCPortlet
 			_totalError++;
 			log.error("Error importing user, PortalException Exception kp="+ password1 + " screenName="+screenName + " email=" + emailAddress);
 			log.error("Error possibly due to empty email address, fname=" + firstName + " lname="+lastName);
-			//e1.printStackTrace(); 
+			e1.printStackTrace(); 
 			
 		}catch (com.liferay.portal.kernel.exception.SystemException ex)
 		{	
@@ -565,6 +570,16 @@ public class SimsUser extends MVCPortlet
 		}
 		
 		return user;
+	}
+
+	private static User getExistingUserByEmail(long companyId, String emailAddress)
+	{
+		try {
+			User existingUser = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+			return existingUser;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	private static void assignToOrganisation(User user)
 	{

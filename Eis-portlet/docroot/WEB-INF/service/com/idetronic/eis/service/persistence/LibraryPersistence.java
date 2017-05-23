@@ -38,64 +38,6 @@ public interface LibraryPersistence extends BasePersistence<Library> {
 	 */
 
 	/**
-	* Returns the library where libraryCode = &#63; or throws a {@link com.idetronic.eis.NoSuchLibraryException} if it could not be found.
-	*
-	* @param libraryCode the library code
-	* @return the matching library
-	* @throws com.idetronic.eis.NoSuchLibraryException if a matching library could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.idetronic.eis.model.Library findBylibraryCode(
-		java.lang.String libraryCode)
-		throws com.idetronic.eis.NoSuchLibraryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the library where libraryCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param libraryCode the library code
-	* @return the matching library, or <code>null</code> if a matching library could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.idetronic.eis.model.Library fetchBylibraryCode(
-		java.lang.String libraryCode)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the library where libraryCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param libraryCode the library code
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching library, or <code>null</code> if a matching library could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.idetronic.eis.model.Library fetchBylibraryCode(
-		java.lang.String libraryCode, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the library where libraryCode = &#63; from the database.
-	*
-	* @param libraryCode the library code
-	* @return the library that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.idetronic.eis.model.Library removeBylibraryCode(
-		java.lang.String libraryCode)
-		throws com.idetronic.eis.NoSuchLibraryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of libraries where libraryCode = &#63;.
-	*
-	* @param libraryCode the library code
-	* @return the number of matching libraries
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countBylibraryCode(java.lang.String libraryCode)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Returns the library where libraryName = &#63; or throws a {@link com.idetronic.eis.NoSuchLibraryException} if it could not be found.
 	*
 	* @param libraryName the library name

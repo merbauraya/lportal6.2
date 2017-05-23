@@ -20,7 +20,10 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.WindowStateException;
 
+import com.idetronic.eis.NoSuchMasterFileException;
 import com.idetronic.eis.model.BorrowerCategory;
+import com.idetronic.eis.model.FactConsultation;
+import com.idetronic.eis.model.FactExpense;
 import com.idetronic.eis.model.FactIrItem;
 import com.idetronic.eis.model.FactIrSubmission;
 import com.idetronic.eis.model.FactMembership;
@@ -33,6 +36,7 @@ import com.idetronic.eis.model.ItemMedium;
 import com.idetronic.eis.model.ItemType;
 import com.idetronic.eis.model.Library;
 import com.idetronic.eis.model.Loan;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.MemberCategory;
 import com.idetronic.eis.model.NonPrintedItemType;
 import com.idetronic.eis.model.PostGrade;
@@ -44,6 +48,9 @@ import com.idetronic.eis.model.SeatingCategory;
 import com.idetronic.eis.model.SeatingDepartment;
 import com.idetronic.eis.model.VisitorCategory;
 import com.idetronic.eis.service.BorrowerCategoryLocalServiceUtil;
+import com.idetronic.eis.service.ConfigLocalServiceUtil;
+import com.idetronic.eis.service.FactConsultationLocalServiceUtil;
+import com.idetronic.eis.service.FactExpenseLocalServiceUtil;
 import com.idetronic.eis.service.FactIrItemLocalServiceUtil;
 import com.idetronic.eis.service.FactIrSubmissionLocalServiceUtil;
 import com.idetronic.eis.service.FactMembershipLocalServiceUtil;
@@ -56,6 +63,7 @@ import com.idetronic.eis.service.ItemMediumLocalServiceUtil;
 import com.idetronic.eis.service.ItemTypeLocalServiceUtil;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
 import com.idetronic.eis.service.LoanLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
 import com.idetronic.eis.service.MemberCategoryLocalServiceUtil;
 import com.idetronic.eis.service.NonPrintedItemTypeLocalServiceUtil;
 import com.idetronic.eis.service.PostGradeLocalServiceUtil;
@@ -91,6 +99,41 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class EisPortlet extends MVCPortlet  
 {
 	
+	public void editConsultation(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		String period = ParamUtil.getString(actionRequest, "period");
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		
+		long categoryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_CONSULTATION_CATEGORY);
+		List<MasterFile> categories = MasterFileLocalServiceUtil.findByMasterType(categoryTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		
+		for (MasterFile category : categories)
+		{
+			String inputName = category.getMasterFileId() + "-value";
+			String value = ParamUtil.getString(actionRequest, inputName);
+			String totalSessionName = category.getMasterFileId() + "-sessionTotal";
+			String totalSession = ParamUtil.getString(actionRequest, totalSessionName);
+			if (Validator.isNotNull(value)) 
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("categoryId", category.getMasterFileId());
+				jsonObject.put("value", value);
+				jsonObject.put("session", totalSession);
+				jsonArray.put(jsonObject);
+		
+			}
+		}
+		
+		FactConsultationLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
+		
+	}
+	
 	public void editSeating(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException, IOException
 	{
 		String period = ParamUtil.getString(actionRequest, "period");
@@ -98,25 +141,36 @@ public class EisPortlet extends MVCPortlet
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
 
-		List<SeatingDepartment> departments = SeatingDepartmentLocalServiceUtil.getSeatingDepartments(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		List<SeatingCategory> categories = SeatingCategoryLocalServiceUtil.getSeatingCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		//List<SeatingDepartment> departments = SeatingDepartmentLocalServiceUtil.getSeatingDepartments(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		//List<SeatingCategory> categories = SeatingCategoryLocalServiceUtil.getSeatingCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		
+		long seatingDeptTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_DEPARTMENT);
+		List<MasterFile> departments = MasterFileLocalServiceUtil.findByMasterType(seatingDeptTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		//List<SeatingDepartment> departments = SeatingDepartmentLocalServiceUtil.getSeatingDepartments(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long seatingCategoryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_CATEGORY);
+		//List<MasterFile> categories = SeatingCategoryLocalServiceUtil.getSeatingCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<MasterFile> categories = MasterFileLocalServiceUtil.findByMasterType(seatingCategoryTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		
-		for (SeatingDepartment department : departments)
+		for (MasterFile department : departments)
 		{
-			for (SeatingCategory category : categories)
+			for (MasterFile category : categories)
 			{
-				String inputName = department.getDepartmentId() + "-" + category.getSeatingCategoryId();
+				String inputName = department.getMasterFileId() + "-" + category.getMasterFileId();
 				String capacity = ParamUtil.getString(actionRequest, inputName);
+					if (Validator.isNotNull(capacity)) 
+					{
+						JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+						jsonObject.put("categoryId", category.getMasterFileId());
+						jsonObject.put("departmentId", department.getMasterFileId());
+						jsonObject.put("capacity", capacity);
+						jsonArray.put(jsonObject);
 				
-					JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
-					jsonObject.put("categoryId", category.getSeatingCategoryId());
-					jsonObject.put("departmentId", department.getDepartmentId());
-					jsonObject.put("capacity", capacity);
-					jsonArray.put(jsonObject);
-				
-				
+					}
 				
 			}
 		}
@@ -127,6 +181,8 @@ public class EisPortlet extends MVCPortlet
 		
 	}
 	
+	
+	
 	public void editIrItem(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException, IOException
 	{
 		
@@ -135,33 +191,34 @@ public class EisPortlet extends MVCPortlet
 		String period = ParamUtil.getString(actionRequest, "period");
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		long itemMediumType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_MEDIUM_TYPE);
 		
-		List<ItemType> irItems = ItemTypeLocalServiceUtil.getIRType(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<MasterFile> irItems = MasterFileLocalServiceUtil.findByTypeAndStatus3(itemTypeId, true);// .getIRType(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		
-		List<ItemMedium> mediums = ItemMediumLocalServiceUtil.getItemMediums(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<MasterFile> mediums = MasterFileLocalServiceUtil.findByMasterType(itemMediumType, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		
-		for (ItemType itemType : irItems)
+		for (MasterFile itemType : irItems)
 		{
 
-			for (ItemMedium medium: mediums)
+			for (MasterFile medium: mediums)
 			{
 				
-				String label = itemType.getItemTypeId() + "-" + medium.getItemMediumId();
+				String label = itemType.getMasterFileId() + "-" + medium.getMasterFileId();
 				String titleTotal = ParamUtil.getString(actionRequest, label + "-title");
 				String volumeTotal = ParamUtil.getString(actionRequest, label + "-volume");
 				
 				
+				if (Validator.isNotNull(titleTotal) && Validator.isNotNull(volumeTotal))
+				{
 				
-				
-				
-				//if (titleTotal > 0 || volumeTotal > 0)
-				//{
+					
 					JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
-					jsonObject.put("itemTypeId", itemType.getItemTypeId());
-					jsonObject.put("itemMediumId", medium.getItemMediumId());
+					jsonObject.put("itemTypeId", itemType.getMasterFileId());
+					jsonObject.put("itemMediumId", medium.getMasterFileId());
 					
 					// our naming format: x-y-title : x-item type, y=medium
 					
@@ -170,7 +227,8 @@ public class EisPortlet extends MVCPortlet
 					jsonObject.put("volumeTotal", volumeTotal);
 					
 					jsonArray.put(jsonObject);
-				//}
+				}
+				
 				
 			}
 		}
@@ -182,6 +240,53 @@ public class EisPortlet extends MVCPortlet
 	
 	public void editExpense(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException, IOException
 	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+
+		
+	
+		
+		long allocationTypeId =  ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_EXPENSE_ALLOCATION_TYPE);
+		long itemTypeId =  ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		
+		List<MasterFile> allocationTypes = MasterFileLocalServiceUtil.findByMasterType(allocationTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByMasterType(itemTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		JSONArray allocationArray = JSONFactoryUtil.createJSONArray();
+		JSONArray expenseArray = JSONFactoryUtil.createJSONArray();
+		
+		//allocation
+		for (MasterFile allocation : allocationTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			long allocationId = allocation.getMasterFileId();
+			jsonObject.put("allocationId",allocationId);
+			
+			String amount = ParamUtil.getString(actionRequest, EisUtil.EXPENSE_TYPE_ALLOCATION+ "-" + allocationId + "-value");
+			jsonObject.put("amount",amount);
+			
+			allocationArray.put(jsonObject);
+			
+			
+		}
+		
+		//expense
+		
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			long itemId = itemType.getMasterFileId();
+			jsonObject.put("itemId",itemId);
+			
+			String amount = ParamUtil.getString(actionRequest, EisUtil.EXPENSE_TYPE_EXPENSE + "-" + itemId + "-value");
+			jsonObject.put("amount",amount);
+			
+			expenseArray.put(jsonObject);
+			
+			
+		}
+		FactExpenseLocalServiceUtil.batchInsert(libraryId, period, allocationArray, expenseArray, serviceContext);
 		
 		
 	}
@@ -231,21 +336,30 @@ public class EisPortlet extends MVCPortlet
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		
-		List<VisitorCategory> categories = VisitorCategoryLocalServiceUtil.getVisitorCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		//List<VisitorCategory> categories = VisitorCategoryLocalServiceUtil.getVisitorCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		
-		for (VisitorCategory category : categories)
+		long visitorCategoryTypeId = ConfigLocalServiceUtil.getKeyAsLong("master.visitor.category");
+		List<MasterFile> categories =  MasterFileLocalServiceUtil.findByMasterType(visitorCategoryTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			
+		
+		
+		for (MasterFile category : categories)
 		{
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			String value = ParamUtil.getString(actionRequest, category.getMasterFileId() + "-value");
+			if (Validator.isNotNull(value))
+			{
 			
-			jsonObject.put("visitorCategoryId", category.getVisitorCategoryId());
-			String value = ParamUtil.getString(actionRequest, category.getVisitorCategoryId() + "-value");
-			
-			jsonObject.put("value", value);
-			
-			
-			jsonArray.put(jsonObject);
+				jsonObject.put("visitorCategoryId", category.getMasterFileId());
+				
+				
+				jsonObject.put("value", value);
+				
+				
+				jsonArray.put(jsonObject);
+			}
 		}
 		FactVisitorLocalServiceUtil.bacthInsert(libraryId, period, jsonArray, serviceContext); 
 		actionResponse.sendRedirect(redirect);
@@ -261,22 +375,27 @@ public class EisPortlet extends MVCPortlet
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		long postGradeType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_POST_GRADE);
 		
-		List<PostGrade> postGrades = PostGradeLocalServiceUtil.getPostGrades(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<MasterFile> postGrades = MasterFileLocalServiceUtil.findByMasterType(postGradeType, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		
-		for (PostGrade postGrade : postGrades)
+		for (MasterFile postGrade : postGrades)
 		{
-			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
-			
-			jsonObject.put("postGradeId", postGrade.getPostGradeId());
-			String value = ParamUtil.getString(actionRequest, postGrade.getPostGradeId() + "-value");
-			
-			jsonObject.put("value", value);
-			
-			
-			jsonArray.put(jsonObject);
+			String value = ParamUtil.getString(actionRequest, postGrade.getMasterFileId() + "-value");
+			if (Validator.isNotNull(value))
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				
+				jsonObject.put("postGradeId", postGrade.getMasterFileId());
+				
+				
+				jsonObject.put("value", value);
+				
+				
+				jsonArray.put(jsonObject);
+			}
 		}
 		FactPostLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
 		actionResponse.sendRedirect(redirect);
@@ -291,21 +410,25 @@ public class EisPortlet extends MVCPortlet
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
 		
-		List<MemberCategory> categories = MemberCategoryLocalServiceUtil.getMemberCategories(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		long memberTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_MEMBERSHIP_CATEGORY);
+		List<MasterFile> categories = MasterFileLocalServiceUtil.findByMasterType(memberTypeId,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-		for (MemberCategory category : categories)
+		for (MasterFile category : categories)
 		{
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			
-			jsonObject.put("categoryId", category.getMemberCategoryId());
-			String value = ParamUtil.getString(actionRequest, category.getMemberCategoryId() + "-value");
 			
-			
-			jsonObject.put("value", value);
-			
-			
-			jsonArray.put(jsonObject);
+			String value = ParamUtil.getString(actionRequest, category.getMasterFileId() + "-value");
+			if (Validator.isNotNull(value))
+			{
+				jsonObject.put("categoryId", category.getMasterFileId());
+				
+				jsonObject.put("value", value);
+				
+				
+				jsonArray.put(jsonObject);
+			}
 		}
 		FactMembershipLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
 		actionResponse.sendRedirect(redirect);
@@ -321,21 +444,21 @@ public class EisPortlet extends MVCPortlet
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
 		
-		List<MemberCategory> categories = MemberCategoryLocalServiceUtil.getMemberCategories(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		long memberCategoryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_MEMBERSHIP_CATEGORY);
+		List<MasterFile> categories = MasterFileLocalServiceUtil.findByMasterType(memberCategoryTypeId,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-		for (MemberCategory category : categories)
+		for (MasterFile category : categories)
 		{
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			String value = ParamUtil.getString(actionRequest, category.getMasterFileId() + "-value");
+			if (Validator.isNotNull(value))
+			{
 			
-			jsonObject.put("categoryId", category.getMemberCategoryId());
-			String value = ParamUtil.getString(actionRequest, category.getMemberCategoryId() + "-value");
-			
-			
-			jsonObject.put("value", value);
-			
-			
-			jsonArray.put(jsonObject);
+				jsonObject.put("categoryId", category.getMasterFileId());
+				jsonObject.put("value", value);
+				jsonArray.put(jsonObject);
+			}
 		}
 		LoanLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
 		actionResponse.sendRedirect(redirect);
@@ -353,24 +476,30 @@ public class EisPortlet extends MVCPortlet
 		
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		
-		List<ItemType> itemTypes = ItemTypeLocalServiceUtil.getNonPrintedType(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByTypeAndStatus2(itemTypeId, true);// .findByMasterType(itemTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
 		
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
 		
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-		for (ItemType itemType : itemTypes)
+		for (MasterFile itemType : itemTypes)
 		{
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			
-			jsonObject.put("id", itemType.getItemTypeId());
-			String volume = ParamUtil.getString(actionRequest, itemType.getItemTypeId() + "-volume");
-			String title = ParamUtil.getString(actionRequest, itemType.getItemTypeId() +"-title");
 			
-			jsonObject.put("volume", volume);
-			jsonObject.put("title", title);
+			String volume = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-volume");
+			String title = ParamUtil.getString(actionRequest, itemType.getMasterFileId() +"-title");
 			
-			jsonArray.put(jsonObject);
+			if (Validator.isNotNull(volume) && Validator.isNotNull(title))
+			{
+				jsonObject.put("id", itemType.getMasterFileId());
+				jsonObject.put("volume", volume);
+				jsonObject.put("title", title);
+				
+				jsonArray.put(jsonObject);
+			}
 			
 		}
 		FactNonPrintedMaterialLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
@@ -379,7 +508,10 @@ public class EisPortlet extends MVCPortlet
 	
 	public void editPrintedItem(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException 
 	{
-		List<ItemType> itemTypes = ItemTypeLocalServiceUtil.getPrintedType(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByMasterType(itemTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		
 		
 		long libraryId = ParamUtil.getLong(actionRequest, "library");
 		String period = ParamUtil.getString(actionRequest, "period");
@@ -390,18 +522,22 @@ public class EisPortlet extends MVCPortlet
 		
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		
-		for (ItemType itemType : itemTypes)
+		for (MasterFile itemType : itemTypes)
 		{
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			
-			jsonObject.put("id", itemType.getItemTypeId());
-			String volume = ParamUtil.getString(actionRequest, itemType.getItemTypeId() + "-volume");
-			String title = ParamUtil.getString(actionRequest, itemType.getItemTypeId() +"-title");
 			
-			jsonObject.put("volume", volume);
-			jsonObject.put("title", title);
+			String volume = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-volume");
+			String title = ParamUtil.getString(actionRequest, itemType.getMasterFileId() +"-title");
 			
-			jsonArray.put(jsonObject);
+			if (Validator.isNotNull(volume) && Validator.isNotNull(title))
+			{
+				jsonObject.put("id", itemType.getMasterFileId());
+				jsonObject.put("volume", volume);
+				jsonObject.put("title", title);
+				
+				jsonArray.put(jsonObject);
+			}
 			
 		}
 		FactPrintedMaterialLocalServiceUtil.multiUpdate(libraryId, period, jsonArray, serviceContext);
@@ -764,7 +900,7 @@ public class EisPortlet extends MVCPortlet
         if (resourceID.equals("libraryList")) 
         {
             long stateId = ParamUtil.getLong(request, "stateId");
-            
+           
             try {
             	libraryList(request,response);
 				//JSONArray libraries = EisUtil.getLibraryByState(stateId);
@@ -870,7 +1006,122 @@ public class EisPortlet extends MVCPortlet
 				e.printStackTrace();
 			}
         }
+        if (resourceID.equals(EisUtil.RESOURCE_EXPENSE_DATA))
+        {
+        	try {
+				
+        		loadExpenseData(request,response);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_CONSULTATION_DATA))
+        {
+        	try {
+				
+        		loadConsultationData(request,response);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+        
     }
+	
+	protected void loadConsultationData(ResourceRequest request, ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		boolean admin = isAdmin(request);
+		
+		
+		List<FactConsultation> datas = FactConsultationLocalServiceUtil.getLatestEntry(libraryId, period);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		try
+		{
+		
+			for (FactConsultation data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("categoryId", data.getConsultationCategoryId());
+				
+				
+				jsonObject.put("value", data.getValue());
+				jsonObject.put("totalSession", data.getTotalSession());
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				
+				jsonData.put("history", FactConsultationLocalServiceUtil.getEntries(libraryId, period));
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	protected void loadExpenseData(ResourceRequest request, ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		boolean admin = isAdmin(request);
+		
+		List<FactExpense> datas = FactExpenseLocalServiceUtil.getLatestEntry(libraryId, period);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		try
+		{
+		
+			for (FactExpense data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("entryType", data.getEntryType());
+				jsonObject.put("MasterId", data.getMasterFileId());
+				jsonObject.put("Jenis", data.getEntryType());
+				
+				
+				jsonObject.put("value", data.getAmount());
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				
+				jsonData.put("history", FactExpenseLocalServiceUtil.getEntries(libraryId, period));
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+		
+	}
 	
 	protected void lodSeatingData(ResourceRequest request, ResourceResponse response) throws SystemException
 	{
@@ -1371,19 +1622,51 @@ public class EisPortlet extends MVCPortlet
         iteratorURL.setWindowState(LiferayWindowState.NORMAL);
         
         long stateId = ParamUtil.getLong(request, "stateId");
-         
-        SearchContainer<Library> libraryListSearchContainer = new SearchContainer<Library>(
+        LOGGER.info("state="+stateId); 
+        SearchContainer<MasterFile> libraryListSearchContainer = new SearchContainer<MasterFile>(
         		request, null, null, "cur", 1, 20,
                 iteratorURL, null, "No Library found.");
         
-        List<Library> libraries = LibraryLocalServiceUtil.findByState(stateId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+        long libraryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+        List<MasterFile> libraries =  MasterFileLocalServiceUtil.findByParent1(libraryTypeId,stateId); //LibraryLocalServiceUtil.findByState(stateId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
         int total = libraries.size();
         
-        libraryListSearchContainer.setResults(libraries);
+        libraryListSearchContainer.setResults(libraries); 
         libraryListSearchContainer.setTotal(total);
         request.setAttribute("libraryListSearchContainer", libraryListSearchContainer);
         include("/html/admin/libraryList.jsp",request,response); 
         
+	}
+	
+	private void converData() throws SystemException
+	{
+		convertVisitorData();
+	}
+	private void convertVisitorData() throws SystemException
+	{
+		long masterTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+		long visitorCategoryId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_VISITOR_CATEGORY);
+		List<MasterFile> libraries = MasterFileLocalServiceUtil.findByMasterType(masterTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		
+		List<FactVisitor> facts = FactVisitorLocalServiceUtil.getFactVisitors(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		for (FactVisitor fact : facts )
+		{
+			try {
+				MasterFile library = MasterFileLocalServiceUtil.findByTypeOldId(masterTypeId, fact.getLibraryId());
+				MasterFile visitorCategory = MasterFileLocalServiceUtil.findByTypeOldId(visitorCategoryId, fact.getVisitorCategoryId());
+				fact.setLibraryId(library.getMasterFileId());
+				fact.setStateId(library.getParentId1());
+				fact.setLibraryTypeId(library.getParentId2());
+				fact.setVisitorCategoryId(visitorCategory.getMasterFileId());
+				FactVisitorLocalServiceUtil.updateFactVisitor(fact);
+				
+				
+			} catch (NoSuchMasterFileException e) {
+				LOGGER.warn("Visitor conversion: masterfile not found, id="+fact.getFactVisitorId() );
+			}
+		}
 	}
 
 	private static Log LOGGER = LogFactoryUtil.getLog(EisPortlet.class);

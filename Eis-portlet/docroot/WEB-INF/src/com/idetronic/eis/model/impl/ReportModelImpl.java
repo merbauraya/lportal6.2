@@ -66,9 +66,11 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 			{ "reportId", Types.BIGINT },
 			{ "reportKey", Types.VARCHAR },
 			{ "reportName", Types.VARCHAR },
-			{ "reportTitle", Types.VARCHAR }
+			{ "reportTitle", Types.VARCHAR },
+			{ "dataEntry", Types.BOOLEAN },
+			{ "dataName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eis_Report (reportId LONG not null primary key,reportKey VARCHAR(75) null,reportName VARCHAR(75) null,reportTitle VARCHAR(150) null)";
+	public static final String TABLE_SQL_CREATE = "create table eis_Report (reportId LONG not null primary key,reportKey VARCHAR(75) null,reportName VARCHAR(75) null,reportTitle VARCHAR(150) null,dataEntry BOOLEAN,dataName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table eis_Report";
 	public static final String ORDER_BY_JPQL = " ORDER BY report.reportId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY eis_Report.reportId ASC";
@@ -84,8 +86,9 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.idetronic.eis.model.Report"),
 			true);
-	public static long REPORTKEY_COLUMN_BITMASK = 1L;
-	public static long REPORTID_COLUMN_BITMASK = 2L;
+	public static long DATAENTRY_COLUMN_BITMASK = 1L;
+	public static long REPORTKEY_COLUMN_BITMASK = 2L;
+	public static long REPORTID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -104,6 +107,8 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		model.setReportKey(soapModel.getReportKey());
 		model.setReportName(soapModel.getReportName());
 		model.setReportTitle(soapModel.getReportTitle());
+		model.setDataEntry(soapModel.getDataEntry());
+		model.setDataName(soapModel.getDataName());
 
 		return model;
 	}
@@ -172,6 +177,8 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		attributes.put("reportKey", getReportKey());
 		attributes.put("reportName", getReportName());
 		attributes.put("reportTitle", getReportTitle());
+		attributes.put("dataEntry", getDataEntry());
+		attributes.put("dataName", getDataName());
 
 		return attributes;
 	}
@@ -200,6 +207,18 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 		if (reportTitle != null) {
 			setReportTitle(reportTitle);
+		}
+
+		Boolean dataEntry = (Boolean)attributes.get("dataEntry");
+
+		if (dataEntry != null) {
+			setDataEntry(dataEntry);
+		}
+
+		String dataName = (String)attributes.get("dataName");
+
+		if (dataName != null) {
+			setDataName(dataName);
 		}
 	}
 
@@ -272,6 +291,50 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		_reportTitle = reportTitle;
 	}
 
+	@JSON
+	@Override
+	public boolean getDataEntry() {
+		return _dataEntry;
+	}
+
+	@Override
+	public boolean isDataEntry() {
+		return _dataEntry;
+	}
+
+	@Override
+	public void setDataEntry(boolean dataEntry) {
+		_columnBitmask |= DATAENTRY_COLUMN_BITMASK;
+
+		if (!_setOriginalDataEntry) {
+			_setOriginalDataEntry = true;
+
+			_originalDataEntry = _dataEntry;
+		}
+
+		_dataEntry = dataEntry;
+	}
+
+	public boolean getOriginalDataEntry() {
+		return _originalDataEntry;
+	}
+
+	@JSON
+	@Override
+	public String getDataName() {
+		if (_dataName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dataName;
+		}
+	}
+
+	@Override
+	public void setDataName(String dataName) {
+		_dataName = dataName;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -307,6 +370,8 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		reportImpl.setReportKey(getReportKey());
 		reportImpl.setReportName(getReportName());
 		reportImpl.setReportTitle(getReportTitle());
+		reportImpl.setDataEntry(getDataEntry());
+		reportImpl.setDataName(getDataName());
 
 		reportImpl.resetOriginalValues();
 
@@ -361,6 +426,10 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 		reportModelImpl._originalReportKey = reportModelImpl._reportKey;
 
+		reportModelImpl._originalDataEntry = reportModelImpl._dataEntry;
+
+		reportModelImpl._setOriginalDataEntry = false;
+
 		reportModelImpl._columnBitmask = 0;
 	}
 
@@ -394,12 +463,22 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 			reportCacheModel.reportTitle = null;
 		}
 
+		reportCacheModel.dataEntry = getDataEntry();
+
+		reportCacheModel.dataName = getDataName();
+
+		String dataName = reportCacheModel.dataName;
+
+		if ((dataName != null) && (dataName.length() == 0)) {
+			reportCacheModel.dataName = null;
+		}
+
 		return reportCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{reportId=");
 		sb.append(getReportId());
@@ -409,6 +488,10 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		sb.append(getReportName());
 		sb.append(", reportTitle=");
 		sb.append(getReportTitle());
+		sb.append(", dataEntry=");
+		sb.append(getDataEntry());
+		sb.append(", dataName=");
+		sb.append(getDataName());
 		sb.append("}");
 
 		return sb.toString();
@@ -416,7 +499,7 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.Report");
@@ -438,6 +521,14 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 			"<column><column-name>reportTitle</column-name><column-value><![CDATA[");
 		sb.append(getReportTitle());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dataEntry</column-name><column-value><![CDATA[");
+		sb.append(getDataEntry());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dataName</column-name><column-value><![CDATA[");
+		sb.append(getDataName());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -451,6 +542,10 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 	private String _originalReportKey;
 	private String _reportName;
 	private String _reportTitle;
+	private boolean _dataEntry;
+	private boolean _originalDataEntry;
+	private boolean _setOriginalDataEntry;
+	private String _dataName;
 	private long _columnBitmask;
 	private Report _escapedModel;
 }

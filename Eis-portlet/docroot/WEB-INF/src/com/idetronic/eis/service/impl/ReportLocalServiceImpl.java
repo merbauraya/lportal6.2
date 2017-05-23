@@ -14,6 +14,8 @@
 
 package com.idetronic.eis.service.impl;
 
+import java.util.List;
+
 import com.idetronic.eis.model.Report;
 import com.idetronic.eis.service.base.ReportLocalServiceBaseImpl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -40,7 +42,7 @@ public class ReportLocalServiceImpl extends ReportLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.idetronic.eis.service.ReportLocalServiceUtil} to access the report local service.
 	 */
 	
-	public Report addReport(String reportKey,String reportName,String reportTitle) throws SystemException
+	public Report addReport(String reportKey,String reportName,String reportTitle,boolean hasDataEntry) throws SystemException
 	{
 		long id = CounterLocalServiceUtil.increment(Report.class.getName());
 		Report report = createReport(id);
@@ -48,8 +50,12 @@ public class ReportLocalServiceImpl extends ReportLocalServiceBaseImpl {
 		report.setReportKey(reportKey);
 		report.setReportName(reportName);
 		report.setReportTitle(reportTitle);
-		
+		report.setDataEntry(hasDataEntry);
 		return updateReport(report);
 		
+	}
+	public List<Report> findByDataEntry(boolean dataEntry) throws SystemException
+	{
+		return reportPersistence.findBydataEntry(dataEntry);
 	}
 }

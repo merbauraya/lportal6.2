@@ -62,9 +62,19 @@ public class LibraryFinderUtil {
 		return getFinder().getLoanCountByLibraryPeriod(libraryId, period);
 	}
 
+	public static int getExpenseCountByLibraryPeriod(long libraryId,
+		java.lang.String period) {
+		return getFinder().getExpenseCountByLibraryPeriod(libraryId, period);
+	}
+
 	public static int getIrItemCountByLibraryPeriod(long libraryId,
 		java.lang.String period) {
 		return getFinder().getIrItemCountByLibraryPeriod(libraryId, period);
+	}
+
+	public static int getConsultationountByLibraryPeriod(long libraryId,
+		java.lang.String period) {
+		return getFinder().getConsultationountByLibraryPeriod(libraryId, period);
 	}
 
 	public static LibraryFinder getFinder() {

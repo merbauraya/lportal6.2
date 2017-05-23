@@ -6,6 +6,7 @@ import com.idetronic.eis.model.FactPrintedMaterial;
 import com.idetronic.eis.model.impl.FactMembershipImpl;
 import com.idetronic.eis.model.impl.FactPrintedMaterialImpl;
 import com.idetronic.eis.model.impl.ItemTypeImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.idetronic.eis.model.impl.MemberCategoryImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -103,7 +104,7 @@ public class FactPrintedMaterialFinderImpl extends BasePersistenceImpl<FactPrint
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactPrintedMaterial", FactPrintedMaterialImpl.class); 
-	        q.addEntity("ItemType", ItemTypeImpl.class);
+	        q.addEntity("ItemType", MasterFileImpl.class);
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

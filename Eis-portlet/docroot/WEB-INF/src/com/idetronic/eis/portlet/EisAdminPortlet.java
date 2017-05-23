@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -18,7 +19,9 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.WindowStateException;
 
+import com.idetronic.eis.NoSuchMasterFileException;
 import com.idetronic.eis.model.BorrowerCategory;
+import com.idetronic.eis.model.Config;
 import com.idetronic.eis.model.Faculty;
 import com.idetronic.eis.model.FacultyType;
 import com.idetronic.eis.model.ItemMedium;
@@ -28,6 +31,8 @@ import com.idetronic.eis.model.Kpi;
 import com.idetronic.eis.model.KpiType;
 import com.idetronic.eis.model.Library;
 import com.idetronic.eis.model.LibraryType;
+import com.idetronic.eis.model.MasterFile;
+import com.idetronic.eis.model.MasterType;
 import com.idetronic.eis.model.MemberCategory;
 import com.idetronic.eis.model.NonPrintedItemType;
 import com.idetronic.eis.model.PostCategory;
@@ -37,6 +42,7 @@ import com.idetronic.eis.model.Report;
 import com.idetronic.eis.model.SeatingCategory;
 import com.idetronic.eis.model.SeatingDepartment;
 import com.idetronic.eis.model.State;
+import com.idetronic.eis.model.UserLibrary;
 import com.idetronic.eis.model.VisitorCategory;
 import com.idetronic.eis.service.BorrowerCategoryLocalServiceUtil;
 import com.idetronic.eis.service.ConfigLocalServiceUtil;
@@ -50,6 +56,8 @@ import com.idetronic.eis.service.KpiLocalServiceUtil;
 import com.idetronic.eis.service.KpiTypeLocalServiceUtil;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
 import com.idetronic.eis.service.LibraryTypeLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
+import com.idetronic.eis.service.MasterTypeLocalServiceUtil;
 import com.idetronic.eis.service.MemberCategoryLocalServiceUtil;
 import com.idetronic.eis.service.NonPrintedItemTypeLocalServiceUtil;
 import com.idetronic.eis.service.PostCategoryLocalServiceUtil;
@@ -59,10 +67,14 @@ import com.idetronic.eis.service.ReportLocalServiceUtil;
 import com.idetronic.eis.service.SeatingCategoryLocalServiceUtil;
 import com.idetronic.eis.service.SeatingDepartmentLocalServiceUtil;
 import com.idetronic.eis.service.StateLocalServiceUtil;
+import com.idetronic.eis.service.UserDataLocalServiceUtil;
 import com.idetronic.eis.service.UserLibraryLocalServiceUtil;
+import com.idetronic.eis.service.UserReportLocalServiceUtil;
 import com.idetronic.eis.service.VisitorCategoryLocalServiceUtil;
 import com.idetronic.eis.util.EisUtil;
+import com.idetronic.eis.util.ReminderNotification;
 import com.idetronic.eis.util.Tester;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -79,6 +91,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
@@ -298,6 +311,37 @@ public class EisAdminPortlet extends MVCPortlet {
 			
 		
 	}
+	public void runTest(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException 
+	{
+		Tester.testNotification();
+	}
+	
+	public void editInfoBox(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException 
+	{
+		long id = ParamUtil.getLong(actionRequest, "id");
+		String key = StringPool.BLANK;
+		String title = ParamUtil.getString(actionRequest, "title");
+		
+		String body = ParamUtil.getString(actionRequest, "boxBodyTemplate");
+		
+		Config infoBox = null;
+		
+		if (Validator.isNull(id))
+		{
+			id = CounterLocalServiceUtil.increment(Config.class.getName());
+			key = EisUtil.EIS_INFO_BOX + "." + id;
+			infoBox = ConfigLocalServiceUtil.createConfig(id);
+			infoBox.setKey(key);
+		}else
+		{
+			infoBox = ConfigLocalServiceUtil.getConfig(id);
+		}
+		
+		infoBox.setTitle(title);
+		infoBox.setValue(body);
+		
+		ConfigLocalServiceUtil.updateConfig(infoBox);
+	}
 	
 	public void editKpiSetting(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException
 	{
@@ -316,12 +360,11 @@ public class EisAdminPortlet extends MVCPortlet {
             String color = actionRequest.getParameter("kpiColor"+ index);
           
             
-            String key = EisUtil.KEY_KPI_SETTING_RANGE + ".low" + n;
-            ConfigLocalServiceUtil.addByStringValue(key, lowRange);
-            key =  EisUtil.KEY_KPI_SETTING_RANGE + ".high" + n;
-            ConfigLocalServiceUtil.addByStringValue(key, highRange);
+            String key = EisUtil.KEY_KPI_SETTING_RANGE +  n;
             
-            key =  EisUtil.KEY_KPI_SETTING_RANGE + ".color" + n;
+            
+            /*
+            
             switch (color)
             {
             case "kpiRed":
@@ -337,8 +380,10 @@ public class EisAdminPortlet extends MVCPortlet {
             	color = "#00008B";
             	break;
             }
+            */
             
-            ConfigLocalServiceUtil.addByStringValue(key, color);
+            String value = lowRange + "," + highRange + "," + color;
+            ConfigLocalServiceUtil.addByStringValue(key, value);
             
              
             n++;
@@ -895,9 +940,31 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 	}
 	
+	public void editUserData(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long userId =  ParamUtil.getLong(actionRequest, "userId");
+		long libraryId = ParamUtil.getLong(actionRequest, "libraryId");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		
+		long[] addDataIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "addDataIds"), 0L);
+		
+		long[] removeDataIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "removeDataIds"), 0L);
+		
+		UserReportLocalServiceUtil.updateAssociationByUser(userId, libraryId,addDataIds, removeDataIds, serviceContext);
+		actionResponse.sendRedirect(redirect);
+
+
+		
+	}
+	
 	public void editUserLibrary(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
 	{
 		long libraryId = ParamUtil.getLong(actionRequest, "libraryId");
+		long userId = ParamUtil.getLong(actionRequest, "userId");
 		
 		
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
@@ -911,6 +978,13 @@ public class EisAdminPortlet extends MVCPortlet {
 		long[] addUserIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		
+		long[] addLibraryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "addLibraryIds"), 0L);
+		
+		long[] removeLibraryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "removeLibraryIds"), 0L);
+		
+		
 		addUserIds = filterAddUserIds(libraryId, addUserIds); 
 		
 		
@@ -919,10 +993,12 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		removeUserIds = filterRemoveUserIds(libraryId, removeUserIds);
 		
+		
+		
 		if (cmd.equals("userLibrary"))
 		{
-			
-			UserLibraryLocalServiceUtil.updateAssociation(libraryId, addUserIds, removeUserIds, serviceContext);
+			UserLibraryLocalServiceUtil.updateAssociationByUser(userId, addLibraryIds, removeLibraryIds, serviceContext);
+			//UserLibraryLocalServiceUtil.updateAssociation(libraryId, addUserIds, removeUserIds, serviceContext);
 		} else //user search
 		{
 			SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
@@ -931,6 +1007,25 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		
 	}
+	
+	public void deleteMasterFile (ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException 
+	{
+		long masterFileId = ParamUtil.getLong(actionRequest, "masterFileId");
+		MasterFile masterFile = MasterFileLocalServiceUtil.fetchMasterFile(masterFileId);
+		
+		
+		MasterFileLocalServiceUtil.deleteMasterFile(masterFileId);
+		
+		long chkItemType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		if (chkItemType == masterFile.getMasterTypeId())
+		{
+			ItemTypeLocalServiceUtil.deleteItemType(masterFile.getOldId());
+		}
+		
+		
+		//ConfigLocalServiceUtil.getByKey(key)
+	}
+	
 	public void deleteMaster (ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException
 	{
 		String masterType = ParamUtil.getString(actionRequest, "masterType");
@@ -992,6 +1087,300 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		
 	}
+	
+	public void editProperty(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long id = ParamUtil.getLong(actionRequest, "propertyId");
+		String key = ParamUtil.getString(actionRequest, "key");
+		String value = ParamUtil.getString(actionRequest, "value");
+		
+		Config property = null;
+		
+		if (Validator.isNull(id))
+		{
+			property = ConfigLocalServiceUtil.createConfig(CounterLocalServiceUtil.increment(Config.class.getName()));
+		} else
+		{
+			property = ConfigLocalServiceUtil.fetchConfig(id);
+		}
+		
+		property.setKey(key);
+		property.setValue(value);
+		ConfigLocalServiceUtil.updateConfig(property);
+		
+		
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param actionRequest
+	 * @param actionResponse
+	 * @throws PortalException
+	 * @throws SystemException
+	 * @throws IOException
+	 */
+	public void editMasterFile(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long masterFileId =ParamUtil.getLong(actionRequest, "masterFileId");
+		long masterTypeId = ParamUtil.getLong(actionRequest, "masterTypeId");
+		String masterFileName = ParamUtil.getString(actionRequest, "masterFileName");
+		
+		long parent1 = ParamUtil.getLong(actionRequest, "parent1");
+		long parent2 = ParamUtil.getLong(actionRequest, "parent2");
+		
+		
+		boolean status1 = ParamUtil.getBoolean(actionRequest, "status1");
+		boolean status2 = ParamUtil.getBoolean(actionRequest, "status2");
+		boolean status3 = ParamUtil.getBoolean(actionRequest, "status3");
+		boolean status4 = ParamUtil.getBoolean(actionRequest, "status4"); 
+		boolean inActive = ParamUtil.getBoolean(actionRequest, "inActive"); 
+		
+		MasterFile masterFile = null;
+		
+		if (Validator.isNotNull(masterFileId))
+		{
+			masterFile = MasterFileLocalServiceUtil.fetchMasterFile(masterFileId);
+		} else
+		{
+			masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+			
+		}
+		
+		masterFile.setMasterFileName(masterFileName);
+		masterFile.setMasterTypeId(masterTypeId);
+		masterFile.setParentId1(parent1);
+		masterFile.setParentId2(parent2);
+		masterFile.setStatus1(status1); 
+		masterFile.setStatus2(status2);
+		masterFile.setStatus3(status3);
+		masterFile.setStatus4(status4);
+		masterFile.setInActive(inActive);
+		
+		
+		MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+		//syncOldMaster(masterFile);
+		
+		
+		
+		
+		
+		
+	}
+	/**
+	 * This is to ensure old master file is updated when adding/editing new master File
+	 * for backward compatibility
+	 * @param masterFile
+	 * @throws SystemException
+	 */
+	
+	private void syncOldMaster(MasterFile masterFile) throws SystemException 
+	{
+		long chkItemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		if (chkItemTypeId == masterFile.getMasterTypeId())
+		{
+			ItemType itemType = checkOldItemType(masterFile);
+			if (Validator.isNull(masterFile.getOldId()))
+			{
+				masterFile.setOldId(itemType.getItemTypeId());
+				
+			}
+		}
+		
+		//library Type
+		chkItemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY_TYPE);
+		if (chkItemTypeId == masterFile.getMasterTypeId())
+		{
+			
+			
+			LibraryType libType;
+			try {
+				libType = LibraryTypeLocalServiceUtil.getLibraryType(masterFile.getOldId());
+			} catch (PortalException | SystemException e) {
+				// TODO Auto-generated catch block
+				libType = LibraryTypeLocalServiceUtil.createLibraryType(CounterLocalServiceUtil.increment(LibraryType.class.getName()));
+				masterFile.setOldId(libType.getLibraryTypeId());
+			}
+			libType.setLibraryTypeName(masterFile.getMasterFileName());
+			
+			LibraryTypeLocalServiceUtil.updateLibraryType(libType);	
+			
+		}
+		//state
+		chkItemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_STATE);
+		if (chkItemTypeId == masterFile.getMasterTypeId())
+		{
+			
+			
+			State state;
+			try {
+				state = StateLocalServiceUtil.getState(masterFile.getOldId());
+			} catch (PortalException | SystemException e) {
+				// TODO Auto-generated catch block
+				state = StateLocalServiceUtil.createState(CounterLocalServiceUtil.increment(State.class.getName()));
+				masterFile.setOldId(state.getStateId());
+			}
+			state.setStateName(masterFile.getMasterFileName());
+			state.setStateCode(masterFile.getMasterCode());
+			StateLocalServiceUtil.updateState(state);	
+				
+			
+		}
+		//library
+		chkItemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+		if (chkItemTypeId == masterFile.getMasterTypeId())
+		{
+			
+			
+			Library library;
+			try {
+				library = LibraryLocalServiceUtil.getLibrary(masterFile.getOldId());
+			} catch (PortalException | SystemException e) {
+				// TODO Auto-generated catch block
+				library = LibraryLocalServiceUtil.createLibrary(CounterLocalServiceUtil.increment(Library.class.getName()));
+				masterFile.setOldId(library.getLibraryId());
+			}
+			library.setLibraryName(masterFile.getMasterFileName());
+			library.setLibraryCode(masterFile.getMasterCode());
+			library.setStateId(masterFile.getParentId1());
+			library.setLibraryTypeId(masterFile.getParentId2());
+			
+			LibraryLocalServiceUtil.updateLibrary(library);	
+				
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+	}
+	
+	private ItemType checkOldItemType(MasterFile masterFile) throws SystemException
+	{
+		ItemType itemType = null;
+		
+		if (Validator.isNotNull(masterFile.getOldId()))
+		{
+			itemType = ItemTypeLocalServiceUtil.fetchItemType(masterFile.getOldId());
+		}else
+		{
+			itemType = ItemTypeLocalServiceUtil.createItemType(CounterLocalServiceUtil.increment(ItemType.class.getName()));
+		}
+		itemType.setItemTypeName(masterFile.getMasterFileName());
+		if (masterFile.getStatus1())
+			itemType.setPrintedType(1);
+		
+		if (masterFile.getStatus2())
+			itemType.setPrintedType(2);
+		
+		itemType.setIRType(masterFile.getStatus3());
+		return ItemTypeLocalServiceUtil.updateItemType(itemType);
+	}
+	
+	/**
+	 * 
+	 * @param actionRequest
+	 * @param actionResponse
+	 * @throws PortalException
+	 * @throws SystemException
+	 * @throws IOException
+	 */
+	public void editMasterType(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long masterTypeId = ParamUtil.getLong(actionRequest, "masterTypeId");
+		String name = ParamUtil.getString(actionRequest, "masterTypeName");
+		String pageLabel = ParamUtil.getString(actionRequest, "pageLabel");
+		String nameLabel = ParamUtil.getString(actionRequest, "nameLabel");
+		
+		boolean parentType = ParamUtil.getBoolean(actionRequest, "parentType");
+		boolean hasParent1 = ParamUtil.getBoolean(actionRequest, "hasParent1");
+		long parentId1 = ParamUtil.getLong(actionRequest, "parent1");
+		String parent1Label = ParamUtil.getString(actionRequest, "parent1Label");
+		
+		
+		boolean hasParent2 = ParamUtil.getBoolean(actionRequest, "hasParent2");
+		long parentId2 = ParamUtil.getLong(actionRequest, "parent2");
+		String parent2Label = ParamUtil.getString(actionRequest, "parent2Label");
+		
+		
+		boolean hasStatus1 = ParamUtil.getBoolean(actionRequest, "hasStatus1");
+		
+		
+		String status1Label = ParamUtil.getString(actionRequest, "status1Label");
+		
+		boolean hasStatus2 = ParamUtil.getBoolean(actionRequest, "hasStatus2");
+		String status2Label = ParamUtil.getString(actionRequest, "status2Label");
+		
+		boolean hasStatus3 = ParamUtil.getBoolean(actionRequest, "hasStatus3");
+		String status3Label = ParamUtil.getString(actionRequest, "status3Label");
+		
+		
+		boolean hasStatus4 = ParamUtil.getBoolean(actionRequest, "hasStatus4");
+		String status4Label = ParamUtil.getString(actionRequest, "status4Label");
+		
+		boolean hasCode = ParamUtil.getBoolean(actionRequest, "hasCode");
+		String codeLabel = ParamUtil.getString(actionRequest, "codeLabel");
+		
+		
+		MasterType masterType = null;
+		if (Validator.isNull(masterTypeId))
+		{
+			masterTypeId = CounterLocalServiceUtil.increment(MasterType.class.getName());
+			masterType = MasterTypeLocalServiceUtil.createMasterType(masterTypeId);
+		}else
+		{
+			masterType = MasterTypeLocalServiceUtil.fetchMasterType(masterTypeId);
+		}
+		masterType.setMasterTypeName(name);
+		masterType.setHasParent1(hasParent1);
+		masterType.setHasParent2(hasParent2);
+		masterType.setHasStatus1(hasStatus1);
+		masterType.setHasStatus2(hasStatus2);
+		masterType.setHasStatus3(hasStatus3);
+		masterType.setHasStatus4(hasStatus4);
+		
+		masterType.setNameLabel(nameLabel);
+		masterType.setPageLabel(pageLabel);
+		masterType.setStatus1Label(status1Label);
+		masterType.setStatus2Label(status2Label);
+		masterType.setStatus3Label(status3Label);
+		masterType.setStatus4Label(status4Label);
+		
+		masterType.setParentId1(parentId1);
+		masterType.setParentId2(parentId2);
+		masterType.setParent1Label(parent1Label);
+		masterType.setParent2Label(parent2Label);
+		masterType.setParentType(parentType);
+		
+		masterType.setHasCode(hasCode);
+		masterType.setCodeLabel(codeLabel);
+		
+		
+		MasterTypeLocalServiceUtil.updateMasterType(masterType);
+		
+	}
+	public void editDbBoxTitle(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException
+	{
+		String boxTitle = ParamUtil.getString(actionRequest, "boxTitle");
+		String boxId = ParamUtil.getString(actionRequest, "boxId");
+		
+		LOGGER.info("nbox="+boxId + ":" + boxTitle);
+		String key = "dashboard.box.title." + boxId;
+		ConfigLocalServiceUtil.addByStringValue(key, boxTitle);
+	}
+	
+	public void deleteMasterType(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException
+	{
+		long masterTypeId = ParamUtil.getLong(actionRequest, "masterId");
+		MasterTypeLocalServiceUtil.deleteMasterType(masterTypeId);
+		
+	}
+	
 	public void editReport(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
 	{
 		long reportId = ParamUtil.getLong(actionRequest, "reportId"); 
@@ -1001,6 +1390,8 @@ public class EisAdminPortlet extends MVCPortlet {
 		String reportKey = ParamUtil.getString(actionRequest, "reportKey");
 		String reportTitle = ParamUtil.getString(actionRequest, "reportTitle");
 		String reportName = ParamUtil.getString(actionRequest, "reportName");
+		boolean dataEntry = ParamUtil.getBoolean(actionRequest, "dataEntry");
+		
 		
 		
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
@@ -1011,12 +1402,13 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		if (Validator.isNull(reportId))
 		{
-			report = ReportLocalServiceUtil.addReport(reportKey, reportName, reportTitle);
+			report = ReportLocalServiceUtil.addReport(reportKey, reportName, reportTitle,dataEntry);
 		}else
 		{
 			report = ReportLocalServiceUtil.fetchReport(reportId);
 			report.setReportKey(reportKey);
 			report.setReportTitle(reportTitle);
+			report.setDataEntry(dataEntry);
 			
 			ReportLocalServiceUtil.updateReport(report);
 			
@@ -1028,6 +1420,446 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		
 	}
+	
+	public void importMaster(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException
+	{
+		
+		
+		try {
+			importState();
+			importLibraryType();
+			importLibrary();
+			importPTJType();
+			importPTJ();
+			importItemType();
+			importItemMedium();
+			importPostCategory();
+			importPostGrade();
+			importVisitorCategory();
+			importMembershipCategory();
+			importSeatingDepartment();
+			importSeatingCategory();
+			importUserLibrary();
+	
+			
+			
+			
+			
+			
+		} catch (NoSuchMasterFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private static void importUserLibrary() throws SystemException
+	{
+		List<UserLibrary> userLibraries = UserLibraryLocalServiceUtil.getUserLibraries(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		long libraryType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+		for (UserLibrary ul : userLibraries)
+		{
+			try {
+				MasterFile library = MasterFileLocalServiceUtil.findByTypeOldId(libraryType, ul.getLibraryId());
+				ul.setLibraryId(library.getMasterFileId());
+				UserLibraryLocalServiceUtil.updateUserLibrary(ul);
+			} catch (NoSuchMasterFileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	
+	private void importSeatingCategory() throws SystemException
+	{
+		List<SeatingCategory> seatingCategories = SeatingCategoryLocalServiceUtil.getSeatingCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long seatingCategoryId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_CATEGORY);
+		
+		for (SeatingCategory category : seatingCategories)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(seatingCategoryId, category.getSeatingCategoryName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				//FacultyType parent = FacultyTypeLocalServiceUtil.fetchFacultyType(ptj.getFacultyTypeId());
+				//long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, parent.getFacultyTypeName()).getMasterFileId();
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(seatingCategoryId);
+				masterFile.setMasterFileName(category.getSeatingCategoryName());
+				
+				long seatingDeptId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_DEPARTMENT);
+				try
+				{
+					MasterFile parent = MasterFileLocalServiceUtil.findByTypeOldId(seatingDeptId, category.getSeatingDepartmentId());
+					masterFile.setParentId1(parent.getMasterFileId());
+				}  catch (NoSuchMasterFileException ex) {}
+				//masterFile.setMasterCode(postGrade.getPostGradeCode());
+				
+				masterFile.setOldId(category.getSeatingCategoryId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+		
+	}
+	
+	
+	private void importSeatingDepartment() throws SystemException
+	{
+		List<SeatingDepartment> seatingDepartments = SeatingDepartmentLocalServiceUtil.getSeatingDepartments(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long seatingDepartmentId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_DEPARTMENT);
+		
+		for (SeatingDepartment dept : seatingDepartments)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(seatingDepartmentId, dept.getDepartmentName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(seatingDepartmentId);
+				masterFile.setMasterFileName(dept.getDepartmentName());
+				
+				
+				
+				masterFile.setOldId(dept.getDepartmentId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+	}
+	
+	private void importMembershipCategory() throws SystemException
+	{
+		List<MemberCategory> memberCategories = MemberCategoryLocalServiceUtil.getMemberCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long memberCategoryId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_MEMBERSHIP_CATEGORY);
+		
+		for (MemberCategory memberCategory : memberCategories)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(memberCategoryId, memberCategory.getMemberCategoryName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(memberCategoryId);
+				masterFile.setMasterFileName(memberCategory.getMemberCategoryName());
+				
+				
+				
+				masterFile.setOldId(memberCategory.getMemberCategoryId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+	}
+	
+	
+	private void importVisitorCategory() throws SystemException
+	{
+		List<VisitorCategory> visitorCategories = VisitorCategoryLocalServiceUtil.getVisitorCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long visitorCategoryId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_VISITOR_CATEGORY);
+		
+		for (VisitorCategory visitorCategory : visitorCategories)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(visitorCategoryId, visitorCategory.getVisitorCategoryName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(visitorCategoryId);
+				masterFile.setMasterFileName(visitorCategory.getVisitorCategoryName());
+				
+				
+				
+				masterFile.setOldId(visitorCategory.getVisitorCategoryId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+	}
+	
+	private void importPostGrade() throws SystemException
+	{
+		List<PostGrade> postGrades = PostGradeLocalServiceUtil.getPostGrades(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long postGradeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_POST_GRADE);
+		
+		for (PostGrade postGrade : postGrades)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(postGradeId, postGrade.getPostGradeName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				//FacultyType parent = FacultyTypeLocalServiceUtil.fetchFacultyType(ptj.getFacultyTypeId());
+				//long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, parent.getFacultyTypeName()).getMasterFileId();
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(postGradeId);
+				masterFile.setMasterFileName(postGrade.getPostGradeName());
+
+				long postCategoryId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_POST_GRADE_CATEGORY);
+				try
+				{
+					MasterFile parent = MasterFileLocalServiceUtil.findByTypeOldId(postCategoryId, postGrade.getPostCategoryId());
+					masterFile.setParentId1(parent.getMasterFileId());
+				}  catch (NoSuchMasterFileException ex) {}
+				//masterFile.setMasterCode(postGrade.getPostGradeCode());
+				
+				//masterFile.setParentId1(postGrade.getPostCategoryId());
+				masterFile.setMasterCode(postGrade.getPostGradeCode());
+				
+				masterFile.setOldId(postGrade.getPostGradeId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+		
+	}
+	
+	private void importPostCategory() throws SystemException
+	{
+		List<PostCategory> postCategories = PostCategoryLocalServiceUtil.getPostCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long postCategoryId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_POST_GRADE_CATEGORY);
+		
+		for (PostCategory postCategory : postCategories)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(postCategoryId, postCategory.getPostCategoryName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				//FacultyType parent = FacultyTypeLocalServiceUtil.fetchFacultyType(ptj.getFacultyTypeId());
+				//long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, parent.getFacultyTypeName()).getMasterFileId();
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(postCategoryId);
+				masterFile.setMasterFileName(postCategory.getPostCategoryName());
+				
+				
+				
+				masterFile.setOldId(postCategory.getPostCategoryId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+		
+	}
+	
+	private void importItemMedium() throws SystemException
+	{
+		List<ItemMedium> itemMediums = ItemMediumLocalServiceUtil.getItemMediums(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long itemMediumId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_MEDIUM_TYPE);
+		
+		for (ItemMedium itemMedium : itemMediums)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(itemMediumId, itemMedium.getItemMediumName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				//FacultyType parent = FacultyTypeLocalServiceUtil.fetchFacultyType(ptj.getFacultyTypeId());
+				//long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, parent.getFacultyTypeName()).getMasterFileId();
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(itemMediumId);
+				masterFile.setMasterFileName(itemMedium.getItemMediumName());
+				
+				
+				
+				masterFile.setOldId(itemMedium.getItemMediumId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+		
+	}
+	
+	private void importItemType() throws SystemException
+	{
+		List<ItemType> itemTypes = ItemTypeLocalServiceUtil.getItemTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		
+		for (ItemType itemType : itemTypes)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(itemTypeId, itemType.getItemTypeName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				//FacultyType parent = FacultyTypeLocalServiceUtil.fetchFacultyType(ptj.getFacultyTypeId());
+				//long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, parent.getFacultyTypeName()).getMasterFileId();
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(itemTypeId);
+				masterFile.setMasterFileName(itemType.getItemTypeName());
+				
+				boolean printedType = itemType.getPrintedType() == 1;
+				boolean nonPrintedType = itemType.getPrintedType() == 2;
+				boolean irType = itemType.getIRType() ;
+				//masterFile.setParentId1(parentId1);
+				masterFile.setStatus1(printedType);
+				masterFile.setStatus2(nonPrintedType);
+				masterFile.setStatus3(irType);
+				masterFile.setStatus4(true);
+				
+				masterFile.setOldId(itemType.getItemTypeId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+		
+		
+	}
+	
+	private void importPTJ() throws SystemException, NoSuchMasterFileException
+	{
+		List<Faculty> faculties = FacultyLocalServiceUtil.getFaculties(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long ptjTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ_TYPE);
+		long ptjId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ);
+		
+		
+
+		
+		for (Faculty ptj : faculties)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(ptjId, ptj.getFacultyName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				FacultyType parent = FacultyTypeLocalServiceUtil.fetchFacultyType(ptj.getFacultyTypeId());
+				long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, parent.getFacultyTypeName()).getMasterFileId();
+					
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(ptjId);
+				masterFile.setMasterFileName(ptj.getFacultyName());
+				masterFile.setParentId1(parentId1);
+				
+				masterFile.setOldId(ptj.getFacultyId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+		}
+		
+		
+	}
+	
+	private void importPTJType() throws SystemException
+	{
+		long ptjTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ_TYPE);
+		List<FacultyType> ptjTypes = FacultyTypeLocalServiceUtil.getFacultyTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		for (FacultyType ptjType : ptjTypes)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(ptjTypeId, ptjType.getFacultyTypeName());
+			} catch (NoSuchMasterFileException e) {
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(ptjTypeId);
+				masterFile.setMasterFileName(ptjType.getFacultyTypeName());
+				masterFile.setOldId(ptjType.getFacultyTypeId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+		}
+
+	}
+	
+	private void importLibraryType() throws SystemException
+	{
+		long libraryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY_TYPE);
+		List<LibraryType> libraryTypes = LibraryTypeLocalServiceUtil.getLibraryTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		
+		for (LibraryType libType : libraryTypes)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(libraryTypeId, libType.getLibraryTypeName());
+			} catch (NoSuchMasterFileException e) {
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(libraryTypeId);
+				masterFile.setMasterFileName(libType.getLibraryTypeName());
+				masterFile.setOldId(libType.getLibraryTypeId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+	}
+	
+	private void importLibrary() throws SystemException, NoSuchMasterFileException
+	{
+		List<Library> libraries = LibraryLocalServiceUtil.getLibraries(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long libraryType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+		long libraryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY_TYPE);
+		long stateType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_STATE);
+		
+
+		
+		for (Library library : libraries)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(libraryType, library.getLibraryName());
+				
+			} catch (NoSuchMasterFileException e) {
+				
+				long parentId1 = MasterFileLocalServiceUtil.findByTypeAndName(stateType, library.getStateName()).getMasterFileId();
+				
+				LibraryType libType = LibraryTypeLocalServiceUtil.fetchLibraryType(library.getLibraryTypeId());
+				long parentId2 = MasterFileLocalServiceUtil.findByTypeAndName(libraryTypeId, libType.getLibraryTypeName()).getMasterFileId();
+				
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(libraryType);
+				masterFile.setMasterFileName(library.getLibraryName());
+				masterFile.setParentId1(parentId1);
+				masterFile.setParentId2(parentId2);
+				masterFile.setOldId(library.getLibraryId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+		}
+		
+	}
+	
+	private void importState() throws SystemException
+	{
+		List<State> states = StateLocalServiceUtil.getStates(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		long stateType = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_STATE);
+		
+		for (State state : states)
+		{
+			MasterFile masterFile = null;
+			try {
+				masterFile = MasterFileLocalServiceUtil.findByTypeAndName(stateType, state.getStateName());
+			} catch (NoSuchMasterFileException e) {
+				masterFile = MasterFileLocalServiceUtil.createMasterFile(CounterLocalServiceUtil.increment(MasterFile.class.getName()));
+				masterFile.setMasterTypeId(stateType);
+				masterFile.setMasterFileName(state.getStateName());
+				masterFile.setOldId(state.getStateId());
+				MasterFileLocalServiceUtil.updateMasterFile(masterFile);
+			}
+			
+		}
+	}
+	
 	
 	protected long[] filterRemoveUserIds(long libraryId,long[] userIds) throws SystemException
 	{
@@ -1101,7 +1933,32 @@ public class EisAdminPortlet extends MVCPortlet {
 				e.printStackTrace();
 			}
         }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_EIS_INFO_BOX_TEMPLATE)) 
+        {
+        	try {
+				serveInfoBoxTemplate(request,response);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
     }
+	
+	private void serveInfoBoxTemplate(ResourceRequest request, ResourceResponse response) throws IOException, PortalException, SystemException
+	{
+		long templateId = ParamUtil.getLong(request, "templateId");
+		Config template = ConfigLocalServiceUtil.getConfig(templateId);
+		if (Validator.isNotNull(template))
+		{
+
+			PrintWriter out = response.getWriter();
+			//out.print(jsonArray.toString());
+			out.print(template.getValue());
+			
+		}
+	}
 	
 	private void serveKpiEntry(ResourceRequest request, ResourceResponse response) throws IOException, PortletException, SystemException
 	{
@@ -1142,11 +1999,13 @@ public class EisAdminPortlet extends MVCPortlet {
         
         long stateId = ParamUtil.getLong(request, "stateId");
          
-        SearchContainer<Library> libraryListSearchContainer = new SearchContainer<Library>(
+        SearchContainer<MasterFile> libraryListSearchContainer = new SearchContainer<MasterFile>(
         		request, null, null, "cur", 1, 20,
                 iteratorURL, null, "No Library found.");
         
-        List<Library> libraries = LibraryLocalServiceUtil.findByState(stateId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+        long libraryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+        
+        List<MasterFile> libraries = MasterFileLocalServiceUtil.findByParent1(libraryTypeId,stateId);//, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
         int total = libraries.size();
         
         libraryListSearchContainer.setResults(libraries);
@@ -1156,6 +2015,10 @@ public class EisAdminPortlet extends MVCPortlet {
         
 	}
 	
+	public void runTester(ActionRequest actionRequest,ActionResponse actionResponse)
+	{
+		Tester.testNotification();
+	}
 	
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(EisAdminPortlet.class);

@@ -16,9 +16,53 @@
 				<column name="KEY_" />
 			</basic>
 			<basic name="value" />
+			<basic name="title" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactConsultationModelImpl">
+		<attributes>
+			<id name="factConsultationId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="consultationGroupId" />
+			<basic name="consultationCategoryId" />
+			<basic name="value" />
+			<basic name="totalSession" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactExpenseModelImpl">
+		<attributes>
+			<id name="factExpenseId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="entryType" />
+			<basic name="masterFileId" />
+			<basic name="amount" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.FactIrItemModelImpl">
@@ -354,6 +398,55 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.MasterFileModelImpl">
+		<attributes>
+			<id name="masterFileId" />
+			<basic name="masterTypeId" />
+			<basic name="parentId1" />
+			<basic name="parentId2" />
+			<basic name="masterFileName" />
+			<basic name="status1" />
+			<basic name="status2" />
+			<basic name="status3" />
+			<basic name="status4" />
+			<basic name="masterCode" />
+			<basic name="oldId" />
+			<basic name="note" />
+			<basic name="inActive" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.MasterTypeModelImpl">
+		<attributes>
+			<id name="masterTypeId" />
+			<basic name="masterTypeName" />
+			<basic name="status" />
+			<basic name="parentType" />
+			<basic name="pageLabel" />
+			<basic name="nameLabel" />
+			<basic name="hasParent1" />
+			<basic name="parentId1" />
+			<basic name="parentId2" />
+			<basic name="hasParent2" />
+			<basic name="parent1Label" />
+			<basic name="parent2Label" />
+			<basic name="hasStatus1" />
+			<basic name="hasStatus2" />
+			<basic name="hasStatus3" />
+			<basic name="hasStatus4" />
+			<basic name="status1Label" />
+			<basic name="status2Label" />
+			<basic name="status3Label" />
+			<basic name="status4Label" />
+			<basic name="hasCode" />
+			<basic name="codeLabel" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.MemberCategoryModelImpl">
 		<attributes>
 			<id name="memberCategoryId" />
@@ -574,6 +667,8 @@
 			<basic name="reportKey" />
 			<basic name="reportName" />
 			<basic name="reportTitle" />
+			<basic name="dataEntry" />
+			<basic name="dataName" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -652,6 +747,24 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.UserReportModelImpl">
+		<attributes>
+			<id name="userReportId" />
+			<basic name="userId" />
+			<basic name="libraryId" />
+			<basic name="reportId" />
+			<basic name="createdByUserId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.VisitorCategoryModelImpl">
 		<attributes>
 			<id name="visitorCategoryId" />
@@ -664,6 +777,14 @@
 	</mapped-superclass>
 	<entity class="com.idetronic.eis.model.impl.ConfigImpl" name="Config">
 		<table name="eis_Config" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactConsultationImpl" name="FactConsultation">
+		<table name="eis_FactConsultation" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactExpenseImpl" name="FactExpense">
+		<table name="eis_FactExpense" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactIrItemImpl" name="FactIrItem">
@@ -742,6 +863,14 @@
 		<table name="eis_Loan" />
 		<attributes />
 	</entity>
+	<entity class="com.idetronic.eis.model.impl.MasterFileImpl" name="MasterFile">
+		<table name="eis_MasterFile" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.MasterTypeImpl" name="MasterType">
+		<table name="eis_MasterType" />
+		<attributes />
+	</entity>
 	<entity class="com.idetronic.eis.model.impl.MemberCategoryImpl" name="MemberCategory">
 		<table name="eis_MemberCategory" />
 		<attributes />
@@ -792,6 +921,10 @@
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.UserLibraryImpl" name="UserLibrary">
 		<table name="eis_UserLibrary" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.UserReportImpl" name="UserReport">
+		<table name="eis_UserReport" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.VisitorCategoryImpl" name="VisitorCategory">

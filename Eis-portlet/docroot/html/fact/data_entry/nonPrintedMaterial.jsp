@@ -5,9 +5,9 @@
 		
 		for (cur = 0; cur < rowSize + extra; cur++)
 		{
-			ItemType item = items.get(cur);
-			String volumeName = item.getItemTypeId() + "-volume"; 
-			String titleName = item.getItemTypeId() + "-title"; 
+			MasterFile item = items.get(cur);
+			String volumeName = item.getMasterFileId() + "-volume"; 
+			String titleName = item.getMasterFileId() + "-title"; 
 			
 			
 	 
@@ -16,7 +16,7 @@
 		
 		<aui:layout cssClass="item-data-cont ">
 			<aui:row cssClass="item-title-cont">
-				<span class="item-title"><%= item.getItemTypeName() %></span>
+				<span class="item-title"><%= item.getMasterFileName() %></span>
 			</aui:row>
 			<aui:row>
 				<div class="data-cont">
@@ -46,15 +46,15 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							ItemType item = items.get(cur);
-							String volumeName = item.getItemTypeId() + "-volume"; 
-							String titleName = item.getItemTypeId() + "-title"; 
+							MasterFile item = items.get(cur);
+							String volumeName = item.getMasterFileId() + "-volume"; 
+							String titleName = item.getMasterFileId() + "-title"; 
 
 							i++;
 					%>
 						<aui:layout cssClass="item-data-cont ">
 							<aui:row cssClass="item-title-cont">
-								<span class="item-title"><%= item.getItemTypeName() %></span>
+								<span class="item-title"><%= item.getMasterFileName() %></span>
 							</aui:row>
 							<aui:row>
 								<div class="data-cont">
@@ -85,16 +85,16 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							ItemType item = items.get(cur);
-							String volumeName = item.getItemTypeId() + "-volume"; 
-							String titleName = item.getItemTypeId() + "-title"; 
+							MasterFile item = items.get(cur);
+							String volumeName = item.getMasterFileId() + "-volume"; 
+							String titleName = item.getMasterFileId() + "-title"; 
 
 							i++;
 					%>
 						
 						<aui:layout cssClass="item-data-cont ">
 							<aui:row cssClass="item-title-cont ">
-								<span class="item-title"><%= item.getItemTypeName() %></span>
+								<span class="item-title"><%= item.getMasterFileName() %></span>
 							</aui:row>
 							<aui:row>
 								<div class="data-cont">

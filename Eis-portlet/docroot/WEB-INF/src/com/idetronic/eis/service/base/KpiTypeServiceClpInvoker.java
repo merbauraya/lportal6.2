@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class KpiTypeServiceClpInvoker {
 	public KpiTypeServiceClpInvoker() {
-		_methodName222 = "getBeanIdentifier";
+		_methodName256 = "getBeanIdentifier";
 
-		_methodParameterTypes222 = new String[] {  };
+		_methodParameterTypes256 = new String[] {  };
 
-		_methodName223 = "setBeanIdentifier";
+		_methodName257 = "setBeanIdentifier";
 
-		_methodParameterTypes223 = new String[] { "java.lang.String" };
+		_methodParameterTypes257 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName222.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes222, parameterTypes)) {
+		if (_methodName256.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes256, parameterTypes)) {
 			return KpiTypeServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName223.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes223, parameterTypes)) {
+		if (_methodName257.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes257, parameterTypes)) {
 			KpiTypeServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class KpiTypeServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName222;
-	private String[] _methodParameterTypes222;
-	private String _methodName223;
-	private String[] _methodParameterTypes223;
+	private String _methodName256;
+	private String[] _methodParameterTypes256;
+	private String _methodName257;
+	private String[] _methodParameterTypes257;
 }

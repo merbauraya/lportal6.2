@@ -1,5 +1,46 @@
 <%@ include file="/html/init.jsp" %>
 
+<%
+	List<Config> kpiSettings = ConfigLocalServiceUtil.findWithKeyWildcard(EisUtil.KEY_KPI_SETTING_RANGE,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+	int[] rowIndexes = null;
+	
+	
+	String rowIndexesParam = ParamUtil.getString(request, "rowIndexes");
+	
+	
+	if (kpiSettings.size() == 0)
+	{
+		kpiSettings = new ArrayList<Config>();
+		rowIndexes = new int[] {0};
+	} else
+	{
+		rowIndexes = new int[kpiSettings.size()];
+		for (int i = 0; i < kpiSettings.size(); i++)
+		{
+			rowIndexes[i] = i;
+		}
+		
+	}
+	
+	if (kpiSettings.isEmpty())
+	{
+		kpiSettings = new ArrayList<Config>();
+		kpiSettings.add(new ConfigImpl());
+		rowIndexes = new int[] {0};
+	}
+	if (rowIndexes == null)
+	{
+		rowIndexes = new int[] {0};
+	}
+	
+	
+	
+	
+
+	
+
+
+%>
 <liferay-portlet:renderURL varImpl="iteratorURL">
        <portlet:param name="mvcPath" value="/html/admin/view.jsp" />
        <portlet:param name="navigation" value="kpiSetting" />
@@ -39,35 +80,92 @@ background : yellow;}
 
 <aui:form action="<%= editURL %>" name="fm">
 	<div id="auto-fields-container">
+		<%
+			for (int i = 0; i < rowIndexes.length; i++)
+			{
+				int rowIndex = rowIndexes[i];
+				Config kpiSetting = kpiSettings.get(i);
+				String setting = kpiSetting.getValue();
+				
+				String[] settingArray = null;
+				if (Validator.isBlank(setting))
+				{
+					settingArray = new String[] {"","",""};
+				} else
+				{
+					settingArray = setting.split(",");
+				}
+			
+				
+				String lowRange = settingArray[0];
+				String highRange = settingArray[1];
+				String color = settingArray[2];
+				String classSelected = "icon-sign-blank";
+				
+				
+				
+			
+		
+		%>
 		<aui:fieldset>
 			<div class="lfr-form-row lfr-form-row-inline">
 				<div class="row-fields" style="display: flex;">
 		
-					<aui:input label="low-range" name="lowRange1" />
-					<aui:input label="high-range" name="highRange1"  />	
+					<aui:input label="low-range" name='<%="lowRange" + rowIndex %>' value = "<%= lowRange %>"/>
+					<aui:input label="high-range" name='<%= "highRange" + rowIndex %>'  value="<%= highRange %>"/>	
 					
 					
 	                
 					<div class="control-group colorSelectorGroup">
-						<aui:input type="hidden" name="kpiColor1" cssClass="colorValue"/>
+						<aui:input type="hidden" name='<%= "kpiColor" + rowIndex %>' cssClass="colorValue" value="<%= color %>"/>
 						<label class="control-label">Color</label>
-						<a href="#" class="kpiRed" class="kpiColorSelector">
-							<i class="red colorSelector icon-sign-blank icon-check"></i>
+						<a href="#" kpiColor="red" class="kpiColorSelector">
+							<%
+								if (color.equalsIgnoreCase("red"))
+								{
+									classSelected = "icon-check colorSelected";
+								}
+							%>
+							<i class='<%= "red colorSelector " + classSelected %>'></i>
 						</a>
-						<a href="#" class="kpiYellow" class="kpiColorSelector">
-							<i class="yellow colorSelector icon-sign-blank"></i>
+						<a href="#" kpiColor="yellow" class="kpiColorSelector">
+							<%
+							classSelected = "icon-sign-blank";
+								if (color.equalsIgnoreCase("yellow"))
+								{
+									classSelected = "icon-check colorSelected";
+								}
+							%>
+							<i class='<%= "yellow colorSelector " + classSelected %>'></i>
 						</a>
-						<a href="#" class="kpiGreen" class="kpiColorSelector">
-							<i class="green colorSelector icon-sign-blank"></i>
+						<a href="#" kpiColor="green" class="kpiColorSelector">
+							<%
+							classSelected = "icon-sign-blank";
+								if (color.equalsIgnoreCase("green"))
+								{
+									classSelected = "icon-check colorSelected";
+								}
+							%>
+							<i class='<%= "green colorSelector " + classSelected %>'></i>
 						</a>
-						<a href="#" class="kpiBlue" class="kpiColorSelector">
-							<i class="blue colorSelector icon-sign-blank"></i>
+						<a href="#" kpiColor="blue" class="kpiColorSelector">
+							<%
+							classSelected = "icon-sign-blank";
+								if (color.equalsIgnoreCase("blue"))
+								{
+									classSelected = "icon-check colorSelected";
+								}
+							%>
+							<i class='<%= "blue colorSelector " + classSelected %>'></i>
 						</a>
 					</div>
 				
 				</div>
 			</div>
 		</aui:fieldset>
+		<%
+			}
+		%>
 		
 	</div>
  
@@ -101,7 +199,7 @@ new Liferay.AutoFields({
 		var inp = parent.one('.colorValue');
 		
 		
-		inp.set('value',this.attr('class'));
+		inp.set('value',this.attr('kpiColor'));
 		
 		var i = parent.all('i');
 		

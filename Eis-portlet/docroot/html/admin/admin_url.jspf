@@ -1,0 +1,128 @@
+<portlet:renderURL var="manageUserLibraryURL">
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="userLibrary" />
+</portlet:renderURL>
+
+
+
+
+<portlet:renderURL var="configURL">
+	
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="config" />
+</portlet:renderURL>
+
+<portlet:renderURL var="emailNotificationURL">
+	
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="emailNotification" />
+</portlet:renderURL>
+<portlet:renderURL var="reportURL">
+	
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="report" />
+</portlet:renderURL>
+
+<portlet:renderURL var="KpiTypeURL">
+	
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="kpiType" />
+</portlet:renderURL>
+<portlet:renderURL var="KpiSettingURL">
+	
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="kpiSetting" />
+</portlet:renderURL>
+<portlet:renderURL var="KpiEntryURL">
+	
+	
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="kpiEntry" />
+</portlet:renderURL>
+ 	<portlet:renderURL var="propertyURL">
+	
+	
+			<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+			<portlet:param name="navigation" value="master-file-property" />
+			
+		</portlet:renderURL>
+       	
+
+    
+    	
+       	
+       	
+      
+       	
+      
+       	
+       	
+       	
+       	
+       
+       	
+       	<%
+       		PortletURL masterURL = renderResponse.createRenderURL();
+       		masterURL.setParameter("mvcPath","/html/admin/view.jsp");
+       		masterURL.setParameter("navigation","masterFile");
+
+       	
+       	%>
+       	
+      
+       	
+       	
+       	
+       	<portlet:renderURL var="masterTypeURL">
+	
+	
+			<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+			<portlet:param name="navigation" value="masterType" />
+			
+		</portlet:renderURL>
+		
+       	
+       	
+       	
+       	<%
+       		List<MasterType> masterTypes = MasterTypeLocalServiceUtil.getMasterTypes(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+       		List<String[]> masterList = new ArrayList<String[]>();
+       		for (MasterType masterType : masterTypes)
+       		{
+       
+       %>
+       		<portlet:renderURL var="masterFileURL">
+	
+	
+				<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+				<portlet:param name="navigation" value="masterFile" />
+				<portlet:param name="masterTypeId" value="<%=  String.valueOf(masterType.getMasterTypeId())	 %>" />
+			
+			
+			
+		</portlet:renderURL>
+			
+		
+       	<%
+       		String[] link = {masterFileURL,masterType.getPageLabel()};
+       			masterList.add(link);
+       		}
+       	%>
+       	
+       	
+         			
+      
+       		
+       		
+       		
+       			
+       		
+       			
+       			
+       			

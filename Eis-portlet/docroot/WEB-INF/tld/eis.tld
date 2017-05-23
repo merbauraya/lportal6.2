@@ -129,6 +129,43 @@
 			<type>boolean</type>
 		</attribute>
 		
+		
+	</tag>
+	<tag>
+		<name>library-selector2</name>
+		<tag-class>com.idetronic.eis.taglib.LibrarySelector2Tag</tag-class>  
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>adminAllowAll</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>addAllOption</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>masterTypeId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>long</type>
+			
+		</attribute>
+		
 	</tag>
 	
 	<tag>

@@ -7,6 +7,7 @@ import com.idetronic.eis.model.FactPrintedMaterial;
 import com.idetronic.eis.model.impl.FactNonPrintedMaterialImpl;
 import com.idetronic.eis.model.impl.FactPrintedMaterialImpl;
 import com.idetronic.eis.model.impl.ItemTypeImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -29,7 +30,7 @@ implements FactNonPrintedMaterialFinder
 	
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
-	        q.addEntity("Fact", FactPrintedMaterialImpl.class);
+	        q.addEntity("Fact", FactNonPrintedMaterialImpl.class);
 	
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);
@@ -101,7 +102,7 @@ implements FactNonPrintedMaterialFinder
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactNonPrintedMaterial", FactNonPrintedMaterialImpl.class); 
-	        q.addEntity("ItemType", ItemTypeImpl.class);
+	        q.addEntity("ItemType", MasterFileImpl.class);
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

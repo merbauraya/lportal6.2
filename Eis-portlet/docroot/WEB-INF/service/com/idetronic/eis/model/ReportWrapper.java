@@ -52,6 +52,8 @@ public class ReportWrapper implements Report, ModelWrapper<Report> {
 		attributes.put("reportKey", getReportKey());
 		attributes.put("reportName", getReportName());
 		attributes.put("reportTitle", getReportTitle());
+		attributes.put("dataEntry", getDataEntry());
+		attributes.put("dataName", getDataName());
 
 		return attributes;
 	}
@@ -80,6 +82,18 @@ public class ReportWrapper implements Report, ModelWrapper<Report> {
 
 		if (reportTitle != null) {
 			setReportTitle(reportTitle);
+		}
+
+		Boolean dataEntry = (Boolean)attributes.get("dataEntry");
+
+		if (dataEntry != null) {
+			setDataEntry(dataEntry);
+		}
+
+		String dataName = (String)attributes.get("dataName");
+
+		if (dataName != null) {
+			setDataName(dataName);
 		}
 	}
 
@@ -181,6 +195,56 @@ public class ReportWrapper implements Report, ModelWrapper<Report> {
 	@Override
 	public void setReportTitle(java.lang.String reportTitle) {
 		_report.setReportTitle(reportTitle);
+	}
+
+	/**
+	* Returns the data entry of this report.
+	*
+	* @return the data entry of this report
+	*/
+	@Override
+	public boolean getDataEntry() {
+		return _report.getDataEntry();
+	}
+
+	/**
+	* Returns <code>true</code> if this report is data entry.
+	*
+	* @return <code>true</code> if this report is data entry; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDataEntry() {
+		return _report.isDataEntry();
+	}
+
+	/**
+	* Sets whether this report is data entry.
+	*
+	* @param dataEntry the data entry of this report
+	*/
+	@Override
+	public void setDataEntry(boolean dataEntry) {
+		_report.setDataEntry(dataEntry);
+	}
+
+	/**
+	* Returns the data name of this report.
+	*
+	* @return the data name of this report
+	*/
+	@Override
+	public java.lang.String getDataName() {
+		return _report.getDataName();
+	}
+
+	/**
+	* Sets the data name of this report.
+	*
+	* @param dataName the data name of this report
+	*/
+	@Override
+	public void setDataName(java.lang.String dataName) {
+		_report.setDataName(dataName);
 	}
 
 	@Override

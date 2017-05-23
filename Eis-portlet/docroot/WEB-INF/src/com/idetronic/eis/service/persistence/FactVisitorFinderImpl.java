@@ -5,6 +5,7 @@ import java.util.List;
 import com.idetronic.eis.model.FactVisitor;
 import com.idetronic.eis.model.impl.FactPostImpl;
 import com.idetronic.eis.model.impl.FactVisitorImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.idetronic.eis.model.impl.VisitorCategoryImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -70,7 +71,7 @@ implements FactVisitorFinder
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactVisitor", FactVisitorImpl.class); 
-	        q.addEntity("VisitorCategory", VisitorCategoryImpl.class);
+	        q.addEntity("MasterFile", MasterFileImpl.class);
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

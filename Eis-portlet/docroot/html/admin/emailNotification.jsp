@@ -1,4 +1,4 @@
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/init.jsp" %>  
 
 <%
 	String adminEmailFromName = LanguageUtil.get(locale,"sender-name");//PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);

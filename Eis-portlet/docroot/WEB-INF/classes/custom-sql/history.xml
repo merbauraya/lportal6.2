@@ -2,13 +2,14 @@
 <custom-sql>
 	<sql id="com.idetronic.eis.service.persistence.FactVisitorFinder.getHistoryByL_P">
 		SELECT 
-		    A.*,category.*
+		    A.*, category.*
 		FROM
 		    eis_FactVisitor A
 		        INNER JOIN
-		    eis_VisitorCategory AS category ON A.visitorCategoryId = category.visitorCategoryId
+		    eis_MasterFile AS category ON A.visitorCategoryId = category.masterFileId
 		WHERE
-		    A.libraryId = ? AND A.period = ?
+		    A.libraryId = ?
+		        AND A.period = ?
 	
 	</sql>
 	<sql id="com.idetronic.eis.service.persistence.FactSeatingFinder.getHistoryByL_P">
@@ -17,7 +18,7 @@
 		FROM
 		    eis_FactSeating A
 		        INNER JOIN
-		    eis_SeatingCategory AS category ON A.seatingCategoryId = category.seatingCategoryId
+		    eis_MasterFile AS category ON A.seatingCategoryId = category.masterFileId
 		WHERE
 		    A.libraryId = ? AND A.period = ?
 	
@@ -30,7 +31,7 @@
 		FROM
 		    eis_Loan A
 		        INNER JOIN
-		    eis_MemberCategory AS category ON A.memberCategoryId = category.memberCategoryId
+		    eis_MasterFile AS category ON A.memberCategoryId = category.masterFileId
 		WHERE
 		    A.libraryId = ? AND A.period = ?
 	
@@ -45,7 +46,7 @@
 		FROM
 		    eis_FactMembership A
 		        INNER JOIN
-		    eis_MemberCategory category ON A.membershipCategoryId = category.memberCategoryId
+		    eis_MasterFile category ON A.membershipCategoryId = category.masterFileId
 		WHERE
 		    A.libraryId = ? AND A.period = ?
 		ORDER BY createDate	    
@@ -61,7 +62,7 @@
 		FROM
 		    eis_FactPrintedMaterial A
 		        INNER JOIN
-		    eis_ItemType itemType ON A.itemTypeId = itemType.itemTypeId
+		    eis_MasterFile itemType ON A.itemTypeId = itemType.masterFileId
 		WHERE
 		    A.libraryId = ? AND A.period = ?
 		ORDER BY dateCreated 
@@ -73,7 +74,7 @@
 		FROM
 		    eis_FactNonPrintedMaterial A
 		        INNER JOIN
-		    eis_ItemType itemType ON A.itemTypeId = itemType.itemTypeId
+		    eis_MasterFile itemType ON A.itemTypeId = itemType.masterFileId
 		WHERE
 		    A.libraryId = ? AND A.period = ?
 		ORDER BY dateCreated 
@@ -85,9 +86,9 @@
 		FROM
 		    eis_FactIrItem A
 		        INNER JOIN
-		    eis_ItemType itemType ON A.itemTypeId = itemType.itemTypeId
+		    eis_MasterFile itemType ON A.itemTypeId = itemType.masterFileId
 		        INNER JOIN
-		    eis_ItemMedium itemMedium ON A.itemMediumId = itemMedium.itemMediumId
+		    eis_MasterFile itemMedium ON A.itemMediumId = itemMedium.masterFileId
 		WHERE
 		    A.libraryId = ? AND A.period = ?
 		        AND facultyId = ?
@@ -99,12 +100,34 @@
 		FROM
 		    eis_FactPost A
 		        INNER JOIN
-		    eis_PostGrade grade ON A.postGradeId = grade.postGradeId
+		    eis_MasterFile grade ON A.postGradeId = grade.masterFileId
 		        INNER JOIN
-		    eis_PostCategory category ON grade.postCategoryId = category.postCategoryId
+		    eis_MasterFile category ON grade.parentId1 = category.masterFileId
 		WHERE
 		    libraryId = ? AND period = ?
 		ORDER BY createdDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactExpenseFinder.getHistoryByL_P">
+		SELECT 
+		    *
+		FROM
+		    eis_FactExpense A
+		        INNER JOIN
+		    eis_MasterFile mst ON A.masterFileId = mst.masterFileId
+		WHERE
+		    libraryId = ? AND period = ?
+ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactConsultationFinder.getHistoryByL_P">
+		SELECT 
+		    *
+		FROM
+		    eis_FactConsultation A
+		        INNER JOIN
+		    eis_MasterFile mst ON A.consultationCategoryId = mst.masterFileId
+		WHERE
+		    libraryId = ? AND period = ?
+		ORDER BY createDate
 	</sql>
 	
 </custom-sql>

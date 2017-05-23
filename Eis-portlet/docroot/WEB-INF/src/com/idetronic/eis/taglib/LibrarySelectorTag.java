@@ -12,7 +12,17 @@ public class LibrarySelectorTag extends IncludeTag{
 	private String m_name = "library";
 	private boolean m_AdminAllowAll = false;
 	private boolean m_addAllOption = false;
+	private long m_masterTypeId;
 	
+	
+	public void setMasterTypeId(long value)
+	{
+		m_masterTypeId = value;
+	}
+	public long getMasterTypeId()
+	{
+		return m_masterTypeId;
+	}
 	public void setAddAllOption(boolean value)
 	{
 		m_addAllOption = true;

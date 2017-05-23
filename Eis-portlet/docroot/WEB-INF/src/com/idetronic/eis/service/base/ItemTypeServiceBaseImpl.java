@@ -17,6 +17,10 @@ package com.idetronic.eis.service.base;
 import com.idetronic.eis.model.ItemType;
 import com.idetronic.eis.service.ItemTypeService;
 import com.idetronic.eis.service.persistence.ConfigPersistence;
+import com.idetronic.eis.service.persistence.FactConsultationFinder;
+import com.idetronic.eis.service.persistence.FactConsultationPersistence;
+import com.idetronic.eis.service.persistence.FactExpenseFinder;
+import com.idetronic.eis.service.persistence.FactExpensePersistence;
 import com.idetronic.eis.service.persistence.FactIrItemFinder;
 import com.idetronic.eis.service.persistence.FactIrItemPersistence;
 import com.idetronic.eis.service.persistence.FactIrSubmissionFinder;
@@ -46,6 +50,8 @@ import com.idetronic.eis.service.persistence.LibrarySeatingDepartmentPersistence
 import com.idetronic.eis.service.persistence.LibraryTypePersistence;
 import com.idetronic.eis.service.persistence.LoanFinder;
 import com.idetronic.eis.service.persistence.LoanPersistence;
+import com.idetronic.eis.service.persistence.MasterFilePersistence;
+import com.idetronic.eis.service.persistence.MasterTypePersistence;
 import com.idetronic.eis.service.persistence.MemberCategoryPersistence;
 import com.idetronic.eis.service.persistence.PostCategoryPersistence;
 import com.idetronic.eis.service.persistence.PostGradePersistence;
@@ -59,6 +65,7 @@ import com.idetronic.eis.service.persistence.SeatingCategoryPersistence;
 import com.idetronic.eis.service.persistence.SeatingDepartmentPersistence;
 import com.idetronic.eis.service.persistence.StatePersistence;
 import com.idetronic.eis.service.persistence.UserLibraryPersistence;
+import com.idetronic.eis.service.persistence.UserReportPersistence;
 import com.idetronic.eis.service.persistence.VisitorCategoryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -145,6 +152,157 @@ public abstract class ItemTypeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setConfigPersistence(ConfigPersistence configPersistence) {
 		this.configPersistence = configPersistence;
+	}
+
+	/**
+	 * Returns the fact consultation local service.
+	 *
+	 * @return the fact consultation local service
+	 */
+	public com.idetronic.eis.service.FactConsultationLocalService getFactConsultationLocalService() {
+		return factConsultationLocalService;
+	}
+
+	/**
+	 * Sets the fact consultation local service.
+	 *
+	 * @param factConsultationLocalService the fact consultation local service
+	 */
+	public void setFactConsultationLocalService(
+		com.idetronic.eis.service.FactConsultationLocalService factConsultationLocalService) {
+		this.factConsultationLocalService = factConsultationLocalService;
+	}
+
+	/**
+	 * Returns the fact consultation remote service.
+	 *
+	 * @return the fact consultation remote service
+	 */
+	public com.idetronic.eis.service.FactConsultationService getFactConsultationService() {
+		return factConsultationService;
+	}
+
+	/**
+	 * Sets the fact consultation remote service.
+	 *
+	 * @param factConsultationService the fact consultation remote service
+	 */
+	public void setFactConsultationService(
+		com.idetronic.eis.service.FactConsultationService factConsultationService) {
+		this.factConsultationService = factConsultationService;
+	}
+
+	/**
+	 * Returns the fact consultation persistence.
+	 *
+	 * @return the fact consultation persistence
+	 */
+	public FactConsultationPersistence getFactConsultationPersistence() {
+		return factConsultationPersistence;
+	}
+
+	/**
+	 * Sets the fact consultation persistence.
+	 *
+	 * @param factConsultationPersistence the fact consultation persistence
+	 */
+	public void setFactConsultationPersistence(
+		FactConsultationPersistence factConsultationPersistence) {
+		this.factConsultationPersistence = factConsultationPersistence;
+	}
+
+	/**
+	 * Returns the fact consultation finder.
+	 *
+	 * @return the fact consultation finder
+	 */
+	public FactConsultationFinder getFactConsultationFinder() {
+		return factConsultationFinder;
+	}
+
+	/**
+	 * Sets the fact consultation finder.
+	 *
+	 * @param factConsultationFinder the fact consultation finder
+	 */
+	public void setFactConsultationFinder(
+		FactConsultationFinder factConsultationFinder) {
+		this.factConsultationFinder = factConsultationFinder;
+	}
+
+	/**
+	 * Returns the fact expense local service.
+	 *
+	 * @return the fact expense local service
+	 */
+	public com.idetronic.eis.service.FactExpenseLocalService getFactExpenseLocalService() {
+		return factExpenseLocalService;
+	}
+
+	/**
+	 * Sets the fact expense local service.
+	 *
+	 * @param factExpenseLocalService the fact expense local service
+	 */
+	public void setFactExpenseLocalService(
+		com.idetronic.eis.service.FactExpenseLocalService factExpenseLocalService) {
+		this.factExpenseLocalService = factExpenseLocalService;
+	}
+
+	/**
+	 * Returns the fact expense remote service.
+	 *
+	 * @return the fact expense remote service
+	 */
+	public com.idetronic.eis.service.FactExpenseService getFactExpenseService() {
+		return factExpenseService;
+	}
+
+	/**
+	 * Sets the fact expense remote service.
+	 *
+	 * @param factExpenseService the fact expense remote service
+	 */
+	public void setFactExpenseService(
+		com.idetronic.eis.service.FactExpenseService factExpenseService) {
+		this.factExpenseService = factExpenseService;
+	}
+
+	/**
+	 * Returns the fact expense persistence.
+	 *
+	 * @return the fact expense persistence
+	 */
+	public FactExpensePersistence getFactExpensePersistence() {
+		return factExpensePersistence;
+	}
+
+	/**
+	 * Sets the fact expense persistence.
+	 *
+	 * @param factExpensePersistence the fact expense persistence
+	 */
+	public void setFactExpensePersistence(
+		FactExpensePersistence factExpensePersistence) {
+		this.factExpensePersistence = factExpensePersistence;
+	}
+
+	/**
+	 * Returns the fact expense finder.
+	 *
+	 * @return the fact expense finder
+	 */
+	public FactExpenseFinder getFactExpenseFinder() {
+		return factExpenseFinder;
+	}
+
+	/**
+	 * Sets the fact expense finder.
+	 *
+	 * @param factExpenseFinder the fact expense finder
+	 */
+	public void setFactExpenseFinder(FactExpenseFinder factExpenseFinder) {
+		this.factExpenseFinder = factExpenseFinder;
 	}
 
 	/**
@@ -1370,6 +1528,120 @@ public abstract class ItemTypeServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+	 * Returns the master file local service.
+	 *
+	 * @return the master file local service
+	 */
+	public com.idetronic.eis.service.MasterFileLocalService getMasterFileLocalService() {
+		return masterFileLocalService;
+	}
+
+	/**
+	 * Sets the master file local service.
+	 *
+	 * @param masterFileLocalService the master file local service
+	 */
+	public void setMasterFileLocalService(
+		com.idetronic.eis.service.MasterFileLocalService masterFileLocalService) {
+		this.masterFileLocalService = masterFileLocalService;
+	}
+
+	/**
+	 * Returns the master file remote service.
+	 *
+	 * @return the master file remote service
+	 */
+	public com.idetronic.eis.service.MasterFileService getMasterFileService() {
+		return masterFileService;
+	}
+
+	/**
+	 * Sets the master file remote service.
+	 *
+	 * @param masterFileService the master file remote service
+	 */
+	public void setMasterFileService(
+		com.idetronic.eis.service.MasterFileService masterFileService) {
+		this.masterFileService = masterFileService;
+	}
+
+	/**
+	 * Returns the master file persistence.
+	 *
+	 * @return the master file persistence
+	 */
+	public MasterFilePersistence getMasterFilePersistence() {
+		return masterFilePersistence;
+	}
+
+	/**
+	 * Sets the master file persistence.
+	 *
+	 * @param masterFilePersistence the master file persistence
+	 */
+	public void setMasterFilePersistence(
+		MasterFilePersistence masterFilePersistence) {
+		this.masterFilePersistence = masterFilePersistence;
+	}
+
+	/**
+	 * Returns the master type local service.
+	 *
+	 * @return the master type local service
+	 */
+	public com.idetronic.eis.service.MasterTypeLocalService getMasterTypeLocalService() {
+		return masterTypeLocalService;
+	}
+
+	/**
+	 * Sets the master type local service.
+	 *
+	 * @param masterTypeLocalService the master type local service
+	 */
+	public void setMasterTypeLocalService(
+		com.idetronic.eis.service.MasterTypeLocalService masterTypeLocalService) {
+		this.masterTypeLocalService = masterTypeLocalService;
+	}
+
+	/**
+	 * Returns the master type remote service.
+	 *
+	 * @return the master type remote service
+	 */
+	public com.idetronic.eis.service.MasterTypeService getMasterTypeService() {
+		return masterTypeService;
+	}
+
+	/**
+	 * Sets the master type remote service.
+	 *
+	 * @param masterTypeService the master type remote service
+	 */
+	public void setMasterTypeService(
+		com.idetronic.eis.service.MasterTypeService masterTypeService) {
+		this.masterTypeService = masterTypeService;
+	}
+
+	/**
+	 * Returns the master type persistence.
+	 *
+	 * @return the master type persistence
+	 */
+	public MasterTypePersistence getMasterTypePersistence() {
+		return masterTypePersistence;
+	}
+
+	/**
+	 * Sets the master type persistence.
+	 *
+	 * @param masterTypePersistence the master type persistence
+	 */
+	public void setMasterTypePersistence(
+		MasterTypePersistence masterTypePersistence) {
+		this.masterTypePersistence = masterTypePersistence;
+	}
+
+	/**
 	 * Returns the member category local service.
 	 *
 	 * @return the member category local service
@@ -2013,6 +2285,63 @@ public abstract class ItemTypeServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+	 * Returns the user report local service.
+	 *
+	 * @return the user report local service
+	 */
+	public com.idetronic.eis.service.UserReportLocalService getUserReportLocalService() {
+		return userReportLocalService;
+	}
+
+	/**
+	 * Sets the user report local service.
+	 *
+	 * @param userReportLocalService the user report local service
+	 */
+	public void setUserReportLocalService(
+		com.idetronic.eis.service.UserReportLocalService userReportLocalService) {
+		this.userReportLocalService = userReportLocalService;
+	}
+
+	/**
+	 * Returns the user report remote service.
+	 *
+	 * @return the user report remote service
+	 */
+	public com.idetronic.eis.service.UserReportService getUserReportService() {
+		return userReportService;
+	}
+
+	/**
+	 * Sets the user report remote service.
+	 *
+	 * @param userReportService the user report remote service
+	 */
+	public void setUserReportService(
+		com.idetronic.eis.service.UserReportService userReportService) {
+		this.userReportService = userReportService;
+	}
+
+	/**
+	 * Returns the user report persistence.
+	 *
+	 * @return the user report persistence
+	 */
+	public UserReportPersistence getUserReportPersistence() {
+		return userReportPersistence;
+	}
+
+	/**
+	 * Sets the user report persistence.
+	 *
+	 * @param userReportPersistence the user report persistence
+	 */
+	public void setUserReportPersistence(
+		UserReportPersistence userReportPersistence) {
+		this.userReportPersistence = userReportPersistence;
+	}
+
+	/**
 	 * Returns the visitor category local service.
 	 *
 	 * @return the visitor category local service
@@ -2246,6 +2575,22 @@ public abstract class ItemTypeServiceBaseImpl extends BaseServiceImpl
 	protected com.idetronic.eis.service.ConfigService configService;
 	@BeanReference(type = ConfigPersistence.class)
 	protected ConfigPersistence configPersistence;
+	@BeanReference(type = com.idetronic.eis.service.FactConsultationLocalService.class)
+	protected com.idetronic.eis.service.FactConsultationLocalService factConsultationLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactConsultationService.class)
+	protected com.idetronic.eis.service.FactConsultationService factConsultationService;
+	@BeanReference(type = FactConsultationPersistence.class)
+	protected FactConsultationPersistence factConsultationPersistence;
+	@BeanReference(type = FactConsultationFinder.class)
+	protected FactConsultationFinder factConsultationFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactExpenseLocalService.class)
+	protected com.idetronic.eis.service.FactExpenseLocalService factExpenseLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactExpenseService.class)
+	protected com.idetronic.eis.service.FactExpenseService factExpenseService;
+	@BeanReference(type = FactExpensePersistence.class)
+	protected FactExpensePersistence factExpensePersistence;
+	@BeanReference(type = FactExpenseFinder.class)
+	protected FactExpenseFinder factExpenseFinder;
 	@BeanReference(type = com.idetronic.eis.service.FactIrItemLocalService.class)
 	protected com.idetronic.eis.service.FactIrItemLocalService factIrItemLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactIrItemService.class)
@@ -2376,6 +2721,18 @@ public abstract class ItemTypeServiceBaseImpl extends BaseServiceImpl
 	protected LoanPersistence loanPersistence;
 	@BeanReference(type = LoanFinder.class)
 	protected LoanFinder loanFinder;
+	@BeanReference(type = com.idetronic.eis.service.MasterFileLocalService.class)
+	protected com.idetronic.eis.service.MasterFileLocalService masterFileLocalService;
+	@BeanReference(type = com.idetronic.eis.service.MasterFileService.class)
+	protected com.idetronic.eis.service.MasterFileService masterFileService;
+	@BeanReference(type = MasterFilePersistence.class)
+	protected MasterFilePersistence masterFilePersistence;
+	@BeanReference(type = com.idetronic.eis.service.MasterTypeLocalService.class)
+	protected com.idetronic.eis.service.MasterTypeLocalService masterTypeLocalService;
+	@BeanReference(type = com.idetronic.eis.service.MasterTypeService.class)
+	protected com.idetronic.eis.service.MasterTypeService masterTypeService;
+	@BeanReference(type = MasterTypePersistence.class)
+	protected MasterTypePersistence masterTypePersistence;
 	@BeanReference(type = com.idetronic.eis.service.MemberCategoryLocalService.class)
 	protected com.idetronic.eis.service.MemberCategoryLocalService memberCategoryLocalService;
 	@BeanReference(type = com.idetronic.eis.service.MemberCategoryService.class)
@@ -2444,6 +2801,12 @@ public abstract class ItemTypeServiceBaseImpl extends BaseServiceImpl
 	protected com.idetronic.eis.service.UserLibraryService userLibraryService;
 	@BeanReference(type = UserLibraryPersistence.class)
 	protected UserLibraryPersistence userLibraryPersistence;
+	@BeanReference(type = com.idetronic.eis.service.UserReportLocalService.class)
+	protected com.idetronic.eis.service.UserReportLocalService userReportLocalService;
+	@BeanReference(type = com.idetronic.eis.service.UserReportService.class)
+	protected com.idetronic.eis.service.UserReportService userReportService;
+	@BeanReference(type = UserReportPersistence.class)
+	protected UserReportPersistence userReportPersistence;
 	@BeanReference(type = com.idetronic.eis.service.VisitorCategoryLocalService.class)
 	protected com.idetronic.eis.service.VisitorCategoryLocalService visitorCategoryLocalService;
 	@BeanReference(type = com.idetronic.eis.service.VisitorCategoryService.class)

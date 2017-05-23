@@ -21,15 +21,23 @@ import java.util.List;
 
 import com.idetronic.eis.NoSuchUserLibraryException;
 import com.idetronic.eis.model.Library;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.UserLibrary;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
 import com.idetronic.eis.service.UserLibraryLocalServiceUtil;
 import com.idetronic.eis.service.base.UserLibraryLocalServiceBaseImpl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -57,18 +65,28 @@ public class UserLibraryLocalServiceImpl extends UserLibraryLocalServiceBaseImpl
 	
 	public UserLibrary add(long userId,long libraryId,ServiceContext serviceContext) throws SystemException 
 	{
-		long id = CounterLocalServiceUtil.increment(UserLibrary.class.getName());
+		UserLibrary userLibrary;
+		try {
+			userLibrary = userLibraryPersistence.findByuserLibrary(userId, libraryId);
+		} catch (NoSuchUserLibraryException e) {
+			long id = CounterLocalServiceUtil.increment(UserLibrary.class.getName());
+			
+			userLibrary = userLibraryPersistence.create(id);
+			
+			userLibrary.setLibraryId(libraryId);
+			userLibrary.setUserId(userId);
+			userLibrary.setCreatedByUserId(serviceContext.getUserId());
+			userLibrary.setCreateDate(new Date());
+			userLibrary.setCompanyId(serviceContext.getCompanyId());
+			userLibrary.setGroupId(serviceContext.getScopeGroupId());
+			userLibraryPersistence.update(userLibrary);
+		}
+		return userLibrary;
 		
-		UserLibrary userLibrary = userLibraryPersistence.create(id);
 		
-		userLibrary.setLibraryId(libraryId);
-		userLibrary.setUserId(userId);
-		userLibrary.setCreatedByUserId(serviceContext.getUserId());
-		userLibrary.setCreateDate(new Date());
-		userLibrary.setCompanyId(serviceContext.getCompanyId());
-		userLibrary.setGroupId(serviceContext.getScopeGroupId());
 		
-		return userLibraryPersistence.update(userLibrary);
+		
+		
 		
 	}
 	
@@ -82,9 +100,13 @@ public class UserLibraryLocalServiceImpl extends UserLibraryLocalServiceBaseImpl
 		}
 		
 	}
-	public void remove(long userId,long libraryId) throws NoSuchUserLibraryException, SystemException
+	public void remove(long userId,long libraryId) throws SystemException
 	{
-		userLibraryPersistence.removeByuserLibrary(userId, libraryId);
+		try {
+			userLibraryPersistence.removeByuserLibrary(userId, libraryId);
+		} catch (NoSuchUserLibraryException e) {
+			
+		}
 	}
 	
 	public List<UserLibrary> findByLibrary(long libraryId,int start,int end) throws SystemException
@@ -104,6 +126,33 @@ public class UserLibraryLocalServiceImpl extends UserLibraryLocalServiceBaseImpl
 		return (userLibrary != null);
 	}
 	
+	public void updateAssociationByUser(long userId,long[] addLibraryIds,long[] removeLibraryIds,ServiceContext serviceContext)
+	{
+		for (long libraryId: addLibraryIds)
+		{
+			try {
+				add(userId,libraryId,serviceContext);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		for (long libraryId : removeLibraryIds)
+		{
+			try {
+				remove(userId, libraryId);
+			
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 */
 	public void updateAssociation(long libraryId,long[] addUserIds,long[] removeUserId,ServiceContext serviceContext) 
 	{
 		for (long userId : addUserIds)
@@ -119,10 +168,7 @@ public class UserLibraryLocalServiceImpl extends UserLibraryLocalServiceBaseImpl
 		{
 			try {
 				remove(userId, libraryId);
-			} catch (NoSuchUserLibraryException e) {
-				// TODO Auto-generated catch block
-				continue;
-			} catch (SystemException se)
+			}  catch (SystemException se)
 			{
 				continue;
 			}
@@ -134,21 +180,44 @@ public class UserLibraryLocalServiceImpl extends UserLibraryLocalServiceBaseImpl
 	{
 		return userLibraryPersistence.countBylibrary(libraryId);
 	}
-	public List<Library> getLibraryByUser(long userId) throws SystemException
+	public List<MasterFile> getLibraryByUser2(long userId) throws SystemException
 	{
 		List<UserLibrary> userLibraries = userLibraryPersistence.findByuser(userId);
-		List<Library> libraries = new ArrayList<Library>(userLibraries.size());
+		List<MasterFile> libraries = new ArrayList<MasterFile>(userLibraries.size());
 		
 		for (UserLibrary userLibrary : userLibraries)
 		{
-			Library library = LibraryLocalServiceUtil.fetchLibrary(userLibrary.getLibraryId());
-			libraries.add(library);
+			MasterFile library =  MasterFileLocalServiceUtil.fetchMasterFile(userLibrary.getLibraryId());
+			if (!library.isInActive())
+			{
+				libraries.add(library);
+			}
 		}
 		
 		
 		
 		return libraries;
 
+	}
+	
+	public List<MasterFile> getLibraryByUser(long userId) throws SystemException
+	{
+		return getLibraryByUser2(userId);
+		/*
+		
+		List<UserLibrary> userLibraries = userLibraryPersistence.findByuser(userId);
+		List<MasterFile> libraries = new ArrayList<MasterFile>(userLibraries.size());
+		
+		for (UserLibrary userLibrary : userLibraries)
+		{
+			MasterFile library = LibraryLocalServiceUtil.fetchLibrary(userLibrary.getLibraryId());
+			libraries.add(library);
+		}
+		
+		
+		
+		return libraries;
+		*/
 	}
 	
 	public List<User> findByLibrary (long libraryId) throws SystemException
@@ -164,6 +233,16 @@ public class UserLibraryLocalServiceImpl extends UserLibraryLocalServiceBaseImpl
 		}
 		
 		return users;
+	}
+	
+	public List<Object> getDistinctUser() throws SystemException
+	{
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserLibrary.class);//, PortalClassLoaderUtil.getClassLoader());
+		Projection projection = ProjectionFactoryUtil.distinct(ProjectionFactoryUtil.property("userId"));
+		dynamicQuery.setProjection(projection);
+		List<Object> userList = userLibraryPersistence.findWithDynamicQuery(dynamicQuery);
+		return userList;
+
 	}
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(UserLibraryLocalServiceUtil.class.getName());

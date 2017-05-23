@@ -295,6 +295,12 @@ public class ConfigLocalServiceWrapper implements ConfigLocalService,
 	}
 
 	@Override
+	public long getKeyAsLong(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _configLocalService.getKeyAsLong(key);
+	}
+
+	@Override
 	public java.lang.String getByKeyAsString(java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _configLocalService.getByKeyAsString(key);
@@ -322,9 +328,15 @@ public class ConfigLocalServiceWrapper implements ConfigLocalService,
 	*/
 	@Override
 	public java.util.List<com.idetronic.eis.model.Config> findWithKeyWildcard(
-		java.lang.String keyWildCard)
+		java.lang.String keyWildCard, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _configLocalService.findWithKeyWildcard(keyWildCard);
+		return _configLocalService.findWithKeyWildcard(keyWildCard, start, end);
+	}
+
+	@Override
+	public int countByKeyWildCard(java.lang.String keyWildCard)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _configLocalService.countByKeyWildCard(keyWildCard);
 	}
 
 	/**

@@ -259,6 +259,10 @@ public interface ConfigLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getKeyAsLong(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getByKeyAsString(java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -278,6 +282,9 @@ public interface ConfigLocalService extends BaseLocalService,
 	* @throws SystemException
 	*/
 	public java.util.List<com.idetronic.eis.model.Config> findWithKeyWildcard(
-		java.lang.String keyWildCard)
+		java.lang.String keyWildCard, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByKeyWildCard(java.lang.String keyWildCard)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

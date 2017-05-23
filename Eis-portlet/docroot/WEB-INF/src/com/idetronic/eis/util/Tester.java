@@ -18,52 +18,57 @@ public class Tester {
 	{
 		int firstReminderDay;
 		int secondReminderDay;
+		int firstRemindarDayUntil;
+		int secondReminderDayUntil;
 		Calendar cal = Calendar.getInstance();
 		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 		Properties props;
 		
+		
+		
+
+		
+		
 		try {
+			boolean notificationEnabled = GetterUtil.getBoolean(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.KEY_CONFIG_ENABLE_EMAIL_NOTIFICATION),false);
+			if (!notificationEnabled)
+			{
+				return;
+			}
+			
 			props = ConfigLocalServiceUtil.getByKey(EisUtil.KEY_CONFIG);
-			firstReminderDay = GetterUtil.getInteger(props.get(EisUtil.CONFIG_REMINDER_DAY_1ST));
-			secondReminderDay = GetterUtil.getInteger(props.get(EisUtil.CONFIG_REMINDER_DAY_2ND));
-			boolean firstReminderSendContinuous = GetterUtil.getBoolean(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.KEY_CONFIG_REMINDER_1ST_SEND_CONTINUOUSLY),false);
-			boolean secondReminderSendContinuous = GetterUtil.getBoolean(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.KEY_CONFIG_REMINDER_2ND_SEND_CONTINUOUSLY),false);
-			LOGGER.info("dayOfMonth= "+dayOfMonth); 
+			int dataDueDay = GetterUtil.getInteger(props.get(EisUtil.CONFIG_DATA_DUE_DAY));
 			
-			if (firstReminderSendContinuous)
+			firstReminderDay = GetterUtil.getInteger(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.CONFIG_REMINDER_DAY_1ST));
+			secondReminderDay = GetterUtil.getInteger(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.CONFIG_REMINDER_DAY_2ND));
+			firstRemindarDayUntil = GetterUtil.getInteger(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.CONFIG_REMINDER_DAY_1ST_UNTIL));
+			secondReminderDayUntil = GetterUtil.getInteger(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.CONFIG_REMINDER_DAY_2ND_UNTIL));
+			
+			//boolean firstReminderSendContinuous = GetterUtil.getBoolean(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.KEY_CONFIG_REMINDER_1ST_SEND_CONTINUOUSLY),false);
+			//boolean secondReminderSendContinuous = GetterUtil.getBoolean(ConfigLocalServiceUtil.getByKeyAsString(EisUtil.KEY_CONFIG_REMINDER_2ND_SEND_CONTINUOUSLY),false);
+			 
+			
+			
+			
+			if (dayOfMonth >= firstReminderDay  && dayOfMonth <= firstRemindarDayUntil)
 			{
-
-				if (dayOfMonth >= firstReminderDay  && dayOfMonth < secondReminderDay)
-				{
-					LOGGER.info("first reminder,continious day="+ dayOfMonth);
-					ReminderNotification.checkFirstReminder();
-				}
+				LOGGER.info("EIS 1st Reminder check");
+				ReminderNotification.checkFirstReminder();
+			} else
+			{
+				LOGGER.info("exclude first notification");
+			}
 				
-			}else
+			
+			if (dayOfMonth >= secondReminderDay && dayOfMonth <= secondReminderDayUntil )
 			{
-				if (dayOfMonth == firstReminderDay)
-				{
-					LOGGER.info("first reminder,Non continious day="+ dayOfMonth);
-
-					ReminderNotification.checkFirstReminder();
-				}
+				LOGGER.info("EIS 2nd Reminder check");
+				ReminderNotification.checkSecondReminder();
+			} else
+			{
+				LOGGER.info("exclude 2md notification");
 			}
 			
-			if (secondReminderSendContinuous)
-			{
-				if (dayOfMonth  >= secondReminderDay)
-				{
-					LOGGER.info("2nd conti");
-					ReminderNotification.checkSecondReminder();
-
-				}
-			}else
-			{
-				if (dayOfMonth == secondReminderDay)
-				{
-					ReminderNotification.checkSecondReminder();
-				}
-			}
 			
 			
 			
@@ -78,8 +83,7 @@ public class Tester {
 		} catch (PortalException e) {
 			
 			e.printStackTrace();
-		}
-
+		}	
 
 		
 	

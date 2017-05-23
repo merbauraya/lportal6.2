@@ -7,13 +7,13 @@
 		
 			for (cur = 0; cur < rowSize + extra; cur++)
 			{
-				ItemType itemType = irTypes.get(cur); 
+				MasterFile itemType = irTypes.get(cur); 
 				for (int i = 0; i < mediums.size(); i++)
 				{
-					ItemMedium medium = mediums.get(i);
-					String volumeName = itemType.getItemTypeId()+"-" +medium.getItemMediumId() + "-volume"; 
-					String titleName = itemType.getItemTypeId()+"-" +medium.getItemMediumId() + "-title"; 
-					String title = itemType.getItemTypeName() + " / " + medium.getItemMediumName();
+					MasterFile medium = mediums.get(i);
+					String volumeName = itemType.getMasterFileId()+"-" +medium.getMasterFileId() + "-volume"; 
+					String titleName = itemType.getMasterFileId()+"-" +medium.getMasterFileId() + "-title"; 
+					String title = itemType.getMasterFileName() + " / " + medium.getMasterFileName();
 				
 						%>
 		<aui:layout cssClass="item-data-cont ">
@@ -52,13 +52,13 @@
 					<%
 						for (int i = 0; i < rowSize; cur++)
 						{
-							ItemType itemType = irTypes.get(cur);
-							for (ItemMedium medium : mediums)
+							MasterFile itemType = irTypes.get(cur);
+							for (MasterFile medium : mediums)
 							{
 								 
-								String volumeName = itemType.getItemTypeId()+"-" +medium.getItemMediumId() + "-volume"; 
-								String titleName = itemType.getItemTypeId()+"-" +medium.getItemMediumId() + "-title"; 
-								String title = itemType.getItemTypeName() + " / " + medium.getItemMediumName();
+								String volumeName = itemType.getMasterFileId()+"-" +medium.getMasterFileId() + "-volume"; 
+								String titleName = itemType.getMasterFileId()+"-" +medium.getMasterFileId() + "-title"; 
+								String title = itemType.getMasterFileName() + " / " + medium.getMasterFileName();
 								
 							
 					%>
@@ -97,12 +97,12 @@
 						
 						for (int i = 0 ; i < rowSize  ; cur++)
 						{
-							ItemType itemType = irTypes.get(cur);
-							for (ItemMedium medium : mediums)
+							MasterFile itemType = irTypes.get(cur);
+							for (MasterFile medium : mediums)
 								{
-									String volumeName = itemType.getItemTypeId()+"-" +medium.getItemMediumId() + "-volume"; 
-									String titleName = itemType.getItemTypeId()+"-" +medium.getItemMediumId() + "-title"; 
-									String title = itemType.getItemTypeName() + " / " + medium.getItemMediumName();
+									String volumeName = itemType.getMasterFileId()+"-" +medium.getMasterFileId() + "-volume"; 
+									String titleName = itemType.getMasterFileId()+"-" +medium.getMasterFileId() + "-title"; 
+									String title = itemType.getMasterFileName() + " / " + medium.getMasterFileName();
 
 
 							

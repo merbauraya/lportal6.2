@@ -6,6 +6,7 @@ import com.idetronic.eis.model.FactMembership;
 import com.idetronic.eis.model.Loan;
 import com.idetronic.eis.model.impl.FactMembershipImpl;
 import com.idetronic.eis.model.impl.LoanImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.idetronic.eis.model.impl.MemberCategoryImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -69,7 +70,7 @@ implements FactMembershipFinder
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactMembership", FactMembershipImpl.class); 
-	        q.addEntity("MemberCategory", MemberCategoryImpl.class);
+	        q.addEntity("MemberCategory", MasterFileImpl.class);
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

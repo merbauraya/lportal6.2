@@ -21,9 +21,11 @@ import java.util.List;
 import com.idetronic.eis.model.FactSeating;
 import com.idetronic.eis.model.FactVisitor;
 import com.idetronic.eis.model.Library;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.SeatingCategory;
 import com.idetronic.eis.model.VisitorCategory;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
 import com.idetronic.eis.service.base.FactSeatingLocalServiceBaseImpl;
 import com.idetronic.eis.service.persistence.FactSeatingFinderUtil;
 import com.idetronic.eis.service.persistence.FactVisitorFinderUtil;
@@ -75,9 +77,9 @@ public class FactSeatingLocalServiceImpl extends FactSeatingLocalServiceBaseImpl
 		factSeating.setCompanyId(serviceContext.getCompanyId());
 		factSeating.setGroupId(serviceContext.getScopeGroupId());
 		
-		Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
-		factSeating.setStateId(library.getStateId());
-		factSeating.setLibraryTypeId(library.getLibraryTypeId());
+		MasterFile library = MasterFileLocalServiceUtil.fetchMasterFile(libraryId);
+		factSeating.setStateId(library.getParentId1());
+		factSeating.setLibraryTypeId(library.getParentId2());
 		
 		
 		
@@ -126,7 +128,7 @@ public class FactSeatingLocalServiceImpl extends FactSeatingLocalServiceBaseImpl
 		List list = FactSeatingFinderUtil.getHistory(libraryId, period);
 		
 		FactSeating fact = null;
-		SeatingCategory category = null;
+		MasterFile category = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -136,7 +138,7 @@ public class FactSeatingLocalServiceImpl extends FactSeatingLocalServiceBaseImpl
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(FactSeating)arrayobject[0];
-			category = (SeatingCategory)arrayobject[1];
+			category = (MasterFile)arrayobject[1];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -145,7 +147,7 @@ public class FactSeatingLocalServiceImpl extends FactSeatingLocalServiceBaseImpl
 			
 			
 			jsonObject.put("Bil", i);
-			jsonObject.put("Kategori", category.getSeatingCategoryName());
+			jsonObject.put("Kategori", category.getMasterFileName());
 			jsonObject.put("Kapasiti", fact.getCapacity());
 			
 			jsonObject.put("Pengguna", fact.getUserName());

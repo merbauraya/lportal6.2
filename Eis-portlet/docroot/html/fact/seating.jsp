@@ -3,8 +3,13 @@
 
 <%
 	
-	List<SeatingDepartment> departments = SeatingDepartmentLocalServiceUtil.getSeatingDepartments(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	List<SeatingCategory> categories = SeatingCategoryLocalServiceUtil.getSeatingCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	long seatingDeptTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_DEPARTMENT);
+	List<MasterFile> departments = MasterFileLocalServiceUtil.findByMasterType(seatingDeptTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+	//List<SeatingDepartment> departments = SeatingDepartmentLocalServiceUtil.getSeatingDepartments(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	long seatingCategoryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_SEATING_CATEGORY);
+	//List<MasterFile> categories = SeatingCategoryLocalServiceUtil.getSeatingCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	List<MasterFile> categories = MasterFileLocalServiceUtil.findByMasterType(seatingCategoryTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 	int rowCount = categories.size();
 	int rowSize = (int)Math.floor(rowCount/3);
@@ -38,7 +43,7 @@
 	<aui:input name="redirect" value="<%= currentURL %>" type="hidden"></aui:input>
 	<aui:row>
 		<aui:col span="6">
-			<eis:library-selector
+			<eis:library-selector2
 					adminAllowAll="<%= mLibraryAdminAllowAll %>"
 				
 				/>

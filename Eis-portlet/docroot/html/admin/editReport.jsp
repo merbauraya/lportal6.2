@@ -37,7 +37,7 @@
 		<aui:input name="reportKey"  />
 		<aui:input name="reportTitle" label="report-display-title" cssClass="fullWidth"/>
 		
-		
+		<aui:input name="dataEntry" label='has-data-entry'/>
 		
 		
 		

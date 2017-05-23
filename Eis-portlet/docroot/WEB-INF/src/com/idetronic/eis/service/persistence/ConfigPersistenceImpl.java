@@ -613,6 +613,7 @@ public class ConfigPersistenceImpl extends BasePersistenceImpl<Config>
 		configImpl.setId(config.getId());
 		configImpl.setKey(config.getKey());
 		configImpl.setValue(config.getValue());
+		configImpl.setTitle(config.getTitle());
 
 		return configImpl;
 	}

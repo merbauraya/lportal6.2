@@ -20,8 +20,10 @@ import java.util.List;
 
 import com.idetronic.eis.model.FactVisitor;
 import com.idetronic.eis.model.Library;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.VisitorCategory;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
 import com.idetronic.eis.service.base.FactVisitorLocalServiceBaseImpl;
 import com.idetronic.eis.service.persistence.FactVisitorFinderUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -70,9 +72,9 @@ public class FactVisitorLocalServiceImpl extends FactVisitorLocalServiceBaseImpl
 		factVisitor.setCreatedByUserName(user.getFullName());
 		factVisitor.setCreatedDate(new Date());
 		
-		Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
-		factVisitor.setStateId(library.getStateId());
-		factVisitor.setLibraryTypeId(library.getLibraryTypeId());
+		MasterFile library = MasterFileLocalServiceUtil.fetchMasterFile(libraryId);
+		factVisitor.setStateId(library.getParentId1());
+		factVisitor.setLibraryTypeId(library.getParentId2());
 		
 		return factVisitorPersistence.update(factVisitor);
 		
@@ -108,7 +110,7 @@ public class FactVisitorLocalServiceImpl extends FactVisitorLocalServiceBaseImpl
 		List list = FactVisitorFinderUtil.getHistory(libraryId, period);
 		
 		FactVisitor fact = null;
-		VisitorCategory category = null;
+		MasterFile category = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -118,7 +120,7 @@ public class FactVisitorLocalServiceImpl extends FactVisitorLocalServiceBaseImpl
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(FactVisitor)arrayobject[0];
-			category = (VisitorCategory)arrayobject[1];
+			category = (MasterFile)arrayobject[1];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -128,7 +130,7 @@ public class FactVisitorLocalServiceImpl extends FactVisitorLocalServiceBaseImpl
 			
 			jsonObject.put("Bil", i);
 			jsonObject.put("Nilai", fact.getValue());
-			jsonObject.put("Kategori", category.getVisitorCategoryName());
+			jsonObject.put("Kategori", category.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getCreatedByUserName());
 			
 			String pattern = "dd/MM/yyyy";

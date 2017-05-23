@@ -143,24 +143,39 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 
 		_methodParameterTypes24 = new String[] { "long", "long" };
 
-		_methodName25 = "updateAssociation";
+		_methodName25 = "updateAssociationByUser";
 
 		_methodParameterTypes25 = new String[] {
 				"long", "long[][]", "long[][]",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName26 = "countByLibrary";
+		_methodName26 = "updateAssociation";
 
-		_methodParameterTypes26 = new String[] { "long" };
+		_methodParameterTypes26 = new String[] {
+				"long", "long[][]", "long[][]",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName27 = "getLibraryByUser";
+		_methodName27 = "countByLibrary";
 
 		_methodParameterTypes27 = new String[] { "long" };
 
-		_methodName28 = "findByLibrary";
+		_methodName28 = "getLibraryByUser2";
 
 		_methodParameterTypes28 = new String[] { "long" };
+
+		_methodName29 = "getLibraryByUser";
+
+		_methodParameterTypes29 = new String[] { "long" };
+
+		_methodName30 = "findByLibrary";
+
+		_methodParameterTypes30 = new String[] { "long" };
+
+		_methodName31 = "getDistinctUser";
+
+		_methodParameterTypes31 = new String[] {  };
 	}
 
 	@Override
@@ -783,18 +798,13 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 
 	@Override
 	public void remove(long userId, long libraryId)
-		throws com.idetronic.eis.NoSuchUserLibraryException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			_invokableLocalService.invokeMethod(_methodName21,
 				_methodParameterTypes21, new Object[] { userId, libraryId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.idetronic.eis.NoSuchUserLibraryException) {
-				throw (com.idetronic.eis.NoSuchUserLibraryException)t;
-			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
@@ -898,12 +908,42 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 	}
 
 	@Override
-	public void updateAssociation(long libraryId, long[] addUserIds,
-		long[] removeUserId,
+	public void updateAssociationByUser(long userId, long[] addLibraryIds,
+		long[] removeLibraryIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableLocalService.invokeMethod(_methodName25,
 				_methodParameterTypes25,
+				new Object[] {
+					userId,
+					
+				ClpSerializer.translateInput(addLibraryIds),
+					
+				ClpSerializer.translateInput(removeLibraryIds),
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void updateAssociation(long libraryId, long[] addUserIds,
+		long[] removeUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableLocalService.invokeMethod(_methodName26,
+				_methodParameterTypes26,
 				new Object[] {
 					libraryId,
 					
@@ -933,8 +973,8 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26, new Object[] { libraryId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27, new Object[] { libraryId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -956,13 +996,13 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 	}
 
 	@Override
-	public java.util.List<com.idetronic.eis.model.Library> getLibraryByUser(
+	public java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser2(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27, new Object[] { userId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28, new Object[] { userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -980,7 +1020,35 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 			}
 		}
 
-		return (java.util.List<com.idetronic.eis.model.Library>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.idetronic.eis.model.MasterFile>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] { userId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.idetronic.eis.model.MasterFile>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -990,8 +1058,8 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28, new Object[] { libraryId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30, new Object[] { libraryId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1010,6 +1078,34 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 		}
 
 		return (java.util.List<com.liferay.portal.model.User>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<java.lang.Object> getDistinctUser()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<java.lang.Object>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -1069,4 +1165,10 @@ public class UserLibraryLocalServiceClp implements UserLibraryLocalService {
 	private String[] _methodParameterTypes27;
 	private String _methodName28;
 	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
 }

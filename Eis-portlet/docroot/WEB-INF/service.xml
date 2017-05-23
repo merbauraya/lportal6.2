@@ -14,6 +14,7 @@
 		
 	</entity>
 	
+	
 	<entity name="LibraryType" local-service="true" remote-service="false">
 		<column name="libraryTypeId" type="long" primary="true" />
 		<column name="libraryTypeCode" type="String"/>
@@ -55,10 +56,7 @@
 			<order-column name="createDate" />
 		</order>
 
-		<!-- Finder methods -->
-		<finder name="libraryCode" return-type="Library" unique="true">
-            <finder-column name="libraryCode" />
-        </finder>
+		
         <finder name="libraryName" return-type="Library" unique="true">
             <finder-column name="libraryName" />
         </finder>
@@ -603,6 +601,7 @@
 		<column name="id" type="long" primary="true"></column>
 		<column name="key" type="String"></column>
 		<column name="value" type="String"></column>
+		<column name="title" type="String"></column>
 		
 		<finder return-type="Config" name="Key" unique="true">
 			<finder-column name="key"></finder-column>
@@ -658,12 +657,181 @@
 		<column name="reportKey" type="String"></column>
 		<column name="reportName" type="String"></column>
 		<column name="reportTitle" type="String"></column>
-		
+		<column name="dataEntry" type="boolean"></column>
+		<column name="dataName" type="String"></column>
 		<finder return-type="Report" name="Key" unique="true">
 			<finder-column name="reportKey"></finder-column>
 		</finder>
+		<finder return-type="Collection" name="dataEntry">
+			<finder-column name="dataEntry"></finder-column>
+		</finder>
 	</entity>
-	
-	
+	<entity name="FactExpense" local-service="true">
+		<column name="factExpenseId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		
+  		<column name="entryType" type="int"></column><!--  1-peruntukan, 2 - perbelanjaan -->
+  		<column name="masterFileId" type="long">
+  		<!-- if perbelanjaan, itemTypeId is used -->
+  		</column>
+  		
+  		
+  		<column name="amount" type="double"></column>
+		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+	</entity>
+	<entity name="FactConsultation" local-service="true">
+		<column name="factConsultationId" type="long" primary="true"></column>
+  		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		
+  		<column name="consultationGroupId" type="long"></column>
+  		<column name="consultationCategoryId" type="long"></column>
+  		
+  		
+  		<column name="value" type="long"></column>
+  		<column name="totalSession" type="long"></column>
+		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<finder return-type="Collection" name="Library">
+  			<finder-column name="libraryId"></finder-column>
+  		</finder>
+	</entity>
+	<entity name="MasterFile" local-service="true">
+		<column name="masterFileId" type="long" primary="true"></column>
+		<column name="masterTypeId" type="long"></column>
+		<column name="parentId1" type="long"></column>
+		<column name="parentId2" type="long"></column>
+		<column name="masterFileName" type="String">
+		
+		</column>
+		<column name="status1" type="boolean"></column>
+		<column name="status2" type="boolean"></column>
+		<column name="status3" type="boolean"></column>
+		<column name="status4" type="boolean"></column>
+		<column name="masterCode" type="String"></column>
+		<column name="oldId" type="long"></column>
+		<column name="note" type="String"></column>
+		<column name="inActive" type="boolean"></column>
+		<finder return-type="Collection" name="MasterType">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="inActive"></finder-column>
+  		</finder>
+  		
+  		<finder return-type="Collection" name="TypeAndParent1">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="parentId1"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="TypeAndParent2">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="parentId2"></finder-column>
+  		</finder>
+  		<finder return-type="MasterFile" name="MasterTypeAndName">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="masterFileName"></finder-column>
+  		</finder>
+  		<finder return-type="MasterFile" name="OldId">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="oldId"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="MasterTypeAndStatus">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="status1"></finder-column>
+  			<finder-column name="status2"></finder-column>
+  			<finder-column name="status3"></finder-column>
+  			<finder-column name="status4"></finder-column>
+  		
+  		</finder>
+  		<finder return-type="Collection" name="MasterTypeAndStatus1">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="status1"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="MasterTypeAndStatus2">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="status2"></finder-column>
+  		</finder>
+  		<finder return-type="Collection" name="MasterTypeAndStatus3">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="status3"></finder-column>
+  		</finder>
+  		
+  		<finder return-type="Collection" name="MasterTypeAndStatus4">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="status4"></finder-column>
+  		</finder>
+  		
+	</entity>
+	<entity name="MasterType" local-service="true">
+		<column name="masterTypeId" type="long" primary="true"></column>
+		<column name="masterTypeName" type="String"></column>
+		<column name="status" type="int"></column>
+		<column name="parentType" type="boolean"></column>
+		<column name="pageLabel" type="String"/>
+		<column name="nameLabel" type="String"></column>
+		<column name="hasParent1" type="boolean"></column>
+		<column name="parentId1" type="long"></column>
+		<column name="parentId2" type="long"></column>
+		<column name="hasParent2" type="boolean"></column>
+		<column name="parent1Label" type="String"></column>
+		<column name="parent2Label" type="String"></column>
+		<column name="hasStatus1" type="boolean"></column>
+		<column name="hasStatus2" type="boolean"></column>
+		<column name="hasStatus3" type="boolean"></column>
+		<column name="hasStatus4" type="boolean"></column>
+		<column name="status1Label" type="String"></column>
+		<column name="status2Label" type="String"></column>
+		<column name="status3Label" type="String"></column>
+		<column name="status4Label" type="String"></column>
+		<column name="hasCode" type="boolean"></column>
+		<column name="codeLabel" type="String"></column>
+		
+		<finder return-type="Collection" name="ParentType">
+  			<finder-column name="parentType"></finder-column>
+  		</finder>
+  		
+  	
+	</entity>
+	<entity name="UserReport" local-service="true">
+		<column name="userReportId" type="long" primary="true"></column>
+		<column name="userId" type="long"></column>
+		<column name="libraryId" type="long"></column>
+		<column name="reportId" type="long"></column>
+		<column name="createdByUserId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+		
+		<finder name="UserDataLibrary" return-type="UserReport" unique="true">
+            <finder-column name="userId" />
+            <finder-column name="libraryId" />
+            <finder-column name="reportId" />
+        </finder>
+        <finder name="User" return-type="Collection">
+            <finder-column name="userId" />
+        </finder>
+         <finder name="Report" return-type="Collection">
+            <finder-column name="reportId" />
+        </finder>
+        <finder return-type="Collection" name="UserAndLibrary">
+        	<finder-column name="userId" />
+        	<finder-column name="libraryId" />
+        </finder>
+        <finder name="UserLibrary" return-type="Colletion">
+        	<finder-column name="userId" />
+        	<finder-column name="libraryId" />
+        </finder>
+		
+	</entity>
 	
 </service-builder>

@@ -35,7 +35,7 @@ import java.io.ObjectOutput;
 public class ConfigCacheModel implements CacheModel<Config>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{id=");
 		sb.append(id);
@@ -43,6 +43,8 @@ public class ConfigCacheModel implements CacheModel<Config>, Externalizable {
 		sb.append(key);
 		sb.append(", value=");
 		sb.append(value);
+		sb.append(", title=");
+		sb.append(title);
 		sb.append("}");
 
 		return sb.toString();
@@ -68,6 +70,13 @@ public class ConfigCacheModel implements CacheModel<Config>, Externalizable {
 			configImpl.setValue(value);
 		}
 
+		if (title == null) {
+			configImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			configImpl.setTitle(title);
+		}
+
 		configImpl.resetOriginalValues();
 
 		return configImpl;
@@ -78,6 +87,7 @@ public class ConfigCacheModel implements CacheModel<Config>, Externalizable {
 		id = objectInput.readLong();
 		key = objectInput.readUTF();
 		value = objectInput.readUTF();
+		title = objectInput.readUTF();
 	}
 
 	@Override
@@ -98,9 +108,17 @@ public class ConfigCacheModel implements CacheModel<Config>, Externalizable {
 		else {
 			objectOutput.writeUTF(value);
 		}
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
 	}
 
 	public long id;
 	public String key;
 	public String value;
+	public String title;
 }

@@ -263,8 +263,7 @@ public interface UserLibraryLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void remove(long userId, long libraryId)
-		throws com.idetronic.eis.NoSuchUserLibraryException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.idetronic.eis.model.UserLibrary> findByLibrary(
 		long libraryId, int start, int end)
@@ -278,6 +277,10 @@ public interface UserLibraryLocalService extends BaseLocalService,
 	public boolean hasAssociation(long libraryId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void updateAssociationByUser(long userId, long[] addLibraryIds,
+		long[] removeLibraryIds,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public void updateAssociation(long libraryId, long[] addUserIds,
 		long[] removeUserId,
 		com.liferay.portal.service.ServiceContext serviceContext);
@@ -286,10 +289,18 @@ public interface UserLibraryLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.idetronic.eis.model.Library> getLibraryByUser(
+	public java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser2(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.eis.model.MasterFile> getLibraryByUser(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByLibrary(
 		long libraryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.Object> getDistinctUser()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

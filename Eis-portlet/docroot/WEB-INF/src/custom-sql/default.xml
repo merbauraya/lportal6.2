@@ -297,6 +297,60 @@
 		        AND A.libraryId = groupedData.libraryId
 	
 	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactExpenseFinder.findLatestEntryByL_P">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactExpense A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            entryType,
+		            masterFileId,
+		            MAX(factExpenseId) AS id
+		    FROM
+		        eis_FactExpense
+		    WHERE
+		        libraryId = ? AND period = ?
+		    GROUP BY entryType , masterFileId , libraryId , period) groupedData ON (A.entryType = groupedData.entryType
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.masterFileId = groupedData.masterFileId)
+		        AND A.factExpenseId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.masterFileId = groupedData.masterFileId
+		        ORDER BY entryType
+
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactConsultationFinder.findLatestEntryByL_P">
+		SELECT  
+		    A.*
+		FROM
+		    eis_FactConsultation A
+		        INNER JOIN
+		    (SELECT 
+		        libraryId,
+		            period,
+		            consultationCategoryId,
+		            MAX(factConsultationId) AS id
+		    FROM
+		        eis_FactConsultation
+		    WHERE
+		        libraryId = ? AND period = ?
+		    GROUP BY consultationCategoryId , libraryId , period) groupedData ON (A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.consultationCategoryId = groupedData.consultationCategoryId)
+		        AND A.factConsultationId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.libraryId = groupedData.libraryId
+		        AND A.consultationCategoryId = groupedData.consultationCategoryId
+		
+
+	
+	</sql>
 	<sql file="custom-sql/missing_data.xml"/>
 	<sql file="custom-sql/history.xml"/>
 </custom-sql>

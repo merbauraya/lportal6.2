@@ -21,6 +21,7 @@ import java.util.List;
 import com.idetronic.eis.model.FactMembership;
 import com.idetronic.eis.model.Library;
 import com.idetronic.eis.model.Loan;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.MemberCategory;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
 import com.idetronic.eis.service.base.FactMembershipLocalServiceBaseImpl;
@@ -76,10 +77,10 @@ public class FactMembershipLocalServiceImpl
 		fact.setUserName(user.getFullName());
 		
 		
-		Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
+		//Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
 		
-		fact.setStateId(library.getStateId());
-		fact.setLibraryTypeId(library.getLibraryTypeId());
+		//fact.setStateId(library.getStateId());
+		//fact.setLibraryTypeId(library.getLibraryTypeId());
 		
 		
 		return factMembershipPersistence.update(fact);
@@ -117,7 +118,7 @@ public class FactMembershipLocalServiceImpl
 		List list = FactMembershipFinderUtil.getHistory(libraryId, period);
 		
 		FactMembership fact = null;
-		MemberCategory category = null;
+		MasterFile category = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -127,7 +128,7 @@ public class FactMembershipLocalServiceImpl
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(FactMembership)arrayobject[0];
-			category = (MemberCategory)arrayobject[1];
+			category = (MasterFile)arrayobject[1];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -137,7 +138,7 @@ public class FactMembershipLocalServiceImpl
 			
 			jsonObject.put("Bil", i);
 			jsonObject.put("Nilai", fact.getActiveCount());
-			jsonObject.put("Kategori", category.getMemberCategoryName());
+			jsonObject.put("Kategori", category.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getUserName());
 			
 			String pattern = "dd/MM/yyyy";

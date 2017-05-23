@@ -22,6 +22,7 @@ import com.idetronic.eis.model.FactIrItem;
 import com.idetronic.eis.model.FactNonPrintedMaterial;
 import com.idetronic.eis.model.ItemMedium;
 import com.idetronic.eis.model.ItemType;
+import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.service.base.FactIrItemLocalServiceBaseImpl;
 import com.idetronic.eis.service.persistence.FactIrItemFinderUtil;
 import com.idetronic.eis.service.persistence.FactIrSubmissionFinderImpl;
@@ -112,8 +113,8 @@ public class FactIrItemLocalServiceImpl extends FactIrItemLocalServiceBaseImpl {
 		List list = FactIrItemFinderUtil.getHistory(libraryId, period,facultyId);
 		
 		FactIrItem fact = null;
-		ItemType category = null;
-		ItemMedium medium = null;
+		MasterFile category = null;
+		MasterFile medium = null;
 		
 		JSONArray jsonData =   JSONFactoryUtil.createJSONArray();
 		
@@ -123,8 +124,8 @@ public class FactIrItemLocalServiceImpl extends FactIrItemLocalServiceBaseImpl {
 		{
 			Object[] arrayobject=(Object[])object;
 			fact=(FactIrItem)arrayobject[0];
-			category = (ItemType)arrayobject[1];
-			medium = (ItemMedium)arrayobject[2];
+			category = (MasterFile)arrayobject[1];
+			medium = (MasterFile)arrayobject[2];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -135,9 +136,9 @@ public class FactIrItemLocalServiceImpl extends FactIrItemLocalServiceBaseImpl {
 			jsonObject.put("Bil", i);
 			jsonObject.put("Judul", fact.getTitleTotal());
 			jsonObject.put("Naskah", fact.getVolumeTotal());
-			jsonObject.put("Jenis Bahan", category.getItemTypeName());
+			jsonObject.put("Jenis Bahan", category.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getCreatedByUserName());
-			jsonObject.put("Medium", medium.getItemMediumName());
+			jsonObject.put("Medium", medium.getMasterFileName());
 			
 			String pattern = "dd/MM/yyyy";
 		    SimpleDateFormat format = new SimpleDateFormat(pattern);

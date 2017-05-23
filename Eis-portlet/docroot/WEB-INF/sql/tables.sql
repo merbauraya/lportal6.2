@@ -6,7 +6,37 @@ create table eis_BorrowerCategory (
 create table eis_Config (
 	id_ LONG not null primary key,
 	key_ VARCHAR(75) null,
-	value TEXT null
+	value TEXT null,
+	title VARCHAR(150) null
+);
+
+create table eis_FactConsultation (
+	factConsultationId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	consultationGroupId LONG,
+	consultationCategoryId LONG,
+	value LONG,
+	totalSession LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactExpense (
+	factExpenseId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	entryType INTEGER,
+	masterFileId LONG,
+	amount DOUBLE,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
 );
 
 create table eis_FactIrItem (
@@ -235,6 +265,47 @@ create table eis_Loan (
 	value INTEGER
 );
 
+create table eis_MasterFile (
+	masterFileId LONG not null primary key,
+	masterTypeId LONG,
+	parentId1 LONG,
+	parentId2 LONG,
+	masterFileName VARCHAR(75) null,
+	status1 BOOLEAN,
+	status2 BOOLEAN,
+	status3 BOOLEAN,
+	status4 BOOLEAN,
+	masterCode VARCHAR(75) null,
+	oldId LONG,
+	note VARCHAR(75) null,
+	inActive BOOLEAN
+);
+
+create table eis_MasterType (
+	masterTypeId LONG not null primary key,
+	masterTypeName VARCHAR(75) null,
+	status INTEGER,
+	parentType BOOLEAN,
+	pageLabel VARCHAR(75) null,
+	nameLabel VARCHAR(75) null,
+	hasParent1 BOOLEAN,
+	parentId1 LONG,
+	parentId2 LONG,
+	hasParent2 BOOLEAN,
+	parent1Label VARCHAR(75) null,
+	parent2Label VARCHAR(75) null,
+	hasStatus1 BOOLEAN,
+	hasStatus2 BOOLEAN,
+	hasStatus3 BOOLEAN,
+	hasStatus4 BOOLEAN,
+	status1Label VARCHAR(75) null,
+	status2Label VARCHAR(75) null,
+	status3Label VARCHAR(75) null,
+	status4Label VARCHAR(75) null,
+	hasCode BOOLEAN,
+	codeLabel VARCHAR(75) null
+);
+
 create table eis_MemberCategory (
 	memberCategoryId LONG not null primary key,
 	memberCategoryName VARCHAR(75) null,
@@ -387,7 +458,9 @@ create table eis_Report (
 	reportId LONG not null primary key,
 	reportKey VARCHAR(75) null,
 	reportName VARCHAR(75) null,
-	reportTitle VARCHAR(150) null
+	reportTitle VARCHAR(150) null,
+	dataEntry BOOLEAN,
+	dataName VARCHAR(75) null
 );
 
 create table eis_SeatingCategory (
@@ -419,6 +492,16 @@ create table eis_State (
 	stateCode VARCHAR(10) null
 );
 
+create table eis_UserData (
+	userDataId LONG not null primary key,
+	userId LONG,
+	libraryId LONG,
+	dataId LONG,
+	createdByUserId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
 create table eis_UserLibrary (
 	userLibraryId LONG not null primary key,
 	userId LONG,
@@ -429,6 +512,16 @@ create table eis_UserLibrary (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null
+);
+
+create table eis_UserReport (
+	userReportId LONG not null primary key,
+	userId LONG,
+	libraryId LONG,
+	reportId LONG,
+	createdByUserId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
 );
 
 create table eis_VisitorCategory (

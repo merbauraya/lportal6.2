@@ -283,6 +283,11 @@ public class ConfigLocalServiceUtil {
 		return getService().addByStringValue(key, value);
 	}
 
+	public static long getKeyAsLong(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getKeyAsLong(key);
+	}
+
 	public static java.lang.String getByKeyAsString(java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getByKeyAsString(key);
@@ -307,9 +312,14 @@ public class ConfigLocalServiceUtil {
 	* @throws SystemException
 	*/
 	public static java.util.List<com.idetronic.eis.model.Config> findWithKeyWildcard(
-		java.lang.String keyWildCard)
+		java.lang.String keyWildCard, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findWithKeyWildcard(keyWildCard);
+		return getService().findWithKeyWildcard(keyWildCard, start, end);
+	}
+
+	public static int countByKeyWildCard(java.lang.String keyWildCard)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByKeyWildCard(keyWildCard);
 	}
 
 	public static void clearService() {

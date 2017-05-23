@@ -252,6 +252,10 @@ public interface ReportLocalService extends BaseLocalService,
 
 	public com.idetronic.eis.model.Report addReport(
 		java.lang.String reportKey, java.lang.String reportName,
-		java.lang.String reportTitle)
+		java.lang.String reportTitle, boolean hasDataEntry)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.idetronic.eis.model.Report> findByDataEntry(
+		boolean dataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -116,6 +116,42 @@ public interface ReportModel extends BaseModel<Report> {
 	 */
 	public void setReportTitle(String reportTitle);
 
+	/**
+	 * Returns the data entry of this report.
+	 *
+	 * @return the data entry of this report
+	 */
+	public boolean getDataEntry();
+
+	/**
+	 * Returns <code>true</code> if this report is data entry.
+	 *
+	 * @return <code>true</code> if this report is data entry; <code>false</code> otherwise
+	 */
+	public boolean isDataEntry();
+
+	/**
+	 * Sets whether this report is data entry.
+	 *
+	 * @param dataEntry the data entry of this report
+	 */
+	public void setDataEntry(boolean dataEntry);
+
+	/**
+	 * Returns the data name of this report.
+	 *
+	 * @return the data name of this report
+	 */
+	@AutoEscape
+	public String getDataName();
+
+	/**
+	 * Sets the data name of this report.
+	 *
+	 * @param dataName the data name of this report
+	 */
+	public void setDataName(String dataName);
+
 	@Override
 	public boolean isNew();
 

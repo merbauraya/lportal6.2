@@ -15,12 +15,19 @@ import javax.portlet.RenderResponse;
 
 import com.idetronic.eis.NoSuchLibraryException;
 import com.idetronic.eis.model.Library;
+import com.idetronic.eis.model.MasterFile;
+import com.idetronic.eis.model.Report;
+import com.idetronic.eis.model.UserReport;
 import com.idetronic.eis.portlet.EisPortlet;
 import com.idetronic.eis.service.ConfigLocalServiceUtil;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
+import com.idetronic.eis.service.ReportLocalServiceUtil;
 import com.idetronic.eis.service.UserLibraryLocalServiceUtil;
+import com.idetronic.eis.service.UserReportLocalServiceUtil;
 import com.idetronic.eis.service.persistence.LibraryFinderUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -49,8 +56,11 @@ public class EisUtil {
 	public static final String RESOURCE_IR_ITEM = "irItem";
 	public static final String RESOURCE_SEATING_DATA_LIST ="seatingData";
 	public static final String RESOURCE_MEMBERSHIP_DATA = "membershipData";
+	public static final String RESOURCE_EXPENSE_DATA = "expenseData";
+	public static final String RESOURCE_CONSULTATION_DATA = "consultationData";
 	
 	public static final String RESOURCE_KPI_ENTRY_DATA = "kpientryData";
+	public static final String RESOURCE_EIS_INFO_BOX_TEMPLATE = "infoBoxTemplate";
 	/*
 	 * month range 1 to 12
 	 */
@@ -103,7 +113,34 @@ public class EisUtil {
 	public static final String CONFIG_REMINDER_DAY_2ND_UNTIL = "reminder.day.second.until";
 	public static final String CONFIG_REMINDER_OPTION = "reminder.option";
 	public static final String CONFIG_MONTH_DATA_CUT_OFF_DAY = "month.data.cut.off.day";
-
+	
+	public static final String MASTER_EXPENSE_ALLOCATION_TYPE = "master.expense.allocation.type";
+	
+	public static final String MASTER_MEDIUM_TYPE = "master.medium.type";
+	public static final String MASTER_ITEM_TYPE= "master.item.type";
+	
+	public static final String MASTER_STATE="master.state";
+	public static final String MASTER_LIBRARY_TYPE="master.library.type";
+	public static final String MASTER_LIBRARY = "master.library";
+	public static final String MASTER_PTJ_TYPE = "master.ptj.type";
+	public static final String MASTER_PTJ = "master.ptj";
+	
+	public static final String MASTER_POST_GRADE_CATEGORY = "master.post.grade.category";
+	public static final String MASTER_POST_GRADE = "master.post.grade";
+	public static final String MASTER_VISITOR_CATEGORY = "master.visitor.category";
+	public static final String MASTER_MEMBERSHIP_GROUP = "master.membership.group";	
+	public static final String MASTER_MEMBERSHIP_CATEGORY = "master.membership.category";
+	public static final String MASTER_SEATING_DEPARTMENT = "master.seating.department";
+	public static final String MASTER_SEATING_CATEGORY = "master.seating.category";
+	public static final String MASTER_CONSULTATION_GROUP = "master.consultation.group";
+	public static final String MASTER_CONSULTATION_CATEGORY = "master.consultation.category";
+	
+	
+	
+	public static final int EXPENSE_TYPE_ALLOCATION = 1;
+	public static final int EXPENSE_TYPE_EXPENSE = 2;
+	
+	
 	
 	public static final int DATA_ALL_DATA = -1;
 	public static final int DATA_IR = 10;
@@ -114,7 +151,24 @@ public class EisUtil {
 	public static final int DATA_VISITOR = 15;
 	public static final int DATA_LOAN = 16;
 	public static final int DATA_MEMBERSHIP =17;
+	public static final int DATA_EXPENSE = 18;
+	public static final int DATA_ACADEMIC_CONSULTATION = 19;
 	
+	public static final String REPORT_LOAN = "LOAN";
+	public static final String REPORT_IR = " IR_ITEM ";
+	public static final String REPORT_VISITOR = "VISITOR";
+	public static final String REPORT_SEATING = "SEATING";
+	public static final String REPORT_MEMBERSHIP = "MEMBERSHIP";
+	public static final String REPORT_PRINTED_ITEM = " PRINTED_ITEM";
+	public static final String REPORT_NON_PRINTED_ITEM = "NON_PRINTED_ITEM";
+	public static final String REPORT_POSITION= "POSITIONS";
+	public static final String REPORT_EXPENSE = "EXPENSE";
+	public static final String REPORT_ACADEMIC_CONSULTATION = "CONSULTATION";
+	
+	public static final String EIS_INFO_BOX= "eis.info.box";
+	public static final String EIS_INFO_BOX_TEMPLATE = "eis.template.infobox";
+			
+			
 	
 	public static final int KPI_MONTHLY = 1;
 	
@@ -261,14 +315,7 @@ public class EisUtil {
 	
 	
 	
-	public static List<User> missingData()
-	{
-		String period = getPreviousPeriod();
-		
-		
-		
-		return null;
-	}
+	
 	public static List<Library> getMissingPrintedMaterial(String period)
 	{
 		List<Library> libraries = LibraryFinderUtil.findMissingPrintedMaterialDataByPeriod(period);
@@ -276,22 +323,158 @@ public class EisUtil {
 		
 		return libraries;
 	}
-	public static ArrayList getMissingData(long userId,String period,Locale locale,boolean isAdmin,long libraryId,long dataType) throws SystemException, NoSuchLibraryException
+	
+	
+	
+	public static ArrayList getMissingUserData(long userId,String period,Locale locale) throws SystemException
 	{
-		List<Library> libraries = null;
+		ArrayList list = new ArrayList();
+		
+		//get all user libraries
+		List<MasterFile> libraries = UserLibraryLocalServiceUtil.getLibraryByUser2(userId);
+		
+		for (MasterFile library : libraries)
+		{
+			//get user data for the library
+			List<UserReport> userReports = UserReportLocalServiceUtil.findByUserLibrary(userId, library.getMasterFileId());
+			
+			for (UserReport userReport : userReports)
+			{
+				Report report = ReportLocalServiceUtil.fetchReport(userReport.getReportId());
+				
+				//LOGGER.info(report.getReportKey() +" :library :" + library.getMasterFileId() + " : " + library.getMasterFileName() + ":"+ report.getReportTitle());
+
+				if (report.getReportKey().equals(EisUtil.REPORT_EXPENSE))
+				{
+					Map loan  = getMissingExpense(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(loan))
+					{
+						list.add(loan);
+					}
+					
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_IR))
+				{
+					Map irItem = getMIssingIRItem(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					
+					if (Validator.isNotNull(irItem))
+					{
+						list.add(irItem);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_LOAN))
+				{
+					Map loan  = getMissingLoan(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(loan))
+					{
+						list.add(loan);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_MEMBERSHIP))
+				{
+					Map membership  = getMissingMembership(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(membership))
+					{
+						list.add(membership);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_NON_PRINTED_ITEM))
+				{
+
+					Map nonPrintedItem = getMissingNonPrintedItem(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(nonPrintedItem))
+					{
+						list.add(nonPrintedItem);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_POSITION))
+				{
+					Map position  = getMissingPosition(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(position))
+					{
+						list.add(position);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_PRINTED_ITEM))
+				{
+					Map printedItem = getMissingPrintedItem(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(printedItem))
+					{
+						list.add(printedItem);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_SEATING))
+				{
+					Map seating  = getMissingSeating(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(seating))
+					{
+						list.add(seating);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_VISITOR))
+				{
+					Map visitor  = getMissingVisitor(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(visitor))
+					{
+						list.add(visitor);
+					}
+					
+				}
+				
+				if (report.getReportKey().equals(EisUtil.REPORT_ACADEMIC_CONSULTATION))
+				{
+					Map consultation  = getMissingAcademicConsultation(library.getMasterFileId(),period,locale,library.getMasterFileName());
+					if (Validator.isNotNull(consultation))
+					{
+						list.add(consultation);
+					}
+					
+				}
+				
+				
+		
+			}
+		}
+
+		
+		return list;
+	}
+	
+	public static ArrayList getMissingData(long userId,String period,Locale locale,boolean isAdmin,long libraryId,long dataType) throws SystemException, PortalException
+	{
+		List<MasterFile> libraries = null;
+		long libraryTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+		
 		if (Validator.isNull(libraryId))
 		{
 			if (isAdmin)
 			{
-				libraries = LibraryLocalServiceUtil.getLibraries(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				libraries = MasterFileLocalServiceUtil.findByMasterType(libraryTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			}else
 			{
-				libraries = UserLibraryLocalServiceUtil.getLibraryByUser(userId);
+				libraries = UserLibraryLocalServiceUtil.getLibraryByUser2(userId);
+				
 			}
 		}else
 		{
 			libraries = new ArrayList();
-			Library library = LibraryLocalServiceUtil.fetchLibrary(libraryId);
+			MasterFile library = MasterFileLocalServiceUtil.fetchMasterFile(libraryId);
 			libraries.add(library);
 		}
 		List<String> messages = new ArrayList<String>();
@@ -301,14 +484,14 @@ public class EisUtil {
 		
 		int counter = 0;
 		
-		for (Library library : libraries)
+		for (MasterFile library : libraries)
 		{
-			String libraryName = library.getLibraryName();
+			String libraryName = library.getMasterFileName();
 			
 			
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_IR)
 			{
-				Map irItem = getMIssingIRItem(library.getLibraryId(),period,locale,libraryName);
+				Map irItem = getMIssingIRItem(library.getMasterFileId(),period,locale,libraryName);
 				
 				if (Validator.isNotNull(irItem))
 				{
@@ -317,7 +500,7 @@ public class EisUtil {
 			}
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_PRINTED_MATERIAL)
 			{
-				Map printedItem = getMissingPrintedItem(library.getLibraryId(),period,locale,library.getLibraryName());
+				Map printedItem = getMissingPrintedItem(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(printedItem))
 				{
 					list.add(printedItem);
@@ -326,7 +509,7 @@ public class EisUtil {
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_NON_PRINTED_MATERIAL)
 			{
 
-				Map nonPrintedItem = getMissingNonPrintedItem(library.getLibraryId(),period,locale,libraryName);
+				Map nonPrintedItem = getMissingNonPrintedItem(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(nonPrintedItem))
 				{
 					list.add(nonPrintedItem);
@@ -335,7 +518,7 @@ public class EisUtil {
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_POSITION)
 			{
 
-				Map position  = getMissingPosition(library.getLibraryId(),period,locale,libraryName);
+				Map position  = getMissingPosition(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(position))
 				{
 					list.add(position);
@@ -344,7 +527,7 @@ public class EisUtil {
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_VISITOR)
 			{
 
-				Map visitor  = getMissingVisitor(library.getLibraryId(),period,locale,libraryName);
+				Map visitor  = getMissingVisitor(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(visitor))
 				{
 					list.add(visitor);
@@ -353,7 +536,7 @@ public class EisUtil {
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_SEATING)
 			{
 	
-				Map seating  = getMissingSeating(library.getLibraryId(),period,locale,libraryName);
+				Map seating  = getMissingSeating(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(seating))
 				{
 					list.add(seating);
@@ -362,7 +545,7 @@ public class EisUtil {
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_MEMBERSHIP)
 			{
 
-				Map membership  = getMissingMembership(library.getLibraryId(),period,locale,libraryName);
+				Map membership  = getMissingMembership(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(membership))
 				{
 					list.add(membership);
@@ -370,12 +553,22 @@ public class EisUtil {
 			}
 			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_LOAN)
 			{	
-				Map loan  = getMissingLoan(library.getLibraryId(),period,locale,libraryName);
+				Map loan  = getMissingLoan(library.getMasterFileId(),period,locale,libraryName);
 				if (Validator.isNotNull(loan))
 				{
 					list.add(loan);
 				}
 			}
+			
+			if (dataType == DATA_ALL_DATA || dataType == EisUtil.DATA_EXPENSE)
+			{	
+				Map loan  = getMissingExpense(library.getMasterFileId(),period,locale,libraryName);
+				if (Validator.isNotNull(loan))
+				{
+					list.add(loan);
+				}
+			}
+			
 			
 			
 			
@@ -388,11 +581,32 @@ public class EisUtil {
 		return list;
 	}
 	
-	public static ArrayList getMissingData(long userId,String period,ThemeDisplay themeDisplay,boolean isAdmin,long libraryId,long dataType) throws SystemException, NoSuchLibraryException
+	public static ArrayList getMissingData(long userId,String period,ThemeDisplay themeDisplay,boolean isAdmin,long libraryId,long dataType) throws SystemException, PortalException
 	{
 		return getMissingData(userId,period,themeDisplay.getLocale(),isAdmin,libraryId,dataType);
 	}
 
+	
+	
+	public static Map getMissingAcademicConsultation(long libraryId,String period,Locale locale,String libraryName)
+	{
+		if (LibraryLocalServiceUtil.isMissingConsultationData(libraryId, period))
+		{
+			
+			
+			return createMissingDataMap(DATA_IR,libraryId,
+					period,LanguageUtil.get(locale, "consultation"),
+					libraryName);
+			
+			
+		}else
+		{
+			return null;
+		}
+					
+		
+	}
+	
 	public static Map getMIssingIRItem(long libraryId,String period,Locale locale,String libraryName)
 	{
 		if (LibraryLocalServiceUtil.isMissingIRItemData(libraryId, period))
@@ -462,6 +676,21 @@ public class EisUtil {
 			return null;
 		}
 	}
+	
+	public static Map getMissingExpense(long libraryId,String period,Locale locale,String libraryName)
+	{
+		if (LibraryLocalServiceUtil.isMissingExpenseData(libraryId, period))
+		{
+			return createMissingDataMap(DATA_EXPENSE,libraryId,
+					period,LanguageUtil.get(locale, "expense"),
+					libraryName);
+			
+		}else
+		{
+			return null;
+		}
+	}
+	
 	public static Map getMissingLoan(long libraryId,String period,Locale locale,String libraryName)
 	{
 		
@@ -588,7 +817,15 @@ public class EisUtil {
 		
 		
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * @throws SystemException
+	 */
+	public static long getLibraryMasterTypeId() throws SystemException
+	{
+		return ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_LIBRARY);
+	}
 	private static Log LOGGER = LogFactoryUtil.getLog(EisUtil.class);
 
 

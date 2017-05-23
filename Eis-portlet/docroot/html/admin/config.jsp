@@ -84,9 +84,7 @@
 	
 	</liferay-ui:panel>
 	
-	<liferay-ui:panel collapsible="<%= true%>" extended="<%= true%>" title="kpi-setting">
-		
-	</liferay-ui:panel>
+	
 	
 	<aui:button-row>
 		<aui:button type="submit"></aui:button>

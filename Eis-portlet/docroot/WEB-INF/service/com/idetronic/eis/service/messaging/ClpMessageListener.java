@@ -17,6 +17,10 @@ package com.idetronic.eis.service.messaging;
 import com.idetronic.eis.service.ClpSerializer;
 import com.idetronic.eis.service.ConfigLocalServiceUtil;
 import com.idetronic.eis.service.ConfigServiceUtil;
+import com.idetronic.eis.service.FactConsultationLocalServiceUtil;
+import com.idetronic.eis.service.FactConsultationServiceUtil;
+import com.idetronic.eis.service.FactExpenseLocalServiceUtil;
+import com.idetronic.eis.service.FactExpenseServiceUtil;
 import com.idetronic.eis.service.FactIrItemLocalServiceUtil;
 import com.idetronic.eis.service.FactIrItemServiceUtil;
 import com.idetronic.eis.service.FactIrSubmissionLocalServiceUtil;
@@ -53,6 +57,10 @@ import com.idetronic.eis.service.LibrarySeatingDepartmentServiceUtil;
 import com.idetronic.eis.service.LibraryTypeLocalServiceUtil;
 import com.idetronic.eis.service.LoanLocalServiceUtil;
 import com.idetronic.eis.service.LoanServiceUtil;
+import com.idetronic.eis.service.MasterFileLocalServiceUtil;
+import com.idetronic.eis.service.MasterFileServiceUtil;
+import com.idetronic.eis.service.MasterTypeLocalServiceUtil;
+import com.idetronic.eis.service.MasterTypeServiceUtil;
 import com.idetronic.eis.service.MemberCategoryLocalServiceUtil;
 import com.idetronic.eis.service.MemberCategoryServiceUtil;
 import com.idetronic.eis.service.PostCategoryLocalServiceUtil;
@@ -74,6 +82,8 @@ import com.idetronic.eis.service.SeatingDepartmentServiceUtil;
 import com.idetronic.eis.service.StateLocalServiceUtil;
 import com.idetronic.eis.service.UserLibraryLocalServiceUtil;
 import com.idetronic.eis.service.UserLibraryServiceUtil;
+import com.idetronic.eis.service.UserReportLocalServiceUtil;
+import com.idetronic.eis.service.UserReportServiceUtil;
 import com.idetronic.eis.service.VisitorCategoryLocalServiceUtil;
 import com.idetronic.eis.service.VisitorCategoryServiceUtil;
 
@@ -98,6 +108,12 @@ public class ClpMessageListener extends BaseMessageListener {
 			ConfigLocalServiceUtil.clearService();
 
 			ConfigServiceUtil.clearService();
+			FactConsultationLocalServiceUtil.clearService();
+
+			FactConsultationServiceUtil.clearService();
+			FactExpenseLocalServiceUtil.clearService();
+
+			FactExpenseServiceUtil.clearService();
 			FactIrItemLocalServiceUtil.clearService();
 
 			FactIrItemServiceUtil.clearService();
@@ -153,6 +169,12 @@ public class ClpMessageListener extends BaseMessageListener {
 			LoanLocalServiceUtil.clearService();
 
 			LoanServiceUtil.clearService();
+			MasterFileLocalServiceUtil.clearService();
+
+			MasterFileServiceUtil.clearService();
+			MasterTypeLocalServiceUtil.clearService();
+
+			MasterTypeServiceUtil.clearService();
 			MemberCategoryLocalServiceUtil.clearService();
 
 			MemberCategoryServiceUtil.clearService();
@@ -186,6 +208,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			UserLibraryLocalServiceUtil.clearService();
 
 			UserLibraryServiceUtil.clearService();
+			UserReportLocalServiceUtil.clearService();
+
+			UserReportServiceUtil.clearService();
 			VisitorCategoryLocalServiceUtil.clearService();
 
 			VisitorCategoryServiceUtil.clearService();

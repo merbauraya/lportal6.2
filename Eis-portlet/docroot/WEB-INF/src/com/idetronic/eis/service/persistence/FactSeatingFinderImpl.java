@@ -8,6 +8,7 @@ import com.idetronic.eis.model.FactSeating;
 import com.idetronic.eis.model.impl.FactIrItemImpl;
 import com.idetronic.eis.model.impl.FactSeatingImpl;
 import com.idetronic.eis.model.impl.FactVisitorImpl;
+import com.idetronic.eis.model.impl.MasterFileImpl;
 import com.idetronic.eis.model.impl.SeatingCategoryImpl;
 import com.idetronic.eis.model.impl.VisitorCategoryImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
@@ -70,7 +71,7 @@ implements FactSeatingFinder
 	        SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("FactSeating", FactSeatingImpl.class); 
-	        q.addEntity("SeatingCategory", SeatingCategoryImpl.class);
+	        q.addEntity("SeatingCategory", MasterFileImpl.class);
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);

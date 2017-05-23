@@ -46,18 +46,25 @@
 					 
 				</portlet:renderURL>
 				
-<portlet:renderURL var="postURL">
+			<portlet:renderURL var="postURL">
 					<portlet:param name="mvcPath" value="/html/fact/post.jsp" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="backURL" value="<%= currentURL %>" />
 					 
 				</portlet:renderURL>
-<portlet:renderURL var="expenseURL">
+			<portlet:renderURL var="expenseURL">
 				<portlet:param name="mvcPath" value="/html/fact/expense.jsp" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="backURL" value="<%= currentURL %>" />
 					 
-				</portlet:renderURL>
+			</portlet:renderURL>
+			
+			<portlet:renderURL var="consultationURL">
+				<portlet:param name="mvcPath" value="/html/fact/consultation.jsp" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="backURL" value="<%= currentURL %>" />
+					 
+			</portlet:renderURL>
 				
 																
 
@@ -90,6 +97,8 @@
 					href="<%= membershipURL %>" label="membership" 
 					name="addItemButton" /> 
 					
+					<aui:nav-item iconCssClass="icon-edit"
+						href="<%= consultationURL %>" label="consultation" />
 				</aui:nav-item>	
 				
 				<aui:nav-item dropdown="true" label="Pembangunan">
@@ -104,10 +113,10 @@
 				
 				</aui:nav-item>
 				
-				<aui:nav-item dropdown="true" label="Repositori">
+				<aui:nav-item dropdown="true" label="irtype-item">
 				
 					<aui:nav-item iconCssClass="icon-edit"  
-					href="<%= IrItemURL %>" label="ir-item" 
+					href="<%= IrItemURL %>" label="intellect-property" 
 					name="addItemButton" /> 		
 				
 				</aui:nav-item>
@@ -121,7 +130,8 @@
 					<aui:nav-item iconCssClass="icon-edit"  
 						href="<%= expenseURL %>" label="expenses" 
 						name="addItemButton" /> 	
-				
+					
+					
 				</aui:nav-item>
 				
 				

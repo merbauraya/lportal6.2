@@ -65,9 +65,10 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "id_", Types.BIGINT },
 			{ "key_", Types.VARCHAR },
-			{ "value", Types.CLOB }
+			{ "value", Types.CLOB },
+			{ "title", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eis_Config (id_ LONG not null primary key,key_ VARCHAR(75) null,value TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table eis_Config (id_ LONG not null primary key,key_ VARCHAR(75) null,value TEXT null,title VARCHAR(150) null)";
 	public static final String TABLE_SQL_DROP = "drop table eis_Config";
 	public static final String ORDER_BY_JPQL = " ORDER BY config.id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY eis_Config.id_ ASC";
@@ -102,6 +103,7 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 		model.setId(soapModel.getId());
 		model.setKey(soapModel.getKey());
 		model.setValue(soapModel.getValue());
+		model.setTitle(soapModel.getTitle());
 
 		return model;
 	}
@@ -169,6 +171,7 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 		attributes.put("id", getId());
 		attributes.put("key", getKey());
 		attributes.put("value", getValue());
+		attributes.put("title", getTitle());
 
 		return attributes;
 	}
@@ -191,6 +194,12 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 
 		if (value != null) {
 			setValue(value);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
 		}
 	}
 
@@ -247,6 +256,22 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 		_value = value;
 	}
 
+	@JSON
+	@Override
+	public String getTitle() {
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -281,6 +306,7 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 		configImpl.setId(getId());
 		configImpl.setKey(getKey());
 		configImpl.setValue(getValue());
+		configImpl.setTitle(getTitle());
 
 		configImpl.resetOriginalValues();
 
@@ -360,12 +386,20 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 			configCacheModel.value = null;
 		}
 
+		configCacheModel.title = getTitle();
+
+		String title = configCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
+			configCacheModel.title = null;
+		}
+
 		return configCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{id=");
 		sb.append(getId());
@@ -373,6 +407,8 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 		sb.append(getKey());
 		sb.append(", value=");
 		sb.append(getValue());
+		sb.append(", title=");
+		sb.append(getTitle());
 		sb.append("}");
 
 		return sb.toString();
@@ -380,7 +416,7 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.Config");
@@ -398,6 +434,10 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 			"<column><column-name>value</column-name><column-value><![CDATA[");
 		sb.append(getValue());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -410,6 +450,7 @@ public class ConfigModelImpl extends BaseModelImpl<Config>
 	private String _key;
 	private String _originalKey;
 	private String _value;
+	private String _title;
 	private long _columnBitmask;
 	private Config _escapedModel;
 }

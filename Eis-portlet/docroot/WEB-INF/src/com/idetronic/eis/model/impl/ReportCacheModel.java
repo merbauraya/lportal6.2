@@ -35,7 +35,7 @@ import java.io.ObjectOutput;
 public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{reportId=");
 		sb.append(reportId);
@@ -45,6 +45,10 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		sb.append(reportName);
 		sb.append(", reportTitle=");
 		sb.append(reportTitle);
+		sb.append(", dataEntry=");
+		sb.append(dataEntry);
+		sb.append(", dataName=");
+		sb.append(dataName);
 		sb.append("}");
 
 		return sb.toString();
@@ -77,6 +81,15 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 			reportImpl.setReportTitle(reportTitle);
 		}
 
+		reportImpl.setDataEntry(dataEntry);
+
+		if (dataName == null) {
+			reportImpl.setDataName(StringPool.BLANK);
+		}
+		else {
+			reportImpl.setDataName(dataName);
+		}
+
 		reportImpl.resetOriginalValues();
 
 		return reportImpl;
@@ -88,6 +101,8 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		reportKey = objectInput.readUTF();
 		reportName = objectInput.readUTF();
 		reportTitle = objectInput.readUTF();
+		dataEntry = objectInput.readBoolean();
+		dataName = objectInput.readUTF();
 	}
 
 	@Override
@@ -115,10 +130,21 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		else {
 			objectOutput.writeUTF(reportTitle);
 		}
+
+		objectOutput.writeBoolean(dataEntry);
+
+		if (dataName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(dataName);
+		}
 	}
 
 	public long reportId;
 	public String reportKey;
 	public String reportName;
 	public String reportTitle;
+	public boolean dataEntry;
+	public String dataName;
 }
