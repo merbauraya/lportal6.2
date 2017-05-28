@@ -82,6 +82,7 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 		attributes.put("status2", getStatus2());
 		attributes.put("status3", getStatus3());
 		attributes.put("status4", getStatus4());
+		attributes.put("status5", getStatus5());
 		attributes.put("masterCode", getMasterCode());
 		attributes.put("oldId", getOldId());
 		attributes.put("note", getNote());
@@ -144,6 +145,12 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 
 		if (status4 != null) {
 			setStatus4(status4);
+		}
+
+		Boolean status5 = (Boolean)attributes.get("status5");
+
+		if (status5 != null) {
+			setStatus5(status5);
 		}
 
 		String masterCode = (String)attributes.get("masterCode");
@@ -400,6 +407,34 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 	}
 
 	@Override
+	public boolean getStatus5() {
+		return _status5;
+	}
+
+	@Override
+	public boolean isStatus5() {
+		return _status5;
+	}
+
+	@Override
+	public void setStatus5(boolean status5) {
+		_status5 = status5;
+
+		if (_masterFileRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterFileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatus5", boolean.class);
+
+				method.invoke(_masterFileRemoteModel, status5);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getMasterCode() {
 		return _masterCode;
 	}
@@ -574,6 +609,7 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 		clone.setStatus2(getStatus2());
 		clone.setStatus3(getStatus3());
 		clone.setStatus4(getStatus4());
+		clone.setStatus5(getStatus5());
 		clone.setMasterCode(getMasterCode());
 		clone.setOldId(getOldId());
 		clone.setNote(getNote());
@@ -630,7 +666,7 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{masterFileId=");
 		sb.append(getMasterFileId());
@@ -650,6 +686,8 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 		sb.append(getStatus3());
 		sb.append(", status4=");
 		sb.append(getStatus4());
+		sb.append(", status5=");
+		sb.append(getStatus5());
 		sb.append(", masterCode=");
 		sb.append(getMasterCode());
 		sb.append(", oldId=");
@@ -665,7 +703,7 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.MasterFile");
@@ -708,6 +746,10 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 		sb.append(getStatus4());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>status5</column-name><column-value><![CDATA[");
+		sb.append(getStatus5());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>masterCode</column-name><column-value><![CDATA[");
 		sb.append(getMasterCode());
 		sb.append("]]></column-value></column>");
@@ -738,6 +780,7 @@ public class MasterFileClp extends BaseModelImpl<MasterFile>
 	private boolean _status2;
 	private boolean _status3;
 	private boolean _status4;
+	private boolean _status5;
 	private String _masterCode;
 	private long _oldId;
 	private String _note;

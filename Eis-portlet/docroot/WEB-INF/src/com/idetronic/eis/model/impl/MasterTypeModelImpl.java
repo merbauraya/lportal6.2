@@ -79,14 +79,16 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 			{ "hasStatus2", Types.BOOLEAN },
 			{ "hasStatus3", Types.BOOLEAN },
 			{ "hasStatus4", Types.BOOLEAN },
+			{ "hasStatus5", Types.BOOLEAN },
 			{ "status1Label", Types.VARCHAR },
 			{ "status2Label", Types.VARCHAR },
 			{ "status3Label", Types.VARCHAR },
 			{ "status4Label", Types.VARCHAR },
+			{ "status5Label", Types.VARCHAR },
 			{ "hasCode", Types.BOOLEAN },
 			{ "codeLabel", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eis_MasterType (masterTypeId LONG not null primary key,masterTypeName VARCHAR(75) null,status INTEGER,parentType BOOLEAN,pageLabel VARCHAR(75) null,nameLabel VARCHAR(75) null,hasParent1 BOOLEAN,parentId1 LONG,parentId2 LONG,hasParent2 BOOLEAN,parent1Label VARCHAR(75) null,parent2Label VARCHAR(75) null,hasStatus1 BOOLEAN,hasStatus2 BOOLEAN,hasStatus3 BOOLEAN,hasStatus4 BOOLEAN,status1Label VARCHAR(75) null,status2Label VARCHAR(75) null,status3Label VARCHAR(75) null,status4Label VARCHAR(75) null,hasCode BOOLEAN,codeLabel VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table eis_MasterType (masterTypeId LONG not null primary key,masterTypeName VARCHAR(75) null,status INTEGER,parentType BOOLEAN,pageLabel VARCHAR(75) null,nameLabel VARCHAR(75) null,hasParent1 BOOLEAN,parentId1 LONG,parentId2 LONG,hasParent2 BOOLEAN,parent1Label VARCHAR(75) null,parent2Label VARCHAR(75) null,hasStatus1 BOOLEAN,hasStatus2 BOOLEAN,hasStatus3 BOOLEAN,hasStatus4 BOOLEAN,hasStatus5 BOOLEAN,status1Label VARCHAR(75) null,status2Label VARCHAR(75) null,status3Label VARCHAR(75) null,status4Label VARCHAR(75) null,status5Label VARCHAR(75) null,hasCode BOOLEAN,codeLabel VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table eis_MasterType";
 	public static final String ORDER_BY_JPQL = " ORDER BY masterType.masterTypeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY eis_MasterType.masterTypeId ASC";
@@ -134,10 +136,12 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		model.setHasStatus2(soapModel.getHasStatus2());
 		model.setHasStatus3(soapModel.getHasStatus3());
 		model.setHasStatus4(soapModel.getHasStatus4());
+		model.setHasStatus5(soapModel.getHasStatus5());
 		model.setStatus1Label(soapModel.getStatus1Label());
 		model.setStatus2Label(soapModel.getStatus2Label());
 		model.setStatus3Label(soapModel.getStatus3Label());
 		model.setStatus4Label(soapModel.getStatus4Label());
+		model.setStatus5Label(soapModel.getStatus5Label());
 		model.setHasCode(soapModel.getHasCode());
 		model.setCodeLabel(soapModel.getCodeLabel());
 
@@ -220,10 +224,12 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		attributes.put("hasStatus2", getHasStatus2());
 		attributes.put("hasStatus3", getHasStatus3());
 		attributes.put("hasStatus4", getHasStatus4());
+		attributes.put("hasStatus5", getHasStatus5());
 		attributes.put("status1Label", getStatus1Label());
 		attributes.put("status2Label", getStatus2Label());
 		attributes.put("status3Label", getStatus3Label());
 		attributes.put("status4Label", getStatus4Label());
+		attributes.put("status5Label", getStatus5Label());
 		attributes.put("hasCode", getHasCode());
 		attributes.put("codeLabel", getCodeLabel());
 
@@ -328,6 +334,12 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 			setHasStatus4(hasStatus4);
 		}
 
+		Boolean hasStatus5 = (Boolean)attributes.get("hasStatus5");
+
+		if (hasStatus5 != null) {
+			setHasStatus5(hasStatus5);
+		}
+
 		String status1Label = (String)attributes.get("status1Label");
 
 		if (status1Label != null) {
@@ -350,6 +362,12 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 
 		if (status4Label != null) {
 			setStatus4Label(status4Label);
+		}
+
+		String status5Label = (String)attributes.get("status5Label");
+
+		if (status5Label != null) {
+			setStatus5Label(status5Label);
 		}
 
 		Boolean hasCode = (Boolean)attributes.get("hasCode");
@@ -615,6 +633,22 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 
 	@JSON
 	@Override
+	public boolean getHasStatus5() {
+		return _hasStatus5;
+	}
+
+	@Override
+	public boolean isHasStatus5() {
+		return _hasStatus5;
+	}
+
+	@Override
+	public void setHasStatus5(boolean hasStatus5) {
+		_hasStatus5 = hasStatus5;
+	}
+
+	@JSON
+	@Override
 	public String getStatus1Label() {
 		if (_status1Label == null) {
 			return StringPool.BLANK;
@@ -675,6 +709,22 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 	@Override
 	public void setStatus4Label(String status4Label) {
 		_status4Label = status4Label;
+	}
+
+	@JSON
+	@Override
+	public String getStatus5Label() {
+		if (_status5Label == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _status5Label;
+		}
+	}
+
+	@Override
+	public void setStatus5Label(String status5Label) {
+		_status5Label = status5Label;
 	}
 
 	@JSON
@@ -756,10 +806,12 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		masterTypeImpl.setHasStatus2(getHasStatus2());
 		masterTypeImpl.setHasStatus3(getHasStatus3());
 		masterTypeImpl.setHasStatus4(getHasStatus4());
+		masterTypeImpl.setHasStatus5(getHasStatus5());
 		masterTypeImpl.setStatus1Label(getStatus1Label());
 		masterTypeImpl.setStatus2Label(getStatus2Label());
 		masterTypeImpl.setStatus3Label(getStatus3Label());
 		masterTypeImpl.setStatus4Label(getStatus4Label());
+		masterTypeImpl.setStatus5Label(getStatus5Label());
 		masterTypeImpl.setHasCode(getHasCode());
 		masterTypeImpl.setCodeLabel(getCodeLabel());
 
@@ -887,6 +939,8 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 
 		masterTypeCacheModel.hasStatus4 = getHasStatus4();
 
+		masterTypeCacheModel.hasStatus5 = getHasStatus5();
+
 		masterTypeCacheModel.status1Label = getStatus1Label();
 
 		String status1Label = masterTypeCacheModel.status1Label;
@@ -919,6 +973,14 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 			masterTypeCacheModel.status4Label = null;
 		}
 
+		masterTypeCacheModel.status5Label = getStatus5Label();
+
+		String status5Label = masterTypeCacheModel.status5Label;
+
+		if ((status5Label != null) && (status5Label.length() == 0)) {
+			masterTypeCacheModel.status5Label = null;
+		}
+
 		masterTypeCacheModel.hasCode = getHasCode();
 
 		masterTypeCacheModel.codeLabel = getCodeLabel();
@@ -934,7 +996,7 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{masterTypeId=");
 		sb.append(getMasterTypeId());
@@ -968,6 +1030,8 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		sb.append(getHasStatus3());
 		sb.append(", hasStatus4=");
 		sb.append(getHasStatus4());
+		sb.append(", hasStatus5=");
+		sb.append(getHasStatus5());
 		sb.append(", status1Label=");
 		sb.append(getStatus1Label());
 		sb.append(", status2Label=");
@@ -976,6 +1040,8 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		sb.append(getStatus3Label());
 		sb.append(", status4Label=");
 		sb.append(getStatus4Label());
+		sb.append(", status5Label=");
+		sb.append(getStatus5Label());
 		sb.append(", hasCode=");
 		sb.append(getHasCode());
 		sb.append(", codeLabel=");
@@ -987,7 +1053,7 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.MasterType");
@@ -1058,6 +1124,10 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		sb.append(getHasStatus4());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>hasStatus5</column-name><column-value><![CDATA[");
+		sb.append(getHasStatus5());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status1Label</column-name><column-value><![CDATA[");
 		sb.append(getStatus1Label());
 		sb.append("]]></column-value></column>");
@@ -1072,6 +1142,10 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 		sb.append(
 			"<column><column-name>status4Label</column-name><column-value><![CDATA[");
 		sb.append(getStatus4Label());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status5Label</column-name><column-value><![CDATA[");
+		sb.append(getStatus5Label());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hasCode</column-name><column-value><![CDATA[");
@@ -1109,10 +1183,12 @@ public class MasterTypeModelImpl extends BaseModelImpl<MasterType>
 	private boolean _hasStatus2;
 	private boolean _hasStatus3;
 	private boolean _hasStatus4;
+	private boolean _hasStatus5;
 	private String _status1Label;
 	private String _status2Label;
 	private String _status3Label;
 	private String _status4Label;
+	private String _status5Label;
 	private boolean _hasCode;
 	private String _codeLabel;
 	private long _columnBitmask;

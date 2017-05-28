@@ -159,6 +159,22 @@ public class ConfigLocalServiceImpl extends ConfigLocalServiceBaseImpl {
 		
 		
 	}
+	public Config getConfigByKey(String key) throws SystemException, IOException
+	{
+		Config config;
+		try {
+			return configPersistence.findByKey(key);
+			
+			
+		} catch (NoSuchConfigException e) {
+			return null;
+		}
+		
+	
+		
+		
+		
+	}
 	public void deleteByKeyWildcard(String keyWildCard) throws SystemException
 	{
 		List<Config> configs = findWithKeyWildcard(keyWildCard,QueryUtil.ALL_POS,QueryUtil.ALL_POS);

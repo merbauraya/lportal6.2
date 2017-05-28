@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class ItemMediumServiceClpInvoker {
 	public ItemMediumServiceClpInvoker() {
-		_methodName256 = "getBeanIdentifier";
+		_methodName264 = "getBeanIdentifier";
 
-		_methodParameterTypes256 = new String[] {  };
+		_methodParameterTypes264 = new String[] {  };
 
-		_methodName257 = "setBeanIdentifier";
+		_methodName265 = "setBeanIdentifier";
 
-		_methodParameterTypes257 = new String[] { "java.lang.String" };
+		_methodParameterTypes265 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName256.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes256, parameterTypes)) {
+		if (_methodName264.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes264, parameterTypes)) {
 			return ItemMediumServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName257.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes257, parameterTypes)) {
+		if (_methodName265.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes265, parameterTypes)) {
 			ItemMediumServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class ItemMediumServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName256;
-	private String[] _methodParameterTypes256;
-	private String _methodName257;
-	private String[] _methodParameterTypes257;
+	private String _methodName264;
+	private String[] _methodParameterTypes264;
+	private String _methodName265;
+	private String[] _methodParameterTypes265;
 }

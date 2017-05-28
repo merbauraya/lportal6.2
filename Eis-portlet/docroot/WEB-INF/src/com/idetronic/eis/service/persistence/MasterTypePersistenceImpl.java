@@ -852,10 +852,12 @@ public class MasterTypePersistenceImpl extends BasePersistenceImpl<MasterType>
 		masterTypeImpl.setHasStatus2(masterType.isHasStatus2());
 		masterTypeImpl.setHasStatus3(masterType.isHasStatus3());
 		masterTypeImpl.setHasStatus4(masterType.isHasStatus4());
+		masterTypeImpl.setHasStatus5(masterType.isHasStatus5());
 		masterTypeImpl.setStatus1Label(masterType.getStatus1Label());
 		masterTypeImpl.setStatus2Label(masterType.getStatus2Label());
 		masterTypeImpl.setStatus3Label(masterType.getStatus3Label());
 		masterTypeImpl.setStatus4Label(masterType.getStatus4Label());
+		masterTypeImpl.setStatus5Label(masterType.getStatus5Label());
 		masterTypeImpl.setHasCode(masterType.isHasCode());
 		masterTypeImpl.setCodeLabel(masterType.getCodeLabel());
 

@@ -327,4 +327,8 @@ public interface MasterFileLocalService extends BaseLocalService,
 	public java.util.List<com.idetronic.eis.model.MasterFile> findByTypeAndStatus4(
 		long masterTypeId, boolean status4)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.idetronic.eis.model.MasterFile> findByTypeAndStatus5(
+		long masterTypeId, boolean status)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -16,6 +16,19 @@
 			<hint name="max-length">150</hint>
 		</field>
 	</model>
+	<model name="com.idetronic.eis.model.FactAcquisition">
+		<field name="factAcquisitionId" type="long" />
+		<field name="facultyId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="volumeTotal" type="long" />
+		<field name="titleTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
 	<model name="com.idetronic.eis.model.FactConsultation">
 		<field name="factConsultationId" type="long" />
 		<field name="libraryId" type="long" />
@@ -282,6 +295,7 @@
 		<field name="status2" type="boolean" />
 		<field name="status3" type="boolean" />
 		<field name="status4" type="boolean" />
+		<field name="status5" type="boolean" />
 		<field name="masterCode" type="String" />
 		<field name="oldId" type="long" />
 		<field name="note" type="String" />
@@ -304,10 +318,12 @@
 		<field name="hasStatus2" type="boolean" />
 		<field name="hasStatus3" type="boolean" />
 		<field name="hasStatus4" type="boolean" />
+		<field name="hasStatus5" type="boolean" />
 		<field name="status1Label" type="String" />
 		<field name="status2Label" type="String" />
 		<field name="status3Label" type="String" />
 		<field name="status4Label" type="String" />
+		<field name="status5Label" type="String" />
 		<field name="hasCode" type="boolean" />
 		<field name="codeLabel" type="String" />
 	</model>

@@ -65,6 +65,13 @@
 				<portlet:param name="backURL" value="<%= currentURL %>" />
 					 
 			</portlet:renderURL>
+			
+			<portlet:renderURL var="acquisitionURL">
+				<portlet:param name="mvcPath" value="/html/fact/acquisition.jsp" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="backURL" value="<%= currentURL %>" />
+					 
+			</portlet:renderURL>
 				
 																
 
@@ -131,7 +138,9 @@
 						href="<%= expenseURL %>" label="expenses" 
 						name="addItemButton" /> 	
 					
-					
+					<aui:nav-item iconCssClass="icon-edit"  
+						href="<%= acquisitionURL %>" label="acquisition" 
+						name="addItemButton" /> 	
 				</aui:nav-item>
 				
 				

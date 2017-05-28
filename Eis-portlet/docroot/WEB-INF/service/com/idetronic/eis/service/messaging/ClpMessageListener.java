@@ -17,6 +17,8 @@ package com.idetronic.eis.service.messaging;
 import com.idetronic.eis.service.ClpSerializer;
 import com.idetronic.eis.service.ConfigLocalServiceUtil;
 import com.idetronic.eis.service.ConfigServiceUtil;
+import com.idetronic.eis.service.FactAcquisitionLocalServiceUtil;
+import com.idetronic.eis.service.FactAcquisitionServiceUtil;
 import com.idetronic.eis.service.FactConsultationLocalServiceUtil;
 import com.idetronic.eis.service.FactConsultationServiceUtil;
 import com.idetronic.eis.service.FactExpenseLocalServiceUtil;
@@ -108,6 +110,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			ConfigLocalServiceUtil.clearService();
 
 			ConfigServiceUtil.clearService();
+			FactAcquisitionLocalServiceUtil.clearService();
+
+			FactAcquisitionServiceUtil.clearService();
 			FactConsultationLocalServiceUtil.clearService();
 
 			FactConsultationServiceUtil.clearService();

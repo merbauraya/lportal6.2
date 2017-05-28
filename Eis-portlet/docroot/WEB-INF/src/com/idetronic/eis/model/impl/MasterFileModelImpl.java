@@ -72,12 +72,13 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 			{ "status2", Types.BOOLEAN },
 			{ "status3", Types.BOOLEAN },
 			{ "status4", Types.BOOLEAN },
+			{ "status5", Types.BOOLEAN },
 			{ "masterCode", Types.VARCHAR },
 			{ "oldId", Types.BIGINT },
 			{ "note", Types.VARCHAR },
 			{ "inActive", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eis_MasterFile (masterFileId LONG not null primary key,masterTypeId LONG,parentId1 LONG,parentId2 LONG,masterFileName VARCHAR(75) null,status1 BOOLEAN,status2 BOOLEAN,status3 BOOLEAN,status4 BOOLEAN,masterCode VARCHAR(75) null,oldId LONG,note VARCHAR(75) null,inActive BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table eis_MasterFile (masterFileId LONG not null primary key,masterTypeId LONG,parentId1 LONG,parentId2 LONG,masterFileName VARCHAR(75) null,status1 BOOLEAN,status2 BOOLEAN,status3 BOOLEAN,status4 BOOLEAN,status5 BOOLEAN,masterCode VARCHAR(75) null,oldId LONG,note VARCHAR(75) null,inActive BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table eis_MasterFile";
 	public static final String ORDER_BY_JPQL = " ORDER BY masterFile.masterFileId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY eis_MasterFile.masterFileId ASC";
@@ -103,7 +104,8 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 	public static long STATUS2_COLUMN_BITMASK = 128L;
 	public static long STATUS3_COLUMN_BITMASK = 256L;
 	public static long STATUS4_COLUMN_BITMASK = 512L;
-	public static long MASTERFILEID_COLUMN_BITMASK = 1024L;
+	public static long STATUS5_COLUMN_BITMASK = 1024L;
+	public static long MASTERFILEID_COLUMN_BITMASK = 2048L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -127,6 +129,7 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 		model.setStatus2(soapModel.getStatus2());
 		model.setStatus3(soapModel.getStatus3());
 		model.setStatus4(soapModel.getStatus4());
+		model.setStatus5(soapModel.getStatus5());
 		model.setMasterCode(soapModel.getMasterCode());
 		model.setOldId(soapModel.getOldId());
 		model.setNote(soapModel.getNote());
@@ -204,6 +207,7 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 		attributes.put("status2", getStatus2());
 		attributes.put("status3", getStatus3());
 		attributes.put("status4", getStatus4());
+		attributes.put("status5", getStatus5());
 		attributes.put("masterCode", getMasterCode());
 		attributes.put("oldId", getOldId());
 		attributes.put("note", getNote());
@@ -266,6 +270,12 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 
 		if (status4 != null) {
 			setStatus4(status4);
+		}
+
+		Boolean status5 = (Boolean)attributes.get("status5");
+
+		if (status5 != null) {
+			setStatus5(status5);
 		}
 
 		String masterCode = (String)attributes.get("masterCode");
@@ -513,6 +523,34 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 
 	@JSON
 	@Override
+	public boolean getStatus5() {
+		return _status5;
+	}
+
+	@Override
+	public boolean isStatus5() {
+		return _status5;
+	}
+
+	@Override
+	public void setStatus5(boolean status5) {
+		_columnBitmask |= STATUS5_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus5) {
+			_setOriginalStatus5 = true;
+
+			_originalStatus5 = _status5;
+		}
+
+		_status5 = status5;
+	}
+
+	public boolean getOriginalStatus5() {
+		return _originalStatus5;
+	}
+
+	@JSON
+	@Override
 	public String getMasterCode() {
 		if (_masterCode == null) {
 			return StringPool.BLANK;
@@ -634,6 +672,7 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 		masterFileImpl.setStatus2(getStatus2());
 		masterFileImpl.setStatus3(getStatus3());
 		masterFileImpl.setStatus4(getStatus4());
+		masterFileImpl.setStatus5(getStatus5());
 		masterFileImpl.setMasterCode(getMasterCode());
 		masterFileImpl.setOldId(getOldId());
 		masterFileImpl.setNote(getNote());
@@ -720,6 +759,10 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 
 		masterFileModelImpl._setOriginalStatus4 = false;
 
+		masterFileModelImpl._originalStatus5 = masterFileModelImpl._status5;
+
+		masterFileModelImpl._setOriginalStatus5 = false;
+
 		masterFileModelImpl._originalOldId = masterFileModelImpl._oldId;
 
 		masterFileModelImpl._setOriginalOldId = false;
@@ -759,6 +802,8 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 
 		masterFileCacheModel.status4 = getStatus4();
 
+		masterFileCacheModel.status5 = getStatus5();
+
 		masterFileCacheModel.masterCode = getMasterCode();
 
 		String masterCode = masterFileCacheModel.masterCode;
@@ -784,7 +829,7 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{masterFileId=");
 		sb.append(getMasterFileId());
@@ -804,6 +849,8 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 		sb.append(getStatus3());
 		sb.append(", status4=");
 		sb.append(getStatus4());
+		sb.append(", status5=");
+		sb.append(getStatus5());
 		sb.append(", masterCode=");
 		sb.append(getMasterCode());
 		sb.append(", oldId=");
@@ -819,7 +866,7 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.MasterFile");
@@ -860,6 +907,10 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 		sb.append(
 			"<column><column-name>status4</column-name><column-value><![CDATA[");
 		sb.append(getStatus4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status5</column-name><column-value><![CDATA[");
+		sb.append(getStatus5());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>masterCode</column-name><column-value><![CDATA[");
@@ -911,6 +962,9 @@ public class MasterFileModelImpl extends BaseModelImpl<MasterFile>
 	private boolean _status4;
 	private boolean _originalStatus4;
 	private boolean _setOriginalStatus4;
+	private boolean _status5;
+	private boolean _originalStatus5;
+	private boolean _setOriginalStatus5;
 	private String _masterCode;
 	private long _oldId;
 	private long _originalOldId;

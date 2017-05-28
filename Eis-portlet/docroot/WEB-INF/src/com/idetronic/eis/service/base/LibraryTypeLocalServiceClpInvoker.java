@@ -106,17 +106,17 @@ public class LibraryTypeLocalServiceClpInvoker {
 				"com.idetronic.eis.model.LibraryType"
 			};
 
-		_methodName272 = "getBeanIdentifier";
+		_methodName280 = "getBeanIdentifier";
 
-		_methodParameterTypes272 = new String[] {  };
+		_methodParameterTypes280 = new String[] {  };
 
-		_methodName273 = "setBeanIdentifier";
+		_methodName281 = "setBeanIdentifier";
 
-		_methodParameterTypes273 = new String[] { "java.lang.String" };
+		_methodParameterTypes281 = new String[] { "java.lang.String" };
 
-		_methodName278 = "add";
+		_methodName286 = "add";
 
-		_methodParameterTypes278 = new String[] {
+		_methodParameterTypes286 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 	}
@@ -210,20 +210,20 @@ public class LibraryTypeLocalServiceClpInvoker {
 			return LibraryTypeLocalServiceUtil.updateLibraryType((com.idetronic.eis.model.LibraryType)arguments[0]);
 		}
 
-		if (_methodName272.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return LibraryTypeLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName273.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			LibraryTypeLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName278.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			return LibraryTypeLocalServiceUtil.add((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
@@ -263,10 +263,10 @@ public class LibraryTypeLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName272;
-	private String[] _methodParameterTypes272;
-	private String _methodName273;
-	private String[] _methodParameterTypes273;
-	private String _methodName278;
-	private String[] _methodParameterTypes278;
+	private String _methodName280;
+	private String[] _methodParameterTypes280;
+	private String _methodName281;
+	private String[] _methodParameterTypes281;
+	private String _methodName286;
+	private String[] _methodParameterTypes286;
 }

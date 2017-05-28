@@ -39,6 +39,7 @@ public class MasterFileSoap implements Serializable {
 		soapModel.setStatus2(model.getStatus2());
 		soapModel.setStatus3(model.getStatus3());
 		soapModel.setStatus4(model.getStatus4());
+		soapModel.setStatus5(model.getStatus5());
 		soapModel.setMasterCode(model.getMasterCode());
 		soapModel.setOldId(model.getOldId());
 		soapModel.setNote(model.getNote());
@@ -183,6 +184,18 @@ public class MasterFileSoap implements Serializable {
 		_status4 = status4;
 	}
 
+	public boolean getStatus5() {
+		return _status5;
+	}
+
+	public boolean isStatus5() {
+		return _status5;
+	}
+
+	public void setStatus5(boolean status5) {
+		_status5 = status5;
+	}
+
 	public String getMasterCode() {
 		return _masterCode;
 	}
@@ -228,6 +241,7 @@ public class MasterFileSoap implements Serializable {
 	private boolean _status2;
 	private boolean _status3;
 	private boolean _status4;
+	private boolean _status5;
 	private String _masterCode;
 	private long _oldId;
 	private String _note;

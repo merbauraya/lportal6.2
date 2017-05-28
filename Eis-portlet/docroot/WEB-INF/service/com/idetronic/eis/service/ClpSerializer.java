@@ -15,6 +15,7 @@
 package com.idetronic.eis.service;
 
 import com.idetronic.eis.model.ConfigClp;
+import com.idetronic.eis.model.FactAcquisitionClp;
 import com.idetronic.eis.model.FactConsultationClp;
 import com.idetronic.eis.model.FactExpenseClp;
 import com.idetronic.eis.model.FactIrItemClp;
@@ -142,6 +143,10 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(ConfigClp.class.getName())) {
 			return translateInputConfig(oldModel);
+		}
+
+		if (oldModelClassName.equals(FactAcquisitionClp.class.getName())) {
+			return translateInputFactAcquisition(oldModel);
 		}
 
 		if (oldModelClassName.equals(FactConsultationClp.class.getName())) {
@@ -316,6 +321,16 @@ public class ClpSerializer {
 		ConfigClp oldClpModel = (ConfigClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getConfigRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputFactAcquisition(BaseModel<?> oldModel) {
+		FactAcquisitionClp oldClpModel = (FactAcquisitionClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getFactAcquisitionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -725,6 +740,43 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals("com.idetronic.eis.model.impl.ConfigImpl")) {
 			return translateOutputConfig(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.idetronic.eis.model.impl.FactAcquisitionImpl")) {
+			return translateOutputFactAcquisition(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -2242,6 +2294,10 @@ public class ClpSerializer {
 			return new com.idetronic.eis.NoSuchConfigException();
 		}
 
+		if (className.equals("com.idetronic.eis.NoSuchFactAcquisitionException")) {
+			return new com.idetronic.eis.NoSuchFactAcquisitionException();
+		}
+
 		if (className.equals(
 					"com.idetronic.eis.NoSuchFactConsultationException")) {
 			return new com.idetronic.eis.NoSuchFactConsultationException();
@@ -2411,6 +2467,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setConfigRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputFactAcquisition(BaseModel<?> oldModel) {
+		FactAcquisitionClp newModel = new FactAcquisitionClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setFactAcquisitionRemoteModel(oldModel);
 
 		return newModel;
 	}

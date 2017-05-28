@@ -351,6 +351,26 @@
 
 	
 	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactAcquisitionFinder.findLatestEntryByL_P">
+		SELECT 
+		    A.*
+		FROM
+		    eis_FactAcquisition A
+		        INNER JOIN
+		    (SELECT 
+		        facultyId, period, itemId, MAX(factAcquisitionId) AS id
+		    FROM
+		        eis_FactAcquisition
+		    WHERE
+		        facultyId = ? AND period = ?
+		    GROUP BY itemId , facultyId , period) groupedData ON (A.period = groupedData.period
+		        AND A.facultyId = groupedData.facultyId
+		        AND A.itemId = groupedData.itemId)
+		        AND A.factAcquisitionId = groupedData.id
+		        AND A.period = groupedData.period
+		        AND A.facultyId = groupedData.facultyId
+		        AND A.itemId = groupedData.itemId
+	</sql>
 	<sql file="custom-sql/missing_data.xml"/>
 	<sql file="custom-sql/history.xml"/>
 </custom-sql>

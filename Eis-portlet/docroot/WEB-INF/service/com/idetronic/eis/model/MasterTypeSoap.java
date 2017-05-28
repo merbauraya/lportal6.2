@@ -46,10 +46,12 @@ public class MasterTypeSoap implements Serializable {
 		soapModel.setHasStatus2(model.getHasStatus2());
 		soapModel.setHasStatus3(model.getHasStatus3());
 		soapModel.setHasStatus4(model.getHasStatus4());
+		soapModel.setHasStatus5(model.getHasStatus5());
 		soapModel.setStatus1Label(model.getStatus1Label());
 		soapModel.setStatus2Label(model.getStatus2Label());
 		soapModel.setStatus3Label(model.getStatus3Label());
 		soapModel.setStatus4Label(model.getStatus4Label());
+		soapModel.setStatus5Label(model.getStatus5Label());
 		soapModel.setHasCode(model.getHasCode());
 		soapModel.setCodeLabel(model.getCodeLabel());
 
@@ -260,6 +262,18 @@ public class MasterTypeSoap implements Serializable {
 		_hasStatus4 = hasStatus4;
 	}
 
+	public boolean getHasStatus5() {
+		return _hasStatus5;
+	}
+
+	public boolean isHasStatus5() {
+		return _hasStatus5;
+	}
+
+	public void setHasStatus5(boolean hasStatus5) {
+		_hasStatus5 = hasStatus5;
+	}
+
 	public String getStatus1Label() {
 		return _status1Label;
 	}
@@ -290,6 +304,14 @@ public class MasterTypeSoap implements Serializable {
 
 	public void setStatus4Label(String status4Label) {
 		_status4Label = status4Label;
+	}
+
+	public String getStatus5Label() {
+		return _status5Label;
+	}
+
+	public void setStatus5Label(String status5Label) {
+		_status5Label = status5Label;
 	}
 
 	public boolean getHasCode() {
@@ -328,10 +350,12 @@ public class MasterTypeSoap implements Serializable {
 	private boolean _hasStatus2;
 	private boolean _hasStatus3;
 	private boolean _hasStatus4;
+	private boolean _hasStatus5;
 	private String _status1Label;
 	private String _status2Label;
 	private String _status3Label;
 	private String _status4Label;
+	private String _status5Label;
 	private boolean _hasCode;
 	private String _codeLabel;
 }

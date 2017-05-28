@@ -16,7 +16,13 @@ String rowIndexesParam = ParamUtil.getString(request, "rowIndexes");
        
        
 </liferay-portlet:renderURL>
-<aui:a cssClass="btn btn-default btnEdit" href="javascript:;" label="add-info-box" />
+<liferay-portlet:renderURL varImpl="addInfoBoxURL">
+	<portlet:param name="id" value="0"/>
+	<portlet:param name="mvcPath" value="/html/admin/view.jsp"/>
+	<portlet:param name="navigation" value="editInfoBox"/>
+</liferay-portlet:renderURL>
+
+<aui:a cssClass="btn btn-default btnEdit" href="<%=addInfoBoxURL.toString()  %>" label="add-info-box" />
 <liferay-ui:search-container emptyResultsMessage="no-info-box-were-found"
 	delta="10"
 	iteratorURL="<%= iteratorURL %>"

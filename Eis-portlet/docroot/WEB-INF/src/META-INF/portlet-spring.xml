@@ -4,6 +4,10 @@
 	<bean id="com.idetronic.eis.service.ConfigLocalService" class="com.idetronic.eis.service.impl.ConfigLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.ConfigService" class="com.idetronic.eis.service.impl.ConfigServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.ConfigPersistence" class="com.idetronic.eis.service.persistence.ConfigPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactAcquisitionLocalService" class="com.idetronic.eis.service.impl.FactAcquisitionLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactAcquisitionService" class="com.idetronic.eis.service.impl.FactAcquisitionServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactAcquisitionPersistence" class="com.idetronic.eis.service.persistence.FactAcquisitionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactAcquisitionFinder" class="com.idetronic.eis.service.persistence.FactAcquisitionFinderImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactConsultationLocalService" class="com.idetronic.eis.service.impl.FactConsultationLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactConsultationService" class="com.idetronic.eis.service.impl.FactConsultationServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactConsultationPersistence" class="com.idetronic.eis.service.persistence.FactConsultationPersistenceImpl" parent="basePersistence" />

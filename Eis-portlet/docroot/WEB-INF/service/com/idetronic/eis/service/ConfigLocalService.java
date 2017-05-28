@@ -271,6 +271,11 @@ public interface ConfigLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException,
 			java.io.IOException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.idetronic.eis.model.Config getConfigByKey(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			java.io.IOException;
+
 	public void deleteByKeyWildcard(java.lang.String keyWildCard)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

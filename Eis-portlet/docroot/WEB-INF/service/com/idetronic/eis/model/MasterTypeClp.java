@@ -89,10 +89,12 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 		attributes.put("hasStatus2", getHasStatus2());
 		attributes.put("hasStatus3", getHasStatus3());
 		attributes.put("hasStatus4", getHasStatus4());
+		attributes.put("hasStatus5", getHasStatus5());
 		attributes.put("status1Label", getStatus1Label());
 		attributes.put("status2Label", getStatus2Label());
 		attributes.put("status3Label", getStatus3Label());
 		attributes.put("status4Label", getStatus4Label());
+		attributes.put("status5Label", getStatus5Label());
 		attributes.put("hasCode", getHasCode());
 		attributes.put("codeLabel", getCodeLabel());
 
@@ -197,6 +199,12 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 			setHasStatus4(hasStatus4);
 		}
 
+		Boolean hasStatus5 = (Boolean)attributes.get("hasStatus5");
+
+		if (hasStatus5 != null) {
+			setHasStatus5(hasStatus5);
+		}
+
 		String status1Label = (String)attributes.get("status1Label");
 
 		if (status1Label != null) {
@@ -219,6 +227,12 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 
 		if (status4Label != null) {
 			setStatus4Label(status4Label);
+		}
+
+		String status5Label = (String)attributes.get("status5Label");
+
+		if (status5Label != null) {
+			setStatus5Label(status5Label);
 		}
 
 		Boolean hasCode = (Boolean)attributes.get("hasCode");
@@ -639,6 +653,34 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 	}
 
 	@Override
+	public boolean getHasStatus5() {
+		return _hasStatus5;
+	}
+
+	@Override
+	public boolean isHasStatus5() {
+		return _hasStatus5;
+	}
+
+	@Override
+	public void setHasStatus5(boolean hasStatus5) {
+		_hasStatus5 = hasStatus5;
+
+		if (_masterTypeRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterTypeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setHasStatus5", boolean.class);
+
+				method.invoke(_masterTypeRemoteModel, hasStatus5);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getStatus1Label() {
 		return _status1Label;
 	}
@@ -723,6 +765,29 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 				Method method = clazz.getMethod("setStatus4Label", String.class);
 
 				method.invoke(_masterTypeRemoteModel, status4Label);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getStatus5Label() {
+		return _status5Label;
+	}
+
+	@Override
+	public void setStatus5Label(String status5Label) {
+		_status5Label = status5Label;
+
+		if (_masterTypeRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterTypeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatus5Label", String.class);
+
+				method.invoke(_masterTypeRemoteModel, status5Label);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -866,10 +931,12 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 		clone.setHasStatus2(getHasStatus2());
 		clone.setHasStatus3(getHasStatus3());
 		clone.setHasStatus4(getHasStatus4());
+		clone.setHasStatus5(getHasStatus5());
 		clone.setStatus1Label(getStatus1Label());
 		clone.setStatus2Label(getStatus2Label());
 		clone.setStatus3Label(getStatus3Label());
 		clone.setStatus4Label(getStatus4Label());
+		clone.setStatus5Label(getStatus5Label());
 		clone.setHasCode(getHasCode());
 		clone.setCodeLabel(getCodeLabel());
 
@@ -924,7 +991,7 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{masterTypeId=");
 		sb.append(getMasterTypeId());
@@ -958,6 +1025,8 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 		sb.append(getHasStatus3());
 		sb.append(", hasStatus4=");
 		sb.append(getHasStatus4());
+		sb.append(", hasStatus5=");
+		sb.append(getHasStatus5());
 		sb.append(", status1Label=");
 		sb.append(getStatus1Label());
 		sb.append(", status2Label=");
@@ -966,6 +1035,8 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 		sb.append(getStatus3Label());
 		sb.append(", status4Label=");
 		sb.append(getStatus4Label());
+		sb.append(", status5Label=");
+		sb.append(getStatus5Label());
 		sb.append(", hasCode=");
 		sb.append(getHasCode());
 		sb.append(", codeLabel=");
@@ -977,7 +1048,7 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.MasterType");
@@ -1048,6 +1119,10 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 		sb.append(getHasStatus4());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>hasStatus5</column-name><column-value><![CDATA[");
+		sb.append(getHasStatus5());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status1Label</column-name><column-value><![CDATA[");
 		sb.append(getStatus1Label());
 		sb.append("]]></column-value></column>");
@@ -1062,6 +1137,10 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 		sb.append(
 			"<column><column-name>status4Label</column-name><column-value><![CDATA[");
 		sb.append(getStatus4Label());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status5Label</column-name><column-value><![CDATA[");
+		sb.append(getStatus5Label());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hasCode</column-name><column-value><![CDATA[");
@@ -1093,10 +1172,12 @@ public class MasterTypeClp extends BaseModelImpl<MasterType>
 	private boolean _hasStatus2;
 	private boolean _hasStatus3;
 	private boolean _hasStatus4;
+	private boolean _hasStatus5;
 	private String _status1Label;
 	private String _status2Label;
 	private String _status3Label;
 	private String _status4Label;
+	private String _status5Label;
 	private boolean _hasCode;
 	private String _codeLabel;
 	private BaseModel<?> _masterTypeRemoteModel;

@@ -1,9 +1,44 @@
 <%@ include file="/html/init.jsp" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONArray" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONFactory" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONObject" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
+<%
+	List<Config> infoBoxes = ConfigLocalServiceUtil.findWithKeyWildcard(EisUtil.EIS_INFO_BOX,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+	List<Report> reports = ReportLocalServiceUtil.findByDataEntry(true);// .getReports(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	
+	
+	String layoutSettingString = ConfigLocalServiceUtil.getByKeyAsString(EisUtil.EIS_DASHBOARD_LAYOUT);
+
+	JSONArray settingArray = JSONFactoryUtil.createJSONArray(layoutSettingString);
+	JSONArray sumArray = JSONFactoryUtil.createJSONArray();
+	JSONArray infoArray = JSONFactoryUtil.createJSONArray();
+	JSONObject layoutSetting = JSONFactoryUtil.createJSONObject();
+	
+	if (settingArray.length() > 0)
+	{
+		layoutSetting = settingArray.getJSONObject(0);
+		//out.print(layoutSetting.getInt("sumColSize"));
+		
+		sumArray = settingArray.getJSONObject(1).getJSONArray("summaryBox");
+		infoArray = settingArray.getJSONObject(2).getJSONArray("infoBox");
+	}
+	
+	
+	
+	
+	
+	
+	JSONArray sumBox = JSONFactoryUtil.createJSONArray();
+	JSONArray infoBoxArray = JSONFactoryUtil.createJSONArray();
+	
+%>
 
 <style>
-.dbcontainer
+.dbContainer
 {
- background-color: #F7F7F7;
+/* background-color: #F7F7F7; */
+ border-right: 1px dashed #808080;
   
 }
 #mySortableLayout h2
@@ -34,42 +69,86 @@
 .portlet-box
 {
 	padding: 0;
+	min-height:140px;
 }
 .ptitle
 {
 	font-weight:bold;
 	font-size:smaller;
 }
+.boxPlaceHolder
+{
+	border-style:dashed;
+	border-width:1px;
+	border-color: #808080;
+	
+}
 
 </style>
 
+<portlet:actionURL var="editURL" name="editDashboard">
+	
+</portlet:actionURL>
+
+<aui:form name="fm" method="post" action="<%=editURL %>" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "submitForm();" %>'>
 
 <aui:row>
 	<aui:col span="3">
 		 <div class="eisSidebar">
 		 <liferay-ui:panel collapsible="<%= true%>" extended="<%= true%>" title="summary">
 		 	<ul class="nav nav-list" id="summaryBoxList">
-		 		<li class="portlet-item" id="box-visitor">Pengunjung</li>
-		 		<li class="portlet-item" id="box-seating">Tempat Duduk</li>
-		 		<li class="portlet-item" id="box-loan">Pinjaman</li>
-		 		<li class="portlet-item" id="box-membership">Ahli Perpustakaan</li>
-		 		<li class="portlet-item" id="box-printedItem">Bahan Bercetak</li>
-		 		<li class="portlet-item" id="box-nonPrintedItem">Bahan Bukan Bercetak</li>
-		 		<li class="portlet-item" id="box-irItem">Harta Intelek</li>
-		 		<li class="portlet-item" id="box-position">Perjawatan</li>
-		 		<li class="portlet-item" id="box-expense">Perbelanjaan</li>
-		 		<li class="portlet-item" id="box-consultation">Konsultasi</li>
+		 	<%
+		 		for (Report report: reports)
+		 		{
+		 			String reportId = "box-" + report.getReportKey();
+		 			boolean add = true;
+		 			for (int i = 0 ; i < sumArray.length(); i++)
+		 			{
+		 				String itemKey = sumArray.getJSONObject(i).getString("id");
+		 				if (itemKey.equals(reportId))
+		 				{
+		 					add = false;
+		 				}
+		 			}
+		 	%>
+		 		<c:if test="<%= add %>">
+		 			<li class="portlet-item" id="<%= reportId %>"><%= report.getReportTitle() %></li>
+		 		</c:if>
+		 	<%
+		 		}
+		 	%>
+		 		
 		 	</ul>
 	 	</liferay-ui:panel>
 	 	 <liferay-ui:panel collapsible="<%= true%>" extended="<%= true%>" title="info">
-	 	 	<aui:select name="infoColumnCount" label="total-column">
-	 	 		<aui:option value="2">2</aui:option>
-	 	 		<aui:option value="3">3</aui:option>
+	 	 	<aui:select name="infoColumnCount" label="total-column" onChange='<%= renderResponse.getNamespace() + "updateInfoLayout();"%>'>
+	 	 		<aui:option value="3" selected="<%= true %>">3</aui:option>
 	 	 		<aui:option value="4">4</aui:option>
 	 	 	</aui:select>
 		 	<ul class="nav nav-list" id="infoBoxList">
-		 		<li class="portlet-item" id="info-library">Perpustakaan</li>
-		 		<li class="portlet-item" id="info-stat">Statistik</li>
+		 		<%
+		 			for (Config infoBox : infoBoxes)
+		 			{
+		 				boolean add = true;
+		 				String infoBoxId = "info-" + infoBox.getId();
+		 				for (int i = 0; i < infoArray.length(); i++)
+		 				{
+		 					String itemKey = infoArray.getJSONObject(i).getString("id");
+		 					if (itemKey.equals(infoBoxId))
+		 					{
+		 						add = false;
+		 					}
+		 				}
+		 				
+		 		%>
+		 		<c:if test="<%= add %>">
+		 			<li class="portlet-item" id="<%= infoBoxId %>"><%= infoBox.getTitle() %></li>
+		 		</c:if>
+		 		
+		 		<%
+		 			}
+		 		%>
+		 		
 		 		
 		 	</ul>
 		 	
@@ -82,8 +161,37 @@
 	<aui:col span="9">
 		<div id="mySortableLayout">
 			<h2> Dashboard Title</h2>
-			<aui:row>
+			<aui:row id="sumContainer" cssClass="sumContainer boxPlaceHolder">
 				<aui:col span="3" cssClass="dbContainer">
+					<%
+						int curSumItem = 0;
+						double curX = 0;
+						for (curSumItem = 0; curSumItem < sumArray.length(); curSumItem++)
+						{
+							JSONObject box = sumArray.getJSONObject(curSumItem);
+							
+							if (curSumItem == 0 || box.getDouble("x")== curX)
+							{
+								String title = box.getString("title");
+								String id = box.getString("id");
+					%>
+						<jsp:include page="drawBox.jsp">
+							<jsp:param name="type" value="infoBox"/>
+							<jsp:param name="id" value="<%= id %>" />
+							<jsp:param name="title" value="<%= title %>" />
+						</jsp:include>
+					<%			
+							}
+							
+							
+							curX = box.getDouble("x");
+							
+							
+					%>
+							
+					<%
+						}
+					%>
 				</aui:col>
 				<aui:col span="3" cssClass="dbContainer">
 				</aui:col>
@@ -93,21 +201,29 @@
 				</aui:col>
 			
 			</aui:row>
-			<aui:row id="infoContainer">
+			<aui:row>
+				
+				<p class="text-center">Information Container</p>
+			</aui:row>
+			<aui:row id="infoContainer" cssClass="infoContainer boxPlaceHolder">
 				<aui:col span="4" cssClass="dbContainer">
 				</aui:col>
 				<aui:col span="4" cssClass="dbContainer">
 				</aui:col>
 				<aui:col span="4" cssClass="dbContainer">
 				</aui:col>
+				
 			</aui:row>
 			
 		</div>
 	</aui:col>
-
+	<aui:button-row>
+			
+			<aui:button type="submit"></aui:button>
+	</aui:button-row>
 </aui:row>
-
- 
+	<aui:input type="hidden" name="layoutSetting" />
+</aui:form>
    
    
 
@@ -125,7 +241,7 @@
 	<div class="titleCont"> \
 	<div class="ptitle">{title}</div> \
 	</div>\
-	<img class="img-class" src="<%=renderRequest.getContextPath() %>/img/{IMG}"> \
+	<img class="center" src="<%=renderRequest.getContextPath() %>/img/{IMG}"> \
 	</div>'
 
 AUI().use(
@@ -419,4 +535,119 @@ var closeDB = A.all('.removeDB');
 			['liferay-util-list-fields']
 	);
 */
+Liferay.provide(
+	    window,
+	    '<portlet:namespace />submitForm',
+	    function() 
+{
+	    	var layoutContainer = A.one('#mySortableLayout');
+	    	
+	    	var sumBoxes = layoutContainer.all('#<portlet:namespace/>sumContainer .portlet-box');
+	    	
+	    	var infoBoxes = layoutContainer.all('#<portlet:namespace/>infoContainer .portlet-box');
+	    	
+	    	var summaryItems = [];
+	    	
+	    	sumBoxes.each(function()
+    			{
+	    		var item = {id:this.get("id"),"x":this.getX(),"y":this.getY(),"title":this.one(".ptitle").html()};
+	    		summaryItems.push(item);
+    		
+    			});
+	    	console.log(summaryItems);
+    		var infoItems = [];
+	    	infoBoxes.each(function()
+    			{
+	    		var item = {id:this.get("id"),"x":this.getX(),"y":this.getY(),title:this.one(".ptitle").html()};
+	    		infoItems.push(item);
+    		
+    			});
+	     
+    	  var layout = {};
+    	  layout.sumColSize = 4;
+    	  layout.infoColSize = 3;
+		 
+    	  summaryItems.sort(function(a, b) {
+		  //sort by x, secondary by y
+		 	 //return a.x == b.x ? a.y - b.y : a.x - b.x;
+		 		return a.x == b.x ? a.y - b.y : a.x - b.x;
+			});
+    	  
+    	  infoItems.sort(function(a, b) {
+    		  //sort by x, secondary by y
+    		 	 //return a.x == b.x ? a.y - b.y : a.x - b.x;
+    		 		return a.x == b.x ? a.y - b.y : a.x - b.x;
+    			});
+	    	
+	    	var dashboard = [];
+	    	
+	    	dashboard.push(layout);
+	    
+	    	
+	    	dashboard.push({"summaryBox" : sortLayout(summaryItems)});
+	    	dashboard.push({"infoBox" : sortLayout(infoItems)});
+	    	
+	    	
+	    	
+	    	
+	    	console.log(dashboard);
+	    
+	      
+	   
+	      document.<portlet:namespace />fm.<portlet:namespace />layoutSetting.value =  JSON.stringify(dashboard);
+  		 submitForm(document.<portlet:namespace />fm);
+
+});
+
+function sortLayout(items)
+{
+	var itemsArray = [];
+	for (var i = 0; i < items.length; i++) {
+
+		  //check if was already added
+		  if (typeof(items[i].wasAdded) == "undefined") {
+			  itemsArray.push(items[i]);
+		    items[i].wasAdded = "true";
+
+		    for (j = i + 1; j < items.length; j++) {
+		      if (items[i].x > items[j].x && typeof(items[j].wasAdded) == "undefined") {
+		    	  itemsArray.push(items[j]);
+		        items[j].wasAdded = "true";
+		      }
+		    }
+		  }
+		}
+	
+	//console.log(itemsArray);
+	return itemsArray;
+	
+}
+
+
+
+Liferay.provide(
+	    window,
+	    '<portlet:namespace />updateInfoLayout',
+	    function() {
+
+	        var A = AUI();
+
+	        var infoSelect = A.one('#<portlet:namespace />infoColumnCount');
+	        console.log(infoSelect);
+	        var column = infoSelect.get('value');
+			var infoContainer = A.one('#<portlet:namespace />infoContainer');
+	        var dbContainer = infoContainer.all('.dbContainer');
+	        console.log(dbContainer);
+	        //reset all span
+	        var spanSize = 12 /column;
+			dbContainer.removeClass('span6').removeClass('span3').removeClass('span4').addClass('span'+ spanSize);
+			
+	        // selecting the sourceSelect drop-down to get the current value
+	       // var sourceElement = A.one("#<portlet:namespace />subject");
+
+	        // selecting the targetSelect drop-down to populate values
+	        //var targetElement = A.one("#<portlet:namespace />topic");
+
+	       
+	    });
 </aui:script>

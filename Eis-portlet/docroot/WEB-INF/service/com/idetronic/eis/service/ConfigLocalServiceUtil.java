@@ -299,6 +299,13 @@ public class ConfigLocalServiceUtil {
 		return getService().getByKey(key);
 	}
 
+	public static com.idetronic.eis.model.Config getConfigByKey(
+		java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			java.io.IOException {
+		return getService().getConfigByKey(key);
+	}
+
 	public static void deleteByKeyWildcard(java.lang.String keyWildCard)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteByKeyWildcard(keyWildCard);

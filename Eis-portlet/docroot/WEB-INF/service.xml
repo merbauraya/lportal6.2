@@ -709,6 +709,23 @@
   			<finder-column name="libraryId"></finder-column>
   		</finder>
 	</entity>
+	<entity name="FactAcquisition" local-service="true">
+		<column name="factAcquisitionId" type="long" primary="true"></column>
+  		<column name="facultyId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="volumeTotal" type="long"></column>
+  		<column name="titleTotal" type="long"></column>
+		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		<finder return-type="Collection" name="PTJ">
+  			<finder-column name="facultyId"></finder-column>
+  		</finder>
+	</entity>
 	<entity name="MasterFile" local-service="true">
 		<column name="masterFileId" type="long" primary="true"></column>
 		<column name="masterTypeId" type="long"></column>
@@ -721,6 +738,7 @@
 		<column name="status2" type="boolean"></column>
 		<column name="status3" type="boolean"></column>
 		<column name="status4" type="boolean"></column>
+		<column name="status5" type="boolean"></column>
 		<column name="masterCode" type="String"></column>
 		<column name="oldId" type="long"></column>
 		<column name="note" type="String"></column>
@@ -771,6 +789,10 @@
   			<finder-column name="masterTypeId"></finder-column>
   			<finder-column name="status4"></finder-column>
   		</finder>
+  		<finder return-type="Collection" name="MasterTypeAndStatus5">
+  			<finder-column name="masterTypeId"></finder-column>
+  			<finder-column name="status5"></finder-column>
+  		</finder>
   		
 	</entity>
 	<entity name="MasterType" local-service="true">
@@ -790,10 +812,12 @@
 		<column name="hasStatus2" type="boolean"></column>
 		<column name="hasStatus3" type="boolean"></column>
 		<column name="hasStatus4" type="boolean"></column>
+		<column name="hasStatus5" type="boolean"></column>
 		<column name="status1Label" type="String"></column>
 		<column name="status2Label" type="String"></column>
 		<column name="status3Label" type="String"></column>
 		<column name="status4Label" type="String"></column>
+		<column name="status5Label" type="String"></column>
 		<column name="hasCode" type="boolean"></column>
 		<column name="codeLabel" type="String"></column>
 		

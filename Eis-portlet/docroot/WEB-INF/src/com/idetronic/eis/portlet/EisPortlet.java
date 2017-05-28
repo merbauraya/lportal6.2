@@ -22,6 +22,7 @@ import javax.portlet.WindowStateException;
 
 import com.idetronic.eis.NoSuchMasterFileException;
 import com.idetronic.eis.model.BorrowerCategory;
+import com.idetronic.eis.model.FactAcquisition;
 import com.idetronic.eis.model.FactConsultation;
 import com.idetronic.eis.model.FactExpense;
 import com.idetronic.eis.model.FactIrItem;
@@ -49,6 +50,7 @@ import com.idetronic.eis.model.SeatingDepartment;
 import com.idetronic.eis.model.VisitorCategory;
 import com.idetronic.eis.service.BorrowerCategoryLocalServiceUtil;
 import com.idetronic.eis.service.ConfigLocalServiceUtil;
+import com.idetronic.eis.service.FactAcquisitionLocalServiceUtil;
 import com.idetronic.eis.service.FactConsultationLocalServiceUtil;
 import com.idetronic.eis.service.FactExpenseLocalServiceUtil;
 import com.idetronic.eis.service.FactIrItemLocalServiceUtil;
@@ -181,7 +183,45 @@ public class EisPortlet extends MVCPortlet
 		
 	}
 	
-	
+	public void editItemAcquisition(ActionRequest actionRequest, ActionResponse actionResponse) throws SystemException, PortalException
+	{
+		long facultyId = ParamUtil.getLong(actionRequest, "faculty");
+		String period = ParamUtil.getString(actionRequest, "period");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		
+		List<MasterFile> items = MasterFileLocalServiceUtil.findByTypeAndStatus5(itemTypeId, true);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		
+		for (MasterFile item : items)
+		{
+			String titleTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-title");
+			String volumeTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-volume");
+			if (Validator.isNotNull(titleTotal) && Validator.isNotNull(volumeTotal))
+			{
+			
+				
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", item.getMasterFileId());
+				
+				
+				// our naming format: x-y-title : x-item type, y=medium
+				
+				
+				jsonObject.put("titleTotal", titleTotal);
+				jsonObject.put("volumeTotal", volumeTotal);
+				
+				jsonArray.put(jsonObject);
+			}
+		}
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+
+		FactAcquisitionLocalServiceUtil.batchInsert(facultyId, period, jsonArray, serviceContext);
+		
+		
+	}
 	
 	public void editIrItem(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException, IOException
 	{
@@ -1027,9 +1067,65 @@ public class EisPortlet extends MVCPortlet
 				e.printStackTrace();
 			}
         }
+        if (resourceID.equals(EisUtil.RESOURCE_ACQUISTION_DATA))
+        {
+        	try {
+				
+        		loadAcquistionData(request,response);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
         
         
     }
+	
+	protected void loadAcquistionData(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long facultyId = ParamUtil.getLong(request, "facultyId");
+		LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactAcquisition> datas = FactAcquisitionLocalServiceUtil.getLatestEntry(facultyId, period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactAcquisition data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", data.getItemId());
+				jsonObject.put("titleTotal", data.getTitleTotal());
+				jsonObject.put("volumeTotal", data.getVolumeTotal());
+				
+				
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				
+				jsonData.put("history", FactAcquisitionLocalServiceUtil.getEntries(facultyId, period));
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
 	
 	protected void loadConsultationData(ResourceRequest request, ResourceResponse response) throws SystemException
 	{

@@ -382,6 +382,12 @@ public class MasterFileLocalServiceUtil {
 		return getService().findByTypeAndStatus4(masterTypeId, status4);
 	}
 
+	public static java.util.List<com.idetronic.eis.model.MasterFile> findByTypeAndStatus5(
+		long masterTypeId, boolean status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByTypeAndStatus5(masterTypeId, status);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

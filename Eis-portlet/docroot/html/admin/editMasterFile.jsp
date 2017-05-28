@@ -47,6 +47,7 @@
 	boolean status2 = false;
 	boolean status3 = false;
 	boolean status4 = false;
+	boolean status5 = false;
 	long parent1Id = 0;
 	long parent2Id = 0;
 	
@@ -56,6 +57,7 @@
 		status2 = masterFile.getStatus2();
 		status3 = masterFile.getStatus3();
 		status4 = masterFile.getStatus4();
+		status5 = masterFile.getStatus5();
 		parent1Id = masterFile.getParentId1();
 		parent2Id = masterFile.getParentId2();
 	}
@@ -158,6 +160,16 @@
 				type="checkbox" 
 				name="status4" 
 				label="<%= masterType.getStatus4Label() %>"> 
+			</aui:input>
+		
+		
+		</c:if>
+		<c:if test="<%= masterType.getHasStatus5() %>">
+			
+			<aui:input value="<%= status5 %>" 
+				type="checkbox" 
+				name="status5" 
+				label="<%= masterType.getStatus5Label() %>"> 
 			</aui:input>
 		
 		

@@ -314,6 +314,13 @@ public class ConfigLocalServiceWrapper implements ConfigLocalService,
 	}
 
 	@Override
+	public com.idetronic.eis.model.Config getConfigByKey(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			java.io.IOException {
+		return _configLocalService.getConfigByKey(key);
+	}
+
+	@Override
 	public void deleteByKeyWildcard(java.lang.String keyWildCard)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_configLocalService.deleteByKeyWildcard(keyWildCard);

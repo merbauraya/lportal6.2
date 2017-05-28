@@ -100,25 +100,25 @@ public class ProjectLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.idetronic.eis.model.Project" };
 
-		_methodName272 = "getBeanIdentifier";
+		_methodName280 = "getBeanIdentifier";
 
-		_methodParameterTypes272 = new String[] {  };
+		_methodParameterTypes280 = new String[] {  };
 
-		_methodName273 = "setBeanIdentifier";
+		_methodName281 = "setBeanIdentifier";
 
-		_methodParameterTypes273 = new String[] { "java.lang.String" };
+		_methodParameterTypes281 = new String[] { "java.lang.String" };
 
-		_methodName278 = "addProject";
+		_methodName286 = "addProject";
 
-		_methodParameterTypes278 = new String[] {
+		_methodParameterTypes286 = new String[] {
 				"java.lang.String", "int", "java.util.Date", "java.util.Date",
 				"int", "int", "java.lang.String", "java.lang.String",
 				"java.util.Date", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName279 = "deleteProjectAll";
+		_methodName287 = "deleteProjectAll";
 
-		_methodParameterTypes279 = new String[] { "long" };
+		_methodParameterTypes287 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -210,20 +210,20 @@ public class ProjectLocalServiceClpInvoker {
 			return ProjectLocalServiceUtil.updateProject((com.idetronic.eis.model.Project)arguments[0]);
 		}
 
-		if (_methodName272.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return ProjectLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName273.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			ProjectLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName278.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			return ProjectLocalServiceUtil.addProject((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				(java.util.Date)arguments[2], (java.util.Date)arguments[3],
@@ -234,8 +234,8 @@ public class ProjectLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
-		if (_methodName279.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
+		if (_methodName287.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
 			ProjectLocalServiceUtil.deleteProjectAll(((Long)arguments[0]).longValue());
 
 			return null;
@@ -276,12 +276,12 @@ public class ProjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName272;
-	private String[] _methodParameterTypes272;
-	private String _methodName273;
-	private String[] _methodParameterTypes273;
-	private String _methodName278;
-	private String[] _methodParameterTypes278;
-	private String _methodName279;
-	private String[] _methodParameterTypes279;
+	private String _methodName280;
+	private String[] _methodParameterTypes280;
+	private String _methodName281;
+	private String[] _methodParameterTypes281;
+	private String _methodName286;
+	private String[] _methodParameterTypes286;
+	private String _methodName287;
+	private String[] _methodParameterTypes287;
 }

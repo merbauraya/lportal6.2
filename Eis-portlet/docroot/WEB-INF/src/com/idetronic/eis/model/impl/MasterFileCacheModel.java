@@ -36,7 +36,7 @@ public class MasterFileCacheModel implements CacheModel<MasterFile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{masterFileId=");
 		sb.append(masterFileId);
@@ -56,6 +56,8 @@ public class MasterFileCacheModel implements CacheModel<MasterFile>,
 		sb.append(status3);
 		sb.append(", status4=");
 		sb.append(status4);
+		sb.append(", status5=");
+		sb.append(status5);
 		sb.append(", masterCode=");
 		sb.append(masterCode);
 		sb.append(", oldId=");
@@ -89,6 +91,7 @@ public class MasterFileCacheModel implements CacheModel<MasterFile>,
 		masterFileImpl.setStatus2(status2);
 		masterFileImpl.setStatus3(status3);
 		masterFileImpl.setStatus4(status4);
+		masterFileImpl.setStatus5(status5);
 
 		if (masterCode == null) {
 			masterFileImpl.setMasterCode(StringPool.BLANK);
@@ -124,6 +127,7 @@ public class MasterFileCacheModel implements CacheModel<MasterFile>,
 		status2 = objectInput.readBoolean();
 		status3 = objectInput.readBoolean();
 		status4 = objectInput.readBoolean();
+		status5 = objectInput.readBoolean();
 		masterCode = objectInput.readUTF();
 		oldId = objectInput.readLong();
 		note = objectInput.readUTF();
@@ -149,6 +153,7 @@ public class MasterFileCacheModel implements CacheModel<MasterFile>,
 		objectOutput.writeBoolean(status2);
 		objectOutput.writeBoolean(status3);
 		objectOutput.writeBoolean(status4);
+		objectOutput.writeBoolean(status5);
 
 		if (masterCode == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -178,6 +183,7 @@ public class MasterFileCacheModel implements CacheModel<MasterFile>,
 	public boolean status2;
 	public boolean status3;
 	public boolean status4;
+	public boolean status5;
 	public String masterCode;
 	public long oldId;
 	public String note;

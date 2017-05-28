@@ -213,6 +213,27 @@ public interface MasterFileModel extends BaseModel<MasterFile> {
 	public void setStatus4(boolean status4);
 
 	/**
+	 * Returns the status5 of this master file.
+	 *
+	 * @return the status5 of this master file
+	 */
+	public boolean getStatus5();
+
+	/**
+	 * Returns <code>true</code> if this master file is status5.
+	 *
+	 * @return <code>true</code> if this master file is status5; <code>false</code> otherwise
+	 */
+	public boolean isStatus5();
+
+	/**
+	 * Sets whether this master file is status5.
+	 *
+	 * @param status5 the status5 of this master file
+	 */
+	public void setStatus5(boolean status5);
+
+	/**
 	 * Returns the master code of this master file.
 	 *
 	 * @return the master code of this master file

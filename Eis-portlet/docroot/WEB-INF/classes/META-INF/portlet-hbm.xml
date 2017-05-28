@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.eis.model.Config" />
+	<import class="com.idetronic.eis.model.FactAcquisition" />
 	<import class="com.idetronic.eis.model.FactConsultation" />
 	<import class="com.idetronic.eis.model.FactExpense" />
 	<import class="com.idetronic.eis.model.FactIrItem" />
@@ -49,6 +50,22 @@
 		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactAcquisitionImpl" table="eis_FactAcquisition">
+		<cache usage="read-write" />
+		<id name="factAcquisitionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="facultyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="volumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="titleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.FactConsultationImpl" table="eis_FactConsultation">
 		<cache usage="read-write" />
@@ -352,6 +369,7 @@
 		<property name="status2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="status3" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="status4" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status5" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="masterCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="oldId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="note" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -377,10 +395,12 @@
 		<property name="hasStatus2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="hasStatus3" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="hasStatus4" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasStatus5" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="status1Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status2Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status3Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status4Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status5Label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hasCode" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="codeLabel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>

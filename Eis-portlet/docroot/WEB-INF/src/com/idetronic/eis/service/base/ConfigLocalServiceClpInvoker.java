@@ -100,49 +100,53 @@ public class ConfigLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.idetronic.eis.model.Config" };
 
-		_methodName272 = "getBeanIdentifier";
+		_methodName280 = "getBeanIdentifier";
 
-		_methodParameterTypes272 = new String[] {  };
+		_methodParameterTypes280 = new String[] {  };
 
-		_methodName273 = "setBeanIdentifier";
-
-		_methodParameterTypes273 = new String[] { "java.lang.String" };
-
-		_methodName278 = "add";
-
-		_methodParameterTypes278 = new String[] {
-				"java.lang.String", "java.util.Properties"
-			};
-
-		_methodName279 = "addByStringValue";
-
-		_methodParameterTypes279 = new String[] {
-				"java.lang.String", "java.lang.String"
-			};
-
-		_methodName280 = "getKeyAsLong";
-
-		_methodParameterTypes280 = new String[] { "java.lang.String" };
-
-		_methodName281 = "getByKeyAsString";
+		_methodName281 = "setBeanIdentifier";
 
 		_methodParameterTypes281 = new String[] { "java.lang.String" };
 
-		_methodName282 = "getByKey";
+		_methodName286 = "add";
 
-		_methodParameterTypes282 = new String[] { "java.lang.String" };
+		_methodParameterTypes286 = new String[] {
+				"java.lang.String", "java.util.Properties"
+			};
 
-		_methodName283 = "deleteByKeyWildcard";
+		_methodName287 = "addByStringValue";
 
-		_methodParameterTypes283 = new String[] { "java.lang.String" };
+		_methodParameterTypes287 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
 
-		_methodName284 = "findWithKeyWildcard";
+		_methodName288 = "getKeyAsLong";
 
-		_methodParameterTypes284 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes288 = new String[] { "java.lang.String" };
 
-		_methodName285 = "countByKeyWildCard";
+		_methodName289 = "getByKeyAsString";
 
-		_methodParameterTypes285 = new String[] { "java.lang.String" };
+		_methodParameterTypes289 = new String[] { "java.lang.String" };
+
+		_methodName290 = "getByKey";
+
+		_methodParameterTypes290 = new String[] { "java.lang.String" };
+
+		_methodName291 = "getConfigByKey";
+
+		_methodParameterTypes291 = new String[] { "java.lang.String" };
+
+		_methodName292 = "deleteByKeyWildcard";
+
+		_methodParameterTypes292 = new String[] { "java.lang.String" };
+
+		_methodName293 = "findWithKeyWildcard";
+
+		_methodParameterTypes293 = new String[] { "java.lang.String", "int", "int" };
+
+		_methodName294 = "countByKeyWildCard";
+
+		_methodParameterTypes294 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -234,61 +238,66 @@ public class ConfigLocalServiceClpInvoker {
 			return ConfigLocalServiceUtil.updateConfig((com.idetronic.eis.model.Config)arguments[0]);
 		}
 
-		if (_methodName272.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return ConfigLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName273.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			ConfigLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName278.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			return ConfigLocalServiceUtil.add((java.lang.String)arguments[0],
 				(java.util.Properties)arguments[1]);
 		}
 
-		if (_methodName279.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
+		if (_methodName287.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
 			return ConfigLocalServiceUtil.addByStringValue((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName288.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
 			return ConfigLocalServiceUtil.getKeyAsLong((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName289.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
 			return ConfigLocalServiceUtil.getByKeyAsString((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName282.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes282, parameterTypes)) {
+		if (_methodName290.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
 			return ConfigLocalServiceUtil.getByKey((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName283.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes283, parameterTypes)) {
+		if (_methodName291.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes291, parameterTypes)) {
+			return ConfigLocalServiceUtil.getConfigByKey((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName292.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes292, parameterTypes)) {
 			ConfigLocalServiceUtil.deleteByKeyWildcard((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName284.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes284, parameterTypes)) {
+		if (_methodName293.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes293, parameterTypes)) {
 			return ConfigLocalServiceUtil.findWithKeyWildcard((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName285.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes285, parameterTypes)) {
+		if (_methodName294.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes294, parameterTypes)) {
 			return ConfigLocalServiceUtil.countByKeyWildCard((java.lang.String)arguments[0]);
 		}
 
@@ -327,24 +336,26 @@ public class ConfigLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName272;
-	private String[] _methodParameterTypes272;
-	private String _methodName273;
-	private String[] _methodParameterTypes273;
-	private String _methodName278;
-	private String[] _methodParameterTypes278;
-	private String _methodName279;
-	private String[] _methodParameterTypes279;
 	private String _methodName280;
 	private String[] _methodParameterTypes280;
 	private String _methodName281;
 	private String[] _methodParameterTypes281;
-	private String _methodName282;
-	private String[] _methodParameterTypes282;
-	private String _methodName283;
-	private String[] _methodParameterTypes283;
-	private String _methodName284;
-	private String[] _methodParameterTypes284;
-	private String _methodName285;
-	private String[] _methodParameterTypes285;
+	private String _methodName286;
+	private String[] _methodParameterTypes286;
+	private String _methodName287;
+	private String[] _methodParameterTypes287;
+	private String _methodName288;
+	private String[] _methodParameterTypes288;
+	private String _methodName289;
+	private String[] _methodParameterTypes289;
+	private String _methodName290;
+	private String[] _methodParameterTypes290;
+	private String _methodName291;
+	private String[] _methodParameterTypes291;
+	private String _methodName292;
+	private String[] _methodParameterTypes292;
+	private String _methodName293;
+	private String[] _methodParameterTypes293;
+	private String _methodName294;
+	private String[] _methodParameterTypes294;
 }

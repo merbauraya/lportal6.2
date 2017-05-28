@@ -342,7 +342,22 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		ConfigLocalServiceUtil.updateConfig(infoBox);
 	}
-	
+	public void editDashboard(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, IOException
+	{
+		String layoutSetting  = ParamUtil.getString(actionRequest, "layoutSetting");
+		Config config = ConfigLocalServiceUtil.getConfigByKey(EisUtil.EIS_DASHBOARD_LAYOUT);
+		if (Validator.isNull(config))
+		{
+			config = ConfigLocalServiceUtil.createConfig(CounterLocalServiceUtil.increment(Config.class.getName()));
+			config.setKey(EisUtil.EIS_DASHBOARD_LAYOUT);
+		}
+		
+		config.setValue(layoutSetting);
+		ConfigLocalServiceUtil.updateConfig(config);
+		
+				
+		
+	}
 	public void editKpiSetting(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException
 	{
 		String rowIndexes = actionRequest.getParameter("rowIndexes");
@@ -1135,6 +1150,7 @@ public class EisAdminPortlet extends MVCPortlet {
 		boolean status2 = ParamUtil.getBoolean(actionRequest, "status2");
 		boolean status3 = ParamUtil.getBoolean(actionRequest, "status3");
 		boolean status4 = ParamUtil.getBoolean(actionRequest, "status4"); 
+		boolean status5 = ParamUtil.getBoolean(actionRequest, "status5"); 
 		boolean inActive = ParamUtil.getBoolean(actionRequest, "inActive"); 
 		
 		MasterFile masterFile = null;
@@ -1156,6 +1172,7 @@ public class EisAdminPortlet extends MVCPortlet {
 		masterFile.setStatus2(status2);
 		masterFile.setStatus3(status3);
 		masterFile.setStatus4(status4);
+		masterFile.setStatus5(status5);
 		masterFile.setInActive(inActive);
 		
 		
@@ -1323,6 +1340,9 @@ public class EisAdminPortlet extends MVCPortlet {
 		boolean hasStatus4 = ParamUtil.getBoolean(actionRequest, "hasStatus4");
 		String status4Label = ParamUtil.getString(actionRequest, "status4Label");
 		
+		boolean hasStatus5 = ParamUtil.getBoolean(actionRequest, "hasStatus5");
+		String status5Label = ParamUtil.getString(actionRequest, "status5Label");
+		
 		boolean hasCode = ParamUtil.getBoolean(actionRequest, "hasCode");
 		String codeLabel = ParamUtil.getString(actionRequest, "codeLabel");
 		
@@ -1343,13 +1363,14 @@ public class EisAdminPortlet extends MVCPortlet {
 		masterType.setHasStatus2(hasStatus2);
 		masterType.setHasStatus3(hasStatus3);
 		masterType.setHasStatus4(hasStatus4);
-		
+		masterType.setHasStatus5(hasStatus5);
 		masterType.setNameLabel(nameLabel);
 		masterType.setPageLabel(pageLabel);
 		masterType.setStatus1Label(status1Label);
 		masterType.setStatus2Label(status2Label);
 		masterType.setStatus3Label(status3Label);
 		masterType.setStatus4Label(status4Label);
+		masterType.setStatus5Label(status5Label);
 		
 		masterType.setParentId1(parentId1);
 		masterType.setParentId2(parentId2);

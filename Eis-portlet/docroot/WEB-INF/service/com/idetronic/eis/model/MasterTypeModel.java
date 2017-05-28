@@ -336,6 +336,27 @@ public interface MasterTypeModel extends BaseModel<MasterType> {
 	public void setHasStatus4(boolean hasStatus4);
 
 	/**
+	 * Returns the has status5 of this master type.
+	 *
+	 * @return the has status5 of this master type
+	 */
+	public boolean getHasStatus5();
+
+	/**
+	 * Returns <code>true</code> if this master type is has status5.
+	 *
+	 * @return <code>true</code> if this master type is has status5; <code>false</code> otherwise
+	 */
+	public boolean isHasStatus5();
+
+	/**
+	 * Sets whether this master type is has status5.
+	 *
+	 * @param hasStatus5 the has status5 of this master type
+	 */
+	public void setHasStatus5(boolean hasStatus5);
+
+	/**
 	 * Returns the status1 label of this master type.
 	 *
 	 * @return the status1 label of this master type
@@ -394,6 +415,21 @@ public interface MasterTypeModel extends BaseModel<MasterType> {
 	 * @param status4Label the status4 label of this master type
 	 */
 	public void setStatus4Label(String status4Label);
+
+	/**
+	 * Returns the status5 label of this master type.
+	 *
+	 * @return the status5 label of this master type
+	 */
+	@AutoEscape
+	public String getStatus5Label();
+
+	/**
+	 * Sets the status5 label of this master type.
+	 *
+	 * @param status5Label the status5 label of this master type
+	 */
+	public void setStatus5Label(String status5Label);
 
 	/**
 	 * Returns the has code of this master type.

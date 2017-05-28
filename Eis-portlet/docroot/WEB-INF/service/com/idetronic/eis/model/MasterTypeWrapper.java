@@ -64,10 +64,12 @@ public class MasterTypeWrapper implements MasterType, ModelWrapper<MasterType> {
 		attributes.put("hasStatus2", getHasStatus2());
 		attributes.put("hasStatus3", getHasStatus3());
 		attributes.put("hasStatus4", getHasStatus4());
+		attributes.put("hasStatus5", getHasStatus5());
 		attributes.put("status1Label", getStatus1Label());
 		attributes.put("status2Label", getStatus2Label());
 		attributes.put("status3Label", getStatus3Label());
 		attributes.put("status4Label", getStatus4Label());
+		attributes.put("status5Label", getStatus5Label());
 		attributes.put("hasCode", getHasCode());
 		attributes.put("codeLabel", getCodeLabel());
 
@@ -172,6 +174,12 @@ public class MasterTypeWrapper implements MasterType, ModelWrapper<MasterType> {
 			setHasStatus4(hasStatus4);
 		}
 
+		Boolean hasStatus5 = (Boolean)attributes.get("hasStatus5");
+
+		if (hasStatus5 != null) {
+			setHasStatus5(hasStatus5);
+		}
+
 		String status1Label = (String)attributes.get("status1Label");
 
 		if (status1Label != null) {
@@ -194,6 +202,12 @@ public class MasterTypeWrapper implements MasterType, ModelWrapper<MasterType> {
 
 		if (status4Label != null) {
 			setStatus4Label(status4Label);
+		}
+
+		String status5Label = (String)attributes.get("status5Label");
+
+		if (status5Label != null) {
+			setStatus5Label(status5Label);
 		}
 
 		Boolean hasCode = (Boolean)attributes.get("hasCode");
@@ -620,6 +634,36 @@ public class MasterTypeWrapper implements MasterType, ModelWrapper<MasterType> {
 	}
 
 	/**
+	* Returns the has status5 of this master type.
+	*
+	* @return the has status5 of this master type
+	*/
+	@Override
+	public boolean getHasStatus5() {
+		return _masterType.getHasStatus5();
+	}
+
+	/**
+	* Returns <code>true</code> if this master type is has status5.
+	*
+	* @return <code>true</code> if this master type is has status5; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHasStatus5() {
+		return _masterType.isHasStatus5();
+	}
+
+	/**
+	* Sets whether this master type is has status5.
+	*
+	* @param hasStatus5 the has status5 of this master type
+	*/
+	@Override
+	public void setHasStatus5(boolean hasStatus5) {
+		_masterType.setHasStatus5(hasStatus5);
+	}
+
+	/**
 	* Returns the status1 label of this master type.
 	*
 	* @return the status1 label of this master type
@@ -697,6 +741,26 @@ public class MasterTypeWrapper implements MasterType, ModelWrapper<MasterType> {
 	@Override
 	public void setStatus4Label(java.lang.String status4Label) {
 		_masterType.setStatus4Label(status4Label);
+	}
+
+	/**
+	* Returns the status5 label of this master type.
+	*
+	* @return the status5 label of this master type
+	*/
+	@Override
+	public java.lang.String getStatus5Label() {
+		return _masterType.getStatus5Label();
+	}
+
+	/**
+	* Sets the status5 label of this master type.
+	*
+	* @param status5Label the status5 label of this master type
+	*/
+	@Override
+	public void setStatus5Label(java.lang.String status5Label) {
+		_masterType.setStatus5Label(status5Label);
 	}
 
 	/**

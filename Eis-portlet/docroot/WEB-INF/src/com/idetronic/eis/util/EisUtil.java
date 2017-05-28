@@ -58,7 +58,7 @@ public class EisUtil {
 	public static final String RESOURCE_MEMBERSHIP_DATA = "membershipData";
 	public static final String RESOURCE_EXPENSE_DATA = "expenseData";
 	public static final String RESOURCE_CONSULTATION_DATA = "consultationData";
-	
+	public static final String RESOURCE_ACQUISTION_DATA = "acquisitionData";
 	public static final String RESOURCE_KPI_ENTRY_DATA = "kpientryData";
 	public static final String RESOURCE_EIS_INFO_BOX_TEMPLATE = "infoBoxTemplate";
 	/*
@@ -165,6 +165,7 @@ public class EisUtil {
 	public static final String REPORT_EXPENSE = "EXPENSE";
 	public static final String REPORT_ACADEMIC_CONSULTATION = "CONSULTATION";
 	
+	public static final String EIS_DASHBOARD_LAYOUT = "eis.dashboard.layout";
 	public static final String EIS_INFO_BOX= "eis.info.box";
 	public static final String EIS_INFO_BOX_TEMPLATE = "eis.template.infobox";
 			

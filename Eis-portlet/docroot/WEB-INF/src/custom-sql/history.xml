@@ -129,5 +129,15 @@ ORDER BY createDate
 		    libraryId = ? AND period = ?
 		ORDER BY createDate
 	</sql>
-	
+	<sql id="com.idetronic.eis.service.persistence.FactAcquisitionFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactAcquisition A
+				INNER JOIN
+			eis_MasterFile mst ON A.itemId = mst.masterFileId
+		WHERE
+			facultyId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
 </custom-sql>

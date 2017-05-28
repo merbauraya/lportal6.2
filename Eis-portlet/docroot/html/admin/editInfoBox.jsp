@@ -49,7 +49,8 @@
 		</aui:field-wrapper>
 		
 		<aui:button-row>
-		<aui:button type="submit"></aui:button>
+			<aui:button type="button" cssClass="btnPreview" value="Preview"></aui:button>
+			<aui:button type="submit"></aui:button>
 	</aui:button-row>
 
 </aui:form>
@@ -61,6 +62,8 @@
 	
 	function <portlet:namespace />initBoxBody() {
 		
+		
+		
 		return "<%= UnicodeFormatter.toString(boxBody) %>";
 	}
 	
@@ -68,8 +71,16 @@
 </aui:script>
 <portlet:resourceURL var="fetchInfoBoxTemplateURL" id="<%= EisUtil.RESOURCE_EIS_INFO_BOX_TEMPLATE %>"/>
 
-<aui:script>
+<aui:script use="aui-node-base">
 	var A = AUI();
+	
+	
+	
+	
+	AUI().ready(function(A){
+		
+		
+	});
 	
 	Liferay.provide(
 		    window,
@@ -118,6 +129,20 @@
 		    ['aui-io']
 		);
 	
+	Liferay.provide(
+		    window,
+		    '<portlet:namespace />submitForm',
+		    function() 
+    {
+	    	//A.one('#<portlet:namespace />firstNotificationTemplate').value = window.<portlet:namespace />firstNotificationBody.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace />boxBodyTemplate.value = window.<portlet:namespace />boxBody.getHTML();
+			//document.<portlet:namespace />fm.<portlet:namespace />secondNotificationTemplate.value = window.<portlet:namespace />secondNotificationBody.getHTML();
+		
+			
+			submitForm(document.<portlet:namespace />fm);
+    	
+    })
+	
 	function <portlet:namespace />submitForm()
 	{
 		
@@ -130,4 +155,56 @@
 		submitForm(document.<portlet:namespace />fm);
 		
 	}
+</aui:script>
+<aui:script position="inline" use="aui-base,liferay-portlet-url">
+			var editButton = A.all('.btnPreview');
+			
+			editButton.on(
+				'click',
+				function(e) {
+					var editURL =Liferay.PortletURL.createRenderURL();
+					//var stateId = 0;
+					//var id = e.target.getAttribute("data-primkey");
+					var html = window.<portlet:namespace />boxBody.getHTML();
+				
+					editURL.setParameter('mvcPath', '/html/admin/infoBoxPreview.jsp');
+					editURL.setParameter('html', html);
+					editURL.setPortletId('eisadmin_WAR_Eisportlet');
+					editURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
+					
+					
+					Liferay.Util.openWindow(
+						{
+							dialog: {
+								centered: true,
+								modal:true,
+								destroyOnHide: true,
+								width: 450,
+								height:600,
+								
+							},
+							
+							title: '<%= portletDisplay.getTitle() %>',
+							uri: editURL.toString(),
+							id: '<portlet:namespace/>dialog',
+						}
+					);
+				}
+			);
+		</aui:script>
+
+
+
+
+
+<aui:script use="liferay-util-window">
+     
+     
+     Liferay.provide(window, 'closePopup', function(dialogId) {
+         var A = AUI();
+         var dialog = Liferay.Util.getWindow(dialogId);
+        
+         dialog.destroy();
+     });
+     
 </aui:script>

@@ -191,6 +191,10 @@ public class MasterFileLocalServiceClp implements MasterFileLocalService {
 		_methodName36 = "findByTypeAndStatus4";
 
 		_methodParameterTypes36 = new String[] { "long", "boolean" };
+
+		_methodName37 = "findByTypeAndStatus5";
+
+		_methodParameterTypes37 = new String[] { "long", "boolean" };
 	}
 
 	@Override
@@ -1301,6 +1305,36 @@ public class MasterFileLocalServiceClp implements MasterFileLocalService {
 		return (java.util.List<com.idetronic.eis.model.MasterFile>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<com.idetronic.eis.model.MasterFile> findByTypeAndStatus5(
+		long masterTypeId, boolean status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName37,
+					_methodParameterTypes37,
+					new Object[] { masterTypeId, status });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.idetronic.eis.model.MasterFile>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1374,4 +1408,6 @@ public class MasterFileLocalServiceClp implements MasterFileLocalService {
 	private String[] _methodParameterTypes35;
 	private String _methodName36;
 	private String[] _methodParameterTypes36;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
 }

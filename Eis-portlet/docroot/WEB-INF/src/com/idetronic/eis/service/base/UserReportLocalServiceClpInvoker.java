@@ -106,42 +106,42 @@ public class UserReportLocalServiceClpInvoker {
 				"com.idetronic.eis.model.UserReport"
 			};
 
-		_methodName272 = "getBeanIdentifier";
+		_methodName280 = "getBeanIdentifier";
 
-		_methodParameterTypes272 = new String[] {  };
+		_methodParameterTypes280 = new String[] {  };
 
-		_methodName273 = "setBeanIdentifier";
+		_methodName281 = "setBeanIdentifier";
 
-		_methodParameterTypes273 = new String[] { "java.lang.String" };
+		_methodParameterTypes281 = new String[] { "java.lang.String" };
 
-		_methodName278 = "add";
+		_methodName286 = "add";
 
-		_methodParameterTypes278 = new String[] {
+		_methodParameterTypes286 = new String[] {
 				"long", "long", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName279 = "add";
+		_methodName287 = "add";
 
-		_methodParameterTypes279 = new String[] {
+		_methodParameterTypes287 = new String[] {
 				"long", "long", "long[][]",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName280 = "findyUserData";
+		_methodName288 = "findyUserData";
 
-		_methodParameterTypes280 = new String[] { "long", "long", "long" };
+		_methodParameterTypes288 = new String[] { "long", "long", "long" };
 
-		_methodName281 = "updateAssociationByUser";
+		_methodName289 = "updateAssociationByUser";
 
-		_methodParameterTypes281 = new String[] {
+		_methodParameterTypes289 = new String[] {
 				"long", "long", "long[][]", "long[][]",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName282 = "findByUserLibrary";
+		_methodName290 = "findByUserLibrary";
 
-		_methodParameterTypes282 = new String[] { "long", "long" };
+		_methodParameterTypes290 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -233,28 +233,28 @@ public class UserReportLocalServiceClpInvoker {
 			return UserReportLocalServiceUtil.updateUserReport((com.idetronic.eis.model.UserReport)arguments[0]);
 		}
 
-		if (_methodName272.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return UserReportLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName273.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			UserReportLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName278.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			return UserReportLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
-		if (_methodName279.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
+		if (_methodName287.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
 			UserReportLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(), (long[])arguments[2],
 				(com.liferay.portal.service.ServiceContext)arguments[3]);
@@ -262,15 +262,15 @@ public class UserReportLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName288.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
 			return UserReportLocalServiceUtil.findyUserData(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue());
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName289.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
 			UserReportLocalServiceUtil.updateAssociationByUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(), (long[])arguments[2],
 				(long[])arguments[3],
@@ -279,8 +279,8 @@ public class UserReportLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName282.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes282, parameterTypes)) {
+		if (_methodName290.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
 			return UserReportLocalServiceUtil.findByUserLibrary(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
@@ -320,18 +320,18 @@ public class UserReportLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName272;
-	private String[] _methodParameterTypes272;
-	private String _methodName273;
-	private String[] _methodParameterTypes273;
-	private String _methodName278;
-	private String[] _methodParameterTypes278;
-	private String _methodName279;
-	private String[] _methodParameterTypes279;
 	private String _methodName280;
 	private String[] _methodParameterTypes280;
 	private String _methodName281;
 	private String[] _methodParameterTypes281;
-	private String _methodName282;
-	private String[] _methodParameterTypes282;
+	private String _methodName286;
+	private String[] _methodParameterTypes286;
+	private String _methodName287;
+	private String[] _methodParameterTypes287;
+	private String _methodName288;
+	private String[] _methodParameterTypes288;
+	private String _methodName289;
+	private String[] _methodParameterTypes289;
+	private String _methodName290;
+	private String[] _methodParameterTypes290;
 }

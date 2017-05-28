@@ -145,4 +145,8 @@ public class MasterFileLocalServiceImpl extends MasterFileLocalServiceBaseImpl {
 	{
 		return masterFilePersistence.findByMasterTypeAndStatus4(masterTypeId, status4);
 	}
+	public List<MasterFile> findByTypeAndStatus5(long masterTypeId,boolean status) throws SystemException
+	{
+		return masterFilePersistence.findByMasterTypeAndStatus5(masterTypeId, status);
+	}
 }

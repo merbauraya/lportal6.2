@@ -414,6 +414,13 @@ public class MasterFileLocalServiceWrapper implements MasterFileLocalService,
 			status4);
 	}
 
+	@Override
+	public java.util.List<com.idetronic.eis.model.MasterFile> findByTypeAndStatus5(
+		long masterTypeId, boolean status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _masterFileLocalService.findByTypeAndStatus5(masterTypeId, status);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

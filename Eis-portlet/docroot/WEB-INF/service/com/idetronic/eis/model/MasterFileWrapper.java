@@ -57,6 +57,7 @@ public class MasterFileWrapper implements MasterFile, ModelWrapper<MasterFile> {
 		attributes.put("status2", getStatus2());
 		attributes.put("status3", getStatus3());
 		attributes.put("status4", getStatus4());
+		attributes.put("status5", getStatus5());
 		attributes.put("masterCode", getMasterCode());
 		attributes.put("oldId", getOldId());
 		attributes.put("note", getNote());
@@ -119,6 +120,12 @@ public class MasterFileWrapper implements MasterFile, ModelWrapper<MasterFile> {
 
 		if (status4 != null) {
 			setStatus4(status4);
+		}
+
+		Boolean status5 = (Boolean)attributes.get("status5");
+
+		if (status5 != null) {
+			setStatus5(status5);
 		}
 
 		String masterCode = (String)attributes.get("masterCode");
@@ -384,6 +391,36 @@ public class MasterFileWrapper implements MasterFile, ModelWrapper<MasterFile> {
 	@Override
 	public void setStatus4(boolean status4) {
 		_masterFile.setStatus4(status4);
+	}
+
+	/**
+	* Returns the status5 of this master file.
+	*
+	* @return the status5 of this master file
+	*/
+	@Override
+	public boolean getStatus5() {
+		return _masterFile.getStatus5();
+	}
+
+	/**
+	* Returns <code>true</code> if this master file is status5.
+	*
+	* @return <code>true</code> if this master file is status5; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isStatus5() {
+		return _masterFile.isStatus5();
+	}
+
+	/**
+	* Sets whether this master file is status5.
+	*
+	* @param status5 the status5 of this master file
+	*/
+	@Override
+	public void setStatus5(boolean status5) {
+		_masterFile.setStatus5(status5);
 	}
 
 	/**

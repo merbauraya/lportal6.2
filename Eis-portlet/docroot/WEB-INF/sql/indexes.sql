@@ -1,5 +1,8 @@
 create unique index IX_4FA2646C on eis_Config (key_);
 
+create index IX_DE5CBD38 on eis_FactAcquisition (facultyId);
+create index IX_1F37703A on eis_FactAcquisition (ptjId);
+
 create index IX_FACCC4DB on eis_FactConsultation (libraryId);
 
 create index IX_175C9B24 on eis_FactExpense (libraryId);
@@ -66,6 +69,7 @@ create index IX_5A0F9341 on eis_MasterFile (masterTypeId, status1, status2, stat
 create index IX_FAB32311 on eis_MasterFile (masterTypeId, status2);
 create index IX_FAB326D2 on eis_MasterFile (masterTypeId, status3);
 create index IX_FAB32A93 on eis_MasterFile (masterTypeId, status4);
+create index IX_FAB32E54 on eis_MasterFile (masterTypeId, status5);
 create index IX_B1F64048 on eis_MasterFile (parentId1);
 create index IX_B1F64409 on eis_MasterFile (parentId2);
 

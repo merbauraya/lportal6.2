@@ -36,7 +36,7 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{masterTypeId=");
 		sb.append(masterTypeId);
@@ -70,6 +70,8 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 		sb.append(hasStatus3);
 		sb.append(", hasStatus4=");
 		sb.append(hasStatus4);
+		sb.append(", hasStatus5=");
+		sb.append(hasStatus5);
 		sb.append(", status1Label=");
 		sb.append(status1Label);
 		sb.append(", status2Label=");
@@ -78,6 +80,8 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 		sb.append(status3Label);
 		sb.append(", status4Label=");
 		sb.append(status4Label);
+		sb.append(", status5Label=");
+		sb.append(status5Label);
 		sb.append(", hasCode=");
 		sb.append(hasCode);
 		sb.append(", codeLabel=");
@@ -140,6 +144,7 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 		masterTypeImpl.setHasStatus2(hasStatus2);
 		masterTypeImpl.setHasStatus3(hasStatus3);
 		masterTypeImpl.setHasStatus4(hasStatus4);
+		masterTypeImpl.setHasStatus5(hasStatus5);
 
 		if (status1Label == null) {
 			masterTypeImpl.setStatus1Label(StringPool.BLANK);
@@ -167,6 +172,13 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 		}
 		else {
 			masterTypeImpl.setStatus4Label(status4Label);
+		}
+
+		if (status5Label == null) {
+			masterTypeImpl.setStatus5Label(StringPool.BLANK);
+		}
+		else {
+			masterTypeImpl.setStatus5Label(status5Label);
 		}
 
 		masterTypeImpl.setHasCode(hasCode);
@@ -201,10 +213,12 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 		hasStatus2 = objectInput.readBoolean();
 		hasStatus3 = objectInput.readBoolean();
 		hasStatus4 = objectInput.readBoolean();
+		hasStatus5 = objectInput.readBoolean();
 		status1Label = objectInput.readUTF();
 		status2Label = objectInput.readUTF();
 		status3Label = objectInput.readUTF();
 		status4Label = objectInput.readUTF();
+		status5Label = objectInput.readUTF();
 		hasCode = objectInput.readBoolean();
 		codeLabel = objectInput.readUTF();
 	}
@@ -261,6 +275,7 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 		objectOutput.writeBoolean(hasStatus2);
 		objectOutput.writeBoolean(hasStatus3);
 		objectOutput.writeBoolean(hasStatus4);
+		objectOutput.writeBoolean(hasStatus5);
 
 		if (status1Label == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -290,6 +305,13 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 			objectOutput.writeUTF(status4Label);
 		}
 
+		if (status5Label == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(status5Label);
+		}
+
 		objectOutput.writeBoolean(hasCode);
 
 		if (codeLabel == null) {
@@ -316,10 +338,12 @@ public class MasterTypeCacheModel implements CacheModel<MasterType>,
 	public boolean hasStatus2;
 	public boolean hasStatus3;
 	public boolean hasStatus4;
+	public boolean hasStatus5;
 	public String status1Label;
 	public String status2Label;
 	public String status3Label;
 	public String status4Label;
+	public String status5Label;
 	public boolean hasCode;
 	public String codeLabel;
 }

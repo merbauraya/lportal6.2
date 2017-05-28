@@ -157,6 +157,18 @@
 		
 		</aui:fieldset>
 		<aui:fieldset>
+			<aui:input name="hasStatus5" type="checkbox" value="<%= masterType.getHasStatus5() %>"/> 
+			<div class="" id="<portlet:namespace />hasStatus5Config">
+				<aui:input name="status5Label"/>
+				
+				
+				
+				
+			
+			</div>
+		
+		</aui:fieldset>
+		<aui:fieldset>
 			<aui:input name="hasCode" type="checkbox" value="<%= masterType.getHasCode() %>"/>
 			<div class="" id="<portlet:namespace />hasCodeConfig">
 				<aui:input name="codeLabel"/>

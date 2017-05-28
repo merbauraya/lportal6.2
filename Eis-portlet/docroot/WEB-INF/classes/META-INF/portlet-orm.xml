@@ -22,6 +22,27 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactAcquisitionModelImpl">
+		<attributes>
+			<id name="factAcquisitionId" />
+			<basic name="facultyId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="volumeTotal" />
+			<basic name="titleTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.FactConsultationModelImpl">
 		<attributes>
 			<id name="factConsultationId" />
@@ -409,6 +430,7 @@
 			<basic name="status2" />
 			<basic name="status3" />
 			<basic name="status4" />
+			<basic name="status5" />
 			<basic name="masterCode" />
 			<basic name="oldId" />
 			<basic name="note" />
@@ -436,10 +458,12 @@
 			<basic name="hasStatus2" />
 			<basic name="hasStatus3" />
 			<basic name="hasStatus4" />
+			<basic name="hasStatus5" />
 			<basic name="status1Label" />
 			<basic name="status2Label" />
 			<basic name="status3Label" />
 			<basic name="status4Label" />
+			<basic name="status5Label" />
 			<basic name="hasCode" />
 			<basic name="codeLabel" />
 			<transient name="modelAttributes" />
@@ -777,6 +801,10 @@
 	</mapped-superclass>
 	<entity class="com.idetronic.eis.model.impl.ConfigImpl" name="Config">
 		<table name="eis_Config" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactAcquisitionImpl" name="FactAcquisition">
+		<table name="eis_FactAcquisition" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactConsultationImpl" name="FactConsultation">

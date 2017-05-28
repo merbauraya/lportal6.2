@@ -17,6 +17,8 @@ package com.idetronic.eis.service.base;
 import com.idetronic.eis.model.MemberCategory;
 import com.idetronic.eis.service.MemberCategoryService;
 import com.idetronic.eis.service.persistence.ConfigPersistence;
+import com.idetronic.eis.service.persistence.FactAcquisitionFinder;
+import com.idetronic.eis.service.persistence.FactAcquisitionPersistence;
 import com.idetronic.eis.service.persistence.FactConsultationFinder;
 import com.idetronic.eis.service.persistence.FactConsultationPersistence;
 import com.idetronic.eis.service.persistence.FactExpenseFinder;
@@ -152,6 +154,82 @@ public abstract class MemberCategoryServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setConfigPersistence(ConfigPersistence configPersistence) {
 		this.configPersistence = configPersistence;
+	}
+
+	/**
+	 * Returns the fact acquisition local service.
+	 *
+	 * @return the fact acquisition local service
+	 */
+	public com.idetronic.eis.service.FactAcquisitionLocalService getFactAcquisitionLocalService() {
+		return factAcquisitionLocalService;
+	}
+
+	/**
+	 * Sets the fact acquisition local service.
+	 *
+	 * @param factAcquisitionLocalService the fact acquisition local service
+	 */
+	public void setFactAcquisitionLocalService(
+		com.idetronic.eis.service.FactAcquisitionLocalService factAcquisitionLocalService) {
+		this.factAcquisitionLocalService = factAcquisitionLocalService;
+	}
+
+	/**
+	 * Returns the fact acquisition remote service.
+	 *
+	 * @return the fact acquisition remote service
+	 */
+	public com.idetronic.eis.service.FactAcquisitionService getFactAcquisitionService() {
+		return factAcquisitionService;
+	}
+
+	/**
+	 * Sets the fact acquisition remote service.
+	 *
+	 * @param factAcquisitionService the fact acquisition remote service
+	 */
+	public void setFactAcquisitionService(
+		com.idetronic.eis.service.FactAcquisitionService factAcquisitionService) {
+		this.factAcquisitionService = factAcquisitionService;
+	}
+
+	/**
+	 * Returns the fact acquisition persistence.
+	 *
+	 * @return the fact acquisition persistence
+	 */
+	public FactAcquisitionPersistence getFactAcquisitionPersistence() {
+		return factAcquisitionPersistence;
+	}
+
+	/**
+	 * Sets the fact acquisition persistence.
+	 *
+	 * @param factAcquisitionPersistence the fact acquisition persistence
+	 */
+	public void setFactAcquisitionPersistence(
+		FactAcquisitionPersistence factAcquisitionPersistence) {
+		this.factAcquisitionPersistence = factAcquisitionPersistence;
+	}
+
+	/**
+	 * Returns the fact acquisition finder.
+	 *
+	 * @return the fact acquisition finder
+	 */
+	public FactAcquisitionFinder getFactAcquisitionFinder() {
+		return factAcquisitionFinder;
+	}
+
+	/**
+	 * Sets the fact acquisition finder.
+	 *
+	 * @param factAcquisitionFinder the fact acquisition finder
+	 */
+	public void setFactAcquisitionFinder(
+		FactAcquisitionFinder factAcquisitionFinder) {
+		this.factAcquisitionFinder = factAcquisitionFinder;
 	}
 
 	/**
@@ -2575,6 +2653,14 @@ public abstract class MemberCategoryServiceBaseImpl extends BaseServiceImpl
 	protected com.idetronic.eis.service.ConfigService configService;
 	@BeanReference(type = ConfigPersistence.class)
 	protected ConfigPersistence configPersistence;
+	@BeanReference(type = com.idetronic.eis.service.FactAcquisitionLocalService.class)
+	protected com.idetronic.eis.service.FactAcquisitionLocalService factAcquisitionLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactAcquisitionService.class)
+	protected com.idetronic.eis.service.FactAcquisitionService factAcquisitionService;
+	@BeanReference(type = FactAcquisitionPersistence.class)
+	protected FactAcquisitionPersistence factAcquisitionPersistence;
+	@BeanReference(type = FactAcquisitionFinder.class)
+	protected FactAcquisitionFinder factAcquisitionFinder;
 	@BeanReference(type = com.idetronic.eis.service.FactConsultationLocalService.class)
 	protected com.idetronic.eis.service.FactConsultationLocalService factConsultationLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactConsultationService.class)

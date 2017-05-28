@@ -106,48 +106,48 @@ public class FactNonPrintedMaterialLocalServiceClpInvoker {
 				"com.idetronic.eis.model.FactNonPrintedMaterial"
 			};
 
-		_methodName272 = "getBeanIdentifier";
+		_methodName280 = "getBeanIdentifier";
 
-		_methodParameterTypes272 = new String[] {  };
+		_methodParameterTypes280 = new String[] {  };
 
-		_methodName273 = "setBeanIdentifier";
+		_methodName281 = "setBeanIdentifier";
 
-		_methodParameterTypes273 = new String[] { "java.lang.String" };
+		_methodParameterTypes281 = new String[] { "java.lang.String" };
 
-		_methodName278 = "batchInsert";
+		_methodName286 = "batchInsert";
 
-		_methodParameterTypes278 = new String[] {
+		_methodParameterTypes286 = new String[] {
 				"long", "java.lang.String",
 				"com.liferay.portal.kernel.json.JSONArray",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName279 = "findByLibraryPeriod";
+		_methodName287 = "findByLibraryPeriod";
 
-		_methodParameterTypes279 = new String[] {
+		_methodParameterTypes287 = new String[] {
 				"long", "java.lang.String", "int", "int"
 			};
 
-		_methodName280 = "add";
+		_methodName288 = "add";
 
-		_methodParameterTypes280 = new String[] {
+		_methodParameterTypes288 = new String[] {
 				"long", "java.lang.String", "long", "int", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName281 = "getItemLatestEntry";
+		_methodName289 = "getItemLatestEntry";
 
-		_methodParameterTypes281 = new String[] {
+		_methodParameterTypes289 = new String[] {
 				"long", "java.lang.String", "long"
 			};
 
-		_methodName282 = "getAllItemLatestEntry";
+		_methodName290 = "getAllItemLatestEntry";
 
-		_methodParameterTypes282 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes290 = new String[] { "long", "java.lang.String" };
 
-		_methodName283 = "getEntries";
+		_methodName291 = "getEntries";
 
-		_methodParameterTypes283 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes291 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -239,20 +239,20 @@ public class FactNonPrintedMaterialLocalServiceClpInvoker {
 			return FactNonPrintedMaterialLocalServiceUtil.updateFactNonPrintedMaterial((com.idetronic.eis.model.FactNonPrintedMaterial)arguments[0]);
 		}
 
-		if (_methodName272.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return FactNonPrintedMaterialLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName273.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			FactNonPrintedMaterialLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName278.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			FactNonPrintedMaterialLocalServiceUtil.batchInsert(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				(com.liferay.portal.kernel.json.JSONArray)arguments[2],
@@ -261,16 +261,16 @@ public class FactNonPrintedMaterialLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName279.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
+		if (_methodName287.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
 			return FactNonPrintedMaterialLocalServiceUtil.findByLibraryPeriod(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Integer)arguments[2]).intValue(),
 				((Integer)arguments[3]).intValue());
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName288.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
 			return FactNonPrintedMaterialLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Long)arguments[2]).longValue(),
@@ -279,20 +279,20 @@ public class FactNonPrintedMaterialLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName289.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
 			return FactNonPrintedMaterialLocalServiceUtil.getItemLatestEntry(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], ((Long)arguments[2]).longValue());
 		}
 
-		if (_methodName282.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes282, parameterTypes)) {
+		if (_methodName290.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
 			return FactNonPrintedMaterialLocalServiceUtil.getAllItemLatestEntry(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName283.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes283, parameterTypes)) {
+		if (_methodName291.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes291, parameterTypes)) {
 			return FactNonPrintedMaterialLocalServiceUtil.getEntries(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
@@ -332,20 +332,20 @@ public class FactNonPrintedMaterialLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName272;
-	private String[] _methodParameterTypes272;
-	private String _methodName273;
-	private String[] _methodParameterTypes273;
-	private String _methodName278;
-	private String[] _methodParameterTypes278;
-	private String _methodName279;
-	private String[] _methodParameterTypes279;
 	private String _methodName280;
 	private String[] _methodParameterTypes280;
 	private String _methodName281;
 	private String[] _methodParameterTypes281;
-	private String _methodName282;
-	private String[] _methodParameterTypes282;
-	private String _methodName283;
-	private String[] _methodParameterTypes283;
+	private String _methodName286;
+	private String[] _methodParameterTypes286;
+	private String _methodName287;
+	private String[] _methodParameterTypes287;
+	private String _methodName288;
+	private String[] _methodParameterTypes288;
+	private String _methodName289;
+	private String[] _methodParameterTypes289;
+	private String _methodName290;
+	private String[] _methodParameterTypes290;
+	private String _methodName291;
+	private String[] _methodParameterTypes291;
 }

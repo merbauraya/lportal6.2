@@ -10,6 +10,20 @@ create table eis_Config (
 	title VARCHAR(150) null
 );
 
+create table eis_FactAcquisition (
+	factAcquisitionId LONG not null primary key,
+	facultyId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	volumeTotal LONG,
+	titleTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
 create table eis_FactConsultation (
 	factConsultationId LONG not null primary key,
 	libraryId LONG,
@@ -275,6 +289,7 @@ create table eis_MasterFile (
 	status2 BOOLEAN,
 	status3 BOOLEAN,
 	status4 BOOLEAN,
+	status5 BOOLEAN,
 	masterCode VARCHAR(75) null,
 	oldId LONG,
 	note VARCHAR(75) null,
@@ -298,10 +313,12 @@ create table eis_MasterType (
 	hasStatus2 BOOLEAN,
 	hasStatus3 BOOLEAN,
 	hasStatus4 BOOLEAN,
+	hasStatus5 BOOLEAN,
 	status1Label VARCHAR(75) null,
 	status2Label VARCHAR(75) null,
 	status3Label VARCHAR(75) null,
 	status4Label VARCHAR(75) null,
+	status5Label VARCHAR(75) null,
 	hasCode BOOLEAN,
 	codeLabel VARCHAR(75) null
 );

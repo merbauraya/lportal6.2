@@ -106,90 +106,94 @@ public class MasterFileLocalServiceClpInvoker {
 				"com.idetronic.eis.model.MasterFile"
 			};
 
-		_methodName272 = "getBeanIdentifier";
+		_methodName280 = "getBeanIdentifier";
 
-		_methodParameterTypes272 = new String[] {  };
+		_methodParameterTypes280 = new String[] {  };
 
-		_methodName273 = "setBeanIdentifier";
+		_methodName281 = "setBeanIdentifier";
 
-		_methodParameterTypes273 = new String[] { "java.lang.String" };
+		_methodParameterTypes281 = new String[] { "java.lang.String" };
 
-		_methodName278 = "findByMasterType";
+		_methodName286 = "findByMasterType";
 
-		_methodParameterTypes278 = new String[] { "long", "int", "int" };
+		_methodParameterTypes286 = new String[] { "long", "int", "int" };
 
-		_methodName279 = "findByMasterFile";
+		_methodName287 = "findByMasterFile";
 
-		_methodParameterTypes279 = new String[] {
+		_methodParameterTypes287 = new String[] {
 				"long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 
-		_methodName280 = "getAllLibraries";
+		_methodName288 = "getAllLibraries";
 
-		_methodParameterTypes280 = new String[] {  };
+		_methodParameterTypes288 = new String[] {  };
 
-		_methodName281 = "getAllPrintedMaterial";
+		_methodName289 = "getAllPrintedMaterial";
 
-		_methodParameterTypes281 = new String[] {  };
+		_methodParameterTypes289 = new String[] {  };
 
-		_methodName282 = "getAllIrItem";
+		_methodName290 = "getAllIrItem";
 
-		_methodParameterTypes282 = new String[] {  };
+		_methodParameterTypes290 = new String[] {  };
 
-		_methodName283 = "getAllNonPrintedMaterial";
+		_methodName291 = "getAllNonPrintedMaterial";
 
-		_methodParameterTypes283 = new String[] {  };
+		_methodParameterTypes291 = new String[] {  };
 
-		_methodName284 = "getAllFaculties";
+		_methodName292 = "getAllFaculties";
 
-		_methodParameterTypes284 = new String[] {  };
+		_methodParameterTypes292 = new String[] {  };
 
-		_methodName285 = "getAllItemMediums";
+		_methodName293 = "getAllItemMediums";
 
-		_methodParameterTypes285 = new String[] {  };
+		_methodParameterTypes293 = new String[] {  };
 
-		_methodName286 = "getCountByMasterType";
+		_methodName294 = "getCountByMasterType";
 
-		_methodParameterTypes286 = new String[] { "long" };
+		_methodParameterTypes294 = new String[] { "long" };
 
-		_methodName287 = "findByParent1";
+		_methodName295 = "findByParent1";
 
-		_methodParameterTypes287 = new String[] { "long", "long" };
+		_methodParameterTypes295 = new String[] { "long", "long" };
 
-		_methodName288 = "findByParent2";
+		_methodName296 = "findByParent2";
 
-		_methodParameterTypes288 = new String[] { "long", "long" };
+		_methodParameterTypes296 = new String[] { "long", "long" };
 
-		_methodName289 = "findByTypeAndName";
+		_methodName297 = "findByTypeAndName";
 
-		_methodParameterTypes289 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes297 = new String[] { "long", "java.lang.String" };
 
-		_methodName290 = "findByTypeOldId";
+		_methodName298 = "findByTypeOldId";
 
-		_methodParameterTypes290 = new String[] { "long", "long" };
+		_methodParameterTypes298 = new String[] { "long", "long" };
 
-		_methodName291 = "findByTypeAndStatus";
+		_methodName299 = "findByTypeAndStatus";
 
-		_methodParameterTypes291 = new String[] {
+		_methodParameterTypes299 = new String[] {
 				"long", "boolean", "boolean", "boolean", "boolean"
 			};
 
-		_methodName292 = "findByTypeAndStatus1";
+		_methodName300 = "findByTypeAndStatus1";
 
-		_methodParameterTypes292 = new String[] { "long", "boolean" };
+		_methodParameterTypes300 = new String[] { "long", "boolean" };
 
-		_methodName293 = "findByTypeAndStatus2";
+		_methodName301 = "findByTypeAndStatus2";
 
-		_methodParameterTypes293 = new String[] { "long", "boolean" };
+		_methodParameterTypes301 = new String[] { "long", "boolean" };
 
-		_methodName294 = "findByTypeAndStatus3";
+		_methodName302 = "findByTypeAndStatus3";
 
-		_methodParameterTypes294 = new String[] { "long", "boolean" };
+		_methodParameterTypes302 = new String[] { "long", "boolean" };
 
-		_methodName295 = "findByTypeAndStatus4";
+		_methodName303 = "findByTypeAndStatus4";
 
-		_methodParameterTypes295 = new String[] { "long", "boolean" };
+		_methodParameterTypes303 = new String[] { "long", "boolean" };
+
+		_methodName304 = "findByTypeAndStatus5";
+
+		_methodParameterTypes304 = new String[] { "long", "boolean" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -281,94 +285,94 @@ public class MasterFileLocalServiceClpInvoker {
 			return MasterFileLocalServiceUtil.updateMasterFile((com.idetronic.eis.model.MasterFile)arguments[0]);
 		}
 
-		if (_methodName272.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes272, parameterTypes)) {
+		if (_methodName280.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName273.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes273, parameterTypes)) {
+		if (_methodName281.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
 			MasterFileLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName278.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes278, parameterTypes)) {
+		if (_methodName286.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByMasterType(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName279.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes279, parameterTypes)) {
+		if (_methodName287.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByMasterFile(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getAllLibraries();
-		}
-
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getAllPrintedMaterial();
-		}
-
-		if (_methodName282.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes282, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getAllIrItem();
-		}
-
-		if (_methodName283.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes283, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getAllNonPrintedMaterial();
-		}
-
-		if (_methodName284.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes284, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getAllFaculties();
-		}
-
-		if (_methodName285.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes285, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getAllItemMediums();
-		}
-
-		if (_methodName286.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
-			return MasterFileLocalServiceUtil.getCountByMasterType(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName287.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
-			return MasterFileLocalServiceUtil.findByParent1(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
-		}
-
 		if (_methodName288.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
-			return MasterFileLocalServiceUtil.findByParent2(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return MasterFileLocalServiceUtil.getAllLibraries();
 		}
 
 		if (_methodName289.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
-			return MasterFileLocalServiceUtil.findByTypeAndName(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+			return MasterFileLocalServiceUtil.getAllPrintedMaterial();
 		}
 
 		if (_methodName290.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
-			return MasterFileLocalServiceUtil.findByTypeOldId(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return MasterFileLocalServiceUtil.getAllIrItem();
 		}
 
 		if (_methodName291.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes291, parameterTypes)) {
+			return MasterFileLocalServiceUtil.getAllNonPrintedMaterial();
+		}
+
+		if (_methodName292.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes292, parameterTypes)) {
+			return MasterFileLocalServiceUtil.getAllFaculties();
+		}
+
+		if (_methodName293.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes293, parameterTypes)) {
+			return MasterFileLocalServiceUtil.getAllItemMediums();
+		}
+
+		if (_methodName294.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes294, parameterTypes)) {
+			return MasterFileLocalServiceUtil.getCountByMasterType(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName295.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes295, parameterTypes)) {
+			return MasterFileLocalServiceUtil.findByParent1(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName296.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes296, parameterTypes)) {
+			return MasterFileLocalServiceUtil.findByParent2(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName297.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes297, parameterTypes)) {
+			return MasterFileLocalServiceUtil.findByTypeAndName(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName298.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes298, parameterTypes)) {
+			return MasterFileLocalServiceUtil.findByTypeOldId(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName299.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes299, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue(),
 				((Boolean)arguments[2]).booleanValue(),
@@ -376,27 +380,33 @@ public class MasterFileLocalServiceClpInvoker {
 				((Boolean)arguments[4]).booleanValue());
 		}
 
-		if (_methodName292.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes292, parameterTypes)) {
+		if (_methodName300.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes300, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus1(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName293.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes293, parameterTypes)) {
+		if (_methodName301.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes301, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus2(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName294.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes294, parameterTypes)) {
+		if (_methodName302.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes302, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus3(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName295.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes295, parameterTypes)) {
+		if (_methodName303.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes303, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus4(((Long)arguments[0]).longValue(),
+				((Boolean)arguments[1]).booleanValue());
+		}
+
+		if (_methodName304.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes304, parameterTypes)) {
+			return MasterFileLocalServiceUtil.findByTypeAndStatus5(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
@@ -435,26 +445,10 @@ public class MasterFileLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName272;
-	private String[] _methodParameterTypes272;
-	private String _methodName273;
-	private String[] _methodParameterTypes273;
-	private String _methodName278;
-	private String[] _methodParameterTypes278;
-	private String _methodName279;
-	private String[] _methodParameterTypes279;
 	private String _methodName280;
 	private String[] _methodParameterTypes280;
 	private String _methodName281;
 	private String[] _methodParameterTypes281;
-	private String _methodName282;
-	private String[] _methodParameterTypes282;
-	private String _methodName283;
-	private String[] _methodParameterTypes283;
-	private String _methodName284;
-	private String[] _methodParameterTypes284;
-	private String _methodName285;
-	private String[] _methodParameterTypes285;
 	private String _methodName286;
 	private String[] _methodParameterTypes286;
 	private String _methodName287;
@@ -475,4 +469,22 @@ public class MasterFileLocalServiceClpInvoker {
 	private String[] _methodParameterTypes294;
 	private String _methodName295;
 	private String[] _methodParameterTypes295;
+	private String _methodName296;
+	private String[] _methodParameterTypes296;
+	private String _methodName297;
+	private String[] _methodParameterTypes297;
+	private String _methodName298;
+	private String[] _methodParameterTypes298;
+	private String _methodName299;
+	private String[] _methodParameterTypes299;
+	private String _methodName300;
+	private String[] _methodParameterTypes300;
+	private String _methodName301;
+	private String[] _methodParameterTypes301;
+	private String _methodName302;
+	private String[] _methodParameterTypes302;
+	private String _methodName303;
+	private String[] _methodParameterTypes303;
+	private String _methodName304;
+	private String[] _methodParameterTypes304;
 }
