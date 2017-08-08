@@ -18,11 +18,31 @@
 	</model>
 	<model name="com.idetronic.eis.model.FactAcquisition">
 		<field name="factAcquisitionId" type="long" />
+		<field name="libraryId" type="long" />
 		<field name="facultyId" type="long" />
 		<field name="period" type="String" />
 		<field name="itemId" type="long" />
+		<field name="approvedTitleTotal" type="long" />
+		<field name="approvedVolumeTotal" type="long" />
+		<field name="approvedAmountTotal" type="double" />
+		<field name="orderTitleTotal" type="long" />
+		<field name="orderVolumeTotal" type="long" />
+		<field name="orderAmountTotal" type="double" />
 		<field name="volumeTotal" type="long" />
 		<field name="titleTotal" type="long" />
+		<field name="amountTotal" type="double" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactArticleIndexing">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="indexTotal" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
@@ -43,6 +63,62 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 	</model>
+	<model name="com.idetronic.eis.model.FactCustomerComplaint">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="complaintTotal" type="long" />
+		<field name="unsettledTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactData">
+		<field name="factId" type="long" />
+		<field name="reportId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="dimensionId" type="long" />
+		<field name="measure1" type="double" />
+		<field name="measure2" type="double" />
+		<field name="measure3" type="double" />
+		<field name="measure4" type="double" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactDatabaseUsage">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="downloadTotal" type="long" />
+		<field name="sessionTotal" type="long" />
+		<field name="searchTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactDigitalCollection">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="titleTotal" type="long" />
+		<field name="volumeTotal" type="long" />
+		<field name="imageTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
 	<model name="com.idetronic.eis.model.FactExpense">
 		<field name="factExpenseId" type="long" />
 		<field name="libraryId" type="long" />
@@ -50,6 +126,55 @@
 		<field name="entryType" type="int" />
 		<field name="masterFileId" type="long" />
 		<field name="amount" type="double" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactGiftReceived">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="titleTotal" type="long" />
+		<field name="volumeTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactIncome">
+		<field name="factIncomeId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="total" type="double" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactInterLibLoan">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="ptjId" type="long" />
+		<field name="applyTotal" type="long" />
+		<field name="approvedTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactInternationalPortalUsage">
+		<field name="factId" type="long" />
+		<field name="period" type="String" />
+		<field name="countryId" type="long" />
+		<field name="pagesTotal" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
@@ -84,6 +209,31 @@
 		<field name="createdByUserId" type="long" />
 		<field name="createdByUserName" type="String" />
 		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactItManagement">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="itemTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eis.model.FactLibraryVisitor">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="visitorCategoryId" type="long" />
+		<field name="sessionTotal" type="long" />
+		<field name="visitorTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
 	</model>
 	<model name="com.idetronic.eis.model.FactMembership">
 		<field name="factMembershipId" type="long" />
@@ -157,6 +307,19 @@
 		<field name="dateCreated" type="Date" />
 		<field name="createdByUserName" type="String" />
 		<field name="createdByUserId" type="long" />
+	</model>
+	<model name="com.idetronic.eis.model.FactReleaseCataloging">
+		<field name="factId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="period" type="String" />
+		<field name="itemId" type="long" />
+		<field name="titleTotal" type="long" />
+		<field name="volumeTotal" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
 	</model>
 	<model name="com.idetronic.eis.model.FactSeating">
 		<field name="factSeatingId" type="long" />
@@ -487,6 +650,16 @@
 			<hint name="max-length">150</hint>
 		</field>
 		<field name="dataEntry" type="boolean" />
+		<field name="hqDataEntry" type="boolean" />
+		<field name="dimensionId" type="long" />
+		<field name="hasMeasure1" type="boolean" />
+		<field name="hasMeasure2" type="boolean" />
+		<field name="hasMeasure3" type="boolean" />
+		<field name="hasMeasure4" type="boolean" />
+		<field name="measure1Name" type="String" />
+		<field name="measure2Name" type="String" />
+		<field name="measure3Name" type="String" />
+		<field name="measure4Name" type="String" />
 		<field name="dataName" type="String" />
 	</model>
 	<model name="com.idetronic.eis.model.SeatingCategory">

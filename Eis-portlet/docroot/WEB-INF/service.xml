@@ -658,13 +658,30 @@
 		<column name="reportName" type="String"></column>
 		<column name="reportTitle" type="String"></column>
 		<column name="dataEntry" type="boolean"></column>
+		<column name="hqDataEntry" type="boolean"></column>
+		<!--  added to support generic fact data -->
+		<column name="dimensionId" type="long"></column>
+		<column name="hasMeasure1" type="boolean"></column>
+		<column name="hasMeasure2" type="boolean"></column>
+		<column name="hasMeasure3" type="boolean"></column>
+		<column name="hasMeasure4" type="boolean"></column>
+		<column name="measure1Name" type="String"></column>
+		<column name="measure2Name" type="String"></column>
+		<column name="measure3Name" type="String"></column>
+		<column name="measure4Name" type="String"></column>
+		<!--  end added to support generic fact data -->
 		<column name="dataName" type="String"></column>
 		<finder return-type="Report" name="Key" unique="true">
 			<finder-column name="reportKey"></finder-column>
 		</finder>
 		<finder return-type="Collection" name="dataEntry">
 			<finder-column name="dataEntry"></finder-column>
+			<finder-column name="hqDataEntry"></finder-column>
 		</finder>
+		<finder return-type="Collection" name="mainReport">
+			<finder-column name="dataEntry"></finder-column>
+		</finder>
+		
 	</entity>
 	<entity name="FactExpense" local-service="true">
 		<column name="factExpenseId" type="long" primary="true"></column>
@@ -711,11 +728,27 @@
 	</entity>
 	<entity name="FactAcquisition" local-service="true">
 		<column name="factAcquisitionId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
   		<column name="facultyId" type="long"></column>
   		<column name="period" type="String"></column>
   		<column name="itemId" type="long"></column>
+  		
+  		<!-- cadangan -->
+  		<column name="approvedTitleTotal" type="long"></column>
+  		<column name="approvedVolumeTotal" type="long"></column>
+  		<column name="approvedAmountTotal" type="double"></column>
+  		
+  		<!--  pesanan pembelian -->
+  		<column name="orderTitleTotal" type="long"></column>
+  		<column name="orderVolumeTotal" type="long"></column>
+  		<column name="orderAmountTotal" type="double"></column>
+  		
+  		<!--  penerimaan -->
   		<column name="volumeTotal" type="long"></column>
   		<column name="titleTotal" type="long"></column>
+  		<column name="amountTotal" type="double"></column>
+  		
+  		
 		<column name="companyId" type="long"></column>
   		<column name="groupId" type="long"></column>
   		
@@ -726,6 +759,200 @@
   			<finder-column name="facultyId"></finder-column>
   		</finder>
 	</entity>
+	<entity name="FactIncome" local-service="true">
+		<column name="factIncomeId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="total" type="double"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<entity name="FactDigitalCollection" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="titleTotal" type="long"></column>
+  		<column name="volumeTotal" type="long"></column>
+  		<column name="imageTotal" type="long"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<entity name="FactDatabaseUsage" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="downloadTotal" type="long"></column>
+  		<column name="sessionTotal" type="long"></column>
+  		<column name="searchTotal" type="long"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<!--  Generic Fact Data
+	Depends on  report to set dimension
+	
+	-->
+	<entity name="FactData" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="reportId" type="long"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="dimensionId" type="long"></column>
+  		<column name="measure1" type="double"></column>
+		<column name="measure2" type="double"></column>
+		<column name="measure3" type="double"></column>
+		<column name="measure4" type="double"></column>
+		
+		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+	</entity>
+	
+	<entity name="FactItManagement" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="itemTotal" type="long"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<entity name="FactInterLibLoan" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="ptjId" type="long"></column>
+  		<column name="applyTotal" type="long"></column>
+  		<column name="approvedTotal" type="long"></column>
+  		
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	
+	<entity name="FactGiftReceived" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="titleTotal" type="long"></column>
+  		<column name="volumeTotal" type="long"></column>
+  		
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<entity name="FactLibraryVisitor" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="visitorCategoryId" type="long"></column>
+  		<column name="sessionTotal" type="long"></column>
+  		<column name="visitorTotal" type="long"></column>
+  		
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	
+	<entity name="FactReleaseCataloging" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="titleTotal" type="long"></column>
+  		<column name="volumeTotal" type="long"></column>
+  		
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<entity name="FactArticleIndexing" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="itemId" type="long"></column>
+  		<column name="indexTotal" type="long"></column>
+  		
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	
+	<entity name="FactInternationalPortalUsage" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="period" type="String"></column>
+  		<column name="countryId" type="long"></column>
+  		<column name="pagesTotal" type="long"></column>
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	<entity name="FactCustomerComplaint" local-service="true">
+		<column name="factId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+  		<column name="period" type="String"></column>
+  		<column name="complaintTotal" type="long"></column>
+  		<column name="unsettledTotal" type="long"></column>
+  		
+  		<column name="companyId" type="long"></column>
+  		<column name="groupId" type="long"></column>
+  		
+  		<column name="userId" type="long"></column>
+  		<column name="userName" type="String"></column>
+  		<column name="createDate" type="Date"></column>
+  		
+	</entity>
+	
 	<entity name="MasterFile" local-service="true">
 		<column name="masterFileId" type="long" primary="true"></column>
 		<column name="masterTypeId" type="long"></column>

@@ -31,6 +31,10 @@ public class FactConsultationFinderUtil {
 		return getFinder().getHistory(libraryId, period);
 	}
 
+	public static int getDataCount(long libraryId, java.lang.String period) {
+		return getFinder().getDataCount(libraryId, period);
+	}
+
 	public static FactConsultationFinder getFinder() {
 		if (_finder == null) {
 			_finder = (FactConsultationFinder)PortletBeanLocatorUtil.locate(com.idetronic.eis.service.ClpSerializer.getServletContextName(),

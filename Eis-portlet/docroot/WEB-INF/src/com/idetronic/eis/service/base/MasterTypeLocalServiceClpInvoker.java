@@ -106,17 +106,17 @@ public class MasterTypeLocalServiceClpInvoker {
 				"com.idetronic.eis.model.MasterType"
 			};
 
-		_methodName280 = "getBeanIdentifier";
+		_methodName366 = "getBeanIdentifier";
 
-		_methodParameterTypes280 = new String[] {  };
+		_methodParameterTypes366 = new String[] {  };
 
-		_methodName281 = "setBeanIdentifier";
+		_methodName367 = "setBeanIdentifier";
 
-		_methodParameterTypes281 = new String[] { "java.lang.String" };
+		_methodParameterTypes367 = new String[] { "java.lang.String" };
 
-		_methodName286 = "getAllParentType";
+		_methodName372 = "getAllParentType";
 
-		_methodParameterTypes286 = new String[] { "int", "int" };
+		_methodParameterTypes372 = new String[] { "int", "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class MasterTypeLocalServiceClpInvoker {
 			return MasterTypeLocalServiceUtil.updateMasterType((com.idetronic.eis.model.MasterType)arguments[0]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName366.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes366, parameterTypes)) {
 			return MasterTypeLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName367.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes367, parameterTypes)) {
 			MasterTypeLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName286.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
+		if (_methodName372.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes372, parameterTypes)) {
 			return MasterTypeLocalServiceUtil.getAllParentType(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
@@ -261,10 +261,10 @@ public class MasterTypeLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName280;
-	private String[] _methodParameterTypes280;
-	private String _methodName281;
-	private String[] _methodParameterTypes281;
-	private String _methodName286;
-	private String[] _methodParameterTypes286;
+	private String _methodName366;
+	private String[] _methodParameterTypes366;
+	private String _methodName367;
+	private String[] _methodParameterTypes367;
+	private String _methodName372;
+	private String[] _methodParameterTypes372;
 }

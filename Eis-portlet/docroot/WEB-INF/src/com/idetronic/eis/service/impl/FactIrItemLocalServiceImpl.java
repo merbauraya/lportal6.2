@@ -120,12 +120,15 @@ public class FactIrItemLocalServiceImpl extends FactIrItemLocalServiceBaseImpl {
 		
 		int i = 0;
 		
+		
 		for(Object object:list)
 		{
 			Object[] arrayobject=(Object[])object;
+			
+			
 			fact=(FactIrItem)arrayobject[0];
 			category = (MasterFile)arrayobject[1];
-			medium = (MasterFile)arrayobject[2];
+			//medium = (MasterFile)arrayobject[2];
 			
 			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 			i++;
@@ -138,7 +141,7 @@ public class FactIrItemLocalServiceImpl extends FactIrItemLocalServiceBaseImpl {
 			jsonObject.put("Naskah", fact.getVolumeTotal());
 			jsonObject.put("Jenis Bahan", category.getMasterFileName());
 			jsonObject.put("Pengguna", fact.getCreatedByUserName());
-			jsonObject.put("Medium", medium.getMasterFileName());
+			//jsonObject.put("Medium", medium.getMasterFileName());
 			
 			String pattern = "dd/MM/yyyy";
 		    SimpleDateFormat format = new SimpleDateFormat(pattern);
@@ -151,6 +154,13 @@ public class FactIrItemLocalServiceImpl extends FactIrItemLocalServiceBaseImpl {
 		}
 		return jsonData;
 		
+		
+	}
+	
+	public boolean isMissingData(long libraryId,String period) throws SystemException
+	{
+		List<FactIrItem> items = factIrItemPersistence.findByLibraryPeriod(libraryId, period);
+		return (items.size() == 0);
 		
 	}
 	

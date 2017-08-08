@@ -47,7 +47,4 @@ public interface LibraryFinder {
 
 	public int getIrItemCountByLibraryPeriod(long libraryId,
 		java.lang.String period);
-
-	public int getConsultationountByLibraryPeriod(long libraryId,
-		java.lang.String period);
 }

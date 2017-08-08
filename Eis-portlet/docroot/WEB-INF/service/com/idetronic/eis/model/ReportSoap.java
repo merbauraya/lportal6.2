@@ -35,6 +35,16 @@ public class ReportSoap implements Serializable {
 		soapModel.setReportName(model.getReportName());
 		soapModel.setReportTitle(model.getReportTitle());
 		soapModel.setDataEntry(model.getDataEntry());
+		soapModel.setHqDataEntry(model.getHqDataEntry());
+		soapModel.setDimensionId(model.getDimensionId());
+		soapModel.setHasMeasure1(model.getHasMeasure1());
+		soapModel.setHasMeasure2(model.getHasMeasure2());
+		soapModel.setHasMeasure3(model.getHasMeasure3());
+		soapModel.setHasMeasure4(model.getHasMeasure4());
+		soapModel.setMeasure1Name(model.getMeasure1Name());
+		soapModel.setMeasure2Name(model.getMeasure2Name());
+		soapModel.setMeasure3Name(model.getMeasure3Name());
+		soapModel.setMeasure4Name(model.getMeasure4Name());
 		soapModel.setDataName(model.getDataName());
 
 		return soapModel;
@@ -132,6 +142,106 @@ public class ReportSoap implements Serializable {
 		_dataEntry = dataEntry;
 	}
 
+	public boolean getHqDataEntry() {
+		return _hqDataEntry;
+	}
+
+	public boolean isHqDataEntry() {
+		return _hqDataEntry;
+	}
+
+	public void setHqDataEntry(boolean hqDataEntry) {
+		_hqDataEntry = hqDataEntry;
+	}
+
+	public long getDimensionId() {
+		return _dimensionId;
+	}
+
+	public void setDimensionId(long dimensionId) {
+		_dimensionId = dimensionId;
+	}
+
+	public boolean getHasMeasure1() {
+		return _hasMeasure1;
+	}
+
+	public boolean isHasMeasure1() {
+		return _hasMeasure1;
+	}
+
+	public void setHasMeasure1(boolean hasMeasure1) {
+		_hasMeasure1 = hasMeasure1;
+	}
+
+	public boolean getHasMeasure2() {
+		return _hasMeasure2;
+	}
+
+	public boolean isHasMeasure2() {
+		return _hasMeasure2;
+	}
+
+	public void setHasMeasure2(boolean hasMeasure2) {
+		_hasMeasure2 = hasMeasure2;
+	}
+
+	public boolean getHasMeasure3() {
+		return _hasMeasure3;
+	}
+
+	public boolean isHasMeasure3() {
+		return _hasMeasure3;
+	}
+
+	public void setHasMeasure3(boolean hasMeasure3) {
+		_hasMeasure3 = hasMeasure3;
+	}
+
+	public boolean getHasMeasure4() {
+		return _hasMeasure4;
+	}
+
+	public boolean isHasMeasure4() {
+		return _hasMeasure4;
+	}
+
+	public void setHasMeasure4(boolean hasMeasure4) {
+		_hasMeasure4 = hasMeasure4;
+	}
+
+	public String getMeasure1Name() {
+		return _measure1Name;
+	}
+
+	public void setMeasure1Name(String measure1Name) {
+		_measure1Name = measure1Name;
+	}
+
+	public String getMeasure2Name() {
+		return _measure2Name;
+	}
+
+	public void setMeasure2Name(String measure2Name) {
+		_measure2Name = measure2Name;
+	}
+
+	public String getMeasure3Name() {
+		return _measure3Name;
+	}
+
+	public void setMeasure3Name(String measure3Name) {
+		_measure3Name = measure3Name;
+	}
+
+	public String getMeasure4Name() {
+		return _measure4Name;
+	}
+
+	public void setMeasure4Name(String measure4Name) {
+		_measure4Name = measure4Name;
+	}
+
 	public String getDataName() {
 		return _dataName;
 	}
@@ -145,5 +255,15 @@ public class ReportSoap implements Serializable {
 	private String _reportName;
 	private String _reportTitle;
 	private boolean _dataEntry;
+	private boolean _hqDataEntry;
+	private long _dimensionId;
+	private boolean _hasMeasure1;
+	private boolean _hasMeasure2;
+	private boolean _hasMeasure3;
+	private boolean _hasMeasure4;
+	private String _measure1Name;
+	private String _measure2Name;
+	private String _measure3Name;
+	private String _measure4Name;
 	private String _dataName;
 }

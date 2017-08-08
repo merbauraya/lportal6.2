@@ -25,11 +25,39 @@
 	<mapped-superclass class="com.idetronic.eis.model.impl.FactAcquisitionModelImpl">
 		<attributes>
 			<id name="factAcquisitionId" />
+			<basic name="libraryId" />
 			<basic name="facultyId" />
 			<basic name="period" />
 			<basic name="itemId" />
+			<basic name="approvedTitleTotal" />
+			<basic name="approvedVolumeTotal" />
+			<basic name="approvedAmountTotal" />
+			<basic name="orderTitleTotal" />
+			<basic name="orderVolumeTotal" />
+			<basic name="orderAmountTotal" />
 			<basic name="volumeTotal" />
 			<basic name="titleTotal" />
+			<basic name="amountTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactArticleIndexingModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="indexTotal" />
 			<basic name="companyId" />
 			<basic name="groupId" />
 			<basic name="userId" />
@@ -65,6 +93,94 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactCustomerComplaintModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="complaintTotal" />
+			<basic name="unsettledTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactDataModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="reportId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="dimensionId" />
+			<basic name="measure1" />
+			<basic name="measure2" />
+			<basic name="measure3" />
+			<basic name="measure4" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactDatabaseUsageModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="downloadTotal" />
+			<basic name="sessionTotal" />
+			<basic name="searchTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactDigitalCollectionModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="imageTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.FactExpenseModelImpl">
 		<attributes>
 			<id name="factExpenseId" />
@@ -73,6 +189,87 @@
 			<basic name="entryType" />
 			<basic name="masterFileId" />
 			<basic name="amount" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactGiftReceivedModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactIncomeModelImpl">
+		<attributes>
+			<id name="factIncomeId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="total" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactInterLibLoanModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="ptjId" />
+			<basic name="applyTotal" />
+			<basic name="approvedTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactInternationalPortalUsageModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="period" />
+			<basic name="countryId" />
+			<basic name="pagesTotal" />
 			<basic name="companyId" />
 			<basic name="groupId" />
 			<basic name="userId" />
@@ -125,6 +322,47 @@
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactItManagementModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="itemTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactLibraryVisitorModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="visitorCategoryId" />
+			<basic name="sessionTotal" />
+			<basic name="visitorTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.FactMembershipModelImpl">
@@ -216,6 +454,27 @@
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eis.model.impl.FactReleaseCatalogingModelImpl">
+		<attributes>
+			<id name="factId" />
+			<basic name="libraryId" />
+			<basic name="period" />
+			<basic name="itemId" />
+			<basic name="titleTotal" />
+			<basic name="volumeTotal" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eis.model.impl.FactSeatingModelImpl">
@@ -692,6 +951,16 @@
 			<basic name="reportName" />
 			<basic name="reportTitle" />
 			<basic name="dataEntry" />
+			<basic name="hqDataEntry" />
+			<basic name="dimensionId" />
+			<basic name="hasMeasure1" />
+			<basic name="hasMeasure2" />
+			<basic name="hasMeasure3" />
+			<basic name="hasMeasure4" />
+			<basic name="measure1Name" />
+			<basic name="measure2Name" />
+			<basic name="measure3Name" />
+			<basic name="measure4Name" />
 			<basic name="dataName" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -807,12 +1076,48 @@
 		<table name="eis_FactAcquisition" />
 		<attributes />
 	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactArticleIndexingImpl" name="FactArticleIndexing">
+		<table name="eis_FactArticleIndexing" />
+		<attributes />
+	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactConsultationImpl" name="FactConsultation">
 		<table name="eis_FactConsultation" />
 		<attributes />
 	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactCustomerComplaintImpl" name="FactCustomerComplaint">
+		<table name="eis_FactCustomerComplaint" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactDataImpl" name="FactData">
+		<table name="eis_FactData" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactDatabaseUsageImpl" name="FactDatabaseUsage">
+		<table name="eis_FactDatabaseUsage" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactDigitalCollectionImpl" name="FactDigitalCollection">
+		<table name="eis_FactDigitalCollection" />
+		<attributes />
+	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactExpenseImpl" name="FactExpense">
 		<table name="eis_FactExpense" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactGiftReceivedImpl" name="FactGiftReceived">
+		<table name="eis_FactGiftReceived" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactIncomeImpl" name="FactIncome">
+		<table name="eis_FactIncome" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactInterLibLoanImpl" name="FactInterLibLoan">
+		<table name="eis_FactInterLibLoan" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactInternationalPortalUsageImpl" name="FactInternationalPortalUsage">
+		<table name="eis_FactInternationalPortalUsage" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactIrItemImpl" name="FactIrItem">
@@ -821,6 +1126,14 @@
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactIrSubmissionImpl" name="FactIrSubmission">
 		<table name="eis_FactIrSubmission" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactItManagementImpl" name="FactItManagement">
+		<table name="eis_FactItManagement" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactLibraryVisitorImpl" name="FactLibraryVisitor">
+		<table name="eis_FactLibraryVisitor" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactMembershipImpl" name="FactMembership">
@@ -837,6 +1150,10 @@
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactPrintedMaterialImpl" name="FactPrintedMaterial">
 		<table name="eis_FactPrintedMaterial" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eis.model.impl.FactReleaseCatalogingImpl" name="FactReleaseCataloging">
+		<table name="eis_FactReleaseCataloging" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eis.model.impl.FactSeatingImpl" name="FactSeating">

@@ -51,11 +51,19 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("factAcquisitionId", getFactAcquisitionId());
+		attributes.put("libraryId", getLibraryId());
 		attributes.put("facultyId", getFacultyId());
 		attributes.put("period", getPeriod());
 		attributes.put("itemId", getItemId());
+		attributes.put("approvedTitleTotal", getApprovedTitleTotal());
+		attributes.put("approvedVolumeTotal", getApprovedVolumeTotal());
+		attributes.put("approvedAmountTotal", getApprovedAmountTotal());
+		attributes.put("orderTitleTotal", getOrderTitleTotal());
+		attributes.put("orderVolumeTotal", getOrderVolumeTotal());
+		attributes.put("orderAmountTotal", getOrderAmountTotal());
 		attributes.put("volumeTotal", getVolumeTotal());
 		attributes.put("titleTotal", getTitleTotal());
+		attributes.put("amountTotal", getAmountTotal());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
@@ -71,6 +79,12 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 
 		if (factAcquisitionId != null) {
 			setFactAcquisitionId(factAcquisitionId);
+		}
+
+		Long libraryId = (Long)attributes.get("libraryId");
+
+		if (libraryId != null) {
+			setLibraryId(libraryId);
 		}
 
 		Long facultyId = (Long)attributes.get("facultyId");
@@ -91,6 +105,43 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 			setItemId(itemId);
 		}
 
+		Long approvedTitleTotal = (Long)attributes.get("approvedTitleTotal");
+
+		if (approvedTitleTotal != null) {
+			setApprovedTitleTotal(approvedTitleTotal);
+		}
+
+		Long approvedVolumeTotal = (Long)attributes.get("approvedVolumeTotal");
+
+		if (approvedVolumeTotal != null) {
+			setApprovedVolumeTotal(approvedVolumeTotal);
+		}
+
+		Double approvedAmountTotal = (Double)attributes.get(
+				"approvedAmountTotal");
+
+		if (approvedAmountTotal != null) {
+			setApprovedAmountTotal(approvedAmountTotal);
+		}
+
+		Long orderTitleTotal = (Long)attributes.get("orderTitleTotal");
+
+		if (orderTitleTotal != null) {
+			setOrderTitleTotal(orderTitleTotal);
+		}
+
+		Long orderVolumeTotal = (Long)attributes.get("orderVolumeTotal");
+
+		if (orderVolumeTotal != null) {
+			setOrderVolumeTotal(orderVolumeTotal);
+		}
+
+		Double orderAmountTotal = (Double)attributes.get("orderAmountTotal");
+
+		if (orderAmountTotal != null) {
+			setOrderAmountTotal(orderAmountTotal);
+		}
+
 		Long volumeTotal = (Long)attributes.get("volumeTotal");
 
 		if (volumeTotal != null) {
@@ -101,6 +152,12 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 
 		if (titleTotal != null) {
 			setTitleTotal(titleTotal);
+		}
+
+		Double amountTotal = (Double)attributes.get("amountTotal");
+
+		if (amountTotal != null) {
+			setAmountTotal(amountTotal);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -175,6 +232,26 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 	}
 
 	/**
+	* Returns the library ID of this fact acquisition.
+	*
+	* @return the library ID of this fact acquisition
+	*/
+	@Override
+	public long getLibraryId() {
+		return _factAcquisition.getLibraryId();
+	}
+
+	/**
+	* Sets the library ID of this fact acquisition.
+	*
+	* @param libraryId the library ID of this fact acquisition
+	*/
+	@Override
+	public void setLibraryId(long libraryId) {
+		_factAcquisition.setLibraryId(libraryId);
+	}
+
+	/**
 	* Returns the faculty ID of this fact acquisition.
 	*
 	* @return the faculty ID of this fact acquisition
@@ -235,6 +312,126 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 	}
 
 	/**
+	* Returns the approved title total of this fact acquisition.
+	*
+	* @return the approved title total of this fact acquisition
+	*/
+	@Override
+	public long getApprovedTitleTotal() {
+		return _factAcquisition.getApprovedTitleTotal();
+	}
+
+	/**
+	* Sets the approved title total of this fact acquisition.
+	*
+	* @param approvedTitleTotal the approved title total of this fact acquisition
+	*/
+	@Override
+	public void setApprovedTitleTotal(long approvedTitleTotal) {
+		_factAcquisition.setApprovedTitleTotal(approvedTitleTotal);
+	}
+
+	/**
+	* Returns the approved volume total of this fact acquisition.
+	*
+	* @return the approved volume total of this fact acquisition
+	*/
+	@Override
+	public long getApprovedVolumeTotal() {
+		return _factAcquisition.getApprovedVolumeTotal();
+	}
+
+	/**
+	* Sets the approved volume total of this fact acquisition.
+	*
+	* @param approvedVolumeTotal the approved volume total of this fact acquisition
+	*/
+	@Override
+	public void setApprovedVolumeTotal(long approvedVolumeTotal) {
+		_factAcquisition.setApprovedVolumeTotal(approvedVolumeTotal);
+	}
+
+	/**
+	* Returns the approved amount total of this fact acquisition.
+	*
+	* @return the approved amount total of this fact acquisition
+	*/
+	@Override
+	public double getApprovedAmountTotal() {
+		return _factAcquisition.getApprovedAmountTotal();
+	}
+
+	/**
+	* Sets the approved amount total of this fact acquisition.
+	*
+	* @param approvedAmountTotal the approved amount total of this fact acquisition
+	*/
+	@Override
+	public void setApprovedAmountTotal(double approvedAmountTotal) {
+		_factAcquisition.setApprovedAmountTotal(approvedAmountTotal);
+	}
+
+	/**
+	* Returns the order title total of this fact acquisition.
+	*
+	* @return the order title total of this fact acquisition
+	*/
+	@Override
+	public long getOrderTitleTotal() {
+		return _factAcquisition.getOrderTitleTotal();
+	}
+
+	/**
+	* Sets the order title total of this fact acquisition.
+	*
+	* @param orderTitleTotal the order title total of this fact acquisition
+	*/
+	@Override
+	public void setOrderTitleTotal(long orderTitleTotal) {
+		_factAcquisition.setOrderTitleTotal(orderTitleTotal);
+	}
+
+	/**
+	* Returns the order volume total of this fact acquisition.
+	*
+	* @return the order volume total of this fact acquisition
+	*/
+	@Override
+	public long getOrderVolumeTotal() {
+		return _factAcquisition.getOrderVolumeTotal();
+	}
+
+	/**
+	* Sets the order volume total of this fact acquisition.
+	*
+	* @param orderVolumeTotal the order volume total of this fact acquisition
+	*/
+	@Override
+	public void setOrderVolumeTotal(long orderVolumeTotal) {
+		_factAcquisition.setOrderVolumeTotal(orderVolumeTotal);
+	}
+
+	/**
+	* Returns the order amount total of this fact acquisition.
+	*
+	* @return the order amount total of this fact acquisition
+	*/
+	@Override
+	public double getOrderAmountTotal() {
+		return _factAcquisition.getOrderAmountTotal();
+	}
+
+	/**
+	* Sets the order amount total of this fact acquisition.
+	*
+	* @param orderAmountTotal the order amount total of this fact acquisition
+	*/
+	@Override
+	public void setOrderAmountTotal(double orderAmountTotal) {
+		_factAcquisition.setOrderAmountTotal(orderAmountTotal);
+	}
+
+	/**
 	* Returns the volume total of this fact acquisition.
 	*
 	* @return the volume total of this fact acquisition
@@ -272,6 +469,26 @@ public class FactAcquisitionWrapper implements FactAcquisition,
 	@Override
 	public void setTitleTotal(long titleTotal) {
 		_factAcquisition.setTitleTotal(titleTotal);
+	}
+
+	/**
+	* Returns the amount total of this fact acquisition.
+	*
+	* @return the amount total of this fact acquisition
+	*/
+	@Override
+	public double getAmountTotal() {
+		return _factAcquisition.getAmountTotal();
+	}
+
+	/**
+	* Sets the amount total of this fact acquisition.
+	*
+	* @param amountTotal the amount total of this fact acquisition
+	*/
+	@Override
+	public void setAmountTotal(double amountTotal) {
+		_factAcquisition.setAmountTotal(amountTotal);
 	}
 
 	/**

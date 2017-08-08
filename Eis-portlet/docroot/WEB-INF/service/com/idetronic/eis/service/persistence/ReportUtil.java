@@ -177,16 +177,197 @@ public class ReportUtil {
 	}
 
 	/**
+	* Returns all the reports where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @return the matching reports
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.Report> findBydataEntry(
+		boolean dataEntry, boolean hqDataEntry)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBydataEntry(dataEntry, hqDataEntry);
+	}
+
+	/**
+	* Returns a range of all the reports where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.ReportModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param start the lower bound of the range of reports
+	* @param end the upper bound of the range of reports (not inclusive)
+	* @return the range of matching reports
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.Report> findBydataEntry(
+		boolean dataEntry, boolean hqDataEntry, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBydataEntry(dataEntry, hqDataEntry, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the reports where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.eis.model.impl.ReportModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param start the lower bound of the range of reports
+	* @param end the upper bound of the range of reports (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching reports
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.idetronic.eis.model.Report> findBydataEntry(
+		boolean dataEntry, boolean hqDataEntry, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBydataEntry(dataEntry, hqDataEntry, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first report in the ordered set where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching report
+	* @throws com.idetronic.eis.NoSuchReportException if a matching report could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.Report findBydataEntry_First(
+		boolean dataEntry, boolean hqDataEntry,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchReportException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBydataEntry_First(dataEntry, hqDataEntry,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first report in the ordered set where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching report, or <code>null</code> if a matching report could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.Report fetchBydataEntry_First(
+		boolean dataEntry, boolean hqDataEntry,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBydataEntry_First(dataEntry, hqDataEntry,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last report in the ordered set where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching report
+	* @throws com.idetronic.eis.NoSuchReportException if a matching report could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.Report findBydataEntry_Last(
+		boolean dataEntry, boolean hqDataEntry,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchReportException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBydataEntry_Last(dataEntry, hqDataEntry,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last report in the ordered set where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching report, or <code>null</code> if a matching report could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.Report fetchBydataEntry_Last(
+		boolean dataEntry, boolean hqDataEntry,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBydataEntry_Last(dataEntry, hqDataEntry,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the reports before and after the current report in the ordered set where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param reportId the primary key of the current report
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next report
+	* @throws com.idetronic.eis.NoSuchReportException if a report with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.idetronic.eis.model.Report[] findBydataEntry_PrevAndNext(
+		long reportId, boolean dataEntry, boolean hqDataEntry,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.eis.NoSuchReportException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBydataEntry_PrevAndNext(reportId, dataEntry,
+			hqDataEntry, orderByComparator);
+	}
+
+	/**
+	* Removes all the reports where dataEntry = &#63; and hqDataEntry = &#63; from the database.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeBydataEntry(boolean dataEntry, boolean hqDataEntry)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeBydataEntry(dataEntry, hqDataEntry);
+	}
+
+	/**
+	* Returns the number of reports where dataEntry = &#63; and hqDataEntry = &#63;.
+	*
+	* @param dataEntry the data entry
+	* @param hqDataEntry the hq data entry
+	* @return the number of matching reports
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countBydataEntry(boolean dataEntry, boolean hqDataEntry)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countBydataEntry(dataEntry, hqDataEntry);
+	}
+
+	/**
 	* Returns all the reports where dataEntry = &#63;.
 	*
 	* @param dataEntry the data entry
 	* @return the matching reports
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.idetronic.eis.model.Report> findBydataEntry(
+	public static java.util.List<com.idetronic.eis.model.Report> findBymainReport(
 		boolean dataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBydataEntry(dataEntry);
+		return getPersistence().findBymainReport(dataEntry);
 	}
 
 	/**
@@ -202,10 +383,10 @@ public class ReportUtil {
 	* @return the range of matching reports
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.idetronic.eis.model.Report> findBydataEntry(
+	public static java.util.List<com.idetronic.eis.model.Report> findBymainReport(
 		boolean dataEntry, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBydataEntry(dataEntry, start, end);
+		return getPersistence().findBymainReport(dataEntry, start, end);
 	}
 
 	/**
@@ -222,12 +403,12 @@ public class ReportUtil {
 	* @return the ordered range of matching reports
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.idetronic.eis.model.Report> findBydataEntry(
+	public static java.util.List<com.idetronic.eis.model.Report> findBymainReport(
 		boolean dataEntry, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findBydataEntry(dataEntry, start, end, orderByComparator);
+				   .findBymainReport(dataEntry, start, end, orderByComparator);
 	}
 
 	/**
@@ -239,13 +420,13 @@ public class ReportUtil {
 	* @throws com.idetronic.eis.NoSuchReportException if a matching report could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.idetronic.eis.model.Report findBydataEntry_First(
+	public static com.idetronic.eis.model.Report findBymainReport_First(
 		boolean dataEntry,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.idetronic.eis.NoSuchReportException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findBydataEntry_First(dataEntry, orderByComparator);
+				   .findBymainReport_First(dataEntry, orderByComparator);
 	}
 
 	/**
@@ -256,12 +437,12 @@ public class ReportUtil {
 	* @return the first matching report, or <code>null</code> if a matching report could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.idetronic.eis.model.Report fetchBydataEntry_First(
+	public static com.idetronic.eis.model.Report fetchBymainReport_First(
 		boolean dataEntry,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchBydataEntry_First(dataEntry, orderByComparator);
+				   .fetchBymainReport_First(dataEntry, orderByComparator);
 	}
 
 	/**
@@ -273,13 +454,13 @@ public class ReportUtil {
 	* @throws com.idetronic.eis.NoSuchReportException if a matching report could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.idetronic.eis.model.Report findBydataEntry_Last(
+	public static com.idetronic.eis.model.Report findBymainReport_Last(
 		boolean dataEntry,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.idetronic.eis.NoSuchReportException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findBydataEntry_Last(dataEntry, orderByComparator);
+				   .findBymainReport_Last(dataEntry, orderByComparator);
 	}
 
 	/**
@@ -290,12 +471,12 @@ public class ReportUtil {
 	* @return the last matching report, or <code>null</code> if a matching report could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.idetronic.eis.model.Report fetchBydataEntry_Last(
+	public static com.idetronic.eis.model.Report fetchBymainReport_Last(
 		boolean dataEntry,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchBydataEntry_Last(dataEntry, orderByComparator);
+				   .fetchBymainReport_Last(dataEntry, orderByComparator);
 	}
 
 	/**
@@ -308,13 +489,13 @@ public class ReportUtil {
 	* @throws com.idetronic.eis.NoSuchReportException if a report with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.idetronic.eis.model.Report[] findBydataEntry_PrevAndNext(
+	public static com.idetronic.eis.model.Report[] findBymainReport_PrevAndNext(
 		long reportId, boolean dataEntry,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.idetronic.eis.NoSuchReportException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findBydataEntry_PrevAndNext(reportId, dataEntry,
+				   .findBymainReport_PrevAndNext(reportId, dataEntry,
 			orderByComparator);
 	}
 
@@ -324,9 +505,9 @@ public class ReportUtil {
 	* @param dataEntry the data entry
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeBydataEntry(boolean dataEntry)
+	public static void removeBymainReport(boolean dataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeBydataEntry(dataEntry);
+		getPersistence().removeBymainReport(dataEntry);
 	}
 
 	/**
@@ -336,9 +517,9 @@ public class ReportUtil {
 	* @return the number of matching reports
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countBydataEntry(boolean dataEntry)
+	public static int countBymainReport(boolean dataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countBydataEntry(dataEntry);
+		return getPersistence().countBymainReport(dataEntry);
 	}
 
 	/**

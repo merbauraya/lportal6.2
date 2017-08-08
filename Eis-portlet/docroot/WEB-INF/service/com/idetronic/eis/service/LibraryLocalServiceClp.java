@@ -158,10 +158,6 @@ public class LibraryLocalServiceClp implements LibraryLocalService {
 		_methodName30 = "isMissingExpenseData";
 
 		_methodParameterTypes30 = new String[] { "long", "java.lang.String" };
-
-		_methodName31 = "isMissingConsultationData";
-
-		_methodParameterTypes31 = new String[] { "long", "java.lang.String" };
 	}
 
 	@Override
@@ -1043,32 +1039,6 @@ public class LibraryLocalServiceClp implements LibraryLocalService {
 		return ((Boolean)returnObj).booleanValue();
 	}
 
-	@Override
-	public boolean isMissingConsultationData(long libraryId,
-		java.lang.String period) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName31,
-					_methodParameterTypes31,
-					new Object[] { libraryId, ClpSerializer.translateInput(
-							period) });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return ((Boolean)returnObj).booleanValue();
-	}
-
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1130,6 +1100,4 @@ public class LibraryLocalServiceClp implements LibraryLocalService {
 	private String[] _methodParameterTypes29;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
-	private String _methodName31;
-	private String[] _methodParameterTypes31;
 }

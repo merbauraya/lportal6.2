@@ -53,6 +53,16 @@ public class ReportWrapper implements Report, ModelWrapper<Report> {
 		attributes.put("reportName", getReportName());
 		attributes.put("reportTitle", getReportTitle());
 		attributes.put("dataEntry", getDataEntry());
+		attributes.put("hqDataEntry", getHqDataEntry());
+		attributes.put("dimensionId", getDimensionId());
+		attributes.put("hasMeasure1", getHasMeasure1());
+		attributes.put("hasMeasure2", getHasMeasure2());
+		attributes.put("hasMeasure3", getHasMeasure3());
+		attributes.put("hasMeasure4", getHasMeasure4());
+		attributes.put("measure1Name", getMeasure1Name());
+		attributes.put("measure2Name", getMeasure2Name());
+		attributes.put("measure3Name", getMeasure3Name());
+		attributes.put("measure4Name", getMeasure4Name());
 		attributes.put("dataName", getDataName());
 
 		return attributes;
@@ -88,6 +98,66 @@ public class ReportWrapper implements Report, ModelWrapper<Report> {
 
 		if (dataEntry != null) {
 			setDataEntry(dataEntry);
+		}
+
+		Boolean hqDataEntry = (Boolean)attributes.get("hqDataEntry");
+
+		if (hqDataEntry != null) {
+			setHqDataEntry(hqDataEntry);
+		}
+
+		Long dimensionId = (Long)attributes.get("dimensionId");
+
+		if (dimensionId != null) {
+			setDimensionId(dimensionId);
+		}
+
+		Boolean hasMeasure1 = (Boolean)attributes.get("hasMeasure1");
+
+		if (hasMeasure1 != null) {
+			setHasMeasure1(hasMeasure1);
+		}
+
+		Boolean hasMeasure2 = (Boolean)attributes.get("hasMeasure2");
+
+		if (hasMeasure2 != null) {
+			setHasMeasure2(hasMeasure2);
+		}
+
+		Boolean hasMeasure3 = (Boolean)attributes.get("hasMeasure3");
+
+		if (hasMeasure3 != null) {
+			setHasMeasure3(hasMeasure3);
+		}
+
+		Boolean hasMeasure4 = (Boolean)attributes.get("hasMeasure4");
+
+		if (hasMeasure4 != null) {
+			setHasMeasure4(hasMeasure4);
+		}
+
+		String measure1Name = (String)attributes.get("measure1Name");
+
+		if (measure1Name != null) {
+			setMeasure1Name(measure1Name);
+		}
+
+		String measure2Name = (String)attributes.get("measure2Name");
+
+		if (measure2Name != null) {
+			setMeasure2Name(measure2Name);
+		}
+
+		String measure3Name = (String)attributes.get("measure3Name");
+
+		if (measure3Name != null) {
+			setMeasure3Name(measure3Name);
+		}
+
+		String measure4Name = (String)attributes.get("measure4Name");
+
+		if (measure4Name != null) {
+			setMeasure4Name(measure4Name);
 		}
 
 		String dataName = (String)attributes.get("dataName");
@@ -225,6 +295,256 @@ public class ReportWrapper implements Report, ModelWrapper<Report> {
 	@Override
 	public void setDataEntry(boolean dataEntry) {
 		_report.setDataEntry(dataEntry);
+	}
+
+	/**
+	* Returns the hq data entry of this report.
+	*
+	* @return the hq data entry of this report
+	*/
+	@Override
+	public boolean getHqDataEntry() {
+		return _report.getHqDataEntry();
+	}
+
+	/**
+	* Returns <code>true</code> if this report is hq data entry.
+	*
+	* @return <code>true</code> if this report is hq data entry; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHqDataEntry() {
+		return _report.isHqDataEntry();
+	}
+
+	/**
+	* Sets whether this report is hq data entry.
+	*
+	* @param hqDataEntry the hq data entry of this report
+	*/
+	@Override
+	public void setHqDataEntry(boolean hqDataEntry) {
+		_report.setHqDataEntry(hqDataEntry);
+	}
+
+	/**
+	* Returns the dimension ID of this report.
+	*
+	* @return the dimension ID of this report
+	*/
+	@Override
+	public long getDimensionId() {
+		return _report.getDimensionId();
+	}
+
+	/**
+	* Sets the dimension ID of this report.
+	*
+	* @param dimensionId the dimension ID of this report
+	*/
+	@Override
+	public void setDimensionId(long dimensionId) {
+		_report.setDimensionId(dimensionId);
+	}
+
+	/**
+	* Returns the has measure1 of this report.
+	*
+	* @return the has measure1 of this report
+	*/
+	@Override
+	public boolean getHasMeasure1() {
+		return _report.getHasMeasure1();
+	}
+
+	/**
+	* Returns <code>true</code> if this report is has measure1.
+	*
+	* @return <code>true</code> if this report is has measure1; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHasMeasure1() {
+		return _report.isHasMeasure1();
+	}
+
+	/**
+	* Sets whether this report is has measure1.
+	*
+	* @param hasMeasure1 the has measure1 of this report
+	*/
+	@Override
+	public void setHasMeasure1(boolean hasMeasure1) {
+		_report.setHasMeasure1(hasMeasure1);
+	}
+
+	/**
+	* Returns the has measure2 of this report.
+	*
+	* @return the has measure2 of this report
+	*/
+	@Override
+	public boolean getHasMeasure2() {
+		return _report.getHasMeasure2();
+	}
+
+	/**
+	* Returns <code>true</code> if this report is has measure2.
+	*
+	* @return <code>true</code> if this report is has measure2; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHasMeasure2() {
+		return _report.isHasMeasure2();
+	}
+
+	/**
+	* Sets whether this report is has measure2.
+	*
+	* @param hasMeasure2 the has measure2 of this report
+	*/
+	@Override
+	public void setHasMeasure2(boolean hasMeasure2) {
+		_report.setHasMeasure2(hasMeasure2);
+	}
+
+	/**
+	* Returns the has measure3 of this report.
+	*
+	* @return the has measure3 of this report
+	*/
+	@Override
+	public boolean getHasMeasure3() {
+		return _report.getHasMeasure3();
+	}
+
+	/**
+	* Returns <code>true</code> if this report is has measure3.
+	*
+	* @return <code>true</code> if this report is has measure3; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHasMeasure3() {
+		return _report.isHasMeasure3();
+	}
+
+	/**
+	* Sets whether this report is has measure3.
+	*
+	* @param hasMeasure3 the has measure3 of this report
+	*/
+	@Override
+	public void setHasMeasure3(boolean hasMeasure3) {
+		_report.setHasMeasure3(hasMeasure3);
+	}
+
+	/**
+	* Returns the has measure4 of this report.
+	*
+	* @return the has measure4 of this report
+	*/
+	@Override
+	public boolean getHasMeasure4() {
+		return _report.getHasMeasure4();
+	}
+
+	/**
+	* Returns <code>true</code> if this report is has measure4.
+	*
+	* @return <code>true</code> if this report is has measure4; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHasMeasure4() {
+		return _report.isHasMeasure4();
+	}
+
+	/**
+	* Sets whether this report is has measure4.
+	*
+	* @param hasMeasure4 the has measure4 of this report
+	*/
+	@Override
+	public void setHasMeasure4(boolean hasMeasure4) {
+		_report.setHasMeasure4(hasMeasure4);
+	}
+
+	/**
+	* Returns the measure1 name of this report.
+	*
+	* @return the measure1 name of this report
+	*/
+	@Override
+	public java.lang.String getMeasure1Name() {
+		return _report.getMeasure1Name();
+	}
+
+	/**
+	* Sets the measure1 name of this report.
+	*
+	* @param measure1Name the measure1 name of this report
+	*/
+	@Override
+	public void setMeasure1Name(java.lang.String measure1Name) {
+		_report.setMeasure1Name(measure1Name);
+	}
+
+	/**
+	* Returns the measure2 name of this report.
+	*
+	* @return the measure2 name of this report
+	*/
+	@Override
+	public java.lang.String getMeasure2Name() {
+		return _report.getMeasure2Name();
+	}
+
+	/**
+	* Sets the measure2 name of this report.
+	*
+	* @param measure2Name the measure2 name of this report
+	*/
+	@Override
+	public void setMeasure2Name(java.lang.String measure2Name) {
+		_report.setMeasure2Name(measure2Name);
+	}
+
+	/**
+	* Returns the measure3 name of this report.
+	*
+	* @return the measure3 name of this report
+	*/
+	@Override
+	public java.lang.String getMeasure3Name() {
+		return _report.getMeasure3Name();
+	}
+
+	/**
+	* Sets the measure3 name of this report.
+	*
+	* @param measure3Name the measure3 name of this report
+	*/
+	@Override
+	public void setMeasure3Name(java.lang.String measure3Name) {
+		_report.setMeasure3Name(measure3Name);
+	}
+
+	/**
+	* Returns the measure4 name of this report.
+	*
+	* @return the measure4 name of this report
+	*/
+	@Override
+	public java.lang.String getMeasure4Name() {
+		return _report.getMeasure4Name();
+	}
+
+	/**
+	* Sets the measure4 name of this report.
+	*
+	* @param measure4Name the measure4 name of this report
+	*/
+	@Override
+	public void setMeasure4Name(java.lang.String measure4Name) {
+		_report.setMeasure4Name(measure4Name);
 	}
 
 	/**

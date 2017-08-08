@@ -82,15 +82,19 @@
 	</sql>
 	<sql id="com.idetronic.eis.service.persistence.FactIrItemFinder.getHistoryByL_P">
 		SELECT 
-		    A.*, itemType.*, itemMedium.*
+		    A.*, 
+		    itemType.*
+		    
 		FROM
 		    eis_FactIrItem A
-		        INNER JOIN
+		INNER JOIN 
 		    eis_MasterFile itemType ON A.itemTypeId = itemType.masterFileId
-		        INNER JOIN
-		    eis_MasterFile itemMedium ON A.itemMediumId = itemMedium.masterFileId
+		
+		    
+		    
 		WHERE
-		    A.libraryId = ? AND A.period = ?
+		    A.libraryId = ?
+		        AND A.period = ?
 		        AND facultyId = ?
 		ORDER BY createdDate
 	</sql>
@@ -137,7 +141,85 @@ ORDER BY createDate
 				INNER JOIN
 			eis_MasterFile mst ON A.itemId = mst.masterFileId
 		WHERE
-			facultyId = ? AND period = ?
+			libraryId = ? AND facultyId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactIncomeFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactIncome A
+				INNER JOIN
+			eis_MasterFile mst ON A.itemId = mst.masterFileId
+		WHERE
+			libraryId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactDatabaseUsageFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactDatabaseUsage A
+				INNER JOIN
+			eis_MasterFile mst ON A.itemId = mst.masterFileId
+		WHERE
+			libraryId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactDigitalCollectionFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactDigitalCollection A
+				INNER JOIN
+			eis_MasterFile mst ON A.itemId = mst.masterFileId
+		WHERE
+			libraryId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	
+	<sql id="com.idetronic.eis.service.persistence.FactItManagementFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactItManagement A
+				INNER JOIN
+			eis_MasterFile mst ON A.itemId = mst.masterFileId
+		WHERE
+			libraryId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactInterLibLoanFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactInterLibLoan A
+				INNER JOIN
+			eis_MasterFile mst ON A.ptjId = mst.masterFileId
+		WHERE
+			libraryId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactGiftReceivedFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactGiftReceived A
+				INNER JOIN
+			eis_MasterFile mst ON A.itemId = mst.masterFileId
+		WHERE
+			libraryId = ? AND period = ?
+		ORDER BY createDate
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactDataFinder.getHistoryByL_P">
+		SELECT 
+			*
+		FROM
+			eis_FactData A
+				INNER JOIN
+			eis_MasterFile mst ON A.dimensionId = mst.masterFileId
+		WHERE
+			reportId = ? AND libraryId = ? AND period = ?
 		ORDER BY createDate
 	</sql>
 </custom-sql>

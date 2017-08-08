@@ -19,7 +19,13 @@ package com.idetronic.eis.service.persistence;
  */
 public interface FactAcquisitionFinder {
 	public java.util.List<com.idetronic.eis.model.FactAcquisition> getLatestEntry(
-		long facultyId, java.lang.String period);
+		long libraryId, long facultyId, java.lang.String period);
 
-	public java.util.List getHistory(long facultyId, java.lang.String period);
+	public java.util.List getHistory(long libraryId, long facultyId,
+		java.lang.String period);
+
+	public int getItemCountByLibraryPeriod(long libraryId,
+		java.lang.String period);
+
+	public int getItemCountByPeriod(java.lang.String period);
 }

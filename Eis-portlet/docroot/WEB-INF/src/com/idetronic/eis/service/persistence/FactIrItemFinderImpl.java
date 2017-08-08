@@ -73,12 +73,16 @@ implements FactIrItemFinder
 	        q.setCacheable(false);
 	        q.addEntity("FactIrItem", FactIrItemImpl.class); 
 	        q.addEntity("ItemType", MasterFileImpl.class);
-	        q.addEntity("ItemMedium", MasterFileImpl.class);
+	        //q.addEntity("ItemMedium", MasterFileImpl.class);
+	        
+	        
+	        
 	        
 	        QueryPos qPos = QueryPos.getInstance(q);  
 	        qPos.add(libraryId);
 	        qPos.add(period);
 	        qPos.add(facultyId);
+
 	        
 	        return (List) q.list();
 	        

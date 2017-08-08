@@ -138,6 +138,10 @@ public class FactConsultationLocalServiceClp
 		_methodName22 = "getEntries";
 
 		_methodParameterTypes22 = new String[] { "long", "java.lang.String" };
+
+		_methodName23 = "isMissingData";
+
+		_methodParameterTypes23 = new String[] { "long", "java.lang.String" };
 	}
 
 	@Override
@@ -824,6 +828,31 @@ public class FactConsultationLocalServiceClp
 		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public boolean isMissingData(long libraryId, java.lang.String period) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
+					new Object[] { libraryId, ClpSerializer.translateInput(
+							period) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -869,4 +898,6 @@ public class FactConsultationLocalServiceClp
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
 }

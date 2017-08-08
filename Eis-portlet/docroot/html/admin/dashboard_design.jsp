@@ -5,7 +5,8 @@
 <%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
 <%
 	List<Config> infoBoxes = ConfigLocalServiceUtil.findWithKeyWildcard(EisUtil.EIS_INFO_BOX,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
-	List<Report> reports = ReportLocalServiceUtil.findByDataEntry(true);// .getReports(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	List<Report> reports = ReportLocalServiceUtil.findMainReport();// .getReports(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	
 	
 	
 	String layoutSettingString = ConfigLocalServiceUtil.getByKeyAsString(EisUtil.EIS_DASHBOARD_LAYOUT);
@@ -13,17 +14,23 @@
 	JSONArray settingArray = JSONFactoryUtil.createJSONArray(layoutSettingString);
 	JSONArray sumArray = JSONFactoryUtil.createJSONArray();
 	JSONArray infoArray = JSONFactoryUtil.createJSONArray();
+	JSONArray boxArray = JSONFactoryUtil.createJSONArray();
 	JSONObject layoutSetting = JSONFactoryUtil.createJSONObject();
 	
+	int infoColCount = 0;
 	if (settingArray.length() > 0)
 	{
 		layoutSetting = settingArray.getJSONObject(0);
 		//out.print(layoutSetting.getInt("sumColSize"));
-		
+		infoColCount = layoutSetting.getInt("infoColSize");
 		sumArray = settingArray.getJSONObject(1).getJSONArray("summaryBox");
 		infoArray = settingArray.getJSONObject(2).getJSONArray("infoBox");
 	}
 	
+	if (infoColCount == 0)
+	{
+		infoColCount = 3;
+	}
 	
 	
 	
@@ -75,6 +82,7 @@
 {
 	font-weight:bold;
 	font-size:smaller;
+	padding: 5px;
 }
 .boxPlaceHolder
 {
@@ -121,10 +129,13 @@
 		 	</ul>
 	 	</liferay-ui:panel>
 	 	 <liferay-ui:panel collapsible="<%= true%>" extended="<%= true%>" title="info">
+	 	 	<aui:input name="infoColumnCount" value="3" type="hidden" />
+	 	 	<!-- 
 	 	 	<aui:select name="infoColumnCount" label="total-column" onChange='<%= renderResponse.getNamespace() + "updateInfoLayout();"%>'>
-	 	 		<aui:option value="3" selected="<%= true %>">3</aui:option>
-	 	 		<aui:option value="4">4</aui:option>
+	 	 		<aui:option value="3" selected="<%= infoColCount == 3 %>">3</aui:option>
+	 	 		<aui:option value="4" selected="<%= infoColCount == 4 %>">4</aui:option>
 	 	 	</aui:select>
+	 	 	-->
 		 	<ul class="nav nav-list" id="infoBoxList">
 		 		<%
 		 			for (Config infoBox : infoBoxes)
@@ -155,49 +166,34 @@
 		 	
 		 </liferay-ui:panel>
 		 
-         
+         <aui:button-row>
+			
+			<aui:button type="submit"></aui:button>
+	</aui:button-row>
       </div>
 	</aui:col>
 	<aui:col span="9">
 		<div id="mySortableLayout">
 			<h2> Dashboard Title</h2>
 			<aui:row id="sumContainer" cssClass="sumContainer boxPlaceHolder">
+			<%
+			int curSumItem = 0;
+			String type="sumBox";
+			boxArray = sumArray;
+			%>
 				<aui:col span="3" cssClass="dbContainer">
-					<%
-						int curSumItem = 0;
-						double curX = 0;
-						for (curSumItem = 0; curSumItem < sumArray.length(); curSumItem++)
-						{
-							JSONObject box = sumArray.getJSONObject(curSumItem);
-							
-							if (curSumItem == 0 || box.getDouble("x")== curX)
-							{
-								String title = box.getString("title");
-								String id = box.getString("id");
-					%>
-						<jsp:include page="drawBox.jsp">
-							<jsp:param name="type" value="infoBox"/>
-							<jsp:param name="id" value="<%= id %>" />
-							<jsp:param name="title" value="<%= title %>" />
-						</jsp:include>
-					<%			
-							}
-							
-							
-							curX = box.getDouble("x");
-							
-							
-					%>
-							
-					<%
-						}
-					%>
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 		
+				</aui:col>
+			
+				
+				<aui:col span="3" cssClass="dbContainer">
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 	
 				</aui:col>
 				<aui:col span="3" cssClass="dbContainer">
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 	
 				</aui:col>
 				<aui:col span="3" cssClass="dbContainer">
-				</aui:col>
-				<aui:col span="3" cssClass="dbContainer">
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 
 				</aui:col>
 			
 			</aui:row>
@@ -206,11 +202,19 @@
 				<p class="text-center">Information Container</p>
 			</aui:row>
 			<aui:row id="infoContainer" cssClass="infoContainer boxPlaceHolder">
+				<%
+				int curSumItem = 0;
+				String type="infoBox";
+				boxArray = infoArray;
+				%>
 				<aui:col span="4" cssClass="dbContainer">
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 
 				</aui:col>
 				<aui:col span="4" cssClass="dbContainer">
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 
 				</aui:col>
 				<aui:col span="4" cssClass="dbContainer">
+					<%@ include file="/html/admin/drawDashboard.jspf" %> 
 				</aui:col>
 				
 			</aui:row>
@@ -236,7 +240,7 @@
 <aui:script>
 	var NEW_PORTLET_TPL = '<div class="portlet-box" id="{id}"> \
 	<a class="removeDB pull-right" href="javascript:;"> \
-	<i class="fa fa-close" accessKey="remove"></i> \
+	<i class="icon-remove" accessKey="remove"></i> \
 	</a> \
 	<div class="titleCont"> \
 	<div class="ptitle">{title}</div> \
@@ -512,29 +516,7 @@ var closeDB = A.all('.removeDB');
 				
 				
 			});
-	/*
-	portlet.on('clickoutside', function (e) {
-	  
-	    var inlineEdit = e.currentTarget.one('.add-page-editor');
-	    if (inlineEdit)
-    	{
-	    	
-	    	e.currentTarget.one('.ptitle').removeClass('hide');
-	    	inlineEdit.remove();
-    	}
-	});
 	
-	
-	Liferay.provide(
-			window,
-			'updateLabel',
-			function(e) {
-				console.log(e);
-				
-			},
-			['liferay-util-list-fields']
-	);
-*/
 Liferay.provide(
 	    window,
 	    '<portlet:namespace />submitForm',
@@ -637,11 +619,16 @@ Liferay.provide(
 	        var column = infoSelect.get('value');
 			var infoContainer = A.one('#<portlet:namespace />infoContainer');
 	        var dbContainer = infoContainer.all('.dbContainer');
-	        console.log(dbContainer);
+	        
 	        //reset all span
 	        var spanSize = 12 /column;
 			dbContainer.removeClass('span6').removeClass('span3').removeClass('span4').addClass('span'+ spanSize);
-			
+			/*
+			if (dbContainer.length < column)
+			{
+				dbContainer.append('<div class="dbContainer yui3-dd-drop span"' + spanSize + '"></div>"' );
+			}
+			*/
 	        // selecting the sourceSelect drop-down to get the current value
 	       // var sourceElement = A.one("#<portlet:namespace />subject");
 

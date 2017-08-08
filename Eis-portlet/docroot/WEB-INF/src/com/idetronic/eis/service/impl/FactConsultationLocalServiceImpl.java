@@ -72,6 +72,10 @@ public class FactConsultationLocalServiceImpl
 			String totalSession = data.getString("session");
 			if (!Validator.isBlank(value))
 			{
+				if (Validator.isNull(totalSession))
+				{
+					totalSession = "0";
+				}
 				add(libraryId,period,categoryId,Long.parseLong(value),Long.parseLong(totalSession),serviceContext);
 			}
 		}
@@ -160,5 +164,9 @@ public class FactConsultationLocalServiceImpl
 		}
 		return jsonData;
 				
+	}
+	public boolean isMissingData(long libraryId,String period)
+	{
+		return FactConsultationFinderUtil.getDataCount(libraryId,period) == 0;
 	}
 }

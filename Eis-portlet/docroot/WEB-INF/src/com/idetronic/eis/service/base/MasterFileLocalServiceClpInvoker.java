@@ -106,94 +106,94 @@ public class MasterFileLocalServiceClpInvoker {
 				"com.idetronic.eis.model.MasterFile"
 			};
 
-		_methodName280 = "getBeanIdentifier";
+		_methodName366 = "getBeanIdentifier";
 
-		_methodParameterTypes280 = new String[] {  };
+		_methodParameterTypes366 = new String[] {  };
 
-		_methodName281 = "setBeanIdentifier";
+		_methodName367 = "setBeanIdentifier";
 
-		_methodParameterTypes281 = new String[] { "java.lang.String" };
+		_methodParameterTypes367 = new String[] { "java.lang.String" };
 
-		_methodName286 = "findByMasterType";
+		_methodName372 = "findByMasterType";
 
-		_methodParameterTypes286 = new String[] { "long", "int", "int" };
+		_methodParameterTypes372 = new String[] { "long", "int", "int" };
 
-		_methodName287 = "findByMasterFile";
+		_methodName373 = "findByMasterFile";
 
-		_methodParameterTypes287 = new String[] {
+		_methodParameterTypes373 = new String[] {
 				"long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 
-		_methodName288 = "getAllLibraries";
+		_methodName374 = "getAllLibraries";
 
-		_methodParameterTypes288 = new String[] {  };
+		_methodParameterTypes374 = new String[] {  };
 
-		_methodName289 = "getAllPrintedMaterial";
+		_methodName375 = "getAllPrintedMaterial";
 
-		_methodParameterTypes289 = new String[] {  };
+		_methodParameterTypes375 = new String[] {  };
 
-		_methodName290 = "getAllIrItem";
+		_methodName376 = "getAllIrItem";
 
-		_methodParameterTypes290 = new String[] {  };
+		_methodParameterTypes376 = new String[] {  };
 
-		_methodName291 = "getAllNonPrintedMaterial";
+		_methodName377 = "getAllNonPrintedMaterial";
 
-		_methodParameterTypes291 = new String[] {  };
+		_methodParameterTypes377 = new String[] {  };
 
-		_methodName292 = "getAllFaculties";
+		_methodName378 = "getAllFaculties";
 
-		_methodParameterTypes292 = new String[] {  };
+		_methodParameterTypes378 = new String[] {  };
 
-		_methodName293 = "getAllItemMediums";
+		_methodName379 = "getAllItemMediums";
 
-		_methodParameterTypes293 = new String[] {  };
+		_methodParameterTypes379 = new String[] {  };
 
-		_methodName294 = "getCountByMasterType";
+		_methodName380 = "getCountByMasterType";
 
-		_methodParameterTypes294 = new String[] { "long" };
+		_methodParameterTypes380 = new String[] { "long" };
 
-		_methodName295 = "findByParent1";
+		_methodName381 = "findByParent1";
 
-		_methodParameterTypes295 = new String[] { "long", "long" };
+		_methodParameterTypes381 = new String[] { "long", "long" };
 
-		_methodName296 = "findByParent2";
+		_methodName382 = "findByParent2";
 
-		_methodParameterTypes296 = new String[] { "long", "long" };
+		_methodParameterTypes382 = new String[] { "long", "long" };
 
-		_methodName297 = "findByTypeAndName";
+		_methodName383 = "findByTypeAndName";
 
-		_methodParameterTypes297 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes383 = new String[] { "long", "java.lang.String" };
 
-		_methodName298 = "findByTypeOldId";
+		_methodName384 = "findByTypeOldId";
 
-		_methodParameterTypes298 = new String[] { "long", "long" };
+		_methodParameterTypes384 = new String[] { "long", "long" };
 
-		_methodName299 = "findByTypeAndStatus";
+		_methodName385 = "findByTypeAndStatus";
 
-		_methodParameterTypes299 = new String[] {
+		_methodParameterTypes385 = new String[] {
 				"long", "boolean", "boolean", "boolean", "boolean"
 			};
 
-		_methodName300 = "findByTypeAndStatus1";
+		_methodName386 = "findByTypeAndStatus1";
 
-		_methodParameterTypes300 = new String[] { "long", "boolean" };
+		_methodParameterTypes386 = new String[] { "long", "boolean" };
 
-		_methodName301 = "findByTypeAndStatus2";
+		_methodName387 = "findByTypeAndStatus2";
 
-		_methodParameterTypes301 = new String[] { "long", "boolean" };
+		_methodParameterTypes387 = new String[] { "long", "boolean" };
 
-		_methodName302 = "findByTypeAndStatus3";
+		_methodName388 = "findByTypeAndStatus3";
 
-		_methodParameterTypes302 = new String[] { "long", "boolean" };
+		_methodParameterTypes388 = new String[] { "long", "boolean" };
 
-		_methodName303 = "findByTypeAndStatus4";
+		_methodName389 = "findByTypeAndStatus4";
 
-		_methodParameterTypes303 = new String[] { "long", "boolean" };
+		_methodParameterTypes389 = new String[] { "long", "boolean" };
 
-		_methodName304 = "findByTypeAndStatus5";
+		_methodName390 = "findByTypeAndStatus5";
 
-		_methodParameterTypes304 = new String[] { "long", "boolean" };
+		_methodParameterTypes390 = new String[] { "long", "boolean" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -285,94 +285,94 @@ public class MasterFileLocalServiceClpInvoker {
 			return MasterFileLocalServiceUtil.updateMasterFile((com.idetronic.eis.model.MasterFile)arguments[0]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName366.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes366, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName367.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes367, parameterTypes)) {
 			MasterFileLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName286.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
+		if (_methodName372.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes372, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByMasterType(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName287.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
+		if (_methodName373.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes373, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByMasterFile(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
 		}
 
-		if (_methodName288.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
+		if (_methodName374.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes374, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getAllLibraries();
 		}
 
-		if (_methodName289.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
+		if (_methodName375.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes375, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getAllPrintedMaterial();
 		}
 
-		if (_methodName290.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
+		if (_methodName376.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes376, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getAllIrItem();
 		}
 
-		if (_methodName291.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes291, parameterTypes)) {
+		if (_methodName377.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes377, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getAllNonPrintedMaterial();
 		}
 
-		if (_methodName292.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes292, parameterTypes)) {
+		if (_methodName378.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes378, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getAllFaculties();
 		}
 
-		if (_methodName293.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes293, parameterTypes)) {
+		if (_methodName379.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes379, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getAllItemMediums();
 		}
 
-		if (_methodName294.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes294, parameterTypes)) {
+		if (_methodName380.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes380, parameterTypes)) {
 			return MasterFileLocalServiceUtil.getCountByMasterType(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName295.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes295, parameterTypes)) {
+		if (_methodName381.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes381, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByParent1(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName296.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes296, parameterTypes)) {
+		if (_methodName382.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes382, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByParent2(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName297.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes297, parameterTypes)) {
+		if (_methodName383.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes383, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndName(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName298.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes298, parameterTypes)) {
+		if (_methodName384.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes384, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeOldId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName299.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes299, parameterTypes)) {
+		if (_methodName385.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes385, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue(),
 				((Boolean)arguments[2]).booleanValue(),
@@ -380,32 +380,32 @@ public class MasterFileLocalServiceClpInvoker {
 				((Boolean)arguments[4]).booleanValue());
 		}
 
-		if (_methodName300.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes300, parameterTypes)) {
+		if (_methodName386.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes386, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus1(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName301.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes301, parameterTypes)) {
+		if (_methodName387.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes387, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus2(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName302.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes302, parameterTypes)) {
+		if (_methodName388.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes388, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus3(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName303.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes303, parameterTypes)) {
+		if (_methodName389.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes389, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus4(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName304.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes304, parameterTypes)) {
+		if (_methodName390.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes390, parameterTypes)) {
 			return MasterFileLocalServiceUtil.findByTypeAndStatus5(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
@@ -445,46 +445,46 @@ public class MasterFileLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName280;
-	private String[] _methodParameterTypes280;
-	private String _methodName281;
-	private String[] _methodParameterTypes281;
-	private String _methodName286;
-	private String[] _methodParameterTypes286;
-	private String _methodName287;
-	private String[] _methodParameterTypes287;
-	private String _methodName288;
-	private String[] _methodParameterTypes288;
-	private String _methodName289;
-	private String[] _methodParameterTypes289;
-	private String _methodName290;
-	private String[] _methodParameterTypes290;
-	private String _methodName291;
-	private String[] _methodParameterTypes291;
-	private String _methodName292;
-	private String[] _methodParameterTypes292;
-	private String _methodName293;
-	private String[] _methodParameterTypes293;
-	private String _methodName294;
-	private String[] _methodParameterTypes294;
-	private String _methodName295;
-	private String[] _methodParameterTypes295;
-	private String _methodName296;
-	private String[] _methodParameterTypes296;
-	private String _methodName297;
-	private String[] _methodParameterTypes297;
-	private String _methodName298;
-	private String[] _methodParameterTypes298;
-	private String _methodName299;
-	private String[] _methodParameterTypes299;
-	private String _methodName300;
-	private String[] _methodParameterTypes300;
-	private String _methodName301;
-	private String[] _methodParameterTypes301;
-	private String _methodName302;
-	private String[] _methodParameterTypes302;
-	private String _methodName303;
-	private String[] _methodParameterTypes303;
-	private String _methodName304;
-	private String[] _methodParameterTypes304;
+	private String _methodName366;
+	private String[] _methodParameterTypes366;
+	private String _methodName367;
+	private String[] _methodParameterTypes367;
+	private String _methodName372;
+	private String[] _methodParameterTypes372;
+	private String _methodName373;
+	private String[] _methodParameterTypes373;
+	private String _methodName374;
+	private String[] _methodParameterTypes374;
+	private String _methodName375;
+	private String[] _methodParameterTypes375;
+	private String _methodName376;
+	private String[] _methodParameterTypes376;
+	private String _methodName377;
+	private String[] _methodParameterTypes377;
+	private String _methodName378;
+	private String[] _methodParameterTypes378;
+	private String _methodName379;
+	private String[] _methodParameterTypes379;
+	private String _methodName380;
+	private String[] _methodParameterTypes380;
+	private String _methodName381;
+	private String[] _methodParameterTypes381;
+	private String _methodName382;
+	private String[] _methodParameterTypes382;
+	private String _methodName383;
+	private String[] _methodParameterTypes383;
+	private String _methodName384;
+	private String[] _methodParameterTypes384;
+	private String _methodName385;
+	private String[] _methodParameterTypes385;
+	private String _methodName386;
+	private String[] _methodParameterTypes386;
+	private String _methodName387;
+	private String[] _methodParameterTypes387;
+	private String _methodName388;
+	private String[] _methodParameterTypes388;
+	private String _methodName389;
+	private String[] _methodParameterTypes389;
+	private String _methodName390;
+	private String[] _methodParameterTypes390;
 }

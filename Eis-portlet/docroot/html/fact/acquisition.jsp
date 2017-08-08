@@ -10,12 +10,7 @@
 	List<MasterFile> acquisitionItems = MasterFileLocalServiceUtil.findByTypeAndStatus5(acquistionItemType, true);
 	
 	
-	int rowCount = acquisitionItems.size();
-	int rowSize = (int)Math.floor(rowCount/3);
 	
-	
-	int extra = rowCount % 3;
-	int cur = 0;	
 	String headerTitle = LanguageUtil.get(pageContext, "acquisition");
 
 %> 
@@ -36,7 +31,12 @@
 	<aui:input name="redirect" value="<%= currentURL %>" type="hidden"></aui:input>
 	<aui:row>
 		<aui:layout>
-			
+			<aui:col span="4">
+			<eis:library-selector2
+						adminAllowAll="<%= mLibraryAdminAllowAll %>"
+					
+					/> 
+		</aui:col> 
 			<aui:col span="4">
 				<aui:select name="faculty">
 					<%
@@ -51,7 +51,7 @@
 				</aui:select>
 			</aui:col>
 			
-			<aui:col span="3">
+			<aui:col span="2">
 				<eis:period-selector 
 					allowPreviousYear="<%=mPeriodAllowPreviousYear %>"
 					useYearRange="<%= mPeriodUseYearRange %>" 
@@ -67,7 +67,7 @@
 				
 				
 			</aui:col>
-			<aui:col span="3">
+			<aui:col span="2">
 				<label class="control-label">&nbsp;</label>
 				
 				<aui:button type="button" 
@@ -141,7 +141,7 @@
 		
 		var period =  A.one('#<portlet:namespace/>period').get('value');
 		var facultyId = A.one('#<portlet:namespace/>faculty').get('value');
-		
+		var libraryId = A.one('#<portlet:namespace/>library').get('value');
 		var inputs = A.all('.dataInput');
 		
 		inputs.each(function(){
@@ -158,7 +158,7 @@
             	
 		    	<portlet:namespace/>period : period,
 		    	<portlet:namespace/>facultyId : facultyId,
-		    	
+		    	<portlet:namespace/>libraryId : libraryId,
 		    },
             
             on: {
@@ -166,17 +166,48 @@
                 	 var data=this.get('responseData').data;
                 	A.Array.each(data, function(obj, idx){
                 		var inputId = obj.itemId ;
-                		var volumeTotal = A.one('#<portlet:namespace/>'+ inputId +'-volume');
-                		 var titleTotal = A.one('#<portlet:namespace/>'+ inputId +'-title');
-                		 if (volumeTotal)
-                		{
-                			 volumeTotal.val(obj.volumeTotal);
+                		var volumeTotal = A.one('#<portlet:namespace/>' + inputId + '-volume');
+                		var titleTotal = A.one('#<portlet:namespace/>' + inputId + '-title');
+                		var amountTotal = A.one('#<portlet:namespace/>' + inputId + '-amount');
+
+                		var approvedTitleTotal = A.one('#<portlet:namespace/>' + inputId + '-approvedTitleTotal');
+                		var approvedVolumeTotal = A.one('#<portlet:namespace/>' + inputId + '-approvedVolumeTotal');
+                		var approvedAmountTotal = A.one('#<portlet:namespace/>' + inputId + '-approvedAmountTotal');
+
+                		var orderTitleTotal = A.one('#<portlet:namespace/>' + inputId + '-orderTitleTotal');
+                		var orderVolumeTotal = A.one('#<portlet:namespace/>' + inputId + '-orderVolumeTotal');
+                		var orderAmountTotal = A.one('#<portlet:namespace/>' + inputId + '-orderAmountTotal');
+						//order
+                		if (orderTitleTotal) {
+                		    orderTitleTotal.val(obj.orderTitleTotal);
                 		}
-                		 if (titleTotal)
-                		{
-                			titleTotal.val(obj.titleTotal);	 
+                		if (orderVolumeTotal) {
+                		    orderVolumeTotal.val(obj.orderVolumeTotal);
                 		}
-                		
+                		if (orderAmountTotal) {
+                			orderAmountTotal.val(obj.orderAmountTotal);
+                		}
+                		//approved
+                		if (approvedTitleTotal) {
+                		    approvedTitleTotal.val(obj.approvedTitleTotal);
+                		}
+
+                		if (approvedVolumeTotal) {
+                		    approvedVolumeTotal.val(obj.approvedVolumeTotal);
+                		}
+                		if (approvedAmountTotal) {
+                		    approvedAmountTotal.val(obj.approvedAmountTotal);
+                		}
+						//received
+                		if (volumeTotal) {
+                		    volumeTotal.val(obj.volumeTotal);
+                		}
+                		if (titleTotal) {
+                		    titleTotal.val(obj.titleTotal);
+                		}
+                		if (amountTotal) {
+                		    amountTotal.val(obj.amountTotal);
+                		}
                 			 
                 	 });
                 	
@@ -191,33 +222,145 @@
 		            	          {key:'Pengguna',width:'20%'},
 		            	          {key:'Tarikh'},
 		            	          {key:'Jenis Bahan',width:'20%'},
-		            	          {key:'Medium',width:'10%'},
-		            	          {
-		            	        	  key:'Judul',
-		            	        	  
-		            	        	  className:'numeric',
-		            	        	  formatter: function(o){
-		            	        		  
-		            	        		  return A.Number.format(o.data.Judul,
-		            	        		  {
-		            	        			  thousandsSeparator: "," 
-		            	        		  })
-		            	        		  
-		            	        	  }
-		            	        	},
-		            	          {
-		            	        	  key:'Naskah',
-		            	        	  
-		            	        	  className:'numeric',
-		            	        	  formatter: function(o){
-		            	        		  
-		            	        		  return A.Number.format(o.data.Naskah,
-		            	        		  {
-		            	        			  thousandsSeparator: "," 
-		            	        		  })
-		            	        		  
-		            	        	  }
-		            	        	}
+		            	          
+		            	          {label:'Kelulusan Cadangan',
+		            	        	children:[
+									{
+										  key:'Kelulusan Cadangan Judul',
+										  label:'Judul',
+										  className:'numeric',
+										  formatter: function(o){
+											  
+											  return A.Number.format(o.data['Kelulusan Cadangan Judul'],
+											  {
+												  thousandsSeparator: "," 
+											  })
+											  
+										  }
+										},
+									{
+										  key:'Kelulusan Cadangan Naskah',
+										  label:'Naskah',
+										  className:'numeric',
+										  formatter: function(o){
+											  
+											  return A.Number.format(o.data['Kelulusan Cadangan Naskah'],
+											  {
+												  thousandsSeparator: "," 
+											  })
+											  
+										  }
+										},
+										{
+									  	  key:'Kelulusan Cadangan Amaun',
+									  	  label:'Amaun',
+									  	  className:'numeric',
+									  	  formatter: function(o){
+									  		  
+									  		  return A.Number.format(o.data['Kelulusan Cadangan Amaun'],
+									  		  {
+									  			  thousandsSeparator: ",",
+									  			  decimalPlaces: 2
+									  		  })
+									  		  
+									  	  }
+									  	}
+		            	        	          
+		            	        	]  
+		            	          },
+		            	          {label:'Pesanan Pembelian',
+			            	        	children:[
+										{
+											  key:'Pesanan Pembelian Judul',
+											  label:'Judul',
+											  className:'numeric',
+											  formatter: function(o){
+												  
+												  return A.Number.format(o.data['Pesanan Pembelian Judul'],
+												  {
+													  thousandsSeparator: "," 
+												  })
+												  
+											  }
+											},
+										{
+											  key:'Pesanan Pembelian Naskah',
+											  label:'Naskah',
+											  className:'numeric',
+											  formatter: function(o){
+												  
+												  return A.Number.format(o.data['Pesanan Pembelian Naskah'],
+												  {
+													  thousandsSeparator: "," 
+												  })
+												  
+											  }
+											},
+											{
+										  	  key:'Pesanan Pembelian Amaun',
+										  	  label:'Amaun',
+										  	  className:'numeric',
+										  	  formatter: function(o){
+										  		  
+										  		  return A.Number.format(o.data['Pesanan Pembelian Amaun'],
+										  		  {
+										  			  thousandsSeparator: ",",
+										  			  decimalPlaces: 2
+										  		  })
+										  		  
+										  	  }
+										  	}
+			            	        	          
+			            	        	]  
+			            	          },
+			            	          {label:'Penerimaan Pembelian',
+				            	        	children:[
+											{
+												  key:'Penerimaan Judul',
+												  label:'Judul',
+												  className:'numeric',
+												  formatter: function(o){
+													  
+													  return A.Number.format(o.data['Penerimaan Judul'],
+													  {
+														  thousandsSeparator: "," 
+													  })
+													  
+												  }
+												},
+											{
+												  key:'Penerimaan Naskah',
+												  label:'Naskah',
+												  className:'numeric',
+												  formatter: function(o){
+													  
+													  return A.Number.format(o.data['Penerimaan Naskah'],
+													  {
+														  thousandsSeparator: "," 
+													  })
+													  
+												  }
+												},
+												{
+											  	  key:'Penerimaan Amaun',
+											  	  label:'Amaun',
+											  	  className:'numeric',
+											  	  formatter: function(o){
+											  		  
+											  		  return A.Number.format(o.data['Penerimaan Amaun'],
+											  		  {
+											  			  thousandsSeparator: ",",
+											  			  decimalPlaces: 2
+											  		  })
+											  		  
+											  	  }
+											  	}
+				            	        	          
+				            	        	]  
+				            	          }
+		            	          
+		            	          
+		            	          
 		            	          ];
 		            	new A.DataTable(
 		            		      {

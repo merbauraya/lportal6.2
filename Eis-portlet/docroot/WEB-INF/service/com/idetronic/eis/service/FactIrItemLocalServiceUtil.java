@@ -305,6 +305,11 @@ public class FactIrItemLocalServiceUtil {
 		return getService().getEntries(libraryId, period, facultyId);
 	}
 
+	public static boolean isMissingData(long libraryId, java.lang.String period)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().isMissingData(libraryId, period);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

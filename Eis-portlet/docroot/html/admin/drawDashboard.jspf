@@ -1,0 +1,52 @@
+
+					<%
+						
+						double curX = 0;
+						for (int curItem = curSumItem; curItem < boxArray.length(); curItem++)
+						{
+							JSONObject box = boxArray.getJSONObject(curItem);
+							
+							
+							String title = box.getString("title");
+							double x = box.getDouble("x");
+							String id = box.getString("id");
+							if (id.substring(0, 2).equalsIgnoreCase("box")) //report
+							{
+								String reportKey = id.substring(4, id.length());
+								Report report = ReportLocalServiceUtil.findByKey(reportKey);
+								title = report.getReportTitle();
+								
+							} else if (id.substring(0, 4).equalsIgnoreCase("info")) //info box
+							{
+								
+								String boxId = id.substring(5, id.length());
+								Config boxConfig = ConfigLocalServiceUtil.getConfig(Long.valueOf(boxId));
+								title = boxConfig.getTitle();
+							}
+							
+						
+							if (curX != 0 && x != curX)
+							{
+								curSumItem = curItem;
+								break;
+							}
+							boolean add = (curX == 0 || x == curX);
+							
+					%>
+						<c:if test="<%= add %>">
+							<%@ include file="/html/admin/drawBox.jspf" %> 
+							
+						</c:if>
+					<%			
+							
+							
+							
+							curX = box.getDouble("x");
+							
+							
+					%>
+							
+					<%
+						}
+					%>
+				

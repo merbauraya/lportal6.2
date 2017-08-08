@@ -10,6 +10,7 @@
 	boolean addAllOption = GetterUtil.getBoolean((String) request.getAttribute("eis:library-selector2:addAllOption"));
 
 	String controlName =(String)request.getAttribute("eis:library-selector2:name");
+	String cssClass = ((String)request.getAttribute("eis:library-selector2:cssClass"));
 	
 	boolean isAdmin  = permissionChecker.isOmniadmin() || permissionChecker.isGroupAdmin(themeDisplay.getScopeGroupId());
 		
@@ -40,12 +41,12 @@
 	Object libraryList = null; 
 	
 	
-
+	cssClass = cssClass + " library-selector";
 %>
 
-
+ 
 	
-	<aui:select cssClass="library-selector" name="<%= controlName %>">
+	<aui:select name="<%= controlName %>" cssClass="<%= cssClass %>">
 	<%	
 		if (addAllOption)
 		{

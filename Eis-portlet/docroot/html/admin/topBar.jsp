@@ -187,7 +187,7 @@
        	
        		<aui:nav-item dropdown="true" label="master" iconCssClass="icon-edit">
        		    <aui:nav-item href="<%=masterTypeURL %>" label="master-type" /> 
-       		    <aui:nav-item href="<%=propertyURL %>" iconCssClass="icon-reorder" label="master-property" selected='<%=navigation.equals("property") %>' />
+       		    <aui:nav-item href="<%=propertyURL %>" iconCssClass="icon-reorder" label="property-setting" selected='<%=navigation.equals("property") %>' />
        			
        <%
        		List<MasterType> masterTypes = MasterTypeLocalServiceUtil.getMasterTypes(QueryUtil.ALL_POS,QueryUtil.ALL_POS);

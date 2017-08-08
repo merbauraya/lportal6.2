@@ -272,4 +272,8 @@ public interface FactIrItemLocalService extends BaseLocalService,
 	public com.liferay.portal.kernel.json.JSONArray getEntries(long libraryId,
 		java.lang.String period, long facultyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isMissingData(long libraryId, java.lang.String period)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

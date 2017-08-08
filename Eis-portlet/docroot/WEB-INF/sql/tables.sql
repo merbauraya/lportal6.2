@@ -12,11 +12,32 @@ create table eis_Config (
 
 create table eis_FactAcquisition (
 	factAcquisitionId LONG not null primary key,
+	libraryId LONG,
 	facultyId LONG,
 	period VARCHAR(75) null,
 	itemId LONG,
+	approvedTitleTotal LONG,
+	approvedVolumeTotal LONG,
+	approvedAmountTotal DOUBLE,
+	orderTitleTotal LONG,
+	orderVolumeTotal LONG,
+	orderAmountTotal DOUBLE,
 	volumeTotal LONG,
 	titleTotal LONG,
+	amountTotal DOUBLE,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactArticleIndexing (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	indexTotal LONG,
 	companyId LONG,
 	groupId LONG,
 	userId LONG,
@@ -39,6 +60,66 @@ create table eis_FactConsultation (
 	createDate DATE null
 );
 
+create table eis_FactCustomerComplaint (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	complaintTotal LONG,
+	unsettledTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactData (
+	factId LONG not null primary key,
+	reportId LONG,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	dimensionId LONG,
+	measure1 DOUBLE,
+	measure2 DOUBLE,
+	measure3 DOUBLE,
+	measure4 DOUBLE,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactDatabaseUsage (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	downloadTotal LONG,
+	sessionTotal LONG,
+	searchTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactDigitalCollection (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	titleTotal LONG,
+	volumeTotal LONG,
+	imageTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
 create table eis_FactExpense (
 	factExpenseId LONG not null primary key,
 	libraryId LONG,
@@ -46,6 +127,59 @@ create table eis_FactExpense (
 	entryType INTEGER,
 	masterFileId LONG,
 	amount DOUBLE,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactGiftReceived (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	titleTotal LONG,
+	volumeTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactIncome (
+	factIncomeId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	total DOUBLE,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactInterLibLoan (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	ptjId LONG,
+	applyTotal LONG,
+	approvedTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactInternationalPortalUsage (
+	factId LONG not null primary key,
+	period VARCHAR(75) null,
+	countryId LONG,
+	pagesTotal LONG,
 	companyId LONG,
 	groupId LONG,
 	userId LONG,
@@ -78,6 +212,33 @@ create table eis_FactIrSubmission (
 	createdByUserId LONG,
 	createdByUserName VARCHAR(75) null,
 	createdDate DATE null
+);
+
+create table eis_FactItManagement (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	itemTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
+);
+
+create table eis_FactLibraryVisitor (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	visitorCategoryId LONG,
+	sessionTotal LONG,
+	visitorTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
 );
 
 create table eis_FactMembership (
@@ -141,6 +302,20 @@ create table eis_FactPrintedMaterial (
 	dateCreated DATE null,
 	createdByUserName VARCHAR(75) null,
 	createdByUserId LONG
+);
+
+create table eis_FactReleaseCataloging (
+	factId LONG not null primary key,
+	libraryId LONG,
+	period VARCHAR(75) null,
+	itemId LONG,
+	titleTotal LONG,
+	volumeTotal LONG,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null
 );
 
 create table eis_FactSeating (
@@ -477,6 +652,16 @@ create table eis_Report (
 	reportName VARCHAR(75) null,
 	reportTitle VARCHAR(150) null,
 	dataEntry BOOLEAN,
+	hqDataEntry BOOLEAN,
+	dimensionId LONG,
+	hasMeasure1 BOOLEAN,
+	hasMeasure2 BOOLEAN,
+	hasMeasure3 BOOLEAN,
+	hasMeasure4 BOOLEAN,
+	measure1Name VARCHAR(75) null,
+	measure2Name VARCHAR(75) null,
+	measure3Name VARCHAR(75) null,
+	measure4Name VARCHAR(75) null,
 	dataName VARCHAR(75) null
 );
 

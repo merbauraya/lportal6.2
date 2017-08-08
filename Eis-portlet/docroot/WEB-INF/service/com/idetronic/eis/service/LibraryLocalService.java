@@ -292,8 +292,4 @@ public interface LibraryLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isMissingExpenseData(long libraryId, java.lang.String period);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isMissingConsultationData(long libraryId,
-		java.lang.String period);
 }

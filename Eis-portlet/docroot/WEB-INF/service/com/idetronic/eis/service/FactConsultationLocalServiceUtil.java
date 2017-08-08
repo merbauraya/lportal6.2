@@ -304,6 +304,10 @@ public class FactConsultationLocalServiceUtil {
 		return getService().getEntries(libraryId, period);
 	}
 
+	public static boolean isMissingData(long libraryId, java.lang.String period) {
+		return getService().isMissingData(libraryId, period);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

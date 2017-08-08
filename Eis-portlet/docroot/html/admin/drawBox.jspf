@@ -1,0 +1,36 @@
+
+
+<%
+	//String type = (String)request.getAttribute("type");
+	//String id = (String)request.getAttribute("id");
+	//String title =(String)request.getAttribute("title");
+	Double xx = (Double) request.getAttribute("x");
+	String cssClass = StringPool.BLANK;
+	String imgPath = StringPool.BLANK;
+	if (type.equalsIgnoreCase("sumBox"))
+	{
+		cssClass = "sm-st";
+		imgPath = renderRequest.getContextPath() + "/img/db-figure.png";
+	}
+	if (type.equalsIgnoreCase("infoBox"))
+	{
+		cssClass = "info-st";
+		imgPath = renderRequest.getContextPath() + "/img/info-figure.png";
+	}
+
+%>
+
+
+	
+	<div class="portlet-box <%= cssClass %> yui3-dd-drop" id="<%= id%>"> 	
+		<a class="removeDB pull-right" href="javascript:;"> 	
+			<i class="icon-remove" accesskey="remove"></i> 	
+		</a> 	
+		<div class="titleCont"> 	
+			<div class="ptitle"><%= title %></div> 	
+		</div>	
+		<img class="center" src="<%= imgPath %>" /> 	
+	</div>
+
+
+

@@ -5,7 +5,7 @@
 	//List<Library> libraries  = null;
 	List<MasterFile> libraries  = null;
 	//PermissionChecker permissionChecker = PermissionThreadLocal.getPermissionChecker(); 
-	
+	/*
 	if (permissionChecker.isOmniadmin() || permissionChecker.isCompanyAdmin())
 	{
 		//libraries = LibraryLocalServiceUtil.getLibraries(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
@@ -16,9 +16,12 @@
 		libraries = UserLibraryLocalServiceUtil.getLibraryByUser2(themeDisplay.getUserId());
 	
 	}
+	*/
+	long ptjTypeId  = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ_TYPE);
+	List<MasterFile> ptjTypes = MasterFileLocalServiceUtil.findByMasterType(ptjTypeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	
 	//List<Faculty> faculties = FacultyLocalServiceUtil.getFaculties(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
-	List<MasterFile> faculties = MasterFileLocalServiceUtil.getAllFaculties();
+	//List<MasterFile> faculties = MasterFileLocalServiceUtil.getAllFaculties();
 
 	//List<ItemType> irTypes = ItemTypeLocalServiceUtil.getIRType(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);	
 	List<MasterFile> irTypes = MasterFileLocalServiceUtil.getAllIrItem();
@@ -33,6 +36,7 @@
 	int extra = rowCount % 3;
 	int cur = 0;	
 	String headerTitle = LanguageUtil.get(pageContext, "ir-item");
+	long defaultPtjType = 0;
 
 %> 
 
@@ -53,22 +57,21 @@
 	<aui:row>
 		<aui:layout>
 			<aui:col span="3">
-				<eis:library-selector2
-					adminAllowAll="<%= mLibraryAdminAllowAll %>"
-				
-				/>
+				<aui:select name="ptjType">
+				<%
+					
+					for (MasterFile ptjType : ptjTypes)
+					{
+				%>
+						<aui:option label="<%= ptjType.getMasterFileName() %>" value="<%= ptjType.getMasterFileId() %>" />
+				<%		
+					}
+				%>
+				</aui:select>
 			</aui:col>
 			<aui:col span="3">
-				<aui:select name="faculty">
-					<%
-						for (MasterFile faculty : faculties)
-						{
-					%>
-						<aui:option label="<%= faculty.getMasterFileName() %>" value="<%= faculty.getMasterFileId() %>" />
-							
-					<%
-						}
-					%>
+				<aui:select name="faculty" cssClass="selectInput">
+					
 				</aui:select>
 			</aui:col>
 			
@@ -83,20 +86,20 @@
 					endYear="<%= mPeriodEndYear %>"
 					allowFuturePeriod= "<%= false%>"
 					dataCountDay = "<%= mDataCountDay %>"
-					
+					cssClass="selectInput"
 				/>
 				
 				
 			</aui:col>
 			<aui:col span="3">
 				<label class="control-label">&nbsp;</label>
-				
+				<!-- 
 				<aui:button type="button" 
 					name="loadList" 
 					label="load" 
 					icon="icon-refresh"
 				/>
-	
+				-->
 			</aui:col>
 		</aui:layout>
 	</aui:row>
@@ -136,11 +139,14 @@
 
 <portlet:resourceURL var="dataURL" id="<%= EisUtil.RESOURCE_IR_ITEM %>">
 
+
+
 </portlet:resourceURL>
-<aui:script use="aui-base,aui-io-plugin-deprecated,aui-io-request,aui-node,aui-datatable,datatype-number">
+<portlet:resourceURL var="ptjListURL" id="<%= EisUtil.RESOURCE_PTJ_BY_TYPE %>"/>
+<aui:script use="aui-base,aui-io-plugin-deprecated,aui-io-request,aui-node,aui-datatable,datatype-number,node-event-simulate">
 	var A = AUI();
-	var librarySelect = A.one('#<portlet:namespace/>library');
-	console.log(librarySelect);
+	
+	
 	A.all('select').on('change',function(){
 		
 		var inputs = A.all('.dataInput');
@@ -153,18 +159,18 @@
 	
 	
 	var btnLoad = A.one('#<portlet:namespace/>loadList');
+	facultySelect = A.one('#<portlet:namespace/>faculty');
+	var selectInput = A.all(".selectInput");
 	
-	
-	btnLoad.on('click',function(){
-		
-		
+	selectInput.on('change', function() {
 		
 		
 
-		var libraryId = librarySelect.get('value');
+		
 		var period =  A.one('#<portlet:namespace/>period').get('value');
 		var facultyId = A.one('#<portlet:namespace/>faculty').get('value');
-		
+		//console.log("facultyId="+facultyId + " period="+ period);
+		var libraryId = 0;
 		var inputs = A.all('.dataInput');
 		
 		inputs.each(function(){
@@ -213,8 +219,8 @@
 		            	          {key: 'Bil',className:'numeric'},
 		            	          {key:'Pengguna',width:'20%'},
 		            	          {key:'Tarikh'},
-		            	          {key:'Jenis Bahan',width:'20%'},
-		            	          {key:'Medium',width:'10%'},
+		            	          {key:'Jenis Bahan',width:'30%'},
+		            	          
 		            	          {
 		            	        	  key:'Judul',
 		            	        	  
@@ -265,6 +271,64 @@
 		return;
 	
 	});
+	
+	
+	
+	var ptjTypeSelect = A.one("#<portlet:namespace/>ptjType");
+	ptjTypeSelect.on('change', function() 
+	{
+    	A.io.request('<%= ptjListURL.toString()%>', 
+          {
+
+              method: 'POST',
+              data: {
+                  "<portlet:namespace/>ptjTypeId": ptjTypeSelect.val()
+                      
+
+                  },
+
+                  dataType: 'json',
+                  on: {
+                      success: function() {
+                          var ptjList = this.get('responseData'); 
+
+                          A.one('#<portlet:namespace />faculty').empty();
+                          var selectedValue = '';
+                          //using for loop we iterating the list
+                          for (var i in ptjList) {
+							 //set default to first item
+							 var selected = '';
+							 selectedValue = '';
+							 if (i == 0)
+							 {
+							 	selected = 'selected';
+							 	selectedValue = ptjList[i].masterFileId;
+							 	
+							 }
+                              A.one('#<portlet:namespace />faculty').append("<option  value='" + ptjList[i].masterFileId + "' " + selected + ">" + ptjList[i].masterFileName + "</option> ");
+                          }
+                          //A.one('#<portlet:namespace />faculty').val(selectedValue);
+                          facultySelect.simulate('change');
+
+                      }
+                  }
+
+              });
+                    
+	});
+	
+	var selectPeriod = A.one('#<portlet:namespace />period');
+	
+	AUI().ready('event', 'node','node-event-simulate', function(A){
+		
+		ptjTypeSelect.selectedIndex = 0;
+		ptjTypeSelect.simulate('change');
+		//selectFaculty.prop("selectedIndex", 0);
+		//selectFaculty.selectedIndex = 0;
+		//console.log(selectFaculty);
+		//selectPeriod.simulate('change');
+		});
+	
 	
 
 	</aui:script>

@@ -138,6 +138,185 @@ public interface ReportModel extends BaseModel<Report> {
 	public void setDataEntry(boolean dataEntry);
 
 	/**
+	 * Returns the hq data entry of this report.
+	 *
+	 * @return the hq data entry of this report
+	 */
+	public boolean getHqDataEntry();
+
+	/**
+	 * Returns <code>true</code> if this report is hq data entry.
+	 *
+	 * @return <code>true</code> if this report is hq data entry; <code>false</code> otherwise
+	 */
+	public boolean isHqDataEntry();
+
+	/**
+	 * Sets whether this report is hq data entry.
+	 *
+	 * @param hqDataEntry the hq data entry of this report
+	 */
+	public void setHqDataEntry(boolean hqDataEntry);
+
+	/**
+	 * Returns the dimension ID of this report.
+	 *
+	 * @return the dimension ID of this report
+	 */
+	public long getDimensionId();
+
+	/**
+	 * Sets the dimension ID of this report.
+	 *
+	 * @param dimensionId the dimension ID of this report
+	 */
+	public void setDimensionId(long dimensionId);
+
+	/**
+	 * Returns the has measure1 of this report.
+	 *
+	 * @return the has measure1 of this report
+	 */
+	public boolean getHasMeasure1();
+
+	/**
+	 * Returns <code>true</code> if this report is has measure1.
+	 *
+	 * @return <code>true</code> if this report is has measure1; <code>false</code> otherwise
+	 */
+	public boolean isHasMeasure1();
+
+	/**
+	 * Sets whether this report is has measure1.
+	 *
+	 * @param hasMeasure1 the has measure1 of this report
+	 */
+	public void setHasMeasure1(boolean hasMeasure1);
+
+	/**
+	 * Returns the has measure2 of this report.
+	 *
+	 * @return the has measure2 of this report
+	 */
+	public boolean getHasMeasure2();
+
+	/**
+	 * Returns <code>true</code> if this report is has measure2.
+	 *
+	 * @return <code>true</code> if this report is has measure2; <code>false</code> otherwise
+	 */
+	public boolean isHasMeasure2();
+
+	/**
+	 * Sets whether this report is has measure2.
+	 *
+	 * @param hasMeasure2 the has measure2 of this report
+	 */
+	public void setHasMeasure2(boolean hasMeasure2);
+
+	/**
+	 * Returns the has measure3 of this report.
+	 *
+	 * @return the has measure3 of this report
+	 */
+	public boolean getHasMeasure3();
+
+	/**
+	 * Returns <code>true</code> if this report is has measure3.
+	 *
+	 * @return <code>true</code> if this report is has measure3; <code>false</code> otherwise
+	 */
+	public boolean isHasMeasure3();
+
+	/**
+	 * Sets whether this report is has measure3.
+	 *
+	 * @param hasMeasure3 the has measure3 of this report
+	 */
+	public void setHasMeasure3(boolean hasMeasure3);
+
+	/**
+	 * Returns the has measure4 of this report.
+	 *
+	 * @return the has measure4 of this report
+	 */
+	public boolean getHasMeasure4();
+
+	/**
+	 * Returns <code>true</code> if this report is has measure4.
+	 *
+	 * @return <code>true</code> if this report is has measure4; <code>false</code> otherwise
+	 */
+	public boolean isHasMeasure4();
+
+	/**
+	 * Sets whether this report is has measure4.
+	 *
+	 * @param hasMeasure4 the has measure4 of this report
+	 */
+	public void setHasMeasure4(boolean hasMeasure4);
+
+	/**
+	 * Returns the measure1 name of this report.
+	 *
+	 * @return the measure1 name of this report
+	 */
+	@AutoEscape
+	public String getMeasure1Name();
+
+	/**
+	 * Sets the measure1 name of this report.
+	 *
+	 * @param measure1Name the measure1 name of this report
+	 */
+	public void setMeasure1Name(String measure1Name);
+
+	/**
+	 * Returns the measure2 name of this report.
+	 *
+	 * @return the measure2 name of this report
+	 */
+	@AutoEscape
+	public String getMeasure2Name();
+
+	/**
+	 * Sets the measure2 name of this report.
+	 *
+	 * @param measure2Name the measure2 name of this report
+	 */
+	public void setMeasure2Name(String measure2Name);
+
+	/**
+	 * Returns the measure3 name of this report.
+	 *
+	 * @return the measure3 name of this report
+	 */
+	@AutoEscape
+	public String getMeasure3Name();
+
+	/**
+	 * Sets the measure3 name of this report.
+	 *
+	 * @param measure3Name the measure3 name of this report
+	 */
+	public void setMeasure3Name(String measure3Name);
+
+	/**
+	 * Returns the measure4 name of this report.
+	 *
+	 * @return the measure4 name of this report
+	 */
+	@AutoEscape
+	public String getMeasure4Name();
+
+	/**
+	 * Sets the measure4 name of this report.
+	 *
+	 * @param measure4Name the measure4 name of this report
+	 */
+	public void setMeasure4Name(String measure4Name);
+
+	/**
 	 * Returns the data name of this report.
 	 *
 	 * @return the data name of this report

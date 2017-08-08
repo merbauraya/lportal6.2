@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class FactVisitorServiceClpInvoker {
 	public FactVisitorServiceClpInvoker() {
-		_methodName264 = "getBeanIdentifier";
+		_methodName350 = "getBeanIdentifier";
 
-		_methodParameterTypes264 = new String[] {  };
+		_methodParameterTypes350 = new String[] {  };
 
-		_methodName265 = "setBeanIdentifier";
+		_methodName351 = "setBeanIdentifier";
 
-		_methodParameterTypes265 = new String[] { "java.lang.String" };
+		_methodParameterTypes351 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName264.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes264, parameterTypes)) {
+		if (_methodName350.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes350, parameterTypes)) {
 			return FactVisitorServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName265.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes265, parameterTypes)) {
+		if (_methodName351.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes351, parameterTypes)) {
 			FactVisitorServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class FactVisitorServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName264;
-	private String[] _methodParameterTypes264;
-	private String _methodName265;
-	private String[] _methodParameterTypes265;
+	private String _methodName350;
+	private String[] _methodParameterTypes350;
+	private String _methodName351;
+	private String[] _methodParameterTypes351;
 }

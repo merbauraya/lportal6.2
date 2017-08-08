@@ -23,7 +23,8 @@
 .eis .item-data-cont {
   background: #fefefe none repeat scroll 0 0;
   border: 1px solid #dcdcdc;
-  margin-bottom: 5px; }
+  margin-bottom: 10px;
+  padding: 10px; }
 .eis .item-title-cont {
   padding: 5px; }
 .eis .data-cont {

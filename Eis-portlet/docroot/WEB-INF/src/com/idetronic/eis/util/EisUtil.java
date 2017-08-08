@@ -61,6 +61,18 @@ public class EisUtil {
 	public static final String RESOURCE_ACQUISTION_DATA = "acquisitionData";
 	public static final String RESOURCE_KPI_ENTRY_DATA = "kpientryData";
 	public static final String RESOURCE_EIS_INFO_BOX_TEMPLATE = "infoBoxTemplate";
+	public static final String RESOURCE_INCOME_DATA = "incomeData";
+	public static final String RESOURCE_DATABASE_USAGE = "databaseUsage";
+	public static final String RESOURCE_DIGITAL_COLLECTION = "digitalCollectionData";
+	
+	public static final String RESOURCE_PTJ_BY_TYPE = "ptjByType";
+	public static final String RESOURCE_IT_MANAGEMENT = "itManagement";
+	public static final String RESOURCE_INTER_LIB_LOAN = "interLibraryLoan";
+	public static final String RESOURCE_GIFT_RECEIVED = "giftReceived";
+	public static final String RESOURCE_FACT_DATA = "factData";
+	
+	
+	
 	/*
 	 * month range 1 to 12
 	 */
@@ -135,6 +147,13 @@ public class EisUtil {
 	public static final String MASTER_CONSULTATION_GROUP = "master.consultation.group";
 	public static final String MASTER_CONSULTATION_CATEGORY = "master.consultation.category";
 	
+	public static final String MASTER_INCOME_TYPE = "master.income.type";
+	public static final String MASTER_DIGITAL_COLLECTION = "master.digital.collection";
+	public static final String MASTER_DATABASE_USAGE = "master.database.usage";
+	public static final String MASTER_IT_MANAGEMENT = "master.it.management";
+	public static final String MASTER_PTJ_INTER_LIB_LOAN = "master.ptj.interlib.loan";
+	
+	
 	
 	
 	public static final int EXPENSE_TYPE_ALLOCATION = 1;
@@ -153,17 +172,30 @@ public class EisUtil {
 	public static final int DATA_MEMBERSHIP =17;
 	public static final int DATA_EXPENSE = 18;
 	public static final int DATA_ACADEMIC_CONSULTATION = 19;
+	public static final int DATA_ACQUISITION = 20;
+	public static final int DATA_INCOME = 21;
+	public static final int DATA_DATABASE_USAGE = 22;
+	public static final int DATA_DIGITAL_COLLECTION = 24;
 	
 	public static final String REPORT_LOAN = "LOAN";
-	public static final String REPORT_IR = " IR_ITEM ";
+	public static final String REPORT_IR = "IR_ITEM";
 	public static final String REPORT_VISITOR = "VISITOR";
 	public static final String REPORT_SEATING = "SEATING";
 	public static final String REPORT_MEMBERSHIP = "MEMBERSHIP";
-	public static final String REPORT_PRINTED_ITEM = " PRINTED_ITEM";
+	public static final String REPORT_PRINTED_ITEM = "PRINTED_ITEM";
 	public static final String REPORT_NON_PRINTED_ITEM = "NON_PRINTED_ITEM";
 	public static final String REPORT_POSITION= "POSITIONS";
 	public static final String REPORT_EXPENSE = "EXPENSE";
 	public static final String REPORT_ACADEMIC_CONSULTATION = "CONSULTATION";
+	public static final String REPORT_ACQUISITION = "ACQUISITION";
+	public static final String REPORT_INCOME = "INCOME";
+	public static final String REPORT_DATABASE_USAGE = "DATABASE_USAGE";
+	public static final String REPORT_DIGITAL_COLLECTION = "DIGITAL_COLLECTION";
+	public static final String REPORT_IT_MANAGEMENT = "IT_MANAGEMENT";
+	public static final String REPORT_INTERLIB_LOAN = "INTERLIB_LOAN";
+	public static final String REPORT_GIFT_RECEIVED = "GIFT_RECEIVED";
+	
+	
 	
 	public static final String EIS_DASHBOARD_LAYOUT = "eis.dashboard.layout";
 	public static final String EIS_INFO_BOX= "eis.info.box";
@@ -254,7 +286,9 @@ public class EisUtil {
 			
 			case 3: ret = "<span class='badge status-end'>Tamat</span>";
 				break;
-				
+			
+			case 4: ret = "<span class='badge status-cancel'>Batal</span>";
+			break;
 		
 		}
 		
@@ -327,135 +361,6 @@ public class EisUtil {
 	
 	
 	
-	public static ArrayList getMissingUserData(long userId,String period,Locale locale) throws SystemException
-	{
-		ArrayList list = new ArrayList();
-		
-		//get all user libraries
-		List<MasterFile> libraries = UserLibraryLocalServiceUtil.getLibraryByUser2(userId);
-		
-		for (MasterFile library : libraries)
-		{
-			//get user data for the library
-			List<UserReport> userReports = UserReportLocalServiceUtil.findByUserLibrary(userId, library.getMasterFileId());
-			
-			for (UserReport userReport : userReports)
-			{
-				Report report = ReportLocalServiceUtil.fetchReport(userReport.getReportId());
-				
-				//LOGGER.info(report.getReportKey() +" :library :" + library.getMasterFileId() + " : " + library.getMasterFileName() + ":"+ report.getReportTitle());
-
-				if (report.getReportKey().equals(EisUtil.REPORT_EXPENSE))
-				{
-					Map loan  = getMissingExpense(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(loan))
-					{
-						list.add(loan);
-					}
-					
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_IR))
-				{
-					Map irItem = getMIssingIRItem(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					
-					if (Validator.isNotNull(irItem))
-					{
-						list.add(irItem);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_LOAN))
-				{
-					Map loan  = getMissingLoan(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(loan))
-					{
-						list.add(loan);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_MEMBERSHIP))
-				{
-					Map membership  = getMissingMembership(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(membership))
-					{
-						list.add(membership);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_NON_PRINTED_ITEM))
-				{
-
-					Map nonPrintedItem = getMissingNonPrintedItem(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(nonPrintedItem))
-					{
-						list.add(nonPrintedItem);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_POSITION))
-				{
-					Map position  = getMissingPosition(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(position))
-					{
-						list.add(position);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_PRINTED_ITEM))
-				{
-					Map printedItem = getMissingPrintedItem(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(printedItem))
-					{
-						list.add(printedItem);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_SEATING))
-				{
-					Map seating  = getMissingSeating(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(seating))
-					{
-						list.add(seating);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_VISITOR))
-				{
-					Map visitor  = getMissingVisitor(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(visitor))
-					{
-						list.add(visitor);
-					}
-					
-				}
-				
-				if (report.getReportKey().equals(EisUtil.REPORT_ACADEMIC_CONSULTATION))
-				{
-					Map consultation  = getMissingAcademicConsultation(library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(consultation))
-					{
-						list.add(consultation);
-					}
-					
-				}
-				
-				
-		
-			}
-		}
-
-		
-		return list;
-	}
 	
 	public static ArrayList getMissingData(long userId,String period,Locale locale,boolean isAdmin,long libraryId,long dataType) throws SystemException, PortalException
 	{
@@ -589,24 +494,7 @@ public class EisUtil {
 
 	
 	
-	public static Map getMissingAcademicConsultation(long libraryId,String period,Locale locale,String libraryName)
-	{
-		if (LibraryLocalServiceUtil.isMissingConsultationData(libraryId, period))
-		{
-			
-			
-			return createMissingDataMap(DATA_IR,libraryId,
-					period,LanguageUtil.get(locale, "consultation"),
-					libraryName);
-			
-			
-		}else
-		{
-			return null;
-		}
-					
-		
-	}
+	
 	
 	public static Map getMIssingIRItem(long libraryId,String period,Locale locale,String libraryName)
 	{

@@ -47,6 +47,7 @@
 	<aui:col span="6">
 		<eis:library-selector2
 					adminAllowAll="<%= mLibraryAdminAllowAll %>"
+					cssClass="selectInput"
 				
 				/> 
 	</aui:col>
@@ -63,6 +64,7 @@
 					endYear="<%= mPeriodEndYear %>"
 					allowFuturePeriod= "<%= false%>"
 					dataCountDay = "<%= mDataCountDay %>"
+					cssClass="selectInput"
 					
 				/>
 		
@@ -70,12 +72,13 @@
 	</aui:col>
 	<aui:col span="3">
 		<label class="control-label">&nbsp;</label>
+		<!-- 
 		<aui:button type="button" 
 			name="loadList" 
 			label="load" 
 			icon="icon-refresh"
 		/>
-	
+		-->
 	</aui:col>
 	
 	
@@ -150,13 +153,15 @@
 	
 	var librarySelect = A.one('#<portlet:namespace/>library');
 	
-	var btnLoad = A.one('#<portlet:namespace/>loadList');
 	
 	
-	btnLoad.on('click',function(){
-
+	var selectInput = A.all(".selectInput");
+	
+	selectInput.on('change', function() {
+		
 		var libraryId = librarySelect.get('value');
 		var period =  A.one('#<portlet:namespace/>period').get('value');
+		
 		
 		var inputs = A.all('.dataInput');
 		
@@ -239,6 +244,14 @@
 
 
 	});
+	
+AUI().ready('event', 'node','node-event-simulate', function(A){
+		
+		
+		librarySelect.selectedIndex = 0;
+		librarySelect.simulate('change');
+	
+		});
 		
 	
 

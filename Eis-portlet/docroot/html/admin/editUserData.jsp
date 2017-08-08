@@ -4,15 +4,24 @@
 <%
 	long userId = ParamUtil.getLong(request, "userId");
 	long libraryId = ParamUtil.getLong(request, "libraryId");
+	boolean hqDataEntry = ParamUtil.getBoolean(request, "hqDataEntry");
 	User selUser = UserLocalServiceUtil.getUser(userId);
 	
-	List<Report> allReports = ReportLocalServiceUtil.findByDataEntry(true);// MasterFileLocalServiceUtil.getAllLibraries();
-	
-	MasterFile selLibrary = MasterFileLocalServiceUtil.getMasterFile(libraryId);
-	
+	List<Report> allReports = ReportLocalServiceUtil.findByDataEntry(true,hqDataEntry);// MasterFileLocalServiceUtil.getAllLibraries();
+	MasterFile selLibrary = null;
+	if (Validator.isNotNull(libraryId))
+	{
+		selLibrary = MasterFileLocalServiceUtil.getMasterFile(libraryId);
+	}
 	
 	PortletURL portletURL = renderResponse.createRenderURL();
-	portletURL.setParameter("navigation", "editUserData");
+	if (Validator.isNotNull(libraryId))
+	{
+		portletURL.setParameter("navigation", "editUserData");
+	}else
+	{
+		portletURL.setParameter("navigation", "userLibrary");
+	}
 	portletURL.setParameter("mvcPath", "/html/admin/view.jsp");
 	portletURL.setParameter("userId", String.valueOf(userId));
 	portletURL.setParameter("libraryId", String.valueOf(libraryId));
@@ -21,8 +30,15 @@
 	backURL.setParameter("navigation", "editUserLibrary");
 	backURL.setParameter("userId", String.valueOf(userId));
 	backURL.setParameter("mvcPath", "/html/admin/view.jsp");
-	String title = LanguageUtil.format(pageContext,"edit-user-report-for-x-for-library-x", new String[] {selUser.getFullName(),selLibrary.getMasterFileName()}, false) ;
- 	//String x;
+	String title = StringPool.BLANK;
+	if (Validator.isNotNull(libraryId))
+	{
+		title = LanguageUtil.format(pageContext,"edit-user-report-for-x-for-library-x", new String[] {selUser.getFullName(),selLibrary.getMasterFileName()}, false) ;
+	}else
+	{
+		title = LanguageUtil.format(pageContext,"edit-user-report-for-x", new String[] {selUser.getFullName()}, false) ;
+
+	}
 	//String x = LanguageUtil.format(request, "edit-user-report-for-x-for-library-x", new String[] {selUser.getFullName(),selLibrary.getMasterFileName()},false);
 	//x = LanguageUtil.format(pageContext, "edit-user-report-for-x-for-library-x", new String[] {selUser.getFullName(),selLibrary.getMasterFileName()});
 	

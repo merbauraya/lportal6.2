@@ -4,14 +4,26 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.eis.model.Config" />
 	<import class="com.idetronic.eis.model.FactAcquisition" />
+	<import class="com.idetronic.eis.model.FactArticleIndexing" />
 	<import class="com.idetronic.eis.model.FactConsultation" />
+	<import class="com.idetronic.eis.model.FactCustomerComplaint" />
+	<import class="com.idetronic.eis.model.FactData" />
+	<import class="com.idetronic.eis.model.FactDatabaseUsage" />
+	<import class="com.idetronic.eis.model.FactDigitalCollection" />
 	<import class="com.idetronic.eis.model.FactExpense" />
+	<import class="com.idetronic.eis.model.FactGiftReceived" />
+	<import class="com.idetronic.eis.model.FactIncome" />
+	<import class="com.idetronic.eis.model.FactInterLibLoan" />
+	<import class="com.idetronic.eis.model.FactInternationalPortalUsage" />
 	<import class="com.idetronic.eis.model.FactIrItem" />
 	<import class="com.idetronic.eis.model.FactIrSubmission" />
+	<import class="com.idetronic.eis.model.FactItManagement" />
+	<import class="com.idetronic.eis.model.FactLibraryVisitor" />
 	<import class="com.idetronic.eis.model.FactMembership" />
 	<import class="com.idetronic.eis.model.FactNonPrintedMaterial" />
 	<import class="com.idetronic.eis.model.FactPost" />
 	<import class="com.idetronic.eis.model.FactPrintedMaterial" />
+	<import class="com.idetronic.eis.model.FactReleaseCataloging" />
 	<import class="com.idetronic.eis.model.FactSeating" />
 	<import class="com.idetronic.eis.model.FactVisitor" />
 	<import class="com.idetronic.eis.model.Faculty" />
@@ -56,11 +68,34 @@
 		<id name="factAcquisitionId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="facultyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="approvedTitleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="approvedVolumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="approvedAmountTotal" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="orderTitleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="orderVolumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="orderAmountTotal" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="volumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="titleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="amountTotal" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactArticleIndexingImpl" table="eis_FactArticleIndexing">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="indexTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -84,6 +119,74 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
+	<class name="com.idetronic.eis.model.impl.FactCustomerComplaintImpl" table="eis_FactCustomerComplaint">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="complaintTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="unsettledTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactDataImpl" table="eis_FactData">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="reportId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dimensionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="measure1" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="measure2" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="measure3" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="measure4" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactDatabaseUsageImpl" table="eis_FactDatabaseUsage">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="downloadTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sessionTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="searchTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactDigitalCollectionImpl" table="eis_FactDigitalCollection">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="titleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="volumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="imageTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
 	<class name="com.idetronic.eis.model.impl.FactExpenseImpl" table="eis_FactExpense">
 		<cache usage="read-write" />
 		<id name="factExpenseId" type="long">
@@ -94,6 +197,67 @@
 		<property name="entryType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="masterFileId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="amount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactGiftReceivedImpl" table="eis_FactGiftReceived">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="titleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="volumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactIncomeImpl" table="eis_FactIncome">
+		<cache usage="read-write" />
+		<id name="factIncomeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="total" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactInterLibLoanImpl" table="eis_FactInterLibLoan">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ptjId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applyTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="approvedTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactInternationalPortalUsageImpl" table="eis_FactInternationalPortalUsage">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="pagesTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -130,6 +294,37 @@
 		<property name="createdByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="createdByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactItManagementImpl" table="eis_FactItManagement">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="itemTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactLibraryVisitorImpl" table="eis_FactLibraryVisitor">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="visitorCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sessionTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="visitorTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.FactMembershipImpl" table="eis_FactMembership">
 		<cache usage="read-write" />
@@ -201,6 +396,22 @@
 		<property name="dateCreated" type="org.hibernate.type.TimestampType" />
 		<property name="createdByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createdByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.eis.model.impl.FactReleaseCatalogingImpl" table="eis_FactReleaseCataloging">
+		<cache usage="read-write" />
+		<id name="factId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="period" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="titleTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="volumeTotal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.FactSeatingImpl" table="eis_FactSeating">
 		<cache usage="read-write" />
@@ -561,6 +772,16 @@
 		<property name="reportName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="reportTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dataEntry" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hqDataEntry" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="dimensionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="hasMeasure1" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasMeasure2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasMeasure3" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="hasMeasure4" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="measure1Name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="measure2Name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="measure3Name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="measure4Name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dataName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.idetronic.eis.model.impl.SeatingCategoryImpl" table="eis_SeatingCategory">

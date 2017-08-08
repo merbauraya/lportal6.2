@@ -100,68 +100,64 @@ public class LibraryLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.idetronic.eis.model.Library" };
 
-		_methodName280 = "getBeanIdentifier";
+		_methodName366 = "getBeanIdentifier";
 
-		_methodParameterTypes280 = new String[] {  };
+		_methodParameterTypes366 = new String[] {  };
 
-		_methodName281 = "setBeanIdentifier";
+		_methodName367 = "setBeanIdentifier";
 
-		_methodParameterTypes281 = new String[] { "java.lang.String" };
+		_methodParameterTypes367 = new String[] { "java.lang.String" };
 
-		_methodName286 = "add";
+		_methodName372 = "add";
 
-		_methodParameterTypes286 = new String[] {
+		_methodParameterTypes372 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName287 = "findByState";
+		_methodName373 = "findByState";
 
-		_methodParameterTypes287 = new String[] { "long", "int", "int" };
+		_methodParameterTypes373 = new String[] { "long", "int", "int" };
 
-		_methodName288 = "findByName";
+		_methodName374 = "findByName";
 
-		_methodParameterTypes288 = new String[] { "java.lang.String" };
+		_methodParameterTypes374 = new String[] { "java.lang.String" };
 
-		_methodName289 = "isMissingIRItemData";
+		_methodName375 = "isMissingIRItemData";
 
-		_methodParameterTypes289 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes375 = new String[] { "long", "java.lang.String" };
 
-		_methodName290 = "isMissingPrintedItemData";
+		_methodName376 = "isMissingPrintedItemData";
 
-		_methodParameterTypes290 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes376 = new String[] { "long", "java.lang.String" };
 
-		_methodName291 = "isMissingPositionData";
+		_methodName377 = "isMissingPositionData";
 
-		_methodParameterTypes291 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes377 = new String[] { "long", "java.lang.String" };
 
-		_methodName292 = "isMissingVisitorData";
+		_methodName378 = "isMissingVisitorData";
 
-		_methodParameterTypes292 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes378 = new String[] { "long", "java.lang.String" };
 
-		_methodName293 = "isMissingSeatingData";
+		_methodName379 = "isMissingSeatingData";
 
-		_methodParameterTypes293 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes379 = new String[] { "long", "java.lang.String" };
 
-		_methodName294 = "isMissingMembershipData";
+		_methodName380 = "isMissingMembershipData";
 
-		_methodParameterTypes294 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes380 = new String[] { "long", "java.lang.String" };
 
-		_methodName295 = "isMissingNonPrintedItemData";
+		_methodName381 = "isMissingNonPrintedItemData";
 
-		_methodParameterTypes295 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes381 = new String[] { "long", "java.lang.String" };
 
-		_methodName296 = "isMissingLoanData";
+		_methodName382 = "isMissingLoanData";
 
-		_methodParameterTypes296 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes382 = new String[] { "long", "java.lang.String" };
 
-		_methodName297 = "isMissingExpenseData";
+		_methodName383 = "isMissingExpenseData";
 
-		_methodParameterTypes297 = new String[] { "long", "java.lang.String" };
-
-		_methodName298 = "isMissingConsultationData";
-
-		_methodParameterTypes298 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes383 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -253,95 +249,89 @@ public class LibraryLocalServiceClpInvoker {
 			return LibraryLocalServiceUtil.updateLibrary((com.idetronic.eis.model.Library)arguments[0]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName366.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes366, parameterTypes)) {
 			return LibraryLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName367.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes367, parameterTypes)) {
 			LibraryLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName286.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
+		if (_methodName372.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes372, parameterTypes)) {
 			return LibraryLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Long)arguments[3]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[4]);
 		}
 
-		if (_methodName287.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
+		if (_methodName373.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes373, parameterTypes)) {
 			return LibraryLocalServiceUtil.findByState(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName288.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
+		if (_methodName374.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes374, parameterTypes)) {
 			return LibraryLocalServiceUtil.findByName((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName289.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
+		if (_methodName375.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes375, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingIRItemData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName290.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes290, parameterTypes)) {
+		if (_methodName376.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes376, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingPrintedItemData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName291.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes291, parameterTypes)) {
+		if (_methodName377.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes377, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingPositionData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName292.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes292, parameterTypes)) {
+		if (_methodName378.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes378, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingVisitorData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName293.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes293, parameterTypes)) {
+		if (_methodName379.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes379, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingSeatingData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName294.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes294, parameterTypes)) {
+		if (_methodName380.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes380, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingMembershipData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName295.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes295, parameterTypes)) {
+		if (_methodName381.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes381, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingNonPrintedItemData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName296.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes296, parameterTypes)) {
+		if (_methodName382.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes382, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingLoanData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName297.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes297, parameterTypes)) {
+		if (_methodName383.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes383, parameterTypes)) {
 			return LibraryLocalServiceUtil.isMissingExpenseData(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
-		}
-
-		if (_methodName298.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes298, parameterTypes)) {
-			return LibraryLocalServiceUtil.isMissingConsultationData(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
@@ -380,34 +370,32 @@ public class LibraryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName280;
-	private String[] _methodParameterTypes280;
-	private String _methodName281;
-	private String[] _methodParameterTypes281;
-	private String _methodName286;
-	private String[] _methodParameterTypes286;
-	private String _methodName287;
-	private String[] _methodParameterTypes287;
-	private String _methodName288;
-	private String[] _methodParameterTypes288;
-	private String _methodName289;
-	private String[] _methodParameterTypes289;
-	private String _methodName290;
-	private String[] _methodParameterTypes290;
-	private String _methodName291;
-	private String[] _methodParameterTypes291;
-	private String _methodName292;
-	private String[] _methodParameterTypes292;
-	private String _methodName293;
-	private String[] _methodParameterTypes293;
-	private String _methodName294;
-	private String[] _methodParameterTypes294;
-	private String _methodName295;
-	private String[] _methodParameterTypes295;
-	private String _methodName296;
-	private String[] _methodParameterTypes296;
-	private String _methodName297;
-	private String[] _methodParameterTypes297;
-	private String _methodName298;
-	private String[] _methodParameterTypes298;
+	private String _methodName366;
+	private String[] _methodParameterTypes366;
+	private String _methodName367;
+	private String[] _methodParameterTypes367;
+	private String _methodName372;
+	private String[] _methodParameterTypes372;
+	private String _methodName373;
+	private String[] _methodParameterTypes373;
+	private String _methodName374;
+	private String[] _methodParameterTypes374;
+	private String _methodName375;
+	private String[] _methodParameterTypes375;
+	private String _methodName376;
+	private String[] _methodParameterTypes376;
+	private String _methodName377;
+	private String[] _methodParameterTypes377;
+	private String _methodName378;
+	private String[] _methodParameterTypes378;
+	private String _methodName379;
+	private String[] _methodParameterTypes379;
+	private String _methodName380;
+	private String[] _methodParameterTypes380;
+	private String _methodName381;
+	private String[] _methodParameterTypes381;
+	private String _methodName382;
+	private String[] _methodParameterTypes382;
+	private String _methodName383;
+	private String[] _methodParameterTypes383;
 }

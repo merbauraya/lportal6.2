@@ -272,4 +272,7 @@ public interface FactConsultationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONArray getEntries(long libraryId,
 		java.lang.String period);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isMissingData(long libraryId, java.lang.String period);
 }

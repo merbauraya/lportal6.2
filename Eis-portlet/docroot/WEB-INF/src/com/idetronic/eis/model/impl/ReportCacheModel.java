@@ -35,7 +35,7 @@ import java.io.ObjectOutput;
 public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{reportId=");
 		sb.append(reportId);
@@ -47,6 +47,26 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		sb.append(reportTitle);
 		sb.append(", dataEntry=");
 		sb.append(dataEntry);
+		sb.append(", hqDataEntry=");
+		sb.append(hqDataEntry);
+		sb.append(", dimensionId=");
+		sb.append(dimensionId);
+		sb.append(", hasMeasure1=");
+		sb.append(hasMeasure1);
+		sb.append(", hasMeasure2=");
+		sb.append(hasMeasure2);
+		sb.append(", hasMeasure3=");
+		sb.append(hasMeasure3);
+		sb.append(", hasMeasure4=");
+		sb.append(hasMeasure4);
+		sb.append(", measure1Name=");
+		sb.append(measure1Name);
+		sb.append(", measure2Name=");
+		sb.append(measure2Name);
+		sb.append(", measure3Name=");
+		sb.append(measure3Name);
+		sb.append(", measure4Name=");
+		sb.append(measure4Name);
 		sb.append(", dataName=");
 		sb.append(dataName);
 		sb.append("}");
@@ -82,6 +102,40 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		}
 
 		reportImpl.setDataEntry(dataEntry);
+		reportImpl.setHqDataEntry(hqDataEntry);
+		reportImpl.setDimensionId(dimensionId);
+		reportImpl.setHasMeasure1(hasMeasure1);
+		reportImpl.setHasMeasure2(hasMeasure2);
+		reportImpl.setHasMeasure3(hasMeasure3);
+		reportImpl.setHasMeasure4(hasMeasure4);
+
+		if (measure1Name == null) {
+			reportImpl.setMeasure1Name(StringPool.BLANK);
+		}
+		else {
+			reportImpl.setMeasure1Name(measure1Name);
+		}
+
+		if (measure2Name == null) {
+			reportImpl.setMeasure2Name(StringPool.BLANK);
+		}
+		else {
+			reportImpl.setMeasure2Name(measure2Name);
+		}
+
+		if (measure3Name == null) {
+			reportImpl.setMeasure3Name(StringPool.BLANK);
+		}
+		else {
+			reportImpl.setMeasure3Name(measure3Name);
+		}
+
+		if (measure4Name == null) {
+			reportImpl.setMeasure4Name(StringPool.BLANK);
+		}
+		else {
+			reportImpl.setMeasure4Name(measure4Name);
+		}
 
 		if (dataName == null) {
 			reportImpl.setDataName(StringPool.BLANK);
@@ -102,6 +156,16 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		reportName = objectInput.readUTF();
 		reportTitle = objectInput.readUTF();
 		dataEntry = objectInput.readBoolean();
+		hqDataEntry = objectInput.readBoolean();
+		dimensionId = objectInput.readLong();
+		hasMeasure1 = objectInput.readBoolean();
+		hasMeasure2 = objectInput.readBoolean();
+		hasMeasure3 = objectInput.readBoolean();
+		hasMeasure4 = objectInput.readBoolean();
+		measure1Name = objectInput.readUTF();
+		measure2Name = objectInput.readUTF();
+		measure3Name = objectInput.readUTF();
+		measure4Name = objectInput.readUTF();
 		dataName = objectInput.readUTF();
 	}
 
@@ -132,6 +196,40 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 		}
 
 		objectOutput.writeBoolean(dataEntry);
+		objectOutput.writeBoolean(hqDataEntry);
+		objectOutput.writeLong(dimensionId);
+		objectOutput.writeBoolean(hasMeasure1);
+		objectOutput.writeBoolean(hasMeasure2);
+		objectOutput.writeBoolean(hasMeasure3);
+		objectOutput.writeBoolean(hasMeasure4);
+
+		if (measure1Name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(measure1Name);
+		}
+
+		if (measure2Name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(measure2Name);
+		}
+
+		if (measure3Name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(measure3Name);
+		}
+
+		if (measure4Name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(measure4Name);
+		}
 
 		if (dataName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -146,5 +244,15 @@ public class ReportCacheModel implements CacheModel<Report>, Externalizable {
 	public String reportName;
 	public String reportTitle;
 	public boolean dataEntry;
+	public boolean hqDataEntry;
+	public long dimensionId;
+	public boolean hasMeasure1;
+	public boolean hasMeasure2;
+	public boolean hasMeasure3;
+	public boolean hasMeasure4;
+	public String measure1Name;
+	public String measure2Name;
+	public String measure3Name;
+	public String measure4Name;
 	public String dataName;
 }

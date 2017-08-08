@@ -19,14 +19,32 @@ import com.idetronic.eis.service.MasterTypeLocalService;
 import com.idetronic.eis.service.persistence.ConfigPersistence;
 import com.idetronic.eis.service.persistence.FactAcquisitionFinder;
 import com.idetronic.eis.service.persistence.FactAcquisitionPersistence;
+import com.idetronic.eis.service.persistence.FactArticleIndexingPersistence;
 import com.idetronic.eis.service.persistence.FactConsultationFinder;
 import com.idetronic.eis.service.persistence.FactConsultationPersistence;
+import com.idetronic.eis.service.persistence.FactCustomerComplaintPersistence;
+import com.idetronic.eis.service.persistence.FactDataFinder;
+import com.idetronic.eis.service.persistence.FactDataPersistence;
+import com.idetronic.eis.service.persistence.FactDatabaseUsageFinder;
+import com.idetronic.eis.service.persistence.FactDatabaseUsagePersistence;
+import com.idetronic.eis.service.persistence.FactDigitalCollectionFinder;
+import com.idetronic.eis.service.persistence.FactDigitalCollectionPersistence;
 import com.idetronic.eis.service.persistence.FactExpenseFinder;
 import com.idetronic.eis.service.persistence.FactExpensePersistence;
+import com.idetronic.eis.service.persistence.FactGiftReceivedFinder;
+import com.idetronic.eis.service.persistence.FactGiftReceivedPersistence;
+import com.idetronic.eis.service.persistence.FactIncomeFinder;
+import com.idetronic.eis.service.persistence.FactIncomePersistence;
+import com.idetronic.eis.service.persistence.FactInterLibLoanFinder;
+import com.idetronic.eis.service.persistence.FactInterLibLoanPersistence;
+import com.idetronic.eis.service.persistence.FactInternationalPortalUsagePersistence;
 import com.idetronic.eis.service.persistence.FactIrItemFinder;
 import com.idetronic.eis.service.persistence.FactIrItemPersistence;
 import com.idetronic.eis.service.persistence.FactIrSubmissionFinder;
 import com.idetronic.eis.service.persistence.FactIrSubmissionPersistence;
+import com.idetronic.eis.service.persistence.FactItManagementFinder;
+import com.idetronic.eis.service.persistence.FactItManagementPersistence;
+import com.idetronic.eis.service.persistence.FactLibraryVisitorPersistence;
 import com.idetronic.eis.service.persistence.FactMembershipFinder;
 import com.idetronic.eis.service.persistence.FactMembershipPersistence;
 import com.idetronic.eis.service.persistence.FactNonPrintedMaterialFinder;
@@ -35,6 +53,7 @@ import com.idetronic.eis.service.persistence.FactPostFinder;
 import com.idetronic.eis.service.persistence.FactPostPersistence;
 import com.idetronic.eis.service.persistence.FactPrintedMaterialFinder;
 import com.idetronic.eis.service.persistence.FactPrintedMaterialPersistence;
+import com.idetronic.eis.service.persistence.FactReleaseCatalogingPersistence;
 import com.idetronic.eis.service.persistence.FactSeatingFinder;
 import com.idetronic.eis.service.persistence.FactSeatingPersistence;
 import com.idetronic.eis.service.persistence.FactVisitorFinder;
@@ -465,6 +484,63 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the fact article indexing local service.
+	 *
+	 * @return the fact article indexing local service
+	 */
+	public com.idetronic.eis.service.FactArticleIndexingLocalService getFactArticleIndexingLocalService() {
+		return factArticleIndexingLocalService;
+	}
+
+	/**
+	 * Sets the fact article indexing local service.
+	 *
+	 * @param factArticleIndexingLocalService the fact article indexing local service
+	 */
+	public void setFactArticleIndexingLocalService(
+		com.idetronic.eis.service.FactArticleIndexingLocalService factArticleIndexingLocalService) {
+		this.factArticleIndexingLocalService = factArticleIndexingLocalService;
+	}
+
+	/**
+	 * Returns the fact article indexing remote service.
+	 *
+	 * @return the fact article indexing remote service
+	 */
+	public com.idetronic.eis.service.FactArticleIndexingService getFactArticleIndexingService() {
+		return factArticleIndexingService;
+	}
+
+	/**
+	 * Sets the fact article indexing remote service.
+	 *
+	 * @param factArticleIndexingService the fact article indexing remote service
+	 */
+	public void setFactArticleIndexingService(
+		com.idetronic.eis.service.FactArticleIndexingService factArticleIndexingService) {
+		this.factArticleIndexingService = factArticleIndexingService;
+	}
+
+	/**
+	 * Returns the fact article indexing persistence.
+	 *
+	 * @return the fact article indexing persistence
+	 */
+	public FactArticleIndexingPersistence getFactArticleIndexingPersistence() {
+		return factArticleIndexingPersistence;
+	}
+
+	/**
+	 * Sets the fact article indexing persistence.
+	 *
+	 * @param factArticleIndexingPersistence the fact article indexing persistence
+	 */
+	public void setFactArticleIndexingPersistence(
+		FactArticleIndexingPersistence factArticleIndexingPersistence) {
+		this.factArticleIndexingPersistence = factArticleIndexingPersistence;
+	}
+
+	/**
 	 * Returns the fact consultation local service.
 	 *
 	 * @return the fact consultation local service
@@ -541,6 +617,289 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the fact customer complaint local service.
+	 *
+	 * @return the fact customer complaint local service
+	 */
+	public com.idetronic.eis.service.FactCustomerComplaintLocalService getFactCustomerComplaintLocalService() {
+		return factCustomerComplaintLocalService;
+	}
+
+	/**
+	 * Sets the fact customer complaint local service.
+	 *
+	 * @param factCustomerComplaintLocalService the fact customer complaint local service
+	 */
+	public void setFactCustomerComplaintLocalService(
+		com.idetronic.eis.service.FactCustomerComplaintLocalService factCustomerComplaintLocalService) {
+		this.factCustomerComplaintLocalService = factCustomerComplaintLocalService;
+	}
+
+	/**
+	 * Returns the fact customer complaint remote service.
+	 *
+	 * @return the fact customer complaint remote service
+	 */
+	public com.idetronic.eis.service.FactCustomerComplaintService getFactCustomerComplaintService() {
+		return factCustomerComplaintService;
+	}
+
+	/**
+	 * Sets the fact customer complaint remote service.
+	 *
+	 * @param factCustomerComplaintService the fact customer complaint remote service
+	 */
+	public void setFactCustomerComplaintService(
+		com.idetronic.eis.service.FactCustomerComplaintService factCustomerComplaintService) {
+		this.factCustomerComplaintService = factCustomerComplaintService;
+	}
+
+	/**
+	 * Returns the fact customer complaint persistence.
+	 *
+	 * @return the fact customer complaint persistence
+	 */
+	public FactCustomerComplaintPersistence getFactCustomerComplaintPersistence() {
+		return factCustomerComplaintPersistence;
+	}
+
+	/**
+	 * Sets the fact customer complaint persistence.
+	 *
+	 * @param factCustomerComplaintPersistence the fact customer complaint persistence
+	 */
+	public void setFactCustomerComplaintPersistence(
+		FactCustomerComplaintPersistence factCustomerComplaintPersistence) {
+		this.factCustomerComplaintPersistence = factCustomerComplaintPersistence;
+	}
+
+	/**
+	 * Returns the fact data local service.
+	 *
+	 * @return the fact data local service
+	 */
+	public com.idetronic.eis.service.FactDataLocalService getFactDataLocalService() {
+		return factDataLocalService;
+	}
+
+	/**
+	 * Sets the fact data local service.
+	 *
+	 * @param factDataLocalService the fact data local service
+	 */
+	public void setFactDataLocalService(
+		com.idetronic.eis.service.FactDataLocalService factDataLocalService) {
+		this.factDataLocalService = factDataLocalService;
+	}
+
+	/**
+	 * Returns the fact data remote service.
+	 *
+	 * @return the fact data remote service
+	 */
+	public com.idetronic.eis.service.FactDataService getFactDataService() {
+		return factDataService;
+	}
+
+	/**
+	 * Sets the fact data remote service.
+	 *
+	 * @param factDataService the fact data remote service
+	 */
+	public void setFactDataService(
+		com.idetronic.eis.service.FactDataService factDataService) {
+		this.factDataService = factDataService;
+	}
+
+	/**
+	 * Returns the fact data persistence.
+	 *
+	 * @return the fact data persistence
+	 */
+	public FactDataPersistence getFactDataPersistence() {
+		return factDataPersistence;
+	}
+
+	/**
+	 * Sets the fact data persistence.
+	 *
+	 * @param factDataPersistence the fact data persistence
+	 */
+	public void setFactDataPersistence(FactDataPersistence factDataPersistence) {
+		this.factDataPersistence = factDataPersistence;
+	}
+
+	/**
+	 * Returns the fact data finder.
+	 *
+	 * @return the fact data finder
+	 */
+	public FactDataFinder getFactDataFinder() {
+		return factDataFinder;
+	}
+
+	/**
+	 * Sets the fact data finder.
+	 *
+	 * @param factDataFinder the fact data finder
+	 */
+	public void setFactDataFinder(FactDataFinder factDataFinder) {
+		this.factDataFinder = factDataFinder;
+	}
+
+	/**
+	 * Returns the fact database usage local service.
+	 *
+	 * @return the fact database usage local service
+	 */
+	public com.idetronic.eis.service.FactDatabaseUsageLocalService getFactDatabaseUsageLocalService() {
+		return factDatabaseUsageLocalService;
+	}
+
+	/**
+	 * Sets the fact database usage local service.
+	 *
+	 * @param factDatabaseUsageLocalService the fact database usage local service
+	 */
+	public void setFactDatabaseUsageLocalService(
+		com.idetronic.eis.service.FactDatabaseUsageLocalService factDatabaseUsageLocalService) {
+		this.factDatabaseUsageLocalService = factDatabaseUsageLocalService;
+	}
+
+	/**
+	 * Returns the fact database usage remote service.
+	 *
+	 * @return the fact database usage remote service
+	 */
+	public com.idetronic.eis.service.FactDatabaseUsageService getFactDatabaseUsageService() {
+		return factDatabaseUsageService;
+	}
+
+	/**
+	 * Sets the fact database usage remote service.
+	 *
+	 * @param factDatabaseUsageService the fact database usage remote service
+	 */
+	public void setFactDatabaseUsageService(
+		com.idetronic.eis.service.FactDatabaseUsageService factDatabaseUsageService) {
+		this.factDatabaseUsageService = factDatabaseUsageService;
+	}
+
+	/**
+	 * Returns the fact database usage persistence.
+	 *
+	 * @return the fact database usage persistence
+	 */
+	public FactDatabaseUsagePersistence getFactDatabaseUsagePersistence() {
+		return factDatabaseUsagePersistence;
+	}
+
+	/**
+	 * Sets the fact database usage persistence.
+	 *
+	 * @param factDatabaseUsagePersistence the fact database usage persistence
+	 */
+	public void setFactDatabaseUsagePersistence(
+		FactDatabaseUsagePersistence factDatabaseUsagePersistence) {
+		this.factDatabaseUsagePersistence = factDatabaseUsagePersistence;
+	}
+
+	/**
+	 * Returns the fact database usage finder.
+	 *
+	 * @return the fact database usage finder
+	 */
+	public FactDatabaseUsageFinder getFactDatabaseUsageFinder() {
+		return factDatabaseUsageFinder;
+	}
+
+	/**
+	 * Sets the fact database usage finder.
+	 *
+	 * @param factDatabaseUsageFinder the fact database usage finder
+	 */
+	public void setFactDatabaseUsageFinder(
+		FactDatabaseUsageFinder factDatabaseUsageFinder) {
+		this.factDatabaseUsageFinder = factDatabaseUsageFinder;
+	}
+
+	/**
+	 * Returns the fact digital collection local service.
+	 *
+	 * @return the fact digital collection local service
+	 */
+	public com.idetronic.eis.service.FactDigitalCollectionLocalService getFactDigitalCollectionLocalService() {
+		return factDigitalCollectionLocalService;
+	}
+
+	/**
+	 * Sets the fact digital collection local service.
+	 *
+	 * @param factDigitalCollectionLocalService the fact digital collection local service
+	 */
+	public void setFactDigitalCollectionLocalService(
+		com.idetronic.eis.service.FactDigitalCollectionLocalService factDigitalCollectionLocalService) {
+		this.factDigitalCollectionLocalService = factDigitalCollectionLocalService;
+	}
+
+	/**
+	 * Returns the fact digital collection remote service.
+	 *
+	 * @return the fact digital collection remote service
+	 */
+	public com.idetronic.eis.service.FactDigitalCollectionService getFactDigitalCollectionService() {
+		return factDigitalCollectionService;
+	}
+
+	/**
+	 * Sets the fact digital collection remote service.
+	 *
+	 * @param factDigitalCollectionService the fact digital collection remote service
+	 */
+	public void setFactDigitalCollectionService(
+		com.idetronic.eis.service.FactDigitalCollectionService factDigitalCollectionService) {
+		this.factDigitalCollectionService = factDigitalCollectionService;
+	}
+
+	/**
+	 * Returns the fact digital collection persistence.
+	 *
+	 * @return the fact digital collection persistence
+	 */
+	public FactDigitalCollectionPersistence getFactDigitalCollectionPersistence() {
+		return factDigitalCollectionPersistence;
+	}
+
+	/**
+	 * Sets the fact digital collection persistence.
+	 *
+	 * @param factDigitalCollectionPersistence the fact digital collection persistence
+	 */
+	public void setFactDigitalCollectionPersistence(
+		FactDigitalCollectionPersistence factDigitalCollectionPersistence) {
+		this.factDigitalCollectionPersistence = factDigitalCollectionPersistence;
+	}
+
+	/**
+	 * Returns the fact digital collection finder.
+	 *
+	 * @return the fact digital collection finder
+	 */
+	public FactDigitalCollectionFinder getFactDigitalCollectionFinder() {
+		return factDigitalCollectionFinder;
+	}
+
+	/**
+	 * Sets the fact digital collection finder.
+	 *
+	 * @param factDigitalCollectionFinder the fact digital collection finder
+	 */
+	public void setFactDigitalCollectionFinder(
+		FactDigitalCollectionFinder factDigitalCollectionFinder) {
+		this.factDigitalCollectionFinder = factDigitalCollectionFinder;
+	}
+
+	/**
 	 * Returns the fact expense local service.
 	 *
 	 * @return the fact expense local service
@@ -613,6 +972,290 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	 */
 	public void setFactExpenseFinder(FactExpenseFinder factExpenseFinder) {
 		this.factExpenseFinder = factExpenseFinder;
+	}
+
+	/**
+	 * Returns the fact gift received local service.
+	 *
+	 * @return the fact gift received local service
+	 */
+	public com.idetronic.eis.service.FactGiftReceivedLocalService getFactGiftReceivedLocalService() {
+		return factGiftReceivedLocalService;
+	}
+
+	/**
+	 * Sets the fact gift received local service.
+	 *
+	 * @param factGiftReceivedLocalService the fact gift received local service
+	 */
+	public void setFactGiftReceivedLocalService(
+		com.idetronic.eis.service.FactGiftReceivedLocalService factGiftReceivedLocalService) {
+		this.factGiftReceivedLocalService = factGiftReceivedLocalService;
+	}
+
+	/**
+	 * Returns the fact gift received remote service.
+	 *
+	 * @return the fact gift received remote service
+	 */
+	public com.idetronic.eis.service.FactGiftReceivedService getFactGiftReceivedService() {
+		return factGiftReceivedService;
+	}
+
+	/**
+	 * Sets the fact gift received remote service.
+	 *
+	 * @param factGiftReceivedService the fact gift received remote service
+	 */
+	public void setFactGiftReceivedService(
+		com.idetronic.eis.service.FactGiftReceivedService factGiftReceivedService) {
+		this.factGiftReceivedService = factGiftReceivedService;
+	}
+
+	/**
+	 * Returns the fact gift received persistence.
+	 *
+	 * @return the fact gift received persistence
+	 */
+	public FactGiftReceivedPersistence getFactGiftReceivedPersistence() {
+		return factGiftReceivedPersistence;
+	}
+
+	/**
+	 * Sets the fact gift received persistence.
+	 *
+	 * @param factGiftReceivedPersistence the fact gift received persistence
+	 */
+	public void setFactGiftReceivedPersistence(
+		FactGiftReceivedPersistence factGiftReceivedPersistence) {
+		this.factGiftReceivedPersistence = factGiftReceivedPersistence;
+	}
+
+	/**
+	 * Returns the fact gift received finder.
+	 *
+	 * @return the fact gift received finder
+	 */
+	public FactGiftReceivedFinder getFactGiftReceivedFinder() {
+		return factGiftReceivedFinder;
+	}
+
+	/**
+	 * Sets the fact gift received finder.
+	 *
+	 * @param factGiftReceivedFinder the fact gift received finder
+	 */
+	public void setFactGiftReceivedFinder(
+		FactGiftReceivedFinder factGiftReceivedFinder) {
+		this.factGiftReceivedFinder = factGiftReceivedFinder;
+	}
+
+	/**
+	 * Returns the fact income local service.
+	 *
+	 * @return the fact income local service
+	 */
+	public com.idetronic.eis.service.FactIncomeLocalService getFactIncomeLocalService() {
+		return factIncomeLocalService;
+	}
+
+	/**
+	 * Sets the fact income local service.
+	 *
+	 * @param factIncomeLocalService the fact income local service
+	 */
+	public void setFactIncomeLocalService(
+		com.idetronic.eis.service.FactIncomeLocalService factIncomeLocalService) {
+		this.factIncomeLocalService = factIncomeLocalService;
+	}
+
+	/**
+	 * Returns the fact income remote service.
+	 *
+	 * @return the fact income remote service
+	 */
+	public com.idetronic.eis.service.FactIncomeService getFactIncomeService() {
+		return factIncomeService;
+	}
+
+	/**
+	 * Sets the fact income remote service.
+	 *
+	 * @param factIncomeService the fact income remote service
+	 */
+	public void setFactIncomeService(
+		com.idetronic.eis.service.FactIncomeService factIncomeService) {
+		this.factIncomeService = factIncomeService;
+	}
+
+	/**
+	 * Returns the fact income persistence.
+	 *
+	 * @return the fact income persistence
+	 */
+	public FactIncomePersistence getFactIncomePersistence() {
+		return factIncomePersistence;
+	}
+
+	/**
+	 * Sets the fact income persistence.
+	 *
+	 * @param factIncomePersistence the fact income persistence
+	 */
+	public void setFactIncomePersistence(
+		FactIncomePersistence factIncomePersistence) {
+		this.factIncomePersistence = factIncomePersistence;
+	}
+
+	/**
+	 * Returns the fact income finder.
+	 *
+	 * @return the fact income finder
+	 */
+	public FactIncomeFinder getFactIncomeFinder() {
+		return factIncomeFinder;
+	}
+
+	/**
+	 * Sets the fact income finder.
+	 *
+	 * @param factIncomeFinder the fact income finder
+	 */
+	public void setFactIncomeFinder(FactIncomeFinder factIncomeFinder) {
+		this.factIncomeFinder = factIncomeFinder;
+	}
+
+	/**
+	 * Returns the fact inter lib loan local service.
+	 *
+	 * @return the fact inter lib loan local service
+	 */
+	public com.idetronic.eis.service.FactInterLibLoanLocalService getFactInterLibLoanLocalService() {
+		return factInterLibLoanLocalService;
+	}
+
+	/**
+	 * Sets the fact inter lib loan local service.
+	 *
+	 * @param factInterLibLoanLocalService the fact inter lib loan local service
+	 */
+	public void setFactInterLibLoanLocalService(
+		com.idetronic.eis.service.FactInterLibLoanLocalService factInterLibLoanLocalService) {
+		this.factInterLibLoanLocalService = factInterLibLoanLocalService;
+	}
+
+	/**
+	 * Returns the fact inter lib loan remote service.
+	 *
+	 * @return the fact inter lib loan remote service
+	 */
+	public com.idetronic.eis.service.FactInterLibLoanService getFactInterLibLoanService() {
+		return factInterLibLoanService;
+	}
+
+	/**
+	 * Sets the fact inter lib loan remote service.
+	 *
+	 * @param factInterLibLoanService the fact inter lib loan remote service
+	 */
+	public void setFactInterLibLoanService(
+		com.idetronic.eis.service.FactInterLibLoanService factInterLibLoanService) {
+		this.factInterLibLoanService = factInterLibLoanService;
+	}
+
+	/**
+	 * Returns the fact inter lib loan persistence.
+	 *
+	 * @return the fact inter lib loan persistence
+	 */
+	public FactInterLibLoanPersistence getFactInterLibLoanPersistence() {
+		return factInterLibLoanPersistence;
+	}
+
+	/**
+	 * Sets the fact inter lib loan persistence.
+	 *
+	 * @param factInterLibLoanPersistence the fact inter lib loan persistence
+	 */
+	public void setFactInterLibLoanPersistence(
+		FactInterLibLoanPersistence factInterLibLoanPersistence) {
+		this.factInterLibLoanPersistence = factInterLibLoanPersistence;
+	}
+
+	/**
+	 * Returns the fact inter lib loan finder.
+	 *
+	 * @return the fact inter lib loan finder
+	 */
+	public FactInterLibLoanFinder getFactInterLibLoanFinder() {
+		return factInterLibLoanFinder;
+	}
+
+	/**
+	 * Sets the fact inter lib loan finder.
+	 *
+	 * @param factInterLibLoanFinder the fact inter lib loan finder
+	 */
+	public void setFactInterLibLoanFinder(
+		FactInterLibLoanFinder factInterLibLoanFinder) {
+		this.factInterLibLoanFinder = factInterLibLoanFinder;
+	}
+
+	/**
+	 * Returns the fact international portal usage local service.
+	 *
+	 * @return the fact international portal usage local service
+	 */
+	public com.idetronic.eis.service.FactInternationalPortalUsageLocalService getFactInternationalPortalUsageLocalService() {
+		return factInternationalPortalUsageLocalService;
+	}
+
+	/**
+	 * Sets the fact international portal usage local service.
+	 *
+	 * @param factInternationalPortalUsageLocalService the fact international portal usage local service
+	 */
+	public void setFactInternationalPortalUsageLocalService(
+		com.idetronic.eis.service.FactInternationalPortalUsageLocalService factInternationalPortalUsageLocalService) {
+		this.factInternationalPortalUsageLocalService = factInternationalPortalUsageLocalService;
+	}
+
+	/**
+	 * Returns the fact international portal usage remote service.
+	 *
+	 * @return the fact international portal usage remote service
+	 */
+	public com.idetronic.eis.service.FactInternationalPortalUsageService getFactInternationalPortalUsageService() {
+		return factInternationalPortalUsageService;
+	}
+
+	/**
+	 * Sets the fact international portal usage remote service.
+	 *
+	 * @param factInternationalPortalUsageService the fact international portal usage remote service
+	 */
+	public void setFactInternationalPortalUsageService(
+		com.idetronic.eis.service.FactInternationalPortalUsageService factInternationalPortalUsageService) {
+		this.factInternationalPortalUsageService = factInternationalPortalUsageService;
+	}
+
+	/**
+	 * Returns the fact international portal usage persistence.
+	 *
+	 * @return the fact international portal usage persistence
+	 */
+	public FactInternationalPortalUsagePersistence getFactInternationalPortalUsagePersistence() {
+		return factInternationalPortalUsagePersistence;
+	}
+
+	/**
+	 * Sets the fact international portal usage persistence.
+	 *
+	 * @param factInternationalPortalUsagePersistence the fact international portal usage persistence
+	 */
+	public void setFactInternationalPortalUsagePersistence(
+		FactInternationalPortalUsagePersistence factInternationalPortalUsagePersistence) {
+		this.factInternationalPortalUsagePersistence = factInternationalPortalUsagePersistence;
 	}
 
 	/**
@@ -764,6 +1407,139 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	public void setFactIrSubmissionFinder(
 		FactIrSubmissionFinder factIrSubmissionFinder) {
 		this.factIrSubmissionFinder = factIrSubmissionFinder;
+	}
+
+	/**
+	 * Returns the fact it management local service.
+	 *
+	 * @return the fact it management local service
+	 */
+	public com.idetronic.eis.service.FactItManagementLocalService getFactItManagementLocalService() {
+		return factItManagementLocalService;
+	}
+
+	/**
+	 * Sets the fact it management local service.
+	 *
+	 * @param factItManagementLocalService the fact it management local service
+	 */
+	public void setFactItManagementLocalService(
+		com.idetronic.eis.service.FactItManagementLocalService factItManagementLocalService) {
+		this.factItManagementLocalService = factItManagementLocalService;
+	}
+
+	/**
+	 * Returns the fact it management remote service.
+	 *
+	 * @return the fact it management remote service
+	 */
+	public com.idetronic.eis.service.FactItManagementService getFactItManagementService() {
+		return factItManagementService;
+	}
+
+	/**
+	 * Sets the fact it management remote service.
+	 *
+	 * @param factItManagementService the fact it management remote service
+	 */
+	public void setFactItManagementService(
+		com.idetronic.eis.service.FactItManagementService factItManagementService) {
+		this.factItManagementService = factItManagementService;
+	}
+
+	/**
+	 * Returns the fact it management persistence.
+	 *
+	 * @return the fact it management persistence
+	 */
+	public FactItManagementPersistence getFactItManagementPersistence() {
+		return factItManagementPersistence;
+	}
+
+	/**
+	 * Sets the fact it management persistence.
+	 *
+	 * @param factItManagementPersistence the fact it management persistence
+	 */
+	public void setFactItManagementPersistence(
+		FactItManagementPersistence factItManagementPersistence) {
+		this.factItManagementPersistence = factItManagementPersistence;
+	}
+
+	/**
+	 * Returns the fact it management finder.
+	 *
+	 * @return the fact it management finder
+	 */
+	public FactItManagementFinder getFactItManagementFinder() {
+		return factItManagementFinder;
+	}
+
+	/**
+	 * Sets the fact it management finder.
+	 *
+	 * @param factItManagementFinder the fact it management finder
+	 */
+	public void setFactItManagementFinder(
+		FactItManagementFinder factItManagementFinder) {
+		this.factItManagementFinder = factItManagementFinder;
+	}
+
+	/**
+	 * Returns the fact library visitor local service.
+	 *
+	 * @return the fact library visitor local service
+	 */
+	public com.idetronic.eis.service.FactLibraryVisitorLocalService getFactLibraryVisitorLocalService() {
+		return factLibraryVisitorLocalService;
+	}
+
+	/**
+	 * Sets the fact library visitor local service.
+	 *
+	 * @param factLibraryVisitorLocalService the fact library visitor local service
+	 */
+	public void setFactLibraryVisitorLocalService(
+		com.idetronic.eis.service.FactLibraryVisitorLocalService factLibraryVisitorLocalService) {
+		this.factLibraryVisitorLocalService = factLibraryVisitorLocalService;
+	}
+
+	/**
+	 * Returns the fact library visitor remote service.
+	 *
+	 * @return the fact library visitor remote service
+	 */
+	public com.idetronic.eis.service.FactLibraryVisitorService getFactLibraryVisitorService() {
+		return factLibraryVisitorService;
+	}
+
+	/**
+	 * Sets the fact library visitor remote service.
+	 *
+	 * @param factLibraryVisitorService the fact library visitor remote service
+	 */
+	public void setFactLibraryVisitorService(
+		com.idetronic.eis.service.FactLibraryVisitorService factLibraryVisitorService) {
+		this.factLibraryVisitorService = factLibraryVisitorService;
+	}
+
+	/**
+	 * Returns the fact library visitor persistence.
+	 *
+	 * @return the fact library visitor persistence
+	 */
+	public FactLibraryVisitorPersistence getFactLibraryVisitorPersistence() {
+		return factLibraryVisitorPersistence;
+	}
+
+	/**
+	 * Sets the fact library visitor persistence.
+	 *
+	 * @param factLibraryVisitorPersistence the fact library visitor persistence
+	 */
+	public void setFactLibraryVisitorPersistence(
+		FactLibraryVisitorPersistence factLibraryVisitorPersistence) {
+		this.factLibraryVisitorPersistence = factLibraryVisitorPersistence;
 	}
 
 	/**
@@ -1066,6 +1842,63 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	public void setFactPrintedMaterialFinder(
 		FactPrintedMaterialFinder factPrintedMaterialFinder) {
 		this.factPrintedMaterialFinder = factPrintedMaterialFinder;
+	}
+
+	/**
+	 * Returns the fact release cataloging local service.
+	 *
+	 * @return the fact release cataloging local service
+	 */
+	public com.idetronic.eis.service.FactReleaseCatalogingLocalService getFactReleaseCatalogingLocalService() {
+		return factReleaseCatalogingLocalService;
+	}
+
+	/**
+	 * Sets the fact release cataloging local service.
+	 *
+	 * @param factReleaseCatalogingLocalService the fact release cataloging local service
+	 */
+	public void setFactReleaseCatalogingLocalService(
+		com.idetronic.eis.service.FactReleaseCatalogingLocalService factReleaseCatalogingLocalService) {
+		this.factReleaseCatalogingLocalService = factReleaseCatalogingLocalService;
+	}
+
+	/**
+	 * Returns the fact release cataloging remote service.
+	 *
+	 * @return the fact release cataloging remote service
+	 */
+	public com.idetronic.eis.service.FactReleaseCatalogingService getFactReleaseCatalogingService() {
+		return factReleaseCatalogingService;
+	}
+
+	/**
+	 * Sets the fact release cataloging remote service.
+	 *
+	 * @param factReleaseCatalogingService the fact release cataloging remote service
+	 */
+	public void setFactReleaseCatalogingService(
+		com.idetronic.eis.service.FactReleaseCatalogingService factReleaseCatalogingService) {
+		this.factReleaseCatalogingService = factReleaseCatalogingService;
+	}
+
+	/**
+	 * Returns the fact release cataloging persistence.
+	 *
+	 * @return the fact release cataloging persistence
+	 */
+	public FactReleaseCatalogingPersistence getFactReleaseCatalogingPersistence() {
+		return factReleaseCatalogingPersistence;
+	}
+
+	/**
+	 * Sets the fact release cataloging persistence.
+	 *
+	 * @param factReleaseCatalogingPersistence the fact release cataloging persistence
+	 */
+	public void setFactReleaseCatalogingPersistence(
+		FactReleaseCatalogingPersistence factReleaseCatalogingPersistence) {
+		this.factReleaseCatalogingPersistence = factReleaseCatalogingPersistence;
 	}
 
 	/**
@@ -2898,6 +3731,12 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	protected FactAcquisitionPersistence factAcquisitionPersistence;
 	@BeanReference(type = FactAcquisitionFinder.class)
 	protected FactAcquisitionFinder factAcquisitionFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactArticleIndexingLocalService.class)
+	protected com.idetronic.eis.service.FactArticleIndexingLocalService factArticleIndexingLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactArticleIndexingService.class)
+	protected com.idetronic.eis.service.FactArticleIndexingService factArticleIndexingService;
+	@BeanReference(type = FactArticleIndexingPersistence.class)
+	protected FactArticleIndexingPersistence factArticleIndexingPersistence;
 	@BeanReference(type = com.idetronic.eis.service.FactConsultationLocalService.class)
 	protected com.idetronic.eis.service.FactConsultationLocalService factConsultationLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactConsultationService.class)
@@ -2906,6 +3745,36 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	protected FactConsultationPersistence factConsultationPersistence;
 	@BeanReference(type = FactConsultationFinder.class)
 	protected FactConsultationFinder factConsultationFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactCustomerComplaintLocalService.class)
+	protected com.idetronic.eis.service.FactCustomerComplaintLocalService factCustomerComplaintLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactCustomerComplaintService.class)
+	protected com.idetronic.eis.service.FactCustomerComplaintService factCustomerComplaintService;
+	@BeanReference(type = FactCustomerComplaintPersistence.class)
+	protected FactCustomerComplaintPersistence factCustomerComplaintPersistence;
+	@BeanReference(type = com.idetronic.eis.service.FactDataLocalService.class)
+	protected com.idetronic.eis.service.FactDataLocalService factDataLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactDataService.class)
+	protected com.idetronic.eis.service.FactDataService factDataService;
+	@BeanReference(type = FactDataPersistence.class)
+	protected FactDataPersistence factDataPersistence;
+	@BeanReference(type = FactDataFinder.class)
+	protected FactDataFinder factDataFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactDatabaseUsageLocalService.class)
+	protected com.idetronic.eis.service.FactDatabaseUsageLocalService factDatabaseUsageLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactDatabaseUsageService.class)
+	protected com.idetronic.eis.service.FactDatabaseUsageService factDatabaseUsageService;
+	@BeanReference(type = FactDatabaseUsagePersistence.class)
+	protected FactDatabaseUsagePersistence factDatabaseUsagePersistence;
+	@BeanReference(type = FactDatabaseUsageFinder.class)
+	protected FactDatabaseUsageFinder factDatabaseUsageFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactDigitalCollectionLocalService.class)
+	protected com.idetronic.eis.service.FactDigitalCollectionLocalService factDigitalCollectionLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactDigitalCollectionService.class)
+	protected com.idetronic.eis.service.FactDigitalCollectionService factDigitalCollectionService;
+	@BeanReference(type = FactDigitalCollectionPersistence.class)
+	protected FactDigitalCollectionPersistence factDigitalCollectionPersistence;
+	@BeanReference(type = FactDigitalCollectionFinder.class)
+	protected FactDigitalCollectionFinder factDigitalCollectionFinder;
 	@BeanReference(type = com.idetronic.eis.service.FactExpenseLocalService.class)
 	protected com.idetronic.eis.service.FactExpenseLocalService factExpenseLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactExpenseService.class)
@@ -2914,6 +3783,36 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	protected FactExpensePersistence factExpensePersistence;
 	@BeanReference(type = FactExpenseFinder.class)
 	protected FactExpenseFinder factExpenseFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactGiftReceivedLocalService.class)
+	protected com.idetronic.eis.service.FactGiftReceivedLocalService factGiftReceivedLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactGiftReceivedService.class)
+	protected com.idetronic.eis.service.FactGiftReceivedService factGiftReceivedService;
+	@BeanReference(type = FactGiftReceivedPersistence.class)
+	protected FactGiftReceivedPersistence factGiftReceivedPersistence;
+	@BeanReference(type = FactGiftReceivedFinder.class)
+	protected FactGiftReceivedFinder factGiftReceivedFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactIncomeLocalService.class)
+	protected com.idetronic.eis.service.FactIncomeLocalService factIncomeLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactIncomeService.class)
+	protected com.idetronic.eis.service.FactIncomeService factIncomeService;
+	@BeanReference(type = FactIncomePersistence.class)
+	protected FactIncomePersistence factIncomePersistence;
+	@BeanReference(type = FactIncomeFinder.class)
+	protected FactIncomeFinder factIncomeFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactInterLibLoanLocalService.class)
+	protected com.idetronic.eis.service.FactInterLibLoanLocalService factInterLibLoanLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactInterLibLoanService.class)
+	protected com.idetronic.eis.service.FactInterLibLoanService factInterLibLoanService;
+	@BeanReference(type = FactInterLibLoanPersistence.class)
+	protected FactInterLibLoanPersistence factInterLibLoanPersistence;
+	@BeanReference(type = FactInterLibLoanFinder.class)
+	protected FactInterLibLoanFinder factInterLibLoanFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactInternationalPortalUsageLocalService.class)
+	protected com.idetronic.eis.service.FactInternationalPortalUsageLocalService factInternationalPortalUsageLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactInternationalPortalUsageService.class)
+	protected com.idetronic.eis.service.FactInternationalPortalUsageService factInternationalPortalUsageService;
+	@BeanReference(type = FactInternationalPortalUsagePersistence.class)
+	protected FactInternationalPortalUsagePersistence factInternationalPortalUsagePersistence;
 	@BeanReference(type = com.idetronic.eis.service.FactIrItemLocalService.class)
 	protected com.idetronic.eis.service.FactIrItemLocalService factIrItemLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactIrItemService.class)
@@ -2930,6 +3829,20 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	protected FactIrSubmissionPersistence factIrSubmissionPersistence;
 	@BeanReference(type = FactIrSubmissionFinder.class)
 	protected FactIrSubmissionFinder factIrSubmissionFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactItManagementLocalService.class)
+	protected com.idetronic.eis.service.FactItManagementLocalService factItManagementLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactItManagementService.class)
+	protected com.idetronic.eis.service.FactItManagementService factItManagementService;
+	@BeanReference(type = FactItManagementPersistence.class)
+	protected FactItManagementPersistence factItManagementPersistence;
+	@BeanReference(type = FactItManagementFinder.class)
+	protected FactItManagementFinder factItManagementFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactLibraryVisitorLocalService.class)
+	protected com.idetronic.eis.service.FactLibraryVisitorLocalService factLibraryVisitorLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactLibraryVisitorService.class)
+	protected com.idetronic.eis.service.FactLibraryVisitorService factLibraryVisitorService;
+	@BeanReference(type = FactLibraryVisitorPersistence.class)
+	protected FactLibraryVisitorPersistence factLibraryVisitorPersistence;
 	@BeanReference(type = com.idetronic.eis.service.FactMembershipLocalService.class)
 	protected com.idetronic.eis.service.FactMembershipLocalService factMembershipLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactMembershipService.class)
@@ -2962,6 +3875,12 @@ public abstract class MasterTypeLocalServiceBaseImpl
 	protected FactPrintedMaterialPersistence factPrintedMaterialPersistence;
 	@BeanReference(type = FactPrintedMaterialFinder.class)
 	protected FactPrintedMaterialFinder factPrintedMaterialFinder;
+	@BeanReference(type = com.idetronic.eis.service.FactReleaseCatalogingLocalService.class)
+	protected com.idetronic.eis.service.FactReleaseCatalogingLocalService factReleaseCatalogingLocalService;
+	@BeanReference(type = com.idetronic.eis.service.FactReleaseCatalogingService.class)
+	protected com.idetronic.eis.service.FactReleaseCatalogingService factReleaseCatalogingService;
+	@BeanReference(type = FactReleaseCatalogingPersistence.class)
+	protected FactReleaseCatalogingPersistence factReleaseCatalogingPersistence;
 	@BeanReference(type = com.idetronic.eis.service.FactSeatingLocalService.class)
 	protected com.idetronic.eis.service.FactSeatingLocalService factSeatingLocalService;
 	@BeanReference(type = com.idetronic.eis.service.FactSeatingService.class)

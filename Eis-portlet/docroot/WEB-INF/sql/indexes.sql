@@ -86,6 +86,7 @@ create index IX_E698A4E0 on eis_ProjectActivity (strategyId);
 create index IX_B091A522 on eis_ProjectStrategy (projectId);
 
 create index IX_4012544E on eis_Report (dataEntry);
+create index IX_B6FF2EC1 on eis_Report (dataEntry, hqDataEntry);
 create unique index IX_E7666931 on eis_Report (reportKey);
 
 create index IX_B86E03E9 on eis_SeatingCategory (seatingDepartmentId);

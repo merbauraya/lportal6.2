@@ -12,7 +12,7 @@
 	//int startYear = Integer.parseInt((String)request.getAttribute("eis:period-selector:startYear"));
 	int startYear = GetterUtil.getInteger((String)request.getAttribute("eis:period-selector:startYear"));
 	int endYear = GetterUtil.getInteger((String)request.getAttribute("eis:period-selector:endYear"));
-	
+	String cssClass = ((String)request.getAttribute("eis:period-selector:cssClass"));
 	
 	
 	boolean allowPreviousYear = GetterUtil.getBoolean((String) request.getAttribute("eis:period-select:allowPreviousYear"), true);
@@ -57,7 +57,7 @@
 %>
 	
 			
-			<aui:select name="<%= controlName %>" label="period-year-month">
+			<aui:select name="<%= controlName %>" label="period-year-month" cssClass="<%= cssClass%>">
 				<c:if test="<%= includeEmptyOption %>">
 					<%
 						boolean selected = Validator.isNull(value);
@@ -97,19 +97,16 @@
 							displayValue = stringValue;
 							
 						}
-						if (Validator.isNull(value))
-						{
-							if (month == curMonth && year == curYear)
-							{
-								selected = true;
-							}
-						}else
+						
+						
+						if (Validator.isNotNull(value))	
 						{
 							if (value.equalsIgnoreCase(stringValue.toString()))
 							{
 								selected = true;
 							}
 						}
+						
 						boolean addMonth = true;
 						if (!allowFuturePeriod)
 						{
@@ -118,34 +115,34 @@
 								addMonth = false;
 							}
 						}
-						if (!allowFuturePeriod && year == curYear)
-						{
-							selected = false;
-							
-							if (month >  curMonth)
-							{
-								addMonth = false;
-							}
-							
-							
-							
-							if (month == curMonth && dataCountDay > dayOfMonth)
-							{
-								addMonth = false;
-							}
-							
-							if (dayOfMonth < dataCountDay)
-							{
-								if (curMonth-1 == month) selected = true;
-								
-							} else
-							{
-								if (curMonth == month) selected = true;
-							}
-							
 						
+						if (year == curYear)
+						{
+							//only add up to previous month
+							if (month >= curMonth )
+							{
+								addMonth = false;
+							}
+							if (curMonth-1 == month) selected = true;
 							
 						}
+						
+						//handle jan december
+						if (curMonth == 1) //currently we are in january
+						{
+							
+							if (year  == curYear - 1) //check if previous year
+							{
+								
+								if (month == 12) //if december
+								{
+									
+									selected = true;
+								}
+							}
+						}
+						
+						
 						if (addMonth)
 						{
 			%>			

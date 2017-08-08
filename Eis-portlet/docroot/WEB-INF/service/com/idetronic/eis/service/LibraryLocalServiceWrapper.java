@@ -352,12 +352,6 @@ public class LibraryLocalServiceWrapper implements LibraryLocalService,
 		return _libraryLocalService.isMissingExpenseData(libraryId, period);
 	}
 
-	@Override
-	public boolean isMissingConsultationData(long libraryId,
-		java.lang.String period) {
-		return _libraryLocalService.isMissingConsultationData(libraryId, period);
-	}
-
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

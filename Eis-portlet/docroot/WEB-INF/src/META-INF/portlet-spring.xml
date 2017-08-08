@@ -8,14 +8,47 @@
 	<bean id="com.idetronic.eis.service.FactAcquisitionService" class="com.idetronic.eis.service.impl.FactAcquisitionServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactAcquisitionPersistence" class="com.idetronic.eis.service.persistence.FactAcquisitionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.persistence.FactAcquisitionFinder" class="com.idetronic.eis.service.persistence.FactAcquisitionFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactArticleIndexingLocalService" class="com.idetronic.eis.service.impl.FactArticleIndexingLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactArticleIndexingService" class="com.idetronic.eis.service.impl.FactArticleIndexingServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactArticleIndexingPersistence" class="com.idetronic.eis.service.persistence.FactArticleIndexingPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactConsultationLocalService" class="com.idetronic.eis.service.impl.FactConsultationLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactConsultationService" class="com.idetronic.eis.service.impl.FactConsultationServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactConsultationPersistence" class="com.idetronic.eis.service.persistence.FactConsultationPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.persistence.FactConsultationFinder" class="com.idetronic.eis.service.persistence.FactConsultationFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactCustomerComplaintLocalService" class="com.idetronic.eis.service.impl.FactCustomerComplaintLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactCustomerComplaintService" class="com.idetronic.eis.service.impl.FactCustomerComplaintServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactCustomerComplaintPersistence" class="com.idetronic.eis.service.persistence.FactCustomerComplaintPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactDataLocalService" class="com.idetronic.eis.service.impl.FactDataLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactDataService" class="com.idetronic.eis.service.impl.FactDataServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactDataPersistence" class="com.idetronic.eis.service.persistence.FactDataPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactDataFinder" class="com.idetronic.eis.service.persistence.FactDataFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactDatabaseUsageLocalService" class="com.idetronic.eis.service.impl.FactDatabaseUsageLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactDatabaseUsageService" class="com.idetronic.eis.service.impl.FactDatabaseUsageServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactDatabaseUsagePersistence" class="com.idetronic.eis.service.persistence.FactDatabaseUsagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactDatabaseUsageFinder" class="com.idetronic.eis.service.persistence.FactDatabaseUsageFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactDigitalCollectionLocalService" class="com.idetronic.eis.service.impl.FactDigitalCollectionLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactDigitalCollectionService" class="com.idetronic.eis.service.impl.FactDigitalCollectionServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactDigitalCollectionPersistence" class="com.idetronic.eis.service.persistence.FactDigitalCollectionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactDigitalCollectionFinder" class="com.idetronic.eis.service.persistence.FactDigitalCollectionFinderImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactExpenseLocalService" class="com.idetronic.eis.service.impl.FactExpenseLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactExpenseService" class="com.idetronic.eis.service.impl.FactExpenseServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactExpensePersistence" class="com.idetronic.eis.service.persistence.FactExpensePersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.persistence.FactExpenseFinder" class="com.idetronic.eis.service.persistence.FactExpenseFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactGiftReceivedLocalService" class="com.idetronic.eis.service.impl.FactGiftReceivedLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactGiftReceivedService" class="com.idetronic.eis.service.impl.FactGiftReceivedServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactGiftReceivedPersistence" class="com.idetronic.eis.service.persistence.FactGiftReceivedPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactGiftReceivedFinder" class="com.idetronic.eis.service.persistence.FactGiftReceivedFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactIncomeLocalService" class="com.idetronic.eis.service.impl.FactIncomeLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactIncomeService" class="com.idetronic.eis.service.impl.FactIncomeServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactIncomePersistence" class="com.idetronic.eis.service.persistence.FactIncomePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactIncomeFinder" class="com.idetronic.eis.service.persistence.FactIncomeFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactInterLibLoanLocalService" class="com.idetronic.eis.service.impl.FactInterLibLoanLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactInterLibLoanService" class="com.idetronic.eis.service.impl.FactInterLibLoanServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactInterLibLoanPersistence" class="com.idetronic.eis.service.persistence.FactInterLibLoanPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactInterLibLoanFinder" class="com.idetronic.eis.service.persistence.FactInterLibLoanFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactInternationalPortalUsageLocalService" class="com.idetronic.eis.service.impl.FactInternationalPortalUsageLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactInternationalPortalUsageService" class="com.idetronic.eis.service.impl.FactInternationalPortalUsageServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactInternationalPortalUsagePersistence" class="com.idetronic.eis.service.persistence.FactInternationalPortalUsagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactIrItemLocalService" class="com.idetronic.eis.service.impl.FactIrItemLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactIrItemService" class="com.idetronic.eis.service.impl.FactIrItemServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactIrItemPersistence" class="com.idetronic.eis.service.persistence.FactIrItemPersistenceImpl" parent="basePersistence" />
@@ -24,6 +57,13 @@
 	<bean id="com.idetronic.eis.service.FactIrSubmissionService" class="com.idetronic.eis.service.impl.FactIrSubmissionServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactIrSubmissionPersistence" class="com.idetronic.eis.service.persistence.FactIrSubmissionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.persistence.FactIrSubmissionFinder" class="com.idetronic.eis.service.persistence.FactIrSubmissionFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactItManagementLocalService" class="com.idetronic.eis.service.impl.FactItManagementLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactItManagementService" class="com.idetronic.eis.service.impl.FactItManagementServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactItManagementPersistence" class="com.idetronic.eis.service.persistence.FactItManagementPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.persistence.FactItManagementFinder" class="com.idetronic.eis.service.persistence.FactItManagementFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactLibraryVisitorLocalService" class="com.idetronic.eis.service.impl.FactLibraryVisitorLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactLibraryVisitorService" class="com.idetronic.eis.service.impl.FactLibraryVisitorServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactLibraryVisitorPersistence" class="com.idetronic.eis.service.persistence.FactLibraryVisitorPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactMembershipLocalService" class="com.idetronic.eis.service.impl.FactMembershipLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactMembershipService" class="com.idetronic.eis.service.impl.FactMembershipServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactMembershipPersistence" class="com.idetronic.eis.service.persistence.FactMembershipPersistenceImpl" parent="basePersistence" />
@@ -40,6 +80,9 @@
 	<bean id="com.idetronic.eis.service.FactPrintedMaterialService" class="com.idetronic.eis.service.impl.FactPrintedMaterialServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactPrintedMaterialPersistence" class="com.idetronic.eis.service.persistence.FactPrintedMaterialPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.persistence.FactPrintedMaterialFinder" class="com.idetronic.eis.service.persistence.FactPrintedMaterialFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eis.service.FactReleaseCatalogingLocalService" class="com.idetronic.eis.service.impl.FactReleaseCatalogingLocalServiceImpl" />
+	<bean id="com.idetronic.eis.service.FactReleaseCatalogingService" class="com.idetronic.eis.service.impl.FactReleaseCatalogingServiceImpl" />
+	<bean id="com.idetronic.eis.service.persistence.FactReleaseCatalogingPersistence" class="com.idetronic.eis.service.persistence.FactReleaseCatalogingPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.eis.service.FactSeatingLocalService" class="com.idetronic.eis.service.impl.FactSeatingLocalServiceImpl" />
 	<bean id="com.idetronic.eis.service.FactSeatingService" class="com.idetronic.eis.service.impl.FactSeatingServiceImpl" />
 	<bean id="com.idetronic.eis.service.persistence.FactSeatingPersistence" class="com.idetronic.eis.service.persistence.FactSeatingPersistenceImpl" parent="basePersistence" />

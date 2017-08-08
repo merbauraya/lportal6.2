@@ -1,5 +1,8 @@
 <%@ include file="/html/init.jsp" %>  
 
+
+
+
 <%
 	String adminEmailFromName = LanguageUtil.get(locale,"sender-name");//PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
 	String adminEmailFromAddress = LanguageUtil.get(locale,"sender-address");//PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
@@ -57,7 +60,7 @@
 			<aui:validator name="custom" errorMessage="must-greater-than-first-reminder-day">
             function (val, fieldNode, ruleValue)
                 { 
-                	if (val <= A.one("#<portlet:namespace />firstReminderDay").val())
+                	if (val < A.one("#<portlet:namespace />firstReminderDay").val())
                 	{
                 		
                    		
@@ -97,7 +100,7 @@
 			<aui:validator name="custom" errorMessage="must-greater-than-second-reminder-day">
             function (val, fieldNode, ruleValue)
                 { 
-                	if (val <= A.one("#<portlet:namespace />secondReminderDay").val())
+                	if (val < A.one("#<portlet:namespace />secondReminderDay").val())
                 	{
                 		
                    		

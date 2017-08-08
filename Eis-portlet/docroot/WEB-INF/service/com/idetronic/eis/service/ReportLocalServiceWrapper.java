@@ -283,17 +283,30 @@ public class ReportLocalServiceWrapper implements ReportLocalService,
 	@Override
 	public com.idetronic.eis.model.Report addReport(
 		java.lang.String reportKey, java.lang.String reportName,
-		java.lang.String reportTitle, boolean hasDataEntry)
+		java.lang.String reportTitle, boolean hasDataEntry, boolean hqDataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _reportLocalService.addReport(reportKey, reportName,
-			reportTitle, hasDataEntry);
+			reportTitle, hasDataEntry, hqDataEntry);
 	}
 
 	@Override
 	public java.util.List<com.idetronic.eis.model.Report> findByDataEntry(
-		boolean dataEntry)
+		boolean dataEntry, boolean hqDataEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _reportLocalService.findByDataEntry(dataEntry);
+		return _reportLocalService.findByDataEntry(dataEntry, hqDataEntry);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.eis.model.Report> findMainReport()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _reportLocalService.findMainReport();
+	}
+
+	@Override
+	public com.idetronic.eis.model.Report findByKey(java.lang.String reportKey)
+		throws com.idetronic.eis.NoSuchReportException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _reportLocalService.findByKey(reportKey);
 	}
 
 	/**

@@ -75,6 +75,20 @@ public interface FactAcquisitionModel extends BaseModel<FactAcquisition> {
 	public void setFactAcquisitionId(long factAcquisitionId);
 
 	/**
+	 * Returns the library ID of this fact acquisition.
+	 *
+	 * @return the library ID of this fact acquisition
+	 */
+	public long getLibraryId();
+
+	/**
+	 * Sets the library ID of this fact acquisition.
+	 *
+	 * @param libraryId the library ID of this fact acquisition
+	 */
+	public void setLibraryId(long libraryId);
+
+	/**
 	 * Returns the faculty ID of this fact acquisition.
 	 *
 	 * @return the faculty ID of this fact acquisition
@@ -118,6 +132,90 @@ public interface FactAcquisitionModel extends BaseModel<FactAcquisition> {
 	public void setItemId(long itemId);
 
 	/**
+	 * Returns the approved title total of this fact acquisition.
+	 *
+	 * @return the approved title total of this fact acquisition
+	 */
+	public long getApprovedTitleTotal();
+
+	/**
+	 * Sets the approved title total of this fact acquisition.
+	 *
+	 * @param approvedTitleTotal the approved title total of this fact acquisition
+	 */
+	public void setApprovedTitleTotal(long approvedTitleTotal);
+
+	/**
+	 * Returns the approved volume total of this fact acquisition.
+	 *
+	 * @return the approved volume total of this fact acquisition
+	 */
+	public long getApprovedVolumeTotal();
+
+	/**
+	 * Sets the approved volume total of this fact acquisition.
+	 *
+	 * @param approvedVolumeTotal the approved volume total of this fact acquisition
+	 */
+	public void setApprovedVolumeTotal(long approvedVolumeTotal);
+
+	/**
+	 * Returns the approved amount total of this fact acquisition.
+	 *
+	 * @return the approved amount total of this fact acquisition
+	 */
+	public double getApprovedAmountTotal();
+
+	/**
+	 * Sets the approved amount total of this fact acquisition.
+	 *
+	 * @param approvedAmountTotal the approved amount total of this fact acquisition
+	 */
+	public void setApprovedAmountTotal(double approvedAmountTotal);
+
+	/**
+	 * Returns the order title total of this fact acquisition.
+	 *
+	 * @return the order title total of this fact acquisition
+	 */
+	public long getOrderTitleTotal();
+
+	/**
+	 * Sets the order title total of this fact acquisition.
+	 *
+	 * @param orderTitleTotal the order title total of this fact acquisition
+	 */
+	public void setOrderTitleTotal(long orderTitleTotal);
+
+	/**
+	 * Returns the order volume total of this fact acquisition.
+	 *
+	 * @return the order volume total of this fact acquisition
+	 */
+	public long getOrderVolumeTotal();
+
+	/**
+	 * Sets the order volume total of this fact acquisition.
+	 *
+	 * @param orderVolumeTotal the order volume total of this fact acquisition
+	 */
+	public void setOrderVolumeTotal(long orderVolumeTotal);
+
+	/**
+	 * Returns the order amount total of this fact acquisition.
+	 *
+	 * @return the order amount total of this fact acquisition
+	 */
+	public double getOrderAmountTotal();
+
+	/**
+	 * Sets the order amount total of this fact acquisition.
+	 *
+	 * @param orderAmountTotal the order amount total of this fact acquisition
+	 */
+	public void setOrderAmountTotal(double orderAmountTotal);
+
+	/**
 	 * Returns the volume total of this fact acquisition.
 	 *
 	 * @return the volume total of this fact acquisition
@@ -144,6 +242,20 @@ public interface FactAcquisitionModel extends BaseModel<FactAcquisition> {
 	 * @param titleTotal the title total of this fact acquisition
 	 */
 	public void setTitleTotal(long titleTotal);
+
+	/**
+	 * Returns the amount total of this fact acquisition.
+	 *
+	 * @return the amount total of this fact acquisition
+	 */
+	public double getAmountTotal();
+
+	/**
+	 * Sets the amount total of this fact acquisition.
+	 *
+	 * @param amountTotal the amount total of this fact acquisition
+	 */
+	public void setAmountTotal(double amountTotal);
 
 	/**
 	 * Returns the company ID of this fact acquisition.

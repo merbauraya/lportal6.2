@@ -146,6 +146,33 @@
 				%>
 
 			</liferay-ui:search-container-column-text>
+			<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="hq-report"
+		> 
+   
+				<%
+					List<UserReport> userReports = UserReportLocalServiceUtil.findByUserLibrary(user2.getUserId(), 0); 
+					
+					for (int i = 0; i < userReports.size(); i ++)
+					{
+						UserReport userReport = userReports.get(i);
+						Report report = ReportLocalServiceUtil.getReport(userReport.getReportId());
+						buffer.append(HtmlUtil.escape(report.getReportTitle()));
+						if (i +1 < userReports.size())
+						{
+							buffer.append(StringPool.COMMA_AND_SPACE);
+
+						}
+						
+					}
+					
+					
+				%>
+				
+
+			</liferay-ui:search-container-column-text>
+			
 			<liferay-ui:search-container-column-text name="action">
 			<%
 			PortletURL userActionURL = renderResponse.createRenderURL();
@@ -167,12 +194,17 @@
 			<portlet:renderURL var="editUserDataURL">
 				<portlet:param name="mvcPath" value="/html/admin/view.jsp" />
 				<portlet:param name="navigation" value="editUserData" />
+				<portlet:param name="hqDataEntry" value="true"/>
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 			</portlet:renderURL>
-				<aui:a cssClass="btn btn-default btnEdit"  href="<%= assignURL %>" label="edit-user-library" />
+				
 			
+				<liferay-ui:icon-menu>
+				  <liferay-ui:icon message="edit-user-library" url="<%= assignURL %>" />
+				  <liferay-ui:icon message="edit-user-data-hq" url="<%= editUserDataURL %>" />
+				</liferay-ui:icon-menu> 
 				
 					
 			</liferay-ui:search-container-column-text>

@@ -290,34 +290,52 @@ public class FactAcquisitionLocalServiceWrapper
 	}
 
 	@Override
-	public com.idetronic.eis.model.FactAcquisition add(long facultyId,
-		java.lang.String period, long itemId, int titleTotal, int volumeTotal,
+	public com.idetronic.eis.model.FactAcquisition add(long libraryId,
+		long facultyId, java.lang.String period, long itemId, long titleTotal,
+		long volumeTotal, double amountTotal, long approvedTitleTotal,
+		long approvedVolumeTotal, double approvedAmountTotal,
+		long orderTitleTotal, long orderVolumeTotal, double orderAmountTotal,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _factAcquisitionLocalService.add(facultyId, period, itemId,
-			titleTotal, volumeTotal, serviceContext);
+		return _factAcquisitionLocalService.add(libraryId, facultyId, period,
+			itemId, titleTotal, volumeTotal, amountTotal, approvedTitleTotal,
+			approvedVolumeTotal, approvedAmountTotal, orderTitleTotal,
+			orderVolumeTotal, orderAmountTotal, serviceContext);
 	}
 
 	@Override
-	public void batchInsert(long facultyId, java.lang.String period,
+	public void batchInsert(long libraryId, long facultyId,
+		java.lang.String period,
 		com.liferay.portal.kernel.json.JSONArray datas,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_factAcquisitionLocalService.batchInsert(facultyId, period, datas,
-			serviceContext);
+		_factAcquisitionLocalService.batchInsert(libraryId, facultyId, period,
+			datas, serviceContext);
 	}
 
 	@Override
 	public java.util.List<com.idetronic.eis.model.FactAcquisition> getLatestEntry(
-		long facultyId, java.lang.String period) {
-		return _factAcquisitionLocalService.getLatestEntry(facultyId, period);
+		long libraryId, long facultyId, java.lang.String period) {
+		return _factAcquisitionLocalService.getLatestEntry(libraryId,
+			facultyId, period);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray getEntries(long facultyId,
-		java.lang.String period)
+	public com.liferay.portal.kernel.json.JSONArray getEntries(long libraryId,
+		long facultyId, java.lang.String period)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _factAcquisitionLocalService.getEntries(facultyId, period);
+		return _factAcquisitionLocalService.getEntries(libraryId, facultyId,
+			period);
+	}
+
+	@Override
+	public boolean isMissingData(long libraryId, java.lang.String period) {
+		return _factAcquisitionLocalService.isMissingData(libraryId, period);
+	}
+
+	@Override
+	public boolean isMissingData(java.lang.String period) {
+		return _factAcquisitionLocalService.isMissingData(period);
 	}
 
 	/**

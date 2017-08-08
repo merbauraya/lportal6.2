@@ -22,13 +22,22 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  */
 public class FactAcquisitionFinderUtil {
 	public static java.util.List<com.idetronic.eis.model.FactAcquisition> getLatestEntry(
-		long facultyId, java.lang.String period) {
-		return getFinder().getLatestEntry(facultyId, period);
+		long libraryId, long facultyId, java.lang.String period) {
+		return getFinder().getLatestEntry(libraryId, facultyId, period);
 	}
 
-	public static java.util.List getHistory(long facultyId,
+	public static java.util.List getHistory(long libraryId, long facultyId,
 		java.lang.String period) {
-		return getFinder().getHistory(facultyId, period);
+		return getFinder().getHistory(libraryId, facultyId, period);
+	}
+
+	public static int getItemCountByLibraryPeriod(long libraryId,
+		java.lang.String period) {
+		return getFinder().getItemCountByLibraryPeriod(libraryId, period);
+	}
+
+	public static int getItemCountByPeriod(java.lang.String period) {
+		return getFinder().getItemCountByPeriod(period);
 	}
 
 	public static FactAcquisitionFinder getFinder() {

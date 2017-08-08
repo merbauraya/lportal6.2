@@ -1152,6 +1152,7 @@ public class EisAdminPortlet extends MVCPortlet {
 		boolean status4 = ParamUtil.getBoolean(actionRequest, "status4"); 
 		boolean status5 = ParamUtil.getBoolean(actionRequest, "status5"); 
 		boolean inActive = ParamUtil.getBoolean(actionRequest, "inActive"); 
+		String masterCode = ParamUtil.getString(actionRequest, "masterCode");
 		
 		MasterFile masterFile = null;
 		
@@ -1174,7 +1175,7 @@ public class EisAdminPortlet extends MVCPortlet {
 		masterFile.setStatus4(status4);
 		masterFile.setStatus5(status5);
 		masterFile.setInActive(inActive);
-		
+		masterFile.setMasterCode(masterCode);
 		
 		MasterFileLocalServiceUtil.updateMasterFile(masterFile);
 		//syncOldMaster(masterFile);
@@ -1412,7 +1413,18 @@ public class EisAdminPortlet extends MVCPortlet {
 		String reportTitle = ParamUtil.getString(actionRequest, "reportTitle");
 		String reportName = ParamUtil.getString(actionRequest, "reportName");
 		boolean dataEntry = ParamUtil.getBoolean(actionRequest, "dataEntry");
+		boolean hqDataEntry = ParamUtil.getBoolean(actionRequest, "hqDataEntry");
 		
+		long dimensionId = ParamUtil.getLong(actionRequest, "dimensionId");
+		boolean hasMeasure1 = ParamUtil.getBoolean(actionRequest, "hasMeasure1");
+		boolean hasMeasure2 = ParamUtil.getBoolean(actionRequest, "hasMeasure2");
+		boolean hasMeasure3 = ParamUtil.getBoolean(actionRequest, "hasMeasure3");
+		boolean hasMeasure4 = ParamUtil.getBoolean(actionRequest, "hasMeasure4");
+		
+		String measure1Name = ParamUtil.getString(actionRequest, "measure1Name");
+		String measure2Name = ParamUtil.getString(actionRequest, "measure2Name");
+		String measure3Name = ParamUtil.getString(actionRequest, "measure3Name");
+		String measure4Name = ParamUtil.getString(actionRequest, "measure4Name");
 		
 		
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
@@ -1423,17 +1435,30 @@ public class EisAdminPortlet extends MVCPortlet {
 		
 		if (Validator.isNull(reportId))
 		{
-			report = ReportLocalServiceUtil.addReport(reportKey, reportName, reportTitle,dataEntry);
+			report = ReportLocalServiceUtil.addReport(reportKey, reportName, reportTitle,dataEntry,hqDataEntry);
+		
 		}else
 		{
 			report = ReportLocalServiceUtil.fetchReport(reportId);
-			report.setReportKey(reportKey);
-			report.setReportTitle(reportTitle);
-			report.setDataEntry(dataEntry);
-			
-			ReportLocalServiceUtil.updateReport(report);
-			
 		}
+		report.setReportKey(reportKey);
+		report.setReportTitle(reportTitle);
+		report.setDataEntry(dataEntry);
+		report.setHqDataEntry(hqDataEntry);
+		report.setDimensionId(dimensionId);
+		report.setHasMeasure1(hasMeasure1);
+		report.setHasMeasure2(hasMeasure2);
+		report.setHasMeasure3(hasMeasure3);
+		report.setHasMeasure4(hasMeasure4);
+		report.setMeasure1Name(measure1Name);
+		report.setMeasure2Name(measure2Name);
+		report.setMeasure3Name(measure3Name);
+		report.setMeasure4Name(measure4Name);
+			
+			
+		ReportLocalServiceUtil.updateReport(report);
+			
+		
 		
 		
 		

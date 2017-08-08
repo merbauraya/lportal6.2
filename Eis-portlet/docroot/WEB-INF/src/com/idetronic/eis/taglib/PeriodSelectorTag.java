@@ -12,6 +12,7 @@ public class PeriodSelectorTag extends IncludeTag{
 	final String _PAGE = "/html/taglib/eis/period_selector.jsp";
 	private String m_value = StringPool.BLANK;
 	private String m_controlName = "period";
+	private String m_cssClass = StringPool.BLANK;
 	private boolean m_useMonthName = false;
 	private boolean m_allowPreviousYear;
 	private boolean m_useYearRange;
@@ -22,8 +23,8 @@ public class PeriodSelectorTag extends IncludeTag{
 	private int m_numberFutureYear;
 	
 	
-	private int m_startYear = 2015;
-	private int m_endYear = 2020;
+	private int m_startYear = 2015; 
+	private int m_endYear = 2025;
 	private int m_dataCountDay = 10;
 	
 	
@@ -34,6 +35,14 @@ public class PeriodSelectorTag extends IncludeTag{
 	public boolean getIncludeEmptyOption()
 	{
 		return m_includeEmptyOption ;
+	}
+	public void setCssClass(String value)
+	{
+		m_cssClass = value;
+	}
+	public String getCssClass()
+	{
+		return m_cssClass;
 	}
 	public void setIncludeEmptyOption(boolean value)
 	{
@@ -149,6 +158,7 @@ public class PeriodSelectorTag extends IncludeTag{
 		request.setAttribute("eis:period-selector:numberFutureYear", String.valueOf(m_numberFutureYear) );
 		request.setAttribute("eis:period-selector:dataCountDay", String.valueOf(m_dataCountDay) );
 		request.setAttribute("eis:period-selector:allowFuturePeriod", String.valueOf(m_allowFuturePeriod) );
+		request.setAttribute("eis:period-selector:cssClass", m_cssClass );
 	}
 	
 	@Override

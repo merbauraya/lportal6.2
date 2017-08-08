@@ -72,11 +72,6 @@ public class LibraryFinderUtil {
 		return getFinder().getIrItemCountByLibraryPeriod(libraryId, period);
 	}
 
-	public static int getConsultationountByLibraryPeriod(long libraryId,
-		java.lang.String period) {
-		return getFinder().getConsultationountByLibraryPeriod(libraryId, period);
-	}
-
 	public static LibraryFinder getFinder() {
 		if (_finder == null) {
 			_finder = (LibraryFinder)PortletBeanLocatorUtil.locate(com.idetronic.eis.service.ClpSerializer.getServletContextName(),

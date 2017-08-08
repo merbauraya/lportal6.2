@@ -462,50 +462,7 @@ implements LibraryFinder
 	    return 0;
 	}
 	
-	public int getConsultationountByLibraryPeriod(long libraryId,String period)
-	{
-		Session session = null;
-	    try {
-	        session = openSession();
-
-	        String sql = CustomSQLUtil.get(
-	        		COUNT_CONSULTATION_BY_LIBRARY_PERIOD);
-
-	        SQLQuery q = session.createSQLQuery(sql);
-	        q.setCacheable(false);
-	        
-	        q.addScalar("totalCount",Type.INTEGER);
-	        
-	        QueryPos qPos = QueryPos.getInstance(q);  
-	        qPos.add(libraryId);
-	        qPos.add(period);
-	        
-	        Iterator itr = q.list().iterator();
-	        
-	        if (itr.hasNext()) {
-	            int count = (int)itr.next();
-	    
-	            return count;
-	          }
-	        
-	        
-
-	       
-	        
-	        return 0;
-	    
-	    } catch (Exception e) {
-	        try {
-	            throw new SystemException(e);
-	        } catch (SystemException se) {
-	            se.printStackTrace();
-	        }
-	    } finally {
-	        closeSession(session);
-	    }
-
-	    return 0;
-	}
+	
 	
 	
 	

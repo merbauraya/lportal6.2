@@ -104,6 +104,7 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.idetronic.eis.model.Report" %>
 <%@ page import="com.idetronic.eis.model.MasterType" %>
 <%@ page import="com.idetronic.eis.model.MasterFile" %>
+<%@ page import="com.idetronic.eis.model.UserReport" %>
 <%@ page import="com.idetronic.eis.model.impl.ConfigImpl" %>
 
 <%@ page import="com.idetronic.eis.service.ProjectLocalServiceUtil" %>
@@ -137,6 +138,7 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.idetronic.eis.service.ReportLocalServiceUtil" %>
 <%@ page import="com.idetronic.eis.service.MasterTypeLocalServiceUtil" %>
 <%@ page import="com.idetronic.eis.service.MasterFileLocalServiceUtil" %>
+<%@ page import="com.idetronic.eis.service.UserReportLocalServiceUtil" %>
 
 <%@ page import="com.idetronic.eis.search.UserLibraryChecker" %>
 <%@ page import="com.idetronic.eis.search.UserDataChecker" %>

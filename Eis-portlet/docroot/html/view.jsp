@@ -87,11 +87,8 @@
 		
 		String period = StringPool.BLANK;
 		
-		if (today < mDataCountDay)
-		{
-			month--;
-			
-		}
+		//default to previous month
+		month--;
 		if (month == 0)
 		{
 			year--;
@@ -240,9 +237,18 @@ public PortletURL getEditURL(int dataType,javax.portlet.RenderResponse response)
 	    	
 	    case EisUtil.DATA_EXPENSE : page = "/html/fact/expense.jsp";
     		break;
-    
-    
     	
+	    case EisUtil.DATA_ACADEMIC_CONSULTATION : page = "/html/fact/consultation.jsp";
+	    	break;
+	    case EisUtil.DATA_ACQUISITION : page  = "/html/fact/acquisition.jsp";
+	    	break;
+	    case EisUtil.DATA_DATABASE_USAGE: page = "/html/fact/databaseUsage.jsp";
+	    	break;
+	    
+	    case EisUtil.DATA_DIGITAL_COLLECTION : page = "/html/fact/digitalCollection.jsp";
+	    	break;
+	    case EisUtil.DATA_INCOME : page="/html/fact/income.jsp";
+	    	break;
     }
     
     

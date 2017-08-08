@@ -1,5 +1,6 @@
 package com.idetronic.eis.service.persistence;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.idetronic.eis.model.FactAcquisition;
@@ -9,6 +10,7 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -16,7 +18,7 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 public class FactAcquisitionFinderImpl extends BasePersistenceImpl<FactAcquisition> implements FactAcquisitionFinder
 {
 	
-	public List<FactAcquisition> getLatestEntry (long facultyId,String period)
+	public List<FactAcquisition> getLatestEntry (long libraryId,long facultyId,String period)
 	{
 		Session session = null;
 	    try {
@@ -30,6 +32,7 @@ public class FactAcquisitionFinderImpl extends BasePersistenceImpl<FactAcquisiti
 	        q.addEntity("FactAcquisition", FactAcquisitionImpl.class); 
 
 	        QueryPos qPos = QueryPos.getInstance(q);  
+	        qPos.add(libraryId);
 	        qPos.add(facultyId);
 	        qPos.add(period);
 	       
@@ -52,7 +55,7 @@ public class FactAcquisitionFinderImpl extends BasePersistenceImpl<FactAcquisiti
 	    return null;
 	}
 	
-	public List getHistory(long facultyId,String period)
+	public List getHistory(long libraryId,long facultyId,String period)
 	{
 		Session session = null;
 	    try {
@@ -68,6 +71,7 @@ public class FactAcquisitionFinderImpl extends BasePersistenceImpl<FactAcquisiti
 	        
 	        
 	        QueryPos qPos = QueryPos.getInstance(q);  
+	        qPos.add(libraryId);
 	        qPos.add(facultyId);
 	        qPos.add(period);
 	        
@@ -89,6 +93,94 @@ public class FactAcquisitionFinderImpl extends BasePersistenceImpl<FactAcquisiti
 	    return null;
 	}
 	
+	public int getItemCountByLibraryPeriod(long libraryId,String period)
+	{
+		Session session = null;
+	    try {
+	        session = openSession();
+
+	        String sql = CustomSQLUtil.get(
+	        		COUNT_BY_LIBRARY_PERIOD);
+
+	        SQLQuery q = session.createSQLQuery(sql);
+	        q.setCacheable(false);
+	        
+	        q.addScalar("totalCount",Type.INTEGER);
+	        
+	        QueryPos qPos = QueryPos.getInstance(q);  
+	        qPos.add(libraryId);
+	        qPos.add(period);
+	        
+	        Iterator itr = q.list().iterator();
+	        
+	        if (itr.hasNext()) {
+	            int count = (int)itr.next();
+	    
+	            return count;
+	          }
+	        
+	        
+
+	       
+	        
+	        return 0;
+	    
+	    } catch (Exception e) {
+	        try {
+	            throw new SystemException(e);
+	        } catch (SystemException se) {
+	            se.printStackTrace();
+	        }
+	    } finally {
+	        closeSession(session);
+	    }
+
+	    return 0;
+	}
+	public int getItemCountByPeriod(String period)
+	{
+		Session session = null;
+	    try {
+	        session = openSession();
+
+	        String sql = CustomSQLUtil.get(
+	        		COUNT_BY_LIBRARY_PERIOD);
+
+	        SQLQuery q = session.createSQLQuery(sql);
+	        q.setCacheable(false);
+	        
+	        q.addScalar("totalCount",Type.INTEGER);
+	        
+	        QueryPos qPos = QueryPos.getInstance(q);  
+	        
+	        qPos.add(period);
+	        
+	        Iterator itr = q.list().iterator();
+	        
+	        if (itr.hasNext()) {
+	            int count = (int)itr.next();
+	    
+	            return count;
+	          }
+	        
+	        
+
+	       
+	        
+	        return 0;
+	    
+	    } catch (Exception e) {
+	        try {
+	            throw new SystemException(e);
+	        } catch (SystemException se) {
+	            se.printStackTrace();
+	        }
+	    } finally {
+	        closeSession(session);
+	    }
+
+	    return 0;
+	}
 	
 	public static final String FIND_LATEST_BY_PERIOD =
 			FactAcquisitionFinder.class.getName() +
@@ -98,6 +190,14 @@ public class FactAcquisitionFinderImpl extends BasePersistenceImpl<FactAcquisiti
 			FactAcquisitionFinder.class.getName() +
 		        ".getHistoryByL_P";
 	
+
 	
+	public static final String COUNT_BY_LIBRARY_PERIOD =
+			FactAcquisitionFinder.class.getName() +
+		        ".CountByLibrary_P";
+	
+	public static final String COUNT_BY_PERIOD =
+			FactAcquisitionFinder.class.getName() +
+		        ".CountByPeriod";
 
 }

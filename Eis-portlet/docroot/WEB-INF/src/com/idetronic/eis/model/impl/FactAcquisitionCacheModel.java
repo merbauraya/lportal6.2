@@ -38,20 +38,36 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{factAcquisitionId=");
 		sb.append(factAcquisitionId);
+		sb.append(", libraryId=");
+		sb.append(libraryId);
 		sb.append(", facultyId=");
 		sb.append(facultyId);
 		sb.append(", period=");
 		sb.append(period);
 		sb.append(", itemId=");
 		sb.append(itemId);
+		sb.append(", approvedTitleTotal=");
+		sb.append(approvedTitleTotal);
+		sb.append(", approvedVolumeTotal=");
+		sb.append(approvedVolumeTotal);
+		sb.append(", approvedAmountTotal=");
+		sb.append(approvedAmountTotal);
+		sb.append(", orderTitleTotal=");
+		sb.append(orderTitleTotal);
+		sb.append(", orderVolumeTotal=");
+		sb.append(orderVolumeTotal);
+		sb.append(", orderAmountTotal=");
+		sb.append(orderAmountTotal);
 		sb.append(", volumeTotal=");
 		sb.append(volumeTotal);
 		sb.append(", titleTotal=");
 		sb.append(titleTotal);
+		sb.append(", amountTotal=");
+		sb.append(amountTotal);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", groupId=");
@@ -72,6 +88,7 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 		FactAcquisitionImpl factAcquisitionImpl = new FactAcquisitionImpl();
 
 		factAcquisitionImpl.setFactAcquisitionId(factAcquisitionId);
+		factAcquisitionImpl.setLibraryId(libraryId);
 		factAcquisitionImpl.setFacultyId(facultyId);
 
 		if (period == null) {
@@ -82,8 +99,15 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 		}
 
 		factAcquisitionImpl.setItemId(itemId);
+		factAcquisitionImpl.setApprovedTitleTotal(approvedTitleTotal);
+		factAcquisitionImpl.setApprovedVolumeTotal(approvedVolumeTotal);
+		factAcquisitionImpl.setApprovedAmountTotal(approvedAmountTotal);
+		factAcquisitionImpl.setOrderTitleTotal(orderTitleTotal);
+		factAcquisitionImpl.setOrderVolumeTotal(orderVolumeTotal);
+		factAcquisitionImpl.setOrderAmountTotal(orderAmountTotal);
 		factAcquisitionImpl.setVolumeTotal(volumeTotal);
 		factAcquisitionImpl.setTitleTotal(titleTotal);
+		factAcquisitionImpl.setAmountTotal(amountTotal);
 		factAcquisitionImpl.setCompanyId(companyId);
 		factAcquisitionImpl.setGroupId(groupId);
 		factAcquisitionImpl.setUserId(userId);
@@ -110,11 +134,19 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		factAcquisitionId = objectInput.readLong();
+		libraryId = objectInput.readLong();
 		facultyId = objectInput.readLong();
 		period = objectInput.readUTF();
 		itemId = objectInput.readLong();
+		approvedTitleTotal = objectInput.readLong();
+		approvedVolumeTotal = objectInput.readLong();
+		approvedAmountTotal = objectInput.readDouble();
+		orderTitleTotal = objectInput.readLong();
+		orderVolumeTotal = objectInput.readLong();
+		orderAmountTotal = objectInput.readDouble();
 		volumeTotal = objectInput.readLong();
 		titleTotal = objectInput.readLong();
+		amountTotal = objectInput.readDouble();
 		companyId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -126,6 +158,7 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(factAcquisitionId);
+		objectOutput.writeLong(libraryId);
 		objectOutput.writeLong(facultyId);
 
 		if (period == null) {
@@ -136,8 +169,15 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 		}
 
 		objectOutput.writeLong(itemId);
+		objectOutput.writeLong(approvedTitleTotal);
+		objectOutput.writeLong(approvedVolumeTotal);
+		objectOutput.writeDouble(approvedAmountTotal);
+		objectOutput.writeLong(orderTitleTotal);
+		objectOutput.writeLong(orderVolumeTotal);
+		objectOutput.writeDouble(orderAmountTotal);
 		objectOutput.writeLong(volumeTotal);
 		objectOutput.writeLong(titleTotal);
+		objectOutput.writeDouble(amountTotal);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(userId);
@@ -153,11 +193,19 @@ public class FactAcquisitionCacheModel implements CacheModel<FactAcquisition>,
 	}
 
 	public long factAcquisitionId;
+	public long libraryId;
 	public long facultyId;
 	public String period;
 	public long itemId;
+	public long approvedTitleTotal;
+	public long approvedVolumeTotal;
+	public double approvedAmountTotal;
+	public long orderTitleTotal;
+	public long orderVolumeTotal;
+	public double orderAmountTotal;
 	public long volumeTotal;
 	public long titleTotal;
+	public double amountTotal;
 	public long companyId;
 	public long groupId;
 	public long userId;

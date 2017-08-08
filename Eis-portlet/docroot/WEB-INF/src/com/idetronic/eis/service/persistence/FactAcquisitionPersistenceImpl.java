@@ -839,11 +839,19 @@ public class FactAcquisitionPersistenceImpl extends BasePersistenceImpl<FactAcqu
 		factAcquisitionImpl.setPrimaryKey(factAcquisition.getPrimaryKey());
 
 		factAcquisitionImpl.setFactAcquisitionId(factAcquisition.getFactAcquisitionId());
+		factAcquisitionImpl.setLibraryId(factAcquisition.getLibraryId());
 		factAcquisitionImpl.setFacultyId(factAcquisition.getFacultyId());
 		factAcquisitionImpl.setPeriod(factAcquisition.getPeriod());
 		factAcquisitionImpl.setItemId(factAcquisition.getItemId());
+		factAcquisitionImpl.setApprovedTitleTotal(factAcquisition.getApprovedTitleTotal());
+		factAcquisitionImpl.setApprovedVolumeTotal(factAcquisition.getApprovedVolumeTotal());
+		factAcquisitionImpl.setApprovedAmountTotal(factAcquisition.getApprovedAmountTotal());
+		factAcquisitionImpl.setOrderTitleTotal(factAcquisition.getOrderTitleTotal());
+		factAcquisitionImpl.setOrderVolumeTotal(factAcquisition.getOrderVolumeTotal());
+		factAcquisitionImpl.setOrderAmountTotal(factAcquisition.getOrderAmountTotal());
 		factAcquisitionImpl.setVolumeTotal(factAcquisition.getVolumeTotal());
 		factAcquisitionImpl.setTitleTotal(factAcquisition.getTitleTotal());
+		factAcquisitionImpl.setAmountTotal(factAcquisition.getAmountTotal());
 		factAcquisitionImpl.setCompanyId(factAcquisition.getCompanyId());
 		factAcquisitionImpl.setGroupId(factAcquisition.getGroupId());
 		factAcquisitionImpl.setUserId(factAcquisition.getUserId());

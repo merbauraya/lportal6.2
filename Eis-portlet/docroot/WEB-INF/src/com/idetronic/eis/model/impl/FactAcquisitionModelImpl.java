@@ -67,18 +67,26 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 	public static final String TABLE_NAME = "eis_FactAcquisition";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "factAcquisitionId", Types.BIGINT },
+			{ "libraryId", Types.BIGINT },
 			{ "facultyId", Types.BIGINT },
 			{ "period", Types.VARCHAR },
 			{ "itemId", Types.BIGINT },
+			{ "approvedTitleTotal", Types.BIGINT },
+			{ "approvedVolumeTotal", Types.BIGINT },
+			{ "approvedAmountTotal", Types.DOUBLE },
+			{ "orderTitleTotal", Types.BIGINT },
+			{ "orderVolumeTotal", Types.BIGINT },
+			{ "orderAmountTotal", Types.DOUBLE },
 			{ "volumeTotal", Types.BIGINT },
 			{ "titleTotal", Types.BIGINT },
+			{ "amountTotal", Types.DOUBLE },
 			{ "companyId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eis_FactAcquisition (factAcquisitionId LONG not null primary key,facultyId LONG,period VARCHAR(75) null,itemId LONG,volumeTotal LONG,titleTotal LONG,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table eis_FactAcquisition (factAcquisitionId LONG not null primary key,libraryId LONG,facultyId LONG,period VARCHAR(75) null,itemId LONG,approvedTitleTotal LONG,approvedVolumeTotal LONG,approvedAmountTotal DOUBLE,orderTitleTotal LONG,orderVolumeTotal LONG,orderAmountTotal DOUBLE,volumeTotal LONG,titleTotal LONG,amountTotal DOUBLE,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table eis_FactAcquisition";
 	public static final String ORDER_BY_JPQL = " ORDER BY factAcquisition.factAcquisitionId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY eis_FactAcquisition.factAcquisitionId ASC";
@@ -111,11 +119,19 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 		FactAcquisition model = new FactAcquisitionImpl();
 
 		model.setFactAcquisitionId(soapModel.getFactAcquisitionId());
+		model.setLibraryId(soapModel.getLibraryId());
 		model.setFacultyId(soapModel.getFacultyId());
 		model.setPeriod(soapModel.getPeriod());
 		model.setItemId(soapModel.getItemId());
+		model.setApprovedTitleTotal(soapModel.getApprovedTitleTotal());
+		model.setApprovedVolumeTotal(soapModel.getApprovedVolumeTotal());
+		model.setApprovedAmountTotal(soapModel.getApprovedAmountTotal());
+		model.setOrderTitleTotal(soapModel.getOrderTitleTotal());
+		model.setOrderVolumeTotal(soapModel.getOrderVolumeTotal());
+		model.setOrderAmountTotal(soapModel.getOrderAmountTotal());
 		model.setVolumeTotal(soapModel.getVolumeTotal());
 		model.setTitleTotal(soapModel.getTitleTotal());
+		model.setAmountTotal(soapModel.getAmountTotal());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setUserId(soapModel.getUserId());
@@ -187,11 +203,19 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("factAcquisitionId", getFactAcquisitionId());
+		attributes.put("libraryId", getLibraryId());
 		attributes.put("facultyId", getFacultyId());
 		attributes.put("period", getPeriod());
 		attributes.put("itemId", getItemId());
+		attributes.put("approvedTitleTotal", getApprovedTitleTotal());
+		attributes.put("approvedVolumeTotal", getApprovedVolumeTotal());
+		attributes.put("approvedAmountTotal", getApprovedAmountTotal());
+		attributes.put("orderTitleTotal", getOrderTitleTotal());
+		attributes.put("orderVolumeTotal", getOrderVolumeTotal());
+		attributes.put("orderAmountTotal", getOrderAmountTotal());
 		attributes.put("volumeTotal", getVolumeTotal());
 		attributes.put("titleTotal", getTitleTotal());
+		attributes.put("amountTotal", getAmountTotal());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
@@ -207,6 +231,12 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 		if (factAcquisitionId != null) {
 			setFactAcquisitionId(factAcquisitionId);
+		}
+
+		Long libraryId = (Long)attributes.get("libraryId");
+
+		if (libraryId != null) {
+			setLibraryId(libraryId);
 		}
 
 		Long facultyId = (Long)attributes.get("facultyId");
@@ -227,6 +257,43 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 			setItemId(itemId);
 		}
 
+		Long approvedTitleTotal = (Long)attributes.get("approvedTitleTotal");
+
+		if (approvedTitleTotal != null) {
+			setApprovedTitleTotal(approvedTitleTotal);
+		}
+
+		Long approvedVolumeTotal = (Long)attributes.get("approvedVolumeTotal");
+
+		if (approvedVolumeTotal != null) {
+			setApprovedVolumeTotal(approvedVolumeTotal);
+		}
+
+		Double approvedAmountTotal = (Double)attributes.get(
+				"approvedAmountTotal");
+
+		if (approvedAmountTotal != null) {
+			setApprovedAmountTotal(approvedAmountTotal);
+		}
+
+		Long orderTitleTotal = (Long)attributes.get("orderTitleTotal");
+
+		if (orderTitleTotal != null) {
+			setOrderTitleTotal(orderTitleTotal);
+		}
+
+		Long orderVolumeTotal = (Long)attributes.get("orderVolumeTotal");
+
+		if (orderVolumeTotal != null) {
+			setOrderVolumeTotal(orderVolumeTotal);
+		}
+
+		Double orderAmountTotal = (Double)attributes.get("orderAmountTotal");
+
+		if (orderAmountTotal != null) {
+			setOrderAmountTotal(orderAmountTotal);
+		}
+
 		Long volumeTotal = (Long)attributes.get("volumeTotal");
 
 		if (volumeTotal != null) {
@@ -237,6 +304,12 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 		if (titleTotal != null) {
 			setTitleTotal(titleTotal);
+		}
+
+		Double amountTotal = (Double)attributes.get("amountTotal");
+
+		if (amountTotal != null) {
+			setAmountTotal(amountTotal);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -279,6 +352,17 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 	@Override
 	public void setFactAcquisitionId(long factAcquisitionId) {
 		_factAcquisitionId = factAcquisitionId;
+	}
+
+	@JSON
+	@Override
+	public long getLibraryId() {
+		return _libraryId;
+	}
+
+	@Override
+	public void setLibraryId(long libraryId) {
+		_libraryId = libraryId;
 	}
 
 	@JSON
@@ -333,6 +417,72 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 	@JSON
 	@Override
+	public long getApprovedTitleTotal() {
+		return _approvedTitleTotal;
+	}
+
+	@Override
+	public void setApprovedTitleTotal(long approvedTitleTotal) {
+		_approvedTitleTotal = approvedTitleTotal;
+	}
+
+	@JSON
+	@Override
+	public long getApprovedVolumeTotal() {
+		return _approvedVolumeTotal;
+	}
+
+	@Override
+	public void setApprovedVolumeTotal(long approvedVolumeTotal) {
+		_approvedVolumeTotal = approvedVolumeTotal;
+	}
+
+	@JSON
+	@Override
+	public double getApprovedAmountTotal() {
+		return _approvedAmountTotal;
+	}
+
+	@Override
+	public void setApprovedAmountTotal(double approvedAmountTotal) {
+		_approvedAmountTotal = approvedAmountTotal;
+	}
+
+	@JSON
+	@Override
+	public long getOrderTitleTotal() {
+		return _orderTitleTotal;
+	}
+
+	@Override
+	public void setOrderTitleTotal(long orderTitleTotal) {
+		_orderTitleTotal = orderTitleTotal;
+	}
+
+	@JSON
+	@Override
+	public long getOrderVolumeTotal() {
+		return _orderVolumeTotal;
+	}
+
+	@Override
+	public void setOrderVolumeTotal(long orderVolumeTotal) {
+		_orderVolumeTotal = orderVolumeTotal;
+	}
+
+	@JSON
+	@Override
+	public double getOrderAmountTotal() {
+		return _orderAmountTotal;
+	}
+
+	@Override
+	public void setOrderAmountTotal(double orderAmountTotal) {
+		_orderAmountTotal = orderAmountTotal;
+	}
+
+	@JSON
+	@Override
 	public long getVolumeTotal() {
 		return _volumeTotal;
 	}
@@ -351,6 +501,17 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 	@Override
 	public void setTitleTotal(long titleTotal) {
 		_titleTotal = titleTotal;
+	}
+
+	@JSON
+	@Override
+	public double getAmountTotal() {
+		return _amountTotal;
+	}
+
+	@Override
+	public void setAmountTotal(double amountTotal) {
+		_amountTotal = amountTotal;
 	}
 
 	@JSON
@@ -455,11 +616,19 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 		FactAcquisitionImpl factAcquisitionImpl = new FactAcquisitionImpl();
 
 		factAcquisitionImpl.setFactAcquisitionId(getFactAcquisitionId());
+		factAcquisitionImpl.setLibraryId(getLibraryId());
 		factAcquisitionImpl.setFacultyId(getFacultyId());
 		factAcquisitionImpl.setPeriod(getPeriod());
 		factAcquisitionImpl.setItemId(getItemId());
+		factAcquisitionImpl.setApprovedTitleTotal(getApprovedTitleTotal());
+		factAcquisitionImpl.setApprovedVolumeTotal(getApprovedVolumeTotal());
+		factAcquisitionImpl.setApprovedAmountTotal(getApprovedAmountTotal());
+		factAcquisitionImpl.setOrderTitleTotal(getOrderTitleTotal());
+		factAcquisitionImpl.setOrderVolumeTotal(getOrderVolumeTotal());
+		factAcquisitionImpl.setOrderAmountTotal(getOrderAmountTotal());
 		factAcquisitionImpl.setVolumeTotal(getVolumeTotal());
 		factAcquisitionImpl.setTitleTotal(getTitleTotal());
+		factAcquisitionImpl.setAmountTotal(getAmountTotal());
 		factAcquisitionImpl.setCompanyId(getCompanyId());
 		factAcquisitionImpl.setGroupId(getGroupId());
 		factAcquisitionImpl.setUserId(getUserId());
@@ -530,6 +699,8 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 		factAcquisitionCacheModel.factAcquisitionId = getFactAcquisitionId();
 
+		factAcquisitionCacheModel.libraryId = getLibraryId();
+
 		factAcquisitionCacheModel.facultyId = getFacultyId();
 
 		factAcquisitionCacheModel.period = getPeriod();
@@ -542,9 +713,23 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 		factAcquisitionCacheModel.itemId = getItemId();
 
+		factAcquisitionCacheModel.approvedTitleTotal = getApprovedTitleTotal();
+
+		factAcquisitionCacheModel.approvedVolumeTotal = getApprovedVolumeTotal();
+
+		factAcquisitionCacheModel.approvedAmountTotal = getApprovedAmountTotal();
+
+		factAcquisitionCacheModel.orderTitleTotal = getOrderTitleTotal();
+
+		factAcquisitionCacheModel.orderVolumeTotal = getOrderVolumeTotal();
+
+		factAcquisitionCacheModel.orderAmountTotal = getOrderAmountTotal();
+
 		factAcquisitionCacheModel.volumeTotal = getVolumeTotal();
 
 		factAcquisitionCacheModel.titleTotal = getTitleTotal();
+
+		factAcquisitionCacheModel.amountTotal = getAmountTotal();
 
 		factAcquisitionCacheModel.companyId = getCompanyId();
 
@@ -574,20 +759,36 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{factAcquisitionId=");
 		sb.append(getFactAcquisitionId());
+		sb.append(", libraryId=");
+		sb.append(getLibraryId());
 		sb.append(", facultyId=");
 		sb.append(getFacultyId());
 		sb.append(", period=");
 		sb.append(getPeriod());
 		sb.append(", itemId=");
 		sb.append(getItemId());
+		sb.append(", approvedTitleTotal=");
+		sb.append(getApprovedTitleTotal());
+		sb.append(", approvedVolumeTotal=");
+		sb.append(getApprovedVolumeTotal());
+		sb.append(", approvedAmountTotal=");
+		sb.append(getApprovedAmountTotal());
+		sb.append(", orderTitleTotal=");
+		sb.append(getOrderTitleTotal());
+		sb.append(", orderVolumeTotal=");
+		sb.append(getOrderVolumeTotal());
+		sb.append(", orderAmountTotal=");
+		sb.append(getOrderAmountTotal());
 		sb.append(", volumeTotal=");
 		sb.append(getVolumeTotal());
 		sb.append(", titleTotal=");
 		sb.append(getTitleTotal());
+		sb.append(", amountTotal=");
+		sb.append(getAmountTotal());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
@@ -605,7 +806,7 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.FactAcquisition");
@@ -614,6 +815,10 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 		sb.append(
 			"<column><column-name>factAcquisitionId</column-name><column-value><![CDATA[");
 		sb.append(getFactAcquisitionId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>libraryId</column-name><column-value><![CDATA[");
+		sb.append(getLibraryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>facultyId</column-name><column-value><![CDATA[");
@@ -628,12 +833,40 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 		sb.append(getItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>approvedTitleTotal</column-name><column-value><![CDATA[");
+		sb.append(getApprovedTitleTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedVolumeTotal</column-name><column-value><![CDATA[");
+		sb.append(getApprovedVolumeTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedAmountTotal</column-name><column-value><![CDATA[");
+		sb.append(getApprovedAmountTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderTitleTotal</column-name><column-value><![CDATA[");
+		sb.append(getOrderTitleTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderVolumeTotal</column-name><column-value><![CDATA[");
+		sb.append(getOrderVolumeTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderAmountTotal</column-name><column-value><![CDATA[");
+		sb.append(getOrderAmountTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>volumeTotal</column-name><column-value><![CDATA[");
 		sb.append(getVolumeTotal());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>titleTotal</column-name><column-value><![CDATA[");
 		sb.append(getTitleTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>amountTotal</column-name><column-value><![CDATA[");
+		sb.append(getAmountTotal());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -666,13 +899,21 @@ public class FactAcquisitionModelImpl extends BaseModelImpl<FactAcquisition>
 			FactAcquisition.class
 		};
 	private long _factAcquisitionId;
+	private long _libraryId;
 	private long _facultyId;
 	private long _originalFacultyId;
 	private boolean _setOriginalFacultyId;
 	private String _period;
 	private long _itemId;
+	private long _approvedTitleTotal;
+	private long _approvedVolumeTotal;
+	private double _approvedAmountTotal;
+	private long _orderTitleTotal;
+	private long _orderVolumeTotal;
+	private double _orderAmountTotal;
 	private long _volumeTotal;
 	private long _titleTotal;
+	private double _amountTotal;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;

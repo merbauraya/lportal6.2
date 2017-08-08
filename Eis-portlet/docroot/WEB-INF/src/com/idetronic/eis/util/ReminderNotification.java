@@ -177,6 +177,7 @@ public class ReminderNotification {
 		
 	}
 	
+	/*
 	private static Map getUserMissingData(String period) throws SystemException, PortalException
 	{
 		List<UserLibrary> userLibraries = UserLibraryLocalServiceUtil.getUserLibraries(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -204,7 +205,7 @@ public class ReminderNotification {
 		
 		return userMap;
 	}
-	
+	*/
 	private static String replaceSubjectTemplate(String subject,User user,String period) throws SystemException, PortalException
 	{
 		Company company = CompanyLocalServiceUtil.getCompanyByWebId(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));

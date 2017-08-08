@@ -83,7 +83,7 @@
 		    libraryId = ? AND period = ?
 	
 	</sql>
-	<sql id="com.idetronic.eis.service.persistence.LibraryFinder.CountConsultationByL_P">
+	<sql id="com.idetronic.eis.service.persistence.FactConsultationFinder.CountByLibrary_P">
 		SELECT 
 	    COUNT(*) AS totalCount
 		FROM
@@ -92,6 +92,50 @@
 		    libraryId = ? AND period = ?
 	
 	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactAcquisitionFinder.CountByFaculty_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactAcquisition
+		WHERE
+		    facultyId = ? AND period = ?
 	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactAcquisitionFinder.CountByLibrary_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactAcquisition
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactIncomeFinder.CountByLibrary_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactIncome
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactDatabaseUsageFinder.CountByLibrary_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactDatabaseUsage
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
+	<sql id="com.idetronic.eis.service.persistence.FactDigitalCollectionFinder.CountByLibrary_P">
+		SELECT 
+	    COUNT(*) AS totalCount
+		FROM
+		    eis_FactDigitalCollection
+		WHERE
+		    libraryId = ? AND period = ?
+	
+	</sql>
 
 </custom-sql>

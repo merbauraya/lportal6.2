@@ -76,11 +76,19 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("factAcquisitionId", getFactAcquisitionId());
+		attributes.put("libraryId", getLibraryId());
 		attributes.put("facultyId", getFacultyId());
 		attributes.put("period", getPeriod());
 		attributes.put("itemId", getItemId());
+		attributes.put("approvedTitleTotal", getApprovedTitleTotal());
+		attributes.put("approvedVolumeTotal", getApprovedVolumeTotal());
+		attributes.put("approvedAmountTotal", getApprovedAmountTotal());
+		attributes.put("orderTitleTotal", getOrderTitleTotal());
+		attributes.put("orderVolumeTotal", getOrderVolumeTotal());
+		attributes.put("orderAmountTotal", getOrderAmountTotal());
 		attributes.put("volumeTotal", getVolumeTotal());
 		attributes.put("titleTotal", getTitleTotal());
+		attributes.put("amountTotal", getAmountTotal());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
@@ -96,6 +104,12 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 
 		if (factAcquisitionId != null) {
 			setFactAcquisitionId(factAcquisitionId);
+		}
+
+		Long libraryId = (Long)attributes.get("libraryId");
+
+		if (libraryId != null) {
+			setLibraryId(libraryId);
 		}
 
 		Long facultyId = (Long)attributes.get("facultyId");
@@ -116,6 +130,43 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 			setItemId(itemId);
 		}
 
+		Long approvedTitleTotal = (Long)attributes.get("approvedTitleTotal");
+
+		if (approvedTitleTotal != null) {
+			setApprovedTitleTotal(approvedTitleTotal);
+		}
+
+		Long approvedVolumeTotal = (Long)attributes.get("approvedVolumeTotal");
+
+		if (approvedVolumeTotal != null) {
+			setApprovedVolumeTotal(approvedVolumeTotal);
+		}
+
+		Double approvedAmountTotal = (Double)attributes.get(
+				"approvedAmountTotal");
+
+		if (approvedAmountTotal != null) {
+			setApprovedAmountTotal(approvedAmountTotal);
+		}
+
+		Long orderTitleTotal = (Long)attributes.get("orderTitleTotal");
+
+		if (orderTitleTotal != null) {
+			setOrderTitleTotal(orderTitleTotal);
+		}
+
+		Long orderVolumeTotal = (Long)attributes.get("orderVolumeTotal");
+
+		if (orderVolumeTotal != null) {
+			setOrderVolumeTotal(orderVolumeTotal);
+		}
+
+		Double orderAmountTotal = (Double)attributes.get("orderAmountTotal");
+
+		if (orderAmountTotal != null) {
+			setOrderAmountTotal(orderAmountTotal);
+		}
+
 		Long volumeTotal = (Long)attributes.get("volumeTotal");
 
 		if (volumeTotal != null) {
@@ -126,6 +177,12 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 
 		if (titleTotal != null) {
 			setTitleTotal(titleTotal);
+		}
+
+		Double amountTotal = (Double)attributes.get("amountTotal");
+
+		if (amountTotal != null) {
+			setAmountTotal(amountTotal);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -176,6 +233,29 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 						long.class);
 
 				method.invoke(_factAcquisitionRemoteModel, factAcquisitionId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getLibraryId() {
+		return _libraryId;
+	}
+
+	@Override
+	public void setLibraryId(long libraryId) {
+		_libraryId = libraryId;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLibraryId", long.class);
+
+				method.invoke(_factAcquisitionRemoteModel, libraryId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -253,6 +333,149 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 	}
 
 	@Override
+	public long getApprovedTitleTotal() {
+		return _approvedTitleTotal;
+	}
+
+	@Override
+	public void setApprovedTitleTotal(long approvedTitleTotal) {
+		_approvedTitleTotal = approvedTitleTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setApprovedTitleTotal",
+						long.class);
+
+				method.invoke(_factAcquisitionRemoteModel, approvedTitleTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getApprovedVolumeTotal() {
+		return _approvedVolumeTotal;
+	}
+
+	@Override
+	public void setApprovedVolumeTotal(long approvedVolumeTotal) {
+		_approvedVolumeTotal = approvedVolumeTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setApprovedVolumeTotal",
+						long.class);
+
+				method.invoke(_factAcquisitionRemoteModel, approvedVolumeTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public double getApprovedAmountTotal() {
+		return _approvedAmountTotal;
+	}
+
+	@Override
+	public void setApprovedAmountTotal(double approvedAmountTotal) {
+		_approvedAmountTotal = approvedAmountTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setApprovedAmountTotal",
+						double.class);
+
+				method.invoke(_factAcquisitionRemoteModel, approvedAmountTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getOrderTitleTotal() {
+		return _orderTitleTotal;
+	}
+
+	@Override
+	public void setOrderTitleTotal(long orderTitleTotal) {
+		_orderTitleTotal = orderTitleTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setOrderTitleTotal", long.class);
+
+				method.invoke(_factAcquisitionRemoteModel, orderTitleTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getOrderVolumeTotal() {
+		return _orderVolumeTotal;
+	}
+
+	@Override
+	public void setOrderVolumeTotal(long orderVolumeTotal) {
+		_orderVolumeTotal = orderVolumeTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setOrderVolumeTotal",
+						long.class);
+
+				method.invoke(_factAcquisitionRemoteModel, orderVolumeTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public double getOrderAmountTotal() {
+		return _orderAmountTotal;
+	}
+
+	@Override
+	public void setOrderAmountTotal(double orderAmountTotal) {
+		_orderAmountTotal = orderAmountTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setOrderAmountTotal",
+						double.class);
+
+				method.invoke(_factAcquisitionRemoteModel, orderAmountTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getVolumeTotal() {
 		return _volumeTotal;
 	}
@@ -291,6 +514,29 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 				Method method = clazz.getMethod("setTitleTotal", long.class);
 
 				method.invoke(_factAcquisitionRemoteModel, titleTotal);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public double getAmountTotal() {
+		return _amountTotal;
+	}
+
+	@Override
+	public void setAmountTotal(double amountTotal) {
+		_amountTotal = amountTotal;
+
+		if (_factAcquisitionRemoteModel != null) {
+			try {
+				Class<?> clazz = _factAcquisitionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAmountTotal", double.class);
+
+				method.invoke(_factAcquisitionRemoteModel, amountTotal);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -495,11 +741,19 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 		FactAcquisitionClp clone = new FactAcquisitionClp();
 
 		clone.setFactAcquisitionId(getFactAcquisitionId());
+		clone.setLibraryId(getLibraryId());
 		clone.setFacultyId(getFacultyId());
 		clone.setPeriod(getPeriod());
 		clone.setItemId(getItemId());
+		clone.setApprovedTitleTotal(getApprovedTitleTotal());
+		clone.setApprovedVolumeTotal(getApprovedVolumeTotal());
+		clone.setApprovedAmountTotal(getApprovedAmountTotal());
+		clone.setOrderTitleTotal(getOrderTitleTotal());
+		clone.setOrderVolumeTotal(getOrderVolumeTotal());
+		clone.setOrderAmountTotal(getOrderAmountTotal());
 		clone.setVolumeTotal(getVolumeTotal());
 		clone.setTitleTotal(getTitleTotal());
+		clone.setAmountTotal(getAmountTotal());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
@@ -557,20 +811,36 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{factAcquisitionId=");
 		sb.append(getFactAcquisitionId());
+		sb.append(", libraryId=");
+		sb.append(getLibraryId());
 		sb.append(", facultyId=");
 		sb.append(getFacultyId());
 		sb.append(", period=");
 		sb.append(getPeriod());
 		sb.append(", itemId=");
 		sb.append(getItemId());
+		sb.append(", approvedTitleTotal=");
+		sb.append(getApprovedTitleTotal());
+		sb.append(", approvedVolumeTotal=");
+		sb.append(getApprovedVolumeTotal());
+		sb.append(", approvedAmountTotal=");
+		sb.append(getApprovedAmountTotal());
+		sb.append(", orderTitleTotal=");
+		sb.append(getOrderTitleTotal());
+		sb.append(", orderVolumeTotal=");
+		sb.append(getOrderVolumeTotal());
+		sb.append(", orderAmountTotal=");
+		sb.append(getOrderAmountTotal());
 		sb.append(", volumeTotal=");
 		sb.append(getVolumeTotal());
 		sb.append(", titleTotal=");
 		sb.append(getTitleTotal());
+		sb.append(", amountTotal=");
+		sb.append(getAmountTotal());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
@@ -588,7 +858,7 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.FactAcquisition");
@@ -597,6 +867,10 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 		sb.append(
 			"<column><column-name>factAcquisitionId</column-name><column-value><![CDATA[");
 		sb.append(getFactAcquisitionId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>libraryId</column-name><column-value><![CDATA[");
+		sb.append(getLibraryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>facultyId</column-name><column-value><![CDATA[");
@@ -611,12 +885,40 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 		sb.append(getItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>approvedTitleTotal</column-name><column-value><![CDATA[");
+		sb.append(getApprovedTitleTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedVolumeTotal</column-name><column-value><![CDATA[");
+		sb.append(getApprovedVolumeTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedAmountTotal</column-name><column-value><![CDATA[");
+		sb.append(getApprovedAmountTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderTitleTotal</column-name><column-value><![CDATA[");
+		sb.append(getOrderTitleTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderVolumeTotal</column-name><column-value><![CDATA[");
+		sb.append(getOrderVolumeTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderAmountTotal</column-name><column-value><![CDATA[");
+		sb.append(getOrderAmountTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>volumeTotal</column-name><column-value><![CDATA[");
 		sb.append(getVolumeTotal());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>titleTotal</column-name><column-value><![CDATA[");
 		sb.append(getTitleTotal());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>amountTotal</column-name><column-value><![CDATA[");
+		sb.append(getAmountTotal());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -645,11 +947,19 @@ public class FactAcquisitionClp extends BaseModelImpl<FactAcquisition>
 	}
 
 	private long _factAcquisitionId;
+	private long _libraryId;
 	private long _facultyId;
 	private String _period;
 	private long _itemId;
+	private long _approvedTitleTotal;
+	private long _approvedVolumeTotal;
+	private double _approvedAmountTotal;
+	private long _orderTitleTotal;
+	private long _orderVolumeTotal;
+	private double _orderAmountTotal;
 	private long _volumeTotal;
 	private long _titleTotal;
+	private double _amountTotal;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;

@@ -106,30 +106,30 @@ public class ProjectActivityLocalServiceClpInvoker {
 				"com.idetronic.eis.model.ProjectActivity"
 			};
 
-		_methodName280 = "getBeanIdentifier";
+		_methodName366 = "getBeanIdentifier";
 
-		_methodParameterTypes280 = new String[] {  };
+		_methodParameterTypes366 = new String[] {  };
 
-		_methodName281 = "setBeanIdentifier";
+		_methodName367 = "setBeanIdentifier";
 
-		_methodParameterTypes281 = new String[] { "java.lang.String" };
+		_methodParameterTypes367 = new String[] { "java.lang.String" };
 
-		_methodName286 = "add";
+		_methodName372 = "add";
 
-		_methodParameterTypes286 = new String[] {
+		_methodParameterTypes372 = new String[] {
 				"long", "java.lang.String", "java.util.Date", "java.util.Date",
 				"int", "int", "int", "java.lang.String", "java.lang.String",
 				"java.util.Date", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName287 = "getByStrategy";
+		_methodName373 = "getByStrategy";
 
-		_methodParameterTypes287 = new String[] { "long" };
+		_methodParameterTypes373 = new String[] { "long" };
 
-		_methodName288 = "deleteByStrategy";
+		_methodName374 = "deleteByStrategy";
 
-		_methodParameterTypes288 = new String[] { "long" };
+		_methodParameterTypes374 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -221,20 +221,20 @@ public class ProjectActivityLocalServiceClpInvoker {
 			return ProjectActivityLocalServiceUtil.updateProjectActivity((com.idetronic.eis.model.ProjectActivity)arguments[0]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName366.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes366, parameterTypes)) {
 			return ProjectActivityLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName367.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes367, parameterTypes)) {
 			ProjectActivityLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName286.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
+		if (_methodName372.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes372, parameterTypes)) {
 			return ProjectActivityLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.util.Date)arguments[2],
 				(java.util.Date)arguments[3],
@@ -246,13 +246,13 @@ public class ProjectActivityLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[11]);
 		}
 
-		if (_methodName287.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
+		if (_methodName373.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes373, parameterTypes)) {
 			return ProjectActivityLocalServiceUtil.getByStrategy(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName288.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
+		if (_methodName374.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes374, parameterTypes)) {
 			ProjectActivityLocalServiceUtil.deleteByStrategy(((Long)arguments[0]).longValue());
 
 			return null;
@@ -293,14 +293,14 @@ public class ProjectActivityLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName280;
-	private String[] _methodParameterTypes280;
-	private String _methodName281;
-	private String[] _methodParameterTypes281;
-	private String _methodName286;
-	private String[] _methodParameterTypes286;
-	private String _methodName287;
-	private String[] _methodParameterTypes287;
-	private String _methodName288;
-	private String[] _methodParameterTypes288;
+	private String _methodName366;
+	private String[] _methodParameterTypes366;
+	private String _methodName367;
+	private String[] _methodParameterTypes367;
+	private String _methodName372;
+	private String[] _methodParameterTypes372;
+	private String _methodName373;
+	private String[] _methodParameterTypes373;
+	private String _methodName374;
+	private String[] _methodParameterTypes374;
 }

@@ -118,10 +118,6 @@ public class LibraryLocalServiceImpl extends LibraryLocalServiceBaseImpl {
 	{
 		return LibraryFinderUtil.getExpenseCountByLibraryPeriod(libraryId,period) == 0;
 	}
-	public boolean isMissingConsultationData(long libraryId,String period)
-	{
-		return LibraryFinderUtil.getConsultationountByLibraryPeriod(libraryId,period) == 0;
-	}
 	
 	
 }

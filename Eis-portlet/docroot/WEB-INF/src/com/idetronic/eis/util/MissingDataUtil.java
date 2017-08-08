@@ -10,18 +10,27 @@ import com.idetronic.eis.model.MasterFile;
 import com.idetronic.eis.model.Report;
 import com.idetronic.eis.model.UserLibrary;
 import com.idetronic.eis.model.UserReport;
+import com.idetronic.eis.service.FactAcquisitionLocalServiceUtil;
+import com.idetronic.eis.service.FactConsultationLocalServiceUtil;
+import com.idetronic.eis.service.FactDatabaseUsageLocalServiceUtil;
+import com.idetronic.eis.service.FactDigitalCollectionLocalServiceUtil;
+import com.idetronic.eis.service.FactIncomeLocalServiceUtil;
 import com.idetronic.eis.service.LibraryLocalServiceUtil;
 import com.idetronic.eis.service.MasterFileLocalServiceUtil;
 import com.idetronic.eis.service.ReportLocalServiceUtil;
 import com.idetronic.eis.service.UserLibraryLocalServiceUtil;
 import com.idetronic.eis.service.UserReportLocalServiceUtil;
+import com.idetronic.eis.service.persistence.FactConsultationFinderUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.sun.istack.internal.logging.Logger;
 
 public class MissingDataUtil {
 	
@@ -58,6 +67,7 @@ public class MissingDataUtil {
 		}
 		
 		
+		
 		return userMap;
 	}
 	
@@ -83,13 +93,7 @@ public class MissingDataUtil {
 				
 		ArrayList missingData = getMissingUserData(userId, period, locale,libraryId,false,false);
 		return missingData;
-		/*
-		if (missingData.size()>0)
-		{
-			//userMap.put(userId, missingData);
-			return missinData;
-		}
-	*/
+		
 		
 		
 	}
@@ -136,10 +140,13 @@ public class MissingDataUtil {
 				List<Report> reports = ReportLocalServiceUtil.getReports(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				for (Report report : reports)
 				{
-					Map missingData = checkReportForMissingData(report,library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(missingData))
+					if (!report.getHqDataEntry()) //only check for non hq report
 					{
-						list.add(missingData);
+						Map missingData = checkReportForMissingData(report,library.getMasterFileId(),period,locale,library.getMasterFileName());
+						if (Validator.isNotNull(missingData))
+						{
+							list.add(missingData);
+						}
 					}
 				}
 			}else
@@ -151,12 +158,13 @@ public class MissingDataUtil {
 				{
 					Report report = ReportLocalServiceUtil.fetchReport(userReport.getReportId());
 					
-					//LOGGER.info(report.getReportKey() +" :library :" + library.getMasterFileId() + " : " + library.getMasterFileName() + ":"+ report.getReportTitle());
-					
-					Map missingData = checkReportForMissingData(report,library.getMasterFileId(),period,locale,library.getMasterFileName());
-					if (Validator.isNotNull(missingData))
+					if (!report.getHqDataEntry()) //only check for non hq report
 					{
-						list.add(missingData);
+						Map missingData = checkReportForMissingData(report,library.getMasterFileId(),period,locale,library.getMasterFileName());
+						if (Validator.isNotNull(missingData))
+						{
+							list.add(missingData);
+						}
 					}
 					
 					
@@ -165,11 +173,62 @@ public class MissingDataUtil {
 			} //end normal user
 			
 		}
-
+		
+		//check for user with HQ report (no library assignment,libraryId = 0)
+		List<UserReport> userReports = UserReportLocalServiceUtil.findByUserLibrary(userId, 0);
+		for (UserReport userReport : userReports)
+		{
+			Report report = ReportLocalServiceUtil.getReport(userReport.getReportId());
+			Map missingData = checkHqReportForMissingData(report,period,locale);
+			if (Validator.isNotNull(missingData))
+			{
+				list.add(missingData);
+			}
+		}
 		
 		return list;
+	} 
+	
+	/**
+	 * Check missing data for HQ report.
+	 * @param report - Report Type (HQ Type only)
+	 * @param period - Period to check
+	 * @param locale - Locale 
+	 * @return
+	 */
+	private static Map checkHqReportForMissingData(Report report,String period,Locale locale)
+	{
+		Map data = null;
+		String libraryName = LanguageUtil.get(locale, "hq-library");
+		long libraryId = 0;
+		
+		
+		if (report.getReportKey().equals(EisUtil.REPORT_DATABASE_USAGE))
+		{
+			data  = getMissingDatabaseUsage(libraryId,period,locale,libraryName);
+		}
+		if (report.getReportKey().equals(EisUtil.REPORT_DIGITAL_COLLECTION))
+		{
+			data  = getMissingDigitalCollection(libraryId,period,locale,libraryName);
+		}
+		if (report.getReportKey().equals(EisUtil.REPORT_IR))
+		{
+			
+			data = getMIssingIRItem(libraryId,period,locale,libraryName);
+			
+		}
+		return data;
 	}
 	
+	/**
+	 * Check non HQ Report for Missing Data
+	 * @param report
+	 * @param libraryId
+	 * @param period
+	 * @param locale
+	 * @param libraryName
+	 * @return
+	 */
 	private static Map checkReportForMissingData(Report report,long libraryId,String period,Locale locale,String libraryName)
 	{
 		//LOGGER.info(report.getReportKey() +" :library :" + library.getMasterFileId() + " : " + library.getMasterFileName() + ":"+ report.getReportTitle());
@@ -243,12 +302,109 @@ public class MissingDataUtil {
 			
 			
 		}
+		
+		if (report.getReportKey().equals(EisUtil.REPORT_ACQUISITION))
+		{
+			data  = getMissingAcquisition(libraryId,period,locale,libraryName);
+		}
+		
+		if (report.getReportKey().equals(EisUtil.REPORT_INCOME))
+		{
+			data  = getMissingIncome(libraryId,period,locale,libraryName);
+		}
+		
+		if (report.getReportKey().equals(EisUtil.REPORT_DATABASE_USAGE))
+		{
+			data  = getMissingDatabaseUsage(libraryId,period,locale,libraryName);
+		}
+		
+		if (report.getReportKey().equals(EisUtil.REPORT_DIGITAL_COLLECTION))
+		{
+			data  = getMissingDigitalCollection(libraryId,period,locale,libraryName);
+		}
+		
 		return data;
+	}
+	
+	public static Map getMissingDigitalCollection(long libraryId,String period,Locale locale,String libraryName)
+	{
+		if (FactDigitalCollectionLocalServiceUtil.isMissingData(libraryId, period))
+		{
+			
+			
+			return createMissingDataMap(EisUtil.DATA_DIGITAL_COLLECTION,libraryId, 
+					period,LanguageUtil.get(locale, "digital-collection"),
+					libraryName);
+			
+			
+		}else
+		{
+			return null;
+		}
+					
+		
+	}
+	
+	public static Map getMissingDatabaseUsage(long libraryId,String period,Locale locale,String libraryName)
+	{
+		if (FactDatabaseUsageLocalServiceUtil.isMissingData(libraryId, period))
+		{
+			
+			
+			return createMissingDataMap(EisUtil.DATA_DATABASE_USAGE,libraryId, 
+					period,LanguageUtil.get(locale, "database-usage"),
+					libraryName);
+			
+			
+		}else
+		{
+			return null;
+		}
+					
+		
+	}
+	
+	public static Map getMissingIncome(long libraryId,String period,Locale locale,String libraryName)
+	{
+		if (FactIncomeLocalServiceUtil.isMissingData(libraryId, period))
+		{
+			
+			
+			return createMissingDataMap(EisUtil.DATA_INCOME,libraryId, 
+					period,LanguageUtil.get(locale, "income"),
+					libraryName);
+			
+			
+		}else
+		{
+			return null;
+		}
+					
+		
+	}
+	
+	public static Map getMissingAcquisition(long libraryId,String period,Locale locale,String libraryName)
+	{
+		if (FactAcquisitionLocalServiceUtil.isMissingData(libraryId, period))
+		{
+			
+			
+			return createMissingDataMap(EisUtil.DATA_ACQUISITION,libraryId, 
+					period,LanguageUtil.get(locale, "acquisition"),
+					libraryName);
+			
+			
+		}else
+		{
+			return null;
+		}
+					
+		
 	}
 	
 	public static Map getMissingAcademicConsultation(long libraryId,String period,Locale locale,String libraryName)
 	{
-		if (LibraryLocalServiceUtil.isMissingConsultationData(libraryId, period))
+		if (FactConsultationLocalServiceUtil.isMissingData(libraryId, period))
 		{
 			
 			
@@ -311,7 +467,7 @@ public class MissingDataUtil {
 			
 			
 			return createMissingDataMap(EisUtil.DATA_NON_PRINTED_MATERIAL,libraryId,
-					period,LanguageUtil.get(locale, "non-printed-item-type"),
+					period,LanguageUtil.get(locale, "rpt-non-printed-item-type"),
 					libraryName);
 			
 		}else
@@ -416,5 +572,6 @@ public class MissingDataUtil {
 		map.put("libraryName", libraryName);
 		return map;
 	}
-
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(MissingDataUtil.class);
 }

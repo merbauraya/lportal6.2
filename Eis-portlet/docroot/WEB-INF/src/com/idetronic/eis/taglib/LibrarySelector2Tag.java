@@ -9,6 +9,7 @@ public class LibrarySelector2Tag extends IncludeTag{
 	
 	final String _PAGE = "/html/taglib/eis/library_selector2.jsp";
 	private String m_value = StringPool.BLANK;
+	private String m_cssClass = StringPool.BLANK;
 	private String m_name = "library";
 	private boolean m_AdminAllowAll = false;
 	private boolean m_addAllOption = false;
@@ -57,6 +58,14 @@ public class LibrarySelector2Tag extends IncludeTag{
 	{
 		return m_name;
 	}
+	public void setCssClass(String value)
+	{
+		m_cssClass = value;
+	}
+	public String getCssClass()
+	{
+		return m_cssClass;
+	}
 	
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
@@ -65,6 +74,7 @@ public class LibrarySelector2Tag extends IncludeTag{
 		request.setAttribute("eis:library-selector2:adminAllowAll", String.valueOf(m_AdminAllowAll));
 		request.setAttribute("eis:library-selector2:addAllOption", String.valueOf(m_addAllOption));
 		request.setAttribute("eis:library-selector2:masterTypeId", String.valueOf(m_masterTypeId));
+		request.setAttribute("eis:library-selector2:cssClass", m_cssClass );
 	}
 	
 	@Override

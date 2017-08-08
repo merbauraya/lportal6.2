@@ -106,36 +106,36 @@ public class FactSeatingLocalServiceClpInvoker {
 				"com.idetronic.eis.model.FactSeating"
 			};
 
-		_methodName280 = "getBeanIdentifier";
+		_methodName366 = "getBeanIdentifier";
 
-		_methodParameterTypes280 = new String[] {  };
+		_methodParameterTypes366 = new String[] {  };
 
-		_methodName281 = "setBeanIdentifier";
+		_methodName367 = "setBeanIdentifier";
 
-		_methodParameterTypes281 = new String[] { "java.lang.String" };
+		_methodParameterTypes367 = new String[] { "java.lang.String" };
 
-		_methodName286 = "add";
+		_methodName372 = "add";
 
-		_methodParameterTypes286 = new String[] {
+		_methodParameterTypes372 = new String[] {
 				"long", "long", "long", "java.lang.String", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName287 = "bacthInsert";
+		_methodName373 = "bacthInsert";
 
-		_methodParameterTypes287 = new String[] {
+		_methodParameterTypes373 = new String[] {
 				"long", "java.lang.String",
 				"com.liferay.portal.kernel.json.JSONArray",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName288 = "getLatestEntry";
+		_methodName374 = "getLatestEntry";
 
-		_methodParameterTypes288 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes374 = new String[] { "long", "java.lang.String" };
 
-		_methodName289 = "getEntries";
+		_methodName375 = "getEntries";
 
-		_methodParameterTypes289 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes375 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,20 +227,20 @@ public class FactSeatingLocalServiceClpInvoker {
 			return FactSeatingLocalServiceUtil.updateFactSeating((com.idetronic.eis.model.FactSeating)arguments[0]);
 		}
 
-		if (_methodName280.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes280, parameterTypes)) {
+		if (_methodName366.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes366, parameterTypes)) {
 			return FactSeatingLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName281.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes281, parameterTypes)) {
+		if (_methodName367.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes367, parameterTypes)) {
 			FactSeatingLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName286.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes286, parameterTypes)) {
+		if (_methodName372.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes372, parameterTypes)) {
 			return FactSeatingLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -249,8 +249,8 @@ public class FactSeatingLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
-		if (_methodName287.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes287, parameterTypes)) {
+		if (_methodName373.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes373, parameterTypes)) {
 			FactSeatingLocalServiceUtil.bacthInsert(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				(com.liferay.portal.kernel.json.JSONArray)arguments[2],
@@ -259,14 +259,14 @@ public class FactSeatingLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName288.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes288, parameterTypes)) {
+		if (_methodName374.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes374, parameterTypes)) {
 			return FactSeatingLocalServiceUtil.getLatestEntry(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName289.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes289, parameterTypes)) {
+		if (_methodName375.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes375, parameterTypes)) {
 			return FactSeatingLocalServiceUtil.getEntries(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
@@ -306,16 +306,16 @@ public class FactSeatingLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName280;
-	private String[] _methodParameterTypes280;
-	private String _methodName281;
-	private String[] _methodParameterTypes281;
-	private String _methodName286;
-	private String[] _methodParameterTypes286;
-	private String _methodName287;
-	private String[] _methodParameterTypes287;
-	private String _methodName288;
-	private String[] _methodParameterTypes288;
-	private String _methodName289;
-	private String[] _methodParameterTypes289;
+	private String _methodName366;
+	private String[] _methodParameterTypes366;
+	private String _methodName367;
+	private String[] _methodParameterTypes367;
+	private String _methodName372;
+	private String[] _methodParameterTypes372;
+	private String _methodName373;
+	private String[] _methodParameterTypes373;
+	private String _methodName374;
+	private String[] _methodParameterTypes374;
+	private String _methodName375;
+	private String[] _methodParameterTypes375;
 }

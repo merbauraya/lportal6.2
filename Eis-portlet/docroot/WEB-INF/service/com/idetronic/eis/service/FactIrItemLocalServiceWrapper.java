@@ -319,6 +319,12 @@ public class FactIrItemLocalServiceWrapper implements FactIrItemLocalService,
 		return _factIrItemLocalService.getEntries(libraryId, period, facultyId);
 	}
 
+	@Override
+	public boolean isMissingData(long libraryId, java.lang.String period)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _factIrItemLocalService.isMissingData(libraryId, period);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

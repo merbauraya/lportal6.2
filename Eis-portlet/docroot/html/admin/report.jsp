@@ -29,13 +29,16 @@
 				 
 		>
 			
-			
+			<%
+				String hasDataEntry = report.getDataEntry() ? "Ya" : "Tidak";
+				String hqDataEntry = report.getHqDataEntry() ? "Ya" : "Tidak";
+			%>
 			
 			
 			<liferay-ui:search-container-column-text name="report-key" property="reportKey" />
 			<liferay-ui:search-container-column-text name="report-display-title" property="reportTitle" />
-			
-			
+			<liferay-ui:search-container-column-text name="has-data-entry" value="<%=hasDataEntry %>"/>
+			<liferay-ui:search-container-column-text name="hq-data-entry" value="<%= hqDataEntry %>"/>
 			
 			
 			

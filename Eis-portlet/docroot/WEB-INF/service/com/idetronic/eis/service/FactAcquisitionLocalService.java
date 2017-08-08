@@ -254,22 +254,32 @@ public interface FactAcquisitionLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public com.idetronic.eis.model.FactAcquisition add(long facultyId,
-		java.lang.String period, long itemId, int titleTotal, int volumeTotal,
+	public com.idetronic.eis.model.FactAcquisition add(long libraryId,
+		long facultyId, java.lang.String period, long itemId, long titleTotal,
+		long volumeTotal, double amountTotal, long approvedTitleTotal,
+		long approvedVolumeTotal, double approvedAmountTotal,
+		long orderTitleTotal, long orderVolumeTotal, double orderAmountTotal,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void batchInsert(long facultyId, java.lang.String period,
+	public void batchInsert(long libraryId, long facultyId,
+		java.lang.String period,
 		com.liferay.portal.kernel.json.JSONArray datas,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.idetronic.eis.model.FactAcquisition> getLatestEntry(
-		long facultyId, java.lang.String period);
+		long libraryId, long facultyId, java.lang.String period);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONArray getEntries(long facultyId,
-		java.lang.String period)
+	public com.liferay.portal.kernel.json.JSONArray getEntries(long libraryId,
+		long facultyId, java.lang.String period)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isMissingData(long libraryId, java.lang.String period);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isMissingData(java.lang.String period);
 }

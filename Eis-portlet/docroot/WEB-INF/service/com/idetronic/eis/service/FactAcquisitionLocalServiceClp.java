@@ -119,25 +119,38 @@ public class FactAcquisitionLocalServiceClp
 		_methodName19 = "add";
 
 		_methodParameterTypes19 = new String[] {
-				"long", "java.lang.String", "long", "int", "int",
+				"long", "long", "java.lang.String", "long", "long", "long",
+				"double", "long", "long", "double", "long", "long", "double",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "batchInsert";
 
 		_methodParameterTypes20 = new String[] {
-				"long", "java.lang.String",
+				"long", "long", "java.lang.String",
 				"com.liferay.portal.kernel.json.JSONArray",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName21 = "getLatestEntry";
 
-		_methodParameterTypes21 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes21 = new String[] {
+				"long", "long", "java.lang.String"
+			};
 
 		_methodName22 = "getEntries";
 
-		_methodParameterTypes22 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes22 = new String[] {
+				"long", "long", "java.lang.String"
+			};
+
+		_methodName23 = "isMissingData";
+
+		_methodParameterTypes23 = new String[] { "long", "java.lang.String" };
+
+		_methodName24 = "isMissingData";
+
+		_methodParameterTypes24 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -691,8 +704,11 @@ public class FactAcquisitionLocalServiceClp
 	}
 
 	@Override
-	public com.idetronic.eis.model.FactAcquisition add(long facultyId,
-		java.lang.String period, long itemId, int titleTotal, int volumeTotal,
+	public com.idetronic.eis.model.FactAcquisition add(long libraryId,
+		long facultyId, java.lang.String period, long itemId, long titleTotal,
+		long volumeTotal, double amountTotal, long approvedTitleTotal,
+		long approvedVolumeTotal, double approvedAmountTotal,
+		long orderTitleTotal, long orderVolumeTotal, double orderAmountTotal,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -701,7 +717,9 @@ public class FactAcquisitionLocalServiceClp
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
 					new Object[] {
-						facultyId,
+						libraryId,
+						
+					facultyId,
 						
 					ClpSerializer.translateInput(period),
 						
@@ -710,6 +728,20 @@ public class FactAcquisitionLocalServiceClp
 					titleTotal,
 						
 					volumeTotal,
+						
+					amountTotal,
+						
+					approvedTitleTotal,
+						
+					approvedVolumeTotal,
+						
+					approvedAmountTotal,
+						
+					orderTitleTotal,
+						
+					orderVolumeTotal,
+						
+					orderAmountTotal,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -734,7 +766,8 @@ public class FactAcquisitionLocalServiceClp
 	}
 
 	@Override
-	public void batchInsert(long facultyId, java.lang.String period,
+	public void batchInsert(long libraryId, long facultyId,
+		java.lang.String period,
 		com.liferay.portal.kernel.json.JSONArray datas,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -742,7 +775,9 @@ public class FactAcquisitionLocalServiceClp
 			_invokableLocalService.invokeMethod(_methodName20,
 				_methodParameterTypes20,
 				new Object[] {
-					facultyId,
+					libraryId,
+					
+				facultyId,
 					
 				ClpSerializer.translateInput(period),
 					
@@ -770,14 +805,19 @@ public class FactAcquisitionLocalServiceClp
 
 	@Override
 	public java.util.List<com.idetronic.eis.model.FactAcquisition> getLatestEntry(
-		long facultyId, java.lang.String period) {
+		long libraryId, long facultyId, java.lang.String period) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName21,
 					_methodParameterTypes21,
-					new Object[] { facultyId, ClpSerializer.translateInput(
-							period) });
+					new Object[] {
+						libraryId,
+						
+					facultyId,
+						
+					ClpSerializer.translateInput(period)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -795,16 +835,21 @@ public class FactAcquisitionLocalServiceClp
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray getEntries(long facultyId,
-		java.lang.String period)
+	public com.liferay.portal.kernel.json.JSONArray getEntries(long libraryId,
+		long facultyId, java.lang.String period)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName22,
 					_methodParameterTypes22,
-					new Object[] { facultyId, ClpSerializer.translateInput(
-							period) });
+					new Object[] {
+						libraryId,
+						
+					facultyId,
+						
+					ClpSerializer.translateInput(period)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -823,6 +868,55 @@ public class FactAcquisitionLocalServiceClp
 		}
 
 		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public boolean isMissingData(long libraryId, java.lang.String period) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
+					new Object[] { libraryId, ClpSerializer.translateInput(
+							period) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
+	public boolean isMissingData(java.lang.String period) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] { ClpSerializer.translateInput(period) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -870,4 +964,8 @@ public class FactAcquisitionLocalServiceClp
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

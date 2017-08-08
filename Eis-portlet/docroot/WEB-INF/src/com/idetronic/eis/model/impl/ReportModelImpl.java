@@ -68,9 +68,19 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 			{ "reportName", Types.VARCHAR },
 			{ "reportTitle", Types.VARCHAR },
 			{ "dataEntry", Types.BOOLEAN },
+			{ "hqDataEntry", Types.BOOLEAN },
+			{ "dimensionId", Types.BIGINT },
+			{ "hasMeasure1", Types.BOOLEAN },
+			{ "hasMeasure2", Types.BOOLEAN },
+			{ "hasMeasure3", Types.BOOLEAN },
+			{ "hasMeasure4", Types.BOOLEAN },
+			{ "measure1Name", Types.VARCHAR },
+			{ "measure2Name", Types.VARCHAR },
+			{ "measure3Name", Types.VARCHAR },
+			{ "measure4Name", Types.VARCHAR },
 			{ "dataName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eis_Report (reportId LONG not null primary key,reportKey VARCHAR(75) null,reportName VARCHAR(75) null,reportTitle VARCHAR(150) null,dataEntry BOOLEAN,dataName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table eis_Report (reportId LONG not null primary key,reportKey VARCHAR(75) null,reportName VARCHAR(75) null,reportTitle VARCHAR(150) null,dataEntry BOOLEAN,hqDataEntry BOOLEAN,dimensionId LONG,hasMeasure1 BOOLEAN,hasMeasure2 BOOLEAN,hasMeasure3 BOOLEAN,hasMeasure4 BOOLEAN,measure1Name VARCHAR(75) null,measure2Name VARCHAR(75) null,measure3Name VARCHAR(75) null,measure4Name VARCHAR(75) null,dataName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table eis_Report";
 	public static final String ORDER_BY_JPQL = " ORDER BY report.reportId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY eis_Report.reportId ASC";
@@ -87,8 +97,9 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 				"value.object.column.bitmask.enabled.com.idetronic.eis.model.Report"),
 			true);
 	public static long DATAENTRY_COLUMN_BITMASK = 1L;
-	public static long REPORTKEY_COLUMN_BITMASK = 2L;
-	public static long REPORTID_COLUMN_BITMASK = 4L;
+	public static long HQDATAENTRY_COLUMN_BITMASK = 2L;
+	public static long REPORTKEY_COLUMN_BITMASK = 4L;
+	public static long REPORTID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -108,6 +119,16 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		model.setReportName(soapModel.getReportName());
 		model.setReportTitle(soapModel.getReportTitle());
 		model.setDataEntry(soapModel.getDataEntry());
+		model.setHqDataEntry(soapModel.getHqDataEntry());
+		model.setDimensionId(soapModel.getDimensionId());
+		model.setHasMeasure1(soapModel.getHasMeasure1());
+		model.setHasMeasure2(soapModel.getHasMeasure2());
+		model.setHasMeasure3(soapModel.getHasMeasure3());
+		model.setHasMeasure4(soapModel.getHasMeasure4());
+		model.setMeasure1Name(soapModel.getMeasure1Name());
+		model.setMeasure2Name(soapModel.getMeasure2Name());
+		model.setMeasure3Name(soapModel.getMeasure3Name());
+		model.setMeasure4Name(soapModel.getMeasure4Name());
 		model.setDataName(soapModel.getDataName());
 
 		return model;
@@ -178,6 +199,16 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		attributes.put("reportName", getReportName());
 		attributes.put("reportTitle", getReportTitle());
 		attributes.put("dataEntry", getDataEntry());
+		attributes.put("hqDataEntry", getHqDataEntry());
+		attributes.put("dimensionId", getDimensionId());
+		attributes.put("hasMeasure1", getHasMeasure1());
+		attributes.put("hasMeasure2", getHasMeasure2());
+		attributes.put("hasMeasure3", getHasMeasure3());
+		attributes.put("hasMeasure4", getHasMeasure4());
+		attributes.put("measure1Name", getMeasure1Name());
+		attributes.put("measure2Name", getMeasure2Name());
+		attributes.put("measure3Name", getMeasure3Name());
+		attributes.put("measure4Name", getMeasure4Name());
 		attributes.put("dataName", getDataName());
 
 		return attributes;
@@ -213,6 +244,66 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 		if (dataEntry != null) {
 			setDataEntry(dataEntry);
+		}
+
+		Boolean hqDataEntry = (Boolean)attributes.get("hqDataEntry");
+
+		if (hqDataEntry != null) {
+			setHqDataEntry(hqDataEntry);
+		}
+
+		Long dimensionId = (Long)attributes.get("dimensionId");
+
+		if (dimensionId != null) {
+			setDimensionId(dimensionId);
+		}
+
+		Boolean hasMeasure1 = (Boolean)attributes.get("hasMeasure1");
+
+		if (hasMeasure1 != null) {
+			setHasMeasure1(hasMeasure1);
+		}
+
+		Boolean hasMeasure2 = (Boolean)attributes.get("hasMeasure2");
+
+		if (hasMeasure2 != null) {
+			setHasMeasure2(hasMeasure2);
+		}
+
+		Boolean hasMeasure3 = (Boolean)attributes.get("hasMeasure3");
+
+		if (hasMeasure3 != null) {
+			setHasMeasure3(hasMeasure3);
+		}
+
+		Boolean hasMeasure4 = (Boolean)attributes.get("hasMeasure4");
+
+		if (hasMeasure4 != null) {
+			setHasMeasure4(hasMeasure4);
+		}
+
+		String measure1Name = (String)attributes.get("measure1Name");
+
+		if (measure1Name != null) {
+			setMeasure1Name(measure1Name);
+		}
+
+		String measure2Name = (String)attributes.get("measure2Name");
+
+		if (measure2Name != null) {
+			setMeasure2Name(measure2Name);
+		}
+
+		String measure3Name = (String)attributes.get("measure3Name");
+
+		if (measure3Name != null) {
+			setMeasure3Name(measure3Name);
+		}
+
+		String measure4Name = (String)attributes.get("measure4Name");
+
+		if (measure4Name != null) {
+			setMeasure4Name(measure4Name);
 		}
 
 		String dataName = (String)attributes.get("dataName");
@@ -321,6 +412,173 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 	@JSON
 	@Override
+	public boolean getHqDataEntry() {
+		return _hqDataEntry;
+	}
+
+	@Override
+	public boolean isHqDataEntry() {
+		return _hqDataEntry;
+	}
+
+	@Override
+	public void setHqDataEntry(boolean hqDataEntry) {
+		_columnBitmask |= HQDATAENTRY_COLUMN_BITMASK;
+
+		if (!_setOriginalHqDataEntry) {
+			_setOriginalHqDataEntry = true;
+
+			_originalHqDataEntry = _hqDataEntry;
+		}
+
+		_hqDataEntry = hqDataEntry;
+	}
+
+	public boolean getOriginalHqDataEntry() {
+		return _originalHqDataEntry;
+	}
+
+	@JSON
+	@Override
+	public long getDimensionId() {
+		return _dimensionId;
+	}
+
+	@Override
+	public void setDimensionId(long dimensionId) {
+		_dimensionId = dimensionId;
+	}
+
+	@JSON
+	@Override
+	public boolean getHasMeasure1() {
+		return _hasMeasure1;
+	}
+
+	@Override
+	public boolean isHasMeasure1() {
+		return _hasMeasure1;
+	}
+
+	@Override
+	public void setHasMeasure1(boolean hasMeasure1) {
+		_hasMeasure1 = hasMeasure1;
+	}
+
+	@JSON
+	@Override
+	public boolean getHasMeasure2() {
+		return _hasMeasure2;
+	}
+
+	@Override
+	public boolean isHasMeasure2() {
+		return _hasMeasure2;
+	}
+
+	@Override
+	public void setHasMeasure2(boolean hasMeasure2) {
+		_hasMeasure2 = hasMeasure2;
+	}
+
+	@JSON
+	@Override
+	public boolean getHasMeasure3() {
+		return _hasMeasure3;
+	}
+
+	@Override
+	public boolean isHasMeasure3() {
+		return _hasMeasure3;
+	}
+
+	@Override
+	public void setHasMeasure3(boolean hasMeasure3) {
+		_hasMeasure3 = hasMeasure3;
+	}
+
+	@JSON
+	@Override
+	public boolean getHasMeasure4() {
+		return _hasMeasure4;
+	}
+
+	@Override
+	public boolean isHasMeasure4() {
+		return _hasMeasure4;
+	}
+
+	@Override
+	public void setHasMeasure4(boolean hasMeasure4) {
+		_hasMeasure4 = hasMeasure4;
+	}
+
+	@JSON
+	@Override
+	public String getMeasure1Name() {
+		if (_measure1Name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _measure1Name;
+		}
+	}
+
+	@Override
+	public void setMeasure1Name(String measure1Name) {
+		_measure1Name = measure1Name;
+	}
+
+	@JSON
+	@Override
+	public String getMeasure2Name() {
+		if (_measure2Name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _measure2Name;
+		}
+	}
+
+	@Override
+	public void setMeasure2Name(String measure2Name) {
+		_measure2Name = measure2Name;
+	}
+
+	@JSON
+	@Override
+	public String getMeasure3Name() {
+		if (_measure3Name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _measure3Name;
+		}
+	}
+
+	@Override
+	public void setMeasure3Name(String measure3Name) {
+		_measure3Name = measure3Name;
+	}
+
+	@JSON
+	@Override
+	public String getMeasure4Name() {
+		if (_measure4Name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _measure4Name;
+		}
+	}
+
+	@Override
+	public void setMeasure4Name(String measure4Name) {
+		_measure4Name = measure4Name;
+	}
+
+	@JSON
+	@Override
 	public String getDataName() {
 		if (_dataName == null) {
 			return StringPool.BLANK;
@@ -371,6 +629,16 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		reportImpl.setReportName(getReportName());
 		reportImpl.setReportTitle(getReportTitle());
 		reportImpl.setDataEntry(getDataEntry());
+		reportImpl.setHqDataEntry(getHqDataEntry());
+		reportImpl.setDimensionId(getDimensionId());
+		reportImpl.setHasMeasure1(getHasMeasure1());
+		reportImpl.setHasMeasure2(getHasMeasure2());
+		reportImpl.setHasMeasure3(getHasMeasure3());
+		reportImpl.setHasMeasure4(getHasMeasure4());
+		reportImpl.setMeasure1Name(getMeasure1Name());
+		reportImpl.setMeasure2Name(getMeasure2Name());
+		reportImpl.setMeasure3Name(getMeasure3Name());
+		reportImpl.setMeasure4Name(getMeasure4Name());
 		reportImpl.setDataName(getDataName());
 
 		reportImpl.resetOriginalValues();
@@ -430,6 +698,10 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 		reportModelImpl._setOriginalDataEntry = false;
 
+		reportModelImpl._originalHqDataEntry = reportModelImpl._hqDataEntry;
+
+		reportModelImpl._setOriginalHqDataEntry = false;
+
 		reportModelImpl._columnBitmask = 0;
 	}
 
@@ -465,6 +737,50 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 		reportCacheModel.dataEntry = getDataEntry();
 
+		reportCacheModel.hqDataEntry = getHqDataEntry();
+
+		reportCacheModel.dimensionId = getDimensionId();
+
+		reportCacheModel.hasMeasure1 = getHasMeasure1();
+
+		reportCacheModel.hasMeasure2 = getHasMeasure2();
+
+		reportCacheModel.hasMeasure3 = getHasMeasure3();
+
+		reportCacheModel.hasMeasure4 = getHasMeasure4();
+
+		reportCacheModel.measure1Name = getMeasure1Name();
+
+		String measure1Name = reportCacheModel.measure1Name;
+
+		if ((measure1Name != null) && (measure1Name.length() == 0)) {
+			reportCacheModel.measure1Name = null;
+		}
+
+		reportCacheModel.measure2Name = getMeasure2Name();
+
+		String measure2Name = reportCacheModel.measure2Name;
+
+		if ((measure2Name != null) && (measure2Name.length() == 0)) {
+			reportCacheModel.measure2Name = null;
+		}
+
+		reportCacheModel.measure3Name = getMeasure3Name();
+
+		String measure3Name = reportCacheModel.measure3Name;
+
+		if ((measure3Name != null) && (measure3Name.length() == 0)) {
+			reportCacheModel.measure3Name = null;
+		}
+
+		reportCacheModel.measure4Name = getMeasure4Name();
+
+		String measure4Name = reportCacheModel.measure4Name;
+
+		if ((measure4Name != null) && (measure4Name.length() == 0)) {
+			reportCacheModel.measure4Name = null;
+		}
+
 		reportCacheModel.dataName = getDataName();
 
 		String dataName = reportCacheModel.dataName;
@@ -478,7 +794,7 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{reportId=");
 		sb.append(getReportId());
@@ -490,6 +806,26 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		sb.append(getReportTitle());
 		sb.append(", dataEntry=");
 		sb.append(getDataEntry());
+		sb.append(", hqDataEntry=");
+		sb.append(getHqDataEntry());
+		sb.append(", dimensionId=");
+		sb.append(getDimensionId());
+		sb.append(", hasMeasure1=");
+		sb.append(getHasMeasure1());
+		sb.append(", hasMeasure2=");
+		sb.append(getHasMeasure2());
+		sb.append(", hasMeasure3=");
+		sb.append(getHasMeasure3());
+		sb.append(", hasMeasure4=");
+		sb.append(getHasMeasure4());
+		sb.append(", measure1Name=");
+		sb.append(getMeasure1Name());
+		sb.append(", measure2Name=");
+		sb.append(getMeasure2Name());
+		sb.append(", measure3Name=");
+		sb.append(getMeasure3Name());
+		sb.append(", measure4Name=");
+		sb.append(getMeasure4Name());
 		sb.append(", dataName=");
 		sb.append(getDataName());
 		sb.append("}");
@@ -499,7 +835,7 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eis.model.Report");
@@ -526,6 +862,46 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 		sb.append(getDataEntry());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>hqDataEntry</column-name><column-value><![CDATA[");
+		sb.append(getHqDataEntry());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dimensionId</column-name><column-value><![CDATA[");
+		sb.append(getDimensionId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hasMeasure1</column-name><column-value><![CDATA[");
+		sb.append(getHasMeasure1());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hasMeasure2</column-name><column-value><![CDATA[");
+		sb.append(getHasMeasure2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hasMeasure3</column-name><column-value><![CDATA[");
+		sb.append(getHasMeasure3());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hasMeasure4</column-name><column-value><![CDATA[");
+		sb.append(getHasMeasure4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>measure1Name</column-name><column-value><![CDATA[");
+		sb.append(getMeasure1Name());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>measure2Name</column-name><column-value><![CDATA[");
+		sb.append(getMeasure2Name());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>measure3Name</column-name><column-value><![CDATA[");
+		sb.append(getMeasure3Name());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>measure4Name</column-name><column-value><![CDATA[");
+		sb.append(getMeasure4Name());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>dataName</column-name><column-value><![CDATA[");
 		sb.append(getDataName());
 		sb.append("]]></column-value></column>");
@@ -545,6 +921,18 @@ public class ReportModelImpl extends BaseModelImpl<Report>
 	private boolean _dataEntry;
 	private boolean _originalDataEntry;
 	private boolean _setOriginalDataEntry;
+	private boolean _hqDataEntry;
+	private boolean _originalHqDataEntry;
+	private boolean _setOriginalHqDataEntry;
+	private long _dimensionId;
+	private boolean _hasMeasure1;
+	private boolean _hasMeasure2;
+	private boolean _hasMeasure3;
+	private boolean _hasMeasure4;
+	private String _measure1Name;
+	private String _measure2Name;
+	private String _measure3Name;
+	private String _measure4Name;
 	private String _dataName;
 	private long _columnBitmask;
 	private Report _escapedModel;

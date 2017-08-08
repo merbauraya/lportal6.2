@@ -16,6 +16,7 @@ package com.idetronic.eis.service.impl;
 
 import java.util.List;
 
+import com.idetronic.eis.NoSuchReportException;
 import com.idetronic.eis.model.Report;
 import com.idetronic.eis.service.base.ReportLocalServiceBaseImpl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -42,7 +43,7 @@ public class ReportLocalServiceImpl extends ReportLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.idetronic.eis.service.ReportLocalServiceUtil} to access the report local service.
 	 */
 	
-	public Report addReport(String reportKey,String reportName,String reportTitle,boolean hasDataEntry) throws SystemException
+	public Report addReport(String reportKey,String reportName,String reportTitle,boolean hasDataEntry,boolean hqDataEntry) throws SystemException
 	{
 		long id = CounterLocalServiceUtil.increment(Report.class.getName());
 		Report report = createReport(id);
@@ -51,11 +52,22 @@ public class ReportLocalServiceImpl extends ReportLocalServiceBaseImpl {
 		report.setReportName(reportName);
 		report.setReportTitle(reportTitle);
 		report.setDataEntry(hasDataEntry);
+		report.setHqDataEntry(hqDataEntry);
 		return updateReport(report);
 		
 	}
-	public List<Report> findByDataEntry(boolean dataEntry) throws SystemException
+	public List<Report> findByDataEntry(boolean dataEntry,boolean hqDataEntry) throws SystemException
 	{
-		return reportPersistence.findBydataEntry(dataEntry);
+		return reportPersistence.findBydataEntry(dataEntry,hqDataEntry);
 	}
+	
+	public List<Report> findMainReport() throws SystemException
+	{
+		return reportPersistence.findBymainReport(true);
+	}
+	public Report findByKey(String reportKey) throws NoSuchReportException, SystemException
+	{
+		return reportPersistence.findByKey(reportKey);
+	}
+	
 }

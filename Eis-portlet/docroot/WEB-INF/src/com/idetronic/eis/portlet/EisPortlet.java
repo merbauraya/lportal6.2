@@ -24,9 +24,16 @@ import com.idetronic.eis.NoSuchMasterFileException;
 import com.idetronic.eis.model.BorrowerCategory;
 import com.idetronic.eis.model.FactAcquisition;
 import com.idetronic.eis.model.FactConsultation;
+import com.idetronic.eis.model.FactData;
+import com.idetronic.eis.model.FactDatabaseUsage;
+import com.idetronic.eis.model.FactDigitalCollection;
 import com.idetronic.eis.model.FactExpense;
+import com.idetronic.eis.model.FactGiftReceived;
+import com.idetronic.eis.model.FactIncome;
+import com.idetronic.eis.model.FactInterLibLoan;
 import com.idetronic.eis.model.FactIrItem;
 import com.idetronic.eis.model.FactIrSubmission;
+import com.idetronic.eis.model.FactItManagement;
 import com.idetronic.eis.model.FactMembership;
 import com.idetronic.eis.model.FactNonPrintedMaterial;
 import com.idetronic.eis.model.FactPost;
@@ -45,6 +52,7 @@ import com.idetronic.eis.model.PrintedItemType;
 import com.idetronic.eis.model.Project;
 import com.idetronic.eis.model.ProjectActivity;
 import com.idetronic.eis.model.ProjectStrategy;
+import com.idetronic.eis.model.Report;
 import com.idetronic.eis.model.SeatingCategory;
 import com.idetronic.eis.model.SeatingDepartment;
 import com.idetronic.eis.model.VisitorCategory;
@@ -52,9 +60,16 @@ import com.idetronic.eis.service.BorrowerCategoryLocalServiceUtil;
 import com.idetronic.eis.service.ConfigLocalServiceUtil;
 import com.idetronic.eis.service.FactAcquisitionLocalServiceUtil;
 import com.idetronic.eis.service.FactConsultationLocalServiceUtil;
+import com.idetronic.eis.service.FactDataLocalServiceUtil;
+import com.idetronic.eis.service.FactDatabaseUsageLocalServiceUtil;
+import com.idetronic.eis.service.FactDigitalCollectionLocalServiceUtil;
 import com.idetronic.eis.service.FactExpenseLocalServiceUtil;
+import com.idetronic.eis.service.FactGiftReceivedLocalServiceUtil;
+import com.idetronic.eis.service.FactIncomeLocalServiceUtil;
+import com.idetronic.eis.service.FactInterLibLoanLocalServiceUtil;
 import com.idetronic.eis.service.FactIrItemLocalServiceUtil;
 import com.idetronic.eis.service.FactIrSubmissionLocalServiceUtil;
+import com.idetronic.eis.service.FactItManagementLocalServiceUtil;
 import com.idetronic.eis.service.FactMembershipLocalServiceUtil;
 import com.idetronic.eis.service.FactNonPrintedMaterialLocalServiceUtil;
 import com.idetronic.eis.service.FactPostLocalServiceUtil;
@@ -73,6 +88,7 @@ import com.idetronic.eis.service.PrintedItemTypeLocalServiceUtil;
 import com.idetronic.eis.service.ProjectActivityLocalServiceUtil;
 import com.idetronic.eis.service.ProjectLocalServiceUtil;
 import com.idetronic.eis.service.ProjectStrategyLocalServiceUtil;
+import com.idetronic.eis.service.ReportLocalServiceUtil;
 import com.idetronic.eis.service.SeatingCategoryLocalServiceUtil;
 import com.idetronic.eis.service.SeatingDepartmentLocalServiceUtil;
 import com.idetronic.eis.service.VisitorCategoryLocalServiceUtil;
@@ -175,7 +191,7 @@ public class EisPortlet extends MVCPortlet
 					}
 				
 			}
-		}
+		} 
 		
 		FactSeatingLocalServiceUtil.bacthInsert(libraryId, period, jsonArray, serviceContext);
 		actionResponse.sendRedirect(redirect);
@@ -183,8 +199,9 @@ public class EisPortlet extends MVCPortlet
 		
 	}
 	
-	public void editItemAcquisition(ActionRequest actionRequest, ActionResponse actionResponse) throws SystemException, PortalException
+	public void editItemAcquisition(ActionRequest actionRequest, ActionResponse actionResponse) throws SystemException, PortalException, IOException
 	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
 		long facultyId = ParamUtil.getLong(actionRequest, "faculty");
 		String period = ParamUtil.getString(actionRequest, "period");
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
@@ -199,7 +216,24 @@ public class EisPortlet extends MVCPortlet
 		{
 			String titleTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-title");
 			String volumeTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-volume");
-			if (Validator.isNotNull(titleTotal) && Validator.isNotNull(volumeTotal))
+			String amountTotal =  ParamUtil.getString(actionRequest, item.getMasterFileId() + "-amount");
+			
+
+			String approvedTitleTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-approvedTitleTotal");
+			String approvedVolumeTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() +"-approvedVolumeTotal");
+			String approvedAmountTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-approvedAmountTotal");
+			
+			String orderTitleTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-orderTitleTotal");
+			String orderVolumeTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-orderVolumeTotal");
+			String orderAmountTotal = ParamUtil.getString(actionRequest, item.getMasterFileId() + "-orderAmountTotal");
+			
+			
+			
+			//ensure at least one entry is filled
+			if (Validator.isNotNull(titleTotal) || Validator.isNotNull(volumeTotal) || Validator.isNotNull(amountTotal)
+					|| Validator.isNotNull(approvedTitleTotal) || Validator.isNotNull(approvedVolumeTotal)
+					|| Validator.isNotNull(approvedAmountTotal) || Validator.isNotNull(orderTitleTotal)
+					|| Validator.isNotNull(orderVolumeTotal) || Validator.isNotNull(orderAmountTotal))		
 			{
 			
 				
@@ -212,14 +246,23 @@ public class EisPortlet extends MVCPortlet
 				
 				jsonObject.put("titleTotal", titleTotal);
 				jsonObject.put("volumeTotal", volumeTotal);
+				jsonObject.put("amountTotal", amountTotal);
+				
+				jsonObject.put("approvedTitleTotal", approvedTitleTotal);
+				jsonObject.put("approvedVolumeTotal", approvedVolumeTotal);
+				jsonObject.put("approvedAmountTotal", approvedAmountTotal);
+				
+				jsonObject.put("orderTitleTotal", orderTitleTotal);
+				jsonObject.put("orderVolumeTotal", orderVolumeTotal);
+				jsonObject.put("orderAmountTotal", orderAmountTotal);
 				
 				jsonArray.put(jsonObject);
 			}
 		}
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
 
-		FactAcquisitionLocalServiceUtil.batchInsert(facultyId, period, jsonArray, serviceContext);
-		
+		FactAcquisitionLocalServiceUtil.batchInsert(libraryId,facultyId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
 		
 	}
 	
@@ -475,6 +518,113 @@ public class EisPortlet extends MVCPortlet
 		
 	}
 	
+
+	public void editIncome(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		long incomeTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_INCOME_TYPE);
+		List<MasterFile> incomes = MasterFileLocalServiceUtil.findByMasterType(incomeTypeId,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile income : incomes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			String value = ParamUtil.getString(actionRequest, income.getMasterFileId() + "-value");
+			if (Validator.isNotNull(value))
+			{
+				
+			
+			
+			
+				jsonObject.put("incomeId", income.getMasterFileId());
+				jsonObject.put("amount", value);
+				jsonArray.put(jsonObject);
+			
+			}
+		}
+		
+		FactIncomeLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
+		
+		
+	}
+	
+	public void editDigitalCollection(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_DIGITAL_COLLECTION);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByMasterType(itemTypeId,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			String title = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-title");
+			String volume = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-volume");
+			String image = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-image");
+			if (Validator.isNotNull(title))
+			{
+			
+				jsonObject.put("itemId", itemType.getMasterFileId());
+				jsonObject.put("title", title);
+				jsonObject.put("volume", volume);
+				jsonObject.put("image", image);
+				jsonArray.put(jsonObject);
+			}
+		}
+		FactDigitalCollectionLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext); 
+		actionResponse.sendRedirect(redirect);
+	}
+	
+	/**
+	 * 
+	 * @param actionRequest
+	 * @param actionResponse
+	 * @throws SystemException 
+	 * @throws PortalException 
+	 * @throws IOException 
+	 */
+	public void editDatabaseUsage(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_DATABASE_USAGE);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByMasterType(itemTypeId,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			String download = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-download");
+			String session = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-session");
+			String search = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-search");
+			if (Validator.isNotNull(download))
+			{
+			
+				jsonObject.put("itemId", itemType.getMasterFileId());
+				jsonObject.put("download", download);
+				jsonObject.put("session", session);
+				jsonObject.put("search", search);
+				jsonArray.put(jsonObject);
+			}
+		}
+		FactDatabaseUsageLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext); 
+		actionResponse.sendRedirect(redirect);
+	}
 	
 	public void editLoan(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException
 	{
@@ -505,6 +655,169 @@ public class EisPortlet extends MVCPortlet
 		
 	}
 	
+	public void editGiftReceived(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_ITEM_TYPE);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByMasterType(itemTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			
+			
+			String titleTotal = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-title");
+			String volumeTotal = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-volume");
+			
+			if (Validator.isNotNull(titleTotal) && !Validator.isBlank(volumeTotal))
+			{
+				jsonObject.put("itemId", itemType.getMasterFileId());
+				jsonObject.put("title", titleTotal);
+				jsonObject.put("volume", volumeTotal);
+				
+				jsonArray.put(jsonObject);
+			}
+			
+		}
+		
+		FactGiftReceivedLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
+		
+		
+	}
+	
+	public void editFactData(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		long reportId = ParamUtil.getLong(actionRequest, "reportId");
+		
+		Report report = ReportLocalServiceUtil.fetchReport(reportId);
+		
+		long itemTypeId =  report.getDimensionId();//ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ_INTER_LIB_LOAN);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByTypeAndStatus1(itemTypeId, false);// .findByMasterType(itemTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			
+			
+			String measure1 = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-measure1");
+			String measure2 = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-measure2");
+			String measure3 = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-measure3");
+			String measure4 = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-measure4");
+			
+			
+			if (Validator.isNotNull(measure1))
+			{
+				jsonObject.put("dimensionId", itemType.getMasterFileId());
+				jsonObject.put("measure1", measure1);
+				jsonObject.put("measure2", measure2);
+				jsonObject.put("measure3", measure3);
+				jsonObject.put("measure4", measure4);
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			
+		}
+		
+		FactDataLocalServiceUtil.batchInsert(reportId,libraryId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
+		
+		
+	}
+	
+	
+	public void editInterLibLoan(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ_INTER_LIB_LOAN);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByTypeAndStatus1(itemTypeId, false);// .findByMasterType(itemTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			
+			
+			String applyTotal = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-applyTotal");
+			String approvedTotal = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-approvedTotal");
+			
+			if (Validator.isNotNull(applyTotal) && !Validator.isBlank(approvedTotal))
+			{
+				jsonObject.put("ptjId", itemType.getMasterFileId());
+				jsonObject.put("applyTotal", applyTotal);
+				jsonObject.put("approvedTotal", approvedTotal);
+				
+				jsonArray.put(jsonObject);
+			}
+			
+		}
+		
+		FactInterLibLoanLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
+		
+		
+	}
+	
+	
+	
+	public void editItManagement(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException
+	{
+		long libraryId = ParamUtil.getLong(actionRequest, "library");
+		String period = ParamUtil.getString(actionRequest, "period");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		
+		long itemTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_IT_MANAGEMENT);
+		List<MasterFile> itemTypes = MasterFileLocalServiceUtil.findByTypeAndStatus1(itemTypeId, false);// .findByMasterType(itemTypeId,QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest); 
+		
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for (MasterFile itemType : itemTypes)
+		{
+			JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+			
+			
+			String total = ParamUtil.getString(actionRequest, itemType.getMasterFileId() + "-total");
+			
+			
+			if (Validator.isNotNull(total))
+			{
+				jsonObject.put("itemId", itemType.getMasterFileId());
+				jsonObject.put("total", total);
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			
+		}
+		
+		FactItManagementLocalServiceUtil.batchInsert(libraryId, period, jsonArray, serviceContext);
+		actionResponse.sendRedirect(redirect);
+		
+		
+	}
 	
 	public void editNonPrintedItem(ActionRequest actionRequest,ActionResponse actionResponse) throws SystemException, PortalException, IOException
 	{
@@ -810,6 +1123,7 @@ public class EisPortlet extends MVCPortlet
 		 
 		 
 	}
+	
 	/**
 	 * Edit Project Activity Action
 	 * @param actionRequest
@@ -933,6 +1247,7 @@ public class EisPortlet extends MVCPortlet
             throws PortletException, IOException {
         
 		String resourceID = request.getResourceID();
+		
 		
 		
 		
@@ -1077,17 +1392,443 @@ public class EisPortlet extends MVCPortlet
 				e.printStackTrace();
 			}
         }
+        if (resourceID.equals(EisUtil.RESOURCE_INCOME_DATA))
+        {
+        	try {
+				
+        		loadIncomeData(request,response);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        if (resourceID.equals(EisUtil.RESOURCE_DATABASE_USAGE))
+        {
+        	try {
+				
+        		loadDatabaseUsage(request,response);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_DIGITAL_COLLECTION))
+        {
+        	try {
+				
+        		loadDigitalCollection(request,response);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_PTJ_BY_TYPE))
+        {
+        	try {
+				loadPtjByPtjType(request,response);
+			} catch (SystemException e) {
+				
+				e.printStackTrace();
+			}
+        }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_IT_MANAGEMENT))
+        {
+        	try {
+				loadItManagement(request,response);
+			} catch (SystemException e) {
+				
+				e.printStackTrace();
+			}
+        }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_INTER_LIB_LOAN))
+        {
+        	try {
+        		loadInterLibLoan(request,response);
+			} catch (SystemException e) {
+				
+				e.printStackTrace();
+			}
+        	
+        }
+        
+        if (resourceID.equals(EisUtil.RESOURCE_GIFT_RECEIVED))
+        {
+        	try {
+        		loadGiftReceived(request,response);
+			} catch (SystemException e) {
+				
+				e.printStackTrace();
+			}
+        	
+        }
+        if (resourceID.equals(EisUtil.RESOURCE_FACT_DATA))
+        {
+        	try {
+        		loadFactData(request,response);
+			} catch (SystemException e) {
+				
+				e.printStackTrace();
+			}
+        	
+        }
         
         
     }
+	
+	protected void loadFactData(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		long reportId = ParamUtil.getLong(request, "reportId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactData> datas = FactDataLocalServiceUtil.getLatestEntry(reportId,libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactData data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("dimensionId", data.getDimensionId());
+				jsonObject.put("measure1", data.getMeasure1());
+				jsonObject.put("measure2", data.getMeasure2());
+				jsonObject.put("measure3", data.getMeasure3());
+				jsonObject.put("measure4", data.getMeasure4());
+				
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				JSONArray history = FactDataLocalServiceUtil.getEntries(reportId,libraryId,period);
+				
+				jsonData.put("history", history);
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
+	
+	protected void loadGiftReceived(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactGiftReceived> datas = FactGiftReceivedLocalServiceUtil.getLatestEntry(libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactGiftReceived data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", data.getItemId());
+				jsonObject.put("title", data.getTitleTotal());
+				jsonObject.put("volume", data.getVolumeTotal());
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				JSONArray history = FactGiftReceivedLocalServiceUtil.getEntries(libraryId,period);
+				
+				jsonData.put("history", history);
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
+	protected void loadInterLibLoan(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactInterLibLoan> datas = FactInterLibLoanLocalServiceUtil.getLatestEntry(libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactInterLibLoan data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("ptjId", data.getPtjId());
+				jsonObject.put("applyTotal", data.getApplyTotal());
+				jsonObject.put("approvedTotal", data.getApprovedTotal());
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				JSONArray history = FactInterLibLoanLocalServiceUtil.getEntries(libraryId,period);
+				
+				jsonData.put("history", history);
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
+	
+	protected void loadItManagement(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactItManagement> datas = FactItManagementLocalServiceUtil.getLatestEntry(libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		LOGGER.info("admin="+admin);
+		try
+		{
+		
+			for (FactItManagement data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", data.getItemId());
+				jsonObject.put("total", data.getItemTotal());
+				
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				JSONArray history = FactItManagementLocalServiceUtil.getEntries(libraryId,period);
+				LOGGER.info(history);
+				jsonData.put("history", history);
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
+	
+	protected void loadPtjByPtjType(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		long ptjTypeId = ConfigLocalServiceUtil.getKeyAsLong(EisUtil.MASTER_PTJ);
+		long ptjType = ParamUtil.getLong(request, "ptjTypeId");
+		
+		List<MasterFile> ptjs = MasterFileLocalServiceUtil.findByParent1(ptjTypeId, ptjType);
+		
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		
+		try
+		{
+			for (MasterFile ptj : ptjs)
+			{
+				JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+				
+				jsonData.put("masterFileId", ptj.getMasterFileId());
+				jsonData.put("masterFileName", ptj.getMasterFileName());
+				jsonArray.put(jsonData);
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonArray.toString());
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	protected void loadDigitalCollection(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactDigitalCollection> datas = FactDigitalCollectionLocalServiceUtil.getLatestEntry(libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactDigitalCollection data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", data.getItemId());
+				jsonObject.put("title", data.getTitleTotal());
+				jsonObject.put("volume", data.getVolumeTotal());
+				jsonObject.put("image", data.getImageTotal());
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				
+				jsonData.put("history", FactDigitalCollectionLocalServiceUtil.getEntries(libraryId,period));
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
+	
+	protected void loadIncomeData(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactIncome> datas = FactIncomeLocalServiceUtil.getLatestEntry(libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactIncome data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", data.getItemId());
+				jsonObject.put("total", data.getTotal());
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				
+				jsonData.put("history", FactIncomeLocalServiceUtil.getEntries(libraryId,period));
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
+	
+	protected void loadDatabaseUsage(ResourceRequest request,ResourceResponse response) throws SystemException
+	{
+		String period = ParamUtil.getString(request, "period");
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
+		
+		List<FactDatabaseUsage> datas = FactDatabaseUsageLocalServiceUtil.getLatestEntry(libraryId,period);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
+		
+		boolean admin = isAdmin(request);
+
+		
+		try
+		{
+		
+			for (FactDatabaseUsage data : datas)
+			{
+				JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+				jsonObject.put("itemId", data.getItemId());
+				jsonObject.put("download", data.getDownloadTotal());
+				jsonObject.put("session", data.getSessionTotal());
+				jsonObject.put("search", data.getSearchTotal());
+				
+				jsonArray.put(jsonObject);
+			}
+			jsonData.put("data", jsonArray);
+			if (admin)
+			{
+				
+				jsonData.put("history", FactDatabaseUsageLocalServiceUtil.getEntries(libraryId,period));
+
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(jsonData.toString());
+		} catch (IOException e) 
+		{
+			
+			e.printStackTrace();
+		}
+	}
 	
 	protected void loadAcquistionData(ResourceRequest request,ResourceResponse response) throws SystemException
 	{
 		String period = ParamUtil.getString(request, "period");
 		long facultyId = ParamUtil.getLong(request, "facultyId");
-		LOGGER.info("period="+ period + "faculty=" + facultyId);
+		long libraryId = ParamUtil.getLong(request, "libraryId");
+		//LOGGER.info("period="+ period + "faculty=" + facultyId);
 		
-		List<FactAcquisition> datas = FactAcquisitionLocalServiceUtil.getLatestEntry(facultyId, period);
+		List<FactAcquisition> datas = FactAcquisitionLocalServiceUtil.getLatestEntry(libraryId,facultyId, period);
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		JSONObject jsonData =  JSONFactoryUtil.createJSONObject();
 		
@@ -1103,7 +1844,15 @@ public class EisPortlet extends MVCPortlet
 				jsonObject.put("itemId", data.getItemId());
 				jsonObject.put("titleTotal", data.getTitleTotal());
 				jsonObject.put("volumeTotal", data.getVolumeTotal());
+				jsonObject.put("amountTotal", data.getAmountTotal());
 				
+				jsonObject.put("approvedTitleTotal", data.getApprovedTitleTotal());
+				jsonObject.put("approvedVolumeTotal", data.getApprovedVolumeTotal());
+				jsonObject.put("approvedAmountTotal", data.getApprovedAmountTotal());
+				
+				jsonObject.put("orderTitleTotal", data.getOrderTitleTotal());
+				jsonObject.put("orderVolumeTotal", data.getOrderVolumeTotal());
+				jsonObject.put("orderAmountTotal", data.getOrderAmountTotal());
 				
 				
 				
@@ -1113,7 +1862,7 @@ public class EisPortlet extends MVCPortlet
 			if (admin)
 			{
 				
-				jsonData.put("history", FactAcquisitionLocalServiceUtil.getEntries(facultyId, period));
+				jsonData.put("history", FactAcquisitionLocalServiceUtil.getEntries(libraryId,facultyId, period));
 
 			}
 			

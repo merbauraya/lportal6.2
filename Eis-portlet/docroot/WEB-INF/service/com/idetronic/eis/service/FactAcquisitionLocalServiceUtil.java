@@ -275,31 +275,46 @@ public class FactAcquisitionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.idetronic.eis.model.FactAcquisition add(long facultyId,
-		java.lang.String period, long itemId, int titleTotal, int volumeTotal,
+	public static com.idetronic.eis.model.FactAcquisition add(long libraryId,
+		long facultyId, java.lang.String period, long itemId, long titleTotal,
+		long volumeTotal, double amountTotal, long approvedTitleTotal,
+		long approvedVolumeTotal, double approvedAmountTotal,
+		long orderTitleTotal, long orderVolumeTotal, double orderAmountTotal,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .add(facultyId, period, itemId, titleTotal, volumeTotal,
-			serviceContext);
+				   .add(libraryId, facultyId, period, itemId, titleTotal,
+			volumeTotal, amountTotal, approvedTitleTotal, approvedVolumeTotal,
+			approvedAmountTotal, orderTitleTotal, orderVolumeTotal,
+			orderAmountTotal, serviceContext);
 	}
 
-	public static void batchInsert(long facultyId, java.lang.String period,
+	public static void batchInsert(long libraryId, long facultyId,
+		java.lang.String period,
 		com.liferay.portal.kernel.json.JSONArray datas,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().batchInsert(facultyId, period, datas, serviceContext);
+		getService()
+			.batchInsert(libraryId, facultyId, period, datas, serviceContext);
 	}
 
 	public static java.util.List<com.idetronic.eis.model.FactAcquisition> getLatestEntry(
-		long facultyId, java.lang.String period) {
-		return getService().getLatestEntry(facultyId, period);
+		long libraryId, long facultyId, java.lang.String period) {
+		return getService().getLatestEntry(libraryId, facultyId, period);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray getEntries(
-		long facultyId, java.lang.String period)
+		long libraryId, long facultyId, java.lang.String period)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEntries(facultyId, period);
+		return getService().getEntries(libraryId, facultyId, period);
+	}
+
+	public static boolean isMissingData(long libraryId, java.lang.String period) {
+		return getService().isMissingData(libraryId, period);
+	}
+
+	public static boolean isMissingData(java.lang.String period) {
+		return getService().isMissingData(period);
 	}
 
 	public static void clearService() {

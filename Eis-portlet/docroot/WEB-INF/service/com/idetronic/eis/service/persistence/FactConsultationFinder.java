@@ -22,4 +22,6 @@ public interface FactConsultationFinder {
 		long libraryId, java.lang.String period);
 
 	public java.util.List getHistory(long libraryId, java.lang.String period);
+
+	public int getDataCount(long libraryId, java.lang.String period);
 }
